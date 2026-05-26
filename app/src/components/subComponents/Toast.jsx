@@ -11,6 +11,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import { Trophy, X, Flame, Sparkles } from 'lucide-react';
 import { TROFEUS } from '../../data/estrutura.js';
 import Som from './Som.jsx';
+import TrofeuIcone from './TrofeuIcone.jsx';
 import '../../assets/css/Toast.css';
 
 const Ctx = createContext(null);
@@ -24,6 +25,7 @@ const ICONES = {
 function Toast({ toast, onClose }) {
   const [saindo, setSaindo] = useState(false);
   const Icon = ICONES[toast.icone] || Trophy;
+  const usarTrofeuSvg = !!toast.trofeuIcon;
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -33,9 +35,16 @@ function Toast({ toast, onClose }) {
     return () => clearTimeout(t);
   }, [toast.id, toast.duracao, onClose]);
 
+  // Aplica gradiente do módulo do troféu, se houver, no medalhão do toast
+  const iconeStyle = toast.trofeuMod
+    ? { background: `var(--gradient-${toast.trofeuMod}, linear-gradient(135deg, var(--honey), var(--coral)))` }
+    : undefined;
+
   return (
     <div className={`toast ${toast.variante || ''} ${saindo ? 'leaving' : ''}`} role="status" aria-live="polite">
-      <div className="icone"><Icon size={22} /></div>
+      <div className={`icone ${toast.trofeuMod ? `mod-${toast.trofeuMod}` : ''}`} style={iconeStyle}>
+        {usarTrofeuSvg ? <TrofeuIcone nome={toast.trofeuIcon} size={22} /> : <Icon size={22} />}
+      </div>
       <div className="corpo">
         {toast.kicker && <span className="kicker">{toast.kicker}</span>}
         <span className="titulo">{toast.titulo}</span>
@@ -77,6 +86,9 @@ export function ToastProvider({ children }) {
       descricao: t.desc,
       icone: t.tipo === 'ofensiva' ? 'streak' : 'trofeu',
       duracao: 5500,
+      // Usa o SVG único e a cor do módulo cadastrados em estrutura.js
+      trofeuIcon: t.icon,
+      trofeuMod:  t.mod,
     });
   }, [mostrar]);
 

@@ -127,18 +127,18 @@
   border-color: var(--line);
 }
 
-/* === Gradiente por módulo === */
-.troph-medal.mod-comp     { background: linear-gradient(135deg, var(--comp-soft), var(--comp-base) 50%, var(--comp-deep)); }
-.troph-medal.mod-cel      { background: linear-gradient(135deg, var(--cel-soft),  var(--cel-base) 50%, var(--cel-deep)); }
-.troph-medal.mod-merc     { background: linear-gradient(135deg, var(--merc-soft), var(--merc-base) 50%, var(--merc-deep)); }
-.troph-medal.mod-seg      { background: linear-gradient(135deg, var(--seg-soft),  var(--seg-base) 50%, var(--seg-deep)); }
-.troph-medal.mod-ing      { background: linear-gradient(135deg, var(--ing-soft),  var(--ing-base) 50%, var(--ing-deep)); }
-.troph-medal.mod-vinho    { background: linear-gradient(135deg, var(--vinho-soft), var(--vinho)); }
-.troph-medal.mod-marsala  { background: linear-gradient(135deg, var(--marsala-soft), var(--marsala)); }
-.troph-medal.mod-magenta  { background: linear-gradient(135deg, var(--magenta-soft), var(--magenta)); }
-.troph-medal.mod-roxo     { background: linear-gradient(135deg, var(--roxo-soft), var(--roxo)); }
-.troph-medal.mod-ouro-rosa{ background: linear-gradient(135deg, var(--ouro-rosa-soft), var(--ouro-rosa)); }
-.troph-medal.mod-honey    { background: linear-gradient(135deg, #F4C771, var(--coral)); }
+/* === Gradiente por módulo (reusa vars globais — uso também no toast/celebração) === */
+.troph-medal.mod-comp,      .icone.mod-comp      { background: var(--gradient-comp); }
+.troph-medal.mod-cel,       .icone.mod-cel       { background: var(--gradient-cel); }
+.troph-medal.mod-merc,      .icone.mod-merc      { background: var(--gradient-merc); }
+.troph-medal.mod-seg,       .icone.mod-seg       { background: var(--gradient-seg); }
+.troph-medal.mod-ing,       .icone.mod-ing       { background: var(--gradient-ing); }
+.troph-medal.mod-vinho,     .icone.mod-vinho     { background: var(--gradient-vinho); }
+.troph-medal.mod-marsala,   .icone.mod-marsala   { background: var(--gradient-marsala); }
+.troph-medal.mod-magenta,   .icone.mod-magenta   { background: var(--gradient-magenta); }
+.troph-medal.mod-roxo,      .icone.mod-roxo      { background: var(--gradient-roxo); }
+.troph-medal.mod-ouro-rosa, .icone.mod-ouro-rosa { background: var(--gradient-ouro-rosa); }
+.troph-medal.mod-honey,     .icone.mod-honey     { background: var(--gradient-honey); }
 
 /* === Tier "halos" === */
 .troph-card[data-tier="diamond"] .troph-medal,

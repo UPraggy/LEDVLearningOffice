@@ -7,6 +7,8 @@ import Icone from '../subComponents/Icone.jsx';
 import Interacoes from '../Interacoes.jsx';
 import AulaRica from '../AulaRica.jsx';
 import Som from '../subComponents/Som.jsx';
+import TrofeuIcone from '../subComponents/TrofeuIcone.jsx';
+import '../../assets/css/Trofeus.css';
 import { TRILHAS, MISSOES, TROFEUS } from '../../data/estrutura.js';
 import { useApp } from '../subComponents/AppContext.jsx';
 import { getConteudo } from '../../data/conteudo/index.js';
@@ -290,13 +292,9 @@ export default function Missao({ ativaResp }) {
                       if (!t) return null;
                       return (
                         <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)' }}>
-                          <div style={{
-                            width: 48, height: 48, borderRadius: '50%',
-                            background: 'linear-gradient(135deg, var(--honey), var(--coral))',
-                            color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0,
-                            boxShadow: 'var(--sh-1)',
-                          }}>
-                            <Trophy size={22} />
+                          <div className={`troph-medal mod-${t.mod || 'honey'}`} data-tier={t.tier}
+                            style={{ width: 56, height: 56, flexShrink: 0 }}>
+                            <TrofeuIcone nome={t.icon} size={28} />
                           </div>
                           <div>
                             <div style={{ fontFamily: 'var(--f-display)', fontWeight: 600, fontSize: 18, letterSpacing: '-.005em' }}>{t.nome}</div>
