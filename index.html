@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1B2A4E" />
+  <meta name="description" content="Curso de informática voltado pro mercado de trabalho. Trilhas, missões e portfólio." />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Escritório" />
+
+  <!-- Pré-conexão pras fontes (acelera primeira renderização) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <title>Escritório — Sua carreira digital</title>
+
+  <style>
+    /* Splash mínimo enquanto o React carrega — evita tela branca */
+    body { margin: 0; background: #F5EFE6; font-family: system-ui, sans-serif; }
+    #splash {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #F5EFE6;
+      transition: opacity .3s ease;
+    }
+    #splash.hidden { opacity: 0; pointer-events: none; }
+    #splash .logo {
+      width: 48px; height: 48px; border-radius: 8px;
+      background: #1B2A4E;
+      display: flex; align-items: center; justify-content: center;
+      color: #D4A574; font-size: 24px;
+    }
+    #splash .name {
+      margin-top: 16px; font-size: 18px; font-weight: 600; color: #1B2A4E;
+      letter-spacing: 0.05em;
+    }
+    #splash .sub {
+      margin-top: 4px; font-size: 11px; color: #5A5A52;
+      text-transform: uppercase; letter-spacing: 0.2em;
+    }
+  </style>
+</head>
+<body>
+  <div id="splash">
+    <div class="logo">☕</div>
+    <div class="name">Escritório</div>
+    <div class="sub">carregando…</div>
+  </div>
+
+  <div id="root"></div>
+
+  <!-- Onde o React é montado. Substitua pelo seu bundler (Vite, CRA, etc): -->
+  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Registro do Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((reg) => console.log('SW registrado:', reg.scope))
+          .catch((err) => console.warn('SW falhou:', err));
+      });
+    }
+
+    // Esconde splash quando o app renderiza
+    window.addEventListener('DOMContentLoaded', () => {
+      const obs = new MutationObserver(() => {
+        const root = document.getElementById('root');
+        if (root && root.children.length > 0) {
+          const splash = document.getElementById('splash');
+          if (splash) {
+            splash.classList.add('hidden');
+            setTimeout(() => splash.remove(), 300);
+          }
+          obs.disconnect();
+        }
+      });
+      obs.observe(document.getElementById('root'), { childList: true });
+    });
+  </script>
+</body>
+</html>

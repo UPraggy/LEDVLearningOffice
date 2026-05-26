@@ -1,0 +1,194 @@
+/* =========================================================================
+   TROFÉUS v9 — cores por módulo, ícones únicos, layout sem overflow.
+   ========================================================================= */
+
+.troph-hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-5);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-5) var(--s-6);
+  align-items: center;
+  margin-bottom: var(--s-6);
+  overflow: hidden;
+}
+.troph-hero .nums {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 44px; line-height: 1; letter-spacing: -.02em;
+  color: var(--honey);
+}
+.troph-hero .nums span { color: var(--ink-mute); font-size: 22px; }
+.troph-hero .bar { height: 8px; background: var(--paper-warm); border-radius: 99px; overflow: hidden; min-width: 200px; margin-top: 8px; }
+.troph-hero .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--honey), var(--coral)); border-radius: 99px; }
+.troph-hero-medal {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--honey), var(--coral));
+  display: grid; place-items: center;
+  color: #fff;
+  box-shadow: var(--sh-2);
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .troph-hero { grid-template-columns: 1fr; }
+  .troph-hero-medal { width: 64px; height: 64px; }
+}
+
+/* ===== Filtros ===== */
+.troph-filters {
+  display: flex; gap: var(--s-2); flex-wrap: wrap;
+  margin-bottom: var(--s-5);
+}
+.troph-filters button {
+  background: var(--surface); border: 1px solid var(--line);
+  padding: 8px 14px; border-radius: 99px;
+  font: inherit; font-weight: 600; font-size: 13px;
+  color: var(--ink-soft); cursor: pointer;
+  min-height: 36px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.troph-filters button.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.troph-filters button .cnt {
+  font-family: var(--f-mono); font-size: 10px;
+  background: var(--paper-warm); color: var(--ink); padding: 2px 6px;
+  border-radius: 99px; min-width: 18px; text-align: center;
+}
+.troph-filters button.active .cnt { background: var(--honey); color: #fff; }
+
+/* ===== Grid responsivo (auto-fill + minmax pra evitar overflow) ===== */
+.troph-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--s-3);
+}
+@media (max-width: 600px) {
+  .troph-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--s-2); }
+}
+
+.troph-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s-5) var(--s-3) var(--s-4);
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  gap: var(--s-2);
+  overflow: hidden;
+  min-height: 240px;
+  transition: transform var(--t-micro), box-shadow var(--t-micro);
+  word-wrap: break-word; word-break: break-word; hyphens: auto;
+}
+.troph-card:hover { transform: translateY(-2px); box-shadow: var(--sh-2); }
+.troph-card.locked { opacity: .55; }
+.troph-card.close { border-color: var(--coral); background: linear-gradient(180deg, rgba(226,91,63,.04), transparent 60%); }
+.troph-card.done {
+  background: linear-gradient(180deg, rgba(212,149,69,.06), transparent 70%);
+}
+.troph-card .tier-tag {
+  position: absolute; top: 8px; right: 8px;
+  font-family: var(--f-mono); font-size: 9px;
+  letter-spacing: .12em; text-transform: uppercase; font-weight: 700;
+  padding: 2px 8px; border-radius: 99px;
+  background: var(--paper-warm); color: var(--ink-soft);
+  z-index: 2;
+}
+.troph-card.done .tier-tag { background: var(--sage); color: #fff; }
+.troph-card .badge-new {
+  position: absolute; top: 8px; left: 8px;
+  background: var(--coral); color: #fff;
+  font-family: var(--f-mono); font-size: 9px;
+  letter-spacing: .08em; font-weight: 700;
+  padding: 2px 8px; border-radius: 99px;
+  z-index: 2;
+}
+.troph-card .glow {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: .25;
+}
+
+.troph-medal {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff;
+  box-shadow: var(--sh-2), inset 0 -4px 8px rgba(0,0,0,.20);
+  border: 3px solid rgba(255,255,255,.5);
+  position: relative;
+  flex-shrink: 0;
+}
+.troph-card.locked .troph-medal {
+  color: var(--ink-mute);
+  background: var(--paper-warm) !important;
+  box-shadow: none;
+  border-color: var(--line);
+}
+
+/* === Gradiente por módulo === */
+.troph-medal.mod-comp     { background: linear-gradient(135deg, var(--comp-soft), var(--comp-base) 50%, var(--comp-deep)); }
+.troph-medal.mod-cel      { background: linear-gradient(135deg, var(--cel-soft),  var(--cel-base) 50%, var(--cel-deep)); }
+.troph-medal.mod-merc     { background: linear-gradient(135deg, var(--merc-soft), var(--merc-base) 50%, var(--merc-deep)); }
+.troph-medal.mod-seg      { background: linear-gradient(135deg, var(--seg-soft),  var(--seg-base) 50%, var(--seg-deep)); }
+.troph-medal.mod-ing      { background: linear-gradient(135deg, var(--ing-soft),  var(--ing-base) 50%, var(--ing-deep)); }
+.troph-medal.mod-vinho    { background: linear-gradient(135deg, var(--vinho-soft), var(--vinho)); }
+.troph-medal.mod-marsala  { background: linear-gradient(135deg, var(--marsala-soft), var(--marsala)); }
+.troph-medal.mod-magenta  { background: linear-gradient(135deg, var(--magenta-soft), var(--magenta)); }
+.troph-medal.mod-roxo     { background: linear-gradient(135deg, var(--roxo-soft), var(--roxo)); }
+.troph-medal.mod-ouro-rosa{ background: linear-gradient(135deg, var(--ouro-rosa-soft), var(--ouro-rosa)); }
+.troph-medal.mod-honey    { background: linear-gradient(135deg, #F4C771, var(--coral)); }
+
+/* === Tier "halos" === */
+.troph-card[data-tier="diamond"] .troph-medal,
+.troph-card[data-tier="mythic"] .troph-medal {
+  box-shadow: var(--sh-3), inset 0 -4px 8px rgba(0,0,0,.20), 0 0 0 0 rgba(212,149,69,.4);
+  animation: tierGlow 3s ease-in-out infinite;
+}
+@keyframes tierGlow {
+  0%, 100% { box-shadow: var(--sh-3), inset 0 -4px 8px rgba(0,0,0,.20), 0 0 0 0 rgba(212,149,69,.4); }
+  50%      { box-shadow: var(--sh-3), inset 0 -4px 8px rgba(0,0,0,.20), 0 0 0 8px rgba(212,149,69,0); }
+}
+.troph-card[data-tier="mythic"] .troph-medal {
+  border-color: rgba(199,62,124,.5);
+  animation: mythicGlow 2.5s ease-in-out infinite;
+}
+@keyframes mythicGlow {
+  0%, 100% { box-shadow: var(--sh-3), 0 0 0 0 rgba(199,62,124,.45); }
+  50%      { box-shadow: var(--sh-3), 0 0 0 14px rgba(199,62,124,0); }
+}
+
+.troph-card h4 {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 14px; letter-spacing: -.005em; line-height: 1.2;
+  margin: 0;
+  max-width: 100%;
+}
+.troph-card .desc {
+  font-size: 11px; color: var(--ink-soft); line-height: 1.35;
+  max-width: 100%;
+}
+.troph-card .progresso-bar {
+  width: 100%;
+  height: 4px; background: var(--paper-warm); border-radius: 99px; overflow: hidden;
+}
+.troph-card .progresso-bar i { display: block; height: 100%; background: var(--coral); border-radius: 99px; transition: width .4s var(--ease-out); }
+.troph-card .req {
+  font-family: var(--f-mono); font-size: 10px; color: var(--coral-deep);
+  font-weight: 700; letter-spacing: .04em;
+}
+
+/* ===== Section heading ===== */
+.troph-section { margin-bottom: var(--s-7); }
+.troph-section > h2 {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 18px; letter-spacing: -.005em;
+  margin: 0 0 var(--s-3);
+  display: flex; align-items: center; gap: var(--s-2);
+}
+.troph-section > h2 .label-cnt {
+  font-family: var(--f-mono); font-size: 11px;
+  color: var(--ink-mute); font-weight: 600; letter-spacing: .06em;
+  margin-left: auto;
+}

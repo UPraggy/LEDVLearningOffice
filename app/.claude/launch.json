@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "escritorio",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--host", "--port", "5173"],
+      "cwd": "E:/projects/CloudCode/CloudCodeCodes/escritorio-virtual/app",
+      "port": 5173
+    }
+  ]
+}

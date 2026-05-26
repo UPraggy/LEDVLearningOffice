@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escritório — UI Kit / Componentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EBDD; --paper-warm:#EDE3D0; --surface:#FBF7EE; --surface-2:#FFFCF5;
+    --ink:#1A2540; --ink-soft:#4A5670; --ink-mute:#7A8294; --line:#D9CFB8; --line-strong:#B5A582;
+    --navy:#1B2A4E; --navy-deep:#0E1A36;
+    --coral:#E25B3F; --coral-deep:#C44525;
+    --honey:#D49545; --honey-soft:#E8B978;
+    --sage:#4F7A55; --sage-soft:#8AAB8E;
+    --plum:#6B3F7A; --sky:#4F7CAC;
+    --streak:#E07A3A;
+    --f-display:"Fraunces", Georgia, serif;
+    --f-body:"Plus Jakarta Sans", system-ui, sans-serif;
+    --f-mono:"JetBrains Mono", ui-monospace, monospace;
+    --r-sm:10px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+    --sh-1:0 1px 2px rgba(26,37,64,.06);
+    --sh-2:0 6px 14px rgba(26,37,64,.06), 0 2px 4px rgba(26,37,64,.05);
+    --sh-3:0 18px 40px rgba(26,37,64,.08);
+    --focus:0 0 0 3px rgba(212,149,69,.55);
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--f-body);background:var(--paper);color:var(--ink);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+
+  /* ============ LAYOUT ============ */
+  header.top{
+    padding:18px 28px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(251,247,238,.85);backdrop-filter:blur(8px);
+    position:sticky;top:0;z-index:30;
+  }
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:600;font-size:20px;letter-spacing:-.01em}
+  .brand .mk{width:38px;height:38px;background:var(--navy);border-radius:10px;display:grid;place-items:center;color:var(--honey-soft)}
+  .crumb{font-family:var(--f-mono);font-size:12px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase}
+  .crumb a{color:inherit;text-decoration:none;margin-right:8px}
+
+  .layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+  @media(max-width:880px){.layout{grid-template-columns:1fr}aside.toc{display:none}}
+  aside.toc{
+    position:sticky;top:74px;align-self:start;
+    border-right:1px solid var(--line);padding:32px 20px;
+    max-height:calc(100vh - 74px);overflow-y:auto;
+  }
+  aside.toc h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:24px 0 8px}
+  aside.toc h4:first-child{margin-top:0}
+  aside.toc a{
+    display:block;padding:7px 10px;border-radius:8px;
+    color:var(--ink-soft);text-decoration:none;font-size:14px;font-weight:500;
+  }
+  aside.toc a:hover{background:var(--surface);color:var(--ink)}
+
+  main{padding:48px 56px;max-width:1200px}
+  @media(max-width:780px){main{padding:32px 20px}}
+
+  /* ============ SECTIONS ============ */
+  .hero{padding:48px 0 32px;border-bottom:1px solid var(--line);margin-bottom:48px}
+  .kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .kicker::before{content:"";width:24px;height:1px;background:var(--ink-mute)}
+  .hero h1{font-family:var(--f-display);font-weight:500;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-.025em;margin:0 0 16px;font-variation-settings:"opsz" 144;max-width:18ch}
+  .hero h1 em{color:var(--coral);font-style:italic;font-weight:500}
+  .hero p{font-size:18px;max-width:60ch;color:var(--ink-soft);margin:0}
+
+  section.cat{padding:48px 0;border-bottom:1px solid var(--line)}
+  section.cat > h2{
+    font-family:var(--f-display);font-weight:500;font-size:44px;letter-spacing:-.02em;
+    margin:0 0 8px;line-height:1;
+  }
+  section.cat > h2 .n{color:var(--coral);font-family:var(--f-mono);font-size:18px;font-weight:600;letter-spacing:.04em;vertical-align:top;margin-right:16px}
+  section.cat > .lede{color:var(--ink-soft);margin:0 0 36px;max-width:60ch}
+
+  .block{margin-bottom:40px}
+  .block .b-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+  .block h3{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0;letter-spacing:-.01em}
+  .block .b-meta{font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase}
+  .block .b-note{margin:6px 0 0;color:var(--ink-soft);font-size:14px;max-width:60ch}
+
+  .stage{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:32px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;
+  }
+  .stage[data-grid="1"]{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .stage[data-tight="1"]{padding:20px}
+  .stage[data-dark="1"]{background:var(--navy);color:var(--paper)}
+  .row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+
+  /* state labels */
+  .state-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;width:100%}
+  @media(max-width:780px){.state-row{grid-template-columns:repeat(2,1fr)}}
+  .state{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .state .lbl{font-family:var(--f-mono);font-size:10px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase}
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    --bg:var(--coral); --fg:#fff; --bd:transparent;
+    font-family:var(--f-body);font-weight:700;font-size:16px;
+    background:var(--bg);color:var(--fg);border:1.5px solid var(--bd);
+    padding:0 22px;height:48px;border-radius:var(--r-md);
+    display:inline-flex;align-items:center;gap:10px;
+    cursor:pointer;transition:transform .12s var(--ease),box-shadow .12s var(--ease),background .12s var(--ease);
+    box-shadow:var(--sh-1);text-decoration:none;line-height:1;
+  }
+  .btn:hover{background:var(--coral-deep);transform:translateY(-1px);box-shadow:var(--sh-2)}
+  .btn:focus-visible{outline:none;box-shadow:var(--focus),var(--sh-1)}
+  .btn:active{transform:translateY(0);box-shadow:none}
+  .btn[disabled]{opacity:.4;cursor:not-allowed}
+  .btn.s{height:36px;padding:0 14px;font-size:14px;border-radius:10px}
+  .btn.l{height:60px;padding:0 28px;font-size:18px;border-radius:var(--r-lg)}
+  .btn.xl{height:72px;padding:0 36px;font-size:20px;border-radius:var(--r-lg);font-family:var(--f-display);font-weight:600;letter-spacing:-.01em}
+  .btn.sec{--bg:var(--surface-2);--fg:var(--ink);--bd:var(--line-strong);box-shadow:none}
+  .btn.sec:hover{background:var(--paper-warm)}
+  .btn.gh{--bg:transparent;--fg:var(--ink);--bd:transparent;box-shadow:none;padding:0 12px}
+  .btn.gh:hover{background:var(--paper-warm)}
+  .btn.dest{--bg:#fff;--fg:#9B2715;--bd:#E8B6A8}
+  .btn.dest:hover{background:#FDEEEA}
+  .btn.link{--bg:transparent;--fg:var(--coral-deep);--bd:transparent;padding:0;height:auto;box-shadow:none;text-decoration:underline;text-underline-offset:4px}
+  .btn.ico{padding:0;width:48px;justify-content:center}
+  .btn.ico.s{width:36px}
+  .btn.load{position:relative}
+  .btn.load::after{content:"";width:14px;height:14px;border:2px solid currentColor;border-bottom-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ============ FORM ============ */
+  .field{display:flex;flex-direction:column;gap:6px;width:100%;max-width:360px}
+  .field label{font-weight:600;font-size:14px;color:var(--ink)}
+  .field .help{font-size:12px;color:var(--ink-mute)}
+  .field .err{font-size:12px;color:var(--coral-deep);display:flex;align-items:center;gap:4px}
+  .input{
+    height:48px;border:1.5px solid var(--line-strong);background:var(--surface-2);
+    border-radius:var(--r-md);padding:0 14px;font:inherit;color:var(--ink);
+    transition:border-color .12s var(--ease),box-shadow .12s var(--ease);
+  }
+  .input::placeholder{color:var(--ink-mute)}
+  .input:hover{border-color:var(--ink-soft)}
+  .input:focus{outline:none;border-color:var(--navy);box-shadow:var(--focus)}
+  .input[disabled]{background:var(--paper-warm);color:var(--ink-mute);cursor:not-allowed}
+  .input.err{border-color:var(--coral)}
+  textarea.input{padding:12px 14px;min-height:96px;height:auto;line-height:1.5;resize:vertical}
+
+  .input-ico{position:relative;display:flex;align-items:center}
+  .input-ico svg{position:absolute;left:14px;color:var(--ink-mute);pointer-events:none}
+  .input-ico .input{padding-left:42px}
+
+  /* select */
+  select.input{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%234A5670' stroke-width='2' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:42px}
+
+  /* checkbox/radio */
+  .check{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:15px;padding:8px 0;min-height:44px}
+  .check input{position:absolute;opacity:0;pointer-events:none}
+  .check .box{
+    width:24px;height:24px;border:1.5px solid var(--line-strong);background:var(--surface-2);
+    border-radius:6px;display:grid;place-items:center;color:transparent;flex-shrink:0;
+    transition:all .12s var(--ease);
+  }
+  .check input:checked + .box{background:var(--navy);border-color:var(--navy);color:var(--paper)}
+  .check input:focus-visible + .box{box-shadow:var(--focus)}
+  .check[data-radio="1"] .box{border-radius:50%}
+  .check[data-radio="1"] input:checked + .box{background:var(--paper-warm);border-color:var(--navy);position:relative}
+  .check[data-radio="1"] input:checked + .box::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--navy)}
+
+  /* switch */
+  .switch{display:flex;align-items:center;gap:12px;cursor:pointer;min-height:44px}
+  .switch input{position:absolute;opacity:0;pointer-events:none}
+  .switch .track{width:46px;height:26px;background:#C9BFA6;border-radius:999px;position:relative;transition:.18s var(--ease)}
+  .switch .track::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;box-shadow:var(--sh-1);transition:.18s var(--ease)}
+  .switch input:checked + .track{background:var(--sage)}
+  .switch input:checked + .track::after{left:23px}
+  .switch input:focus-visible + .track{box-shadow:var(--focus)}
+
+  /* slider */
+  .slider-row{display:flex;align-items:center;gap:14px;width:100%;max-width:360px}
+  input[type=range].sl{
+    -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;background:#D9CFB8;outline:none;
+  }
+  input[type=range].sl::-webkit-slider-thumb{
+    -webkit-appearance:none;width:24px;height:24px;background:var(--navy);border-radius:50%;cursor:pointer;
+    box-shadow:0 0 0 4px var(--paper-warm),var(--sh-1);
+  }
+  input[type=range].sl::-moz-range-thumb{width:24px;height:24px;background:var(--navy);border-radius:50%;border:0;cursor:pointer;box-shadow:0 0 0 4px var(--paper-warm),var(--sh-1)}
+
+  /* ============ NAV ============ */
+  .tabs{display:flex;gap:4px;background:var(--paper-warm);padding:6px;border-radius:var(--r-pill);border:1px solid var(--line);width:fit-content}
+  .tabs button{
+    border:0;background:transparent;font:inherit;font-weight:600;font-size:14px;
+    padding:10px 18px;border-radius:var(--r-pill);color:var(--ink-soft);cursor:pointer;min-height:44px;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .tabs button.active{background:var(--ink);color:var(--paper)}
+  .tabs button:hover:not(.active){color:var(--ink)}
+
+  .seg{display:inline-flex;background:var(--paper-warm);border:1px solid var(--line);border-radius:var(--r-md);padding:4px}
+  .seg button{border:0;background:transparent;font:inherit;font-weight:600;font-size:13px;padding:8px 14px;border-radius:10px;color:var(--ink-soft);cursor:pointer;min-height:36px}
+  .seg button.active{background:var(--surface-2);color:var(--ink);box-shadow:var(--sh-1)}
+
+  /* bottom nav (mobile) */
+  .bottomnav{
+    display:flex;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:var(--r-lg);padding:10px;gap:6px;width:100%;max-width:400px;
+    box-shadow:var(--sh-2);
+  }
+  .bottomnav .bn-btn{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:10px 6px;border-radius:14px;cursor:pointer;border:0;background:transparent;font:inherit;color:var(--ink-soft);font-size:12px;font-weight:600;
+    min-height:56px;
+  }
+  .bottomnav .bn-btn.active{background:var(--paper-warm);color:var(--navy)}
+  .bottomnav .bn-btn.active svg{color:var(--coral)}
+
+  /* sidebar (desktop) */
+  .sidebar{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:16px;width:250px;
+  }
+  .sidebar .sb-item{
+    display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;
+    color:var(--ink-soft);font-weight:600;font-size:15px;cursor:pointer;
+  }
+  .sidebar .sb-item.active{background:var(--ink);color:var(--paper)}
+  .sidebar .sb-item:hover:not(.active){background:var(--paper-warm);color:var(--ink)}
+  .sidebar .sb-divider{height:1px;background:var(--line);margin:12px 6px}
+
+  /* breadcrumb */
+  .breadcrumb{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-mute)}
+  .breadcrumb a{color:var(--ink-soft);text-decoration:none;font-weight:500}
+  .breadcrumb a:hover{color:var(--ink)}
+  .breadcrumb .here{color:var(--ink);font-weight:700}
+
+  /* stepper */
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper .dot{width:24px;height:24px;border-radius:50%;background:var(--paper-warm);border:2px solid var(--line-strong);font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--ink-soft);display:grid;place-items:center}
+  .stepper .dot.done{background:var(--sage);border-color:var(--sage);color:#fff}
+  .stepper .dot.curr{background:var(--navy);border-color:var(--navy);color:var(--paper)}
+  .stepper .bar{flex:1;height:2px;background:var(--line);min-width:24px}
+  .stepper .bar.done{background:var(--sage)}
+
+  /* ============ CARDS ============ */
+  .card{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--sh-1);
+  }
+  .card.h{cursor:pointer;transition:transform .14s var(--ease),box-shadow .14s var(--ease)}
+  .card.h:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+
+  /* MODULE card */
+  .mod-card{
+    --mc:var(--navy);
+    background:var(--mc);color:var(--paper);border-radius:var(--r-lg);padding:24px;
+    display:flex;flex-direction:column;gap:14px;min-height:200px;position:relative;overflow:hidden;
+    box-shadow:var(--sh-1);cursor:pointer;border:0;
+    transition:transform .14s var(--ease),box-shadow .14s var(--ease);
+    width:100%;font:inherit;text-align:left;
+  }
+  .mod-card:hover{transform:translateY(-2px);box-shadow:var(--sh-3)}
+  .mod-card[data-color="sky"]{--mc:var(--sky)}
+  .mod-card[data-color="coral"]{--mc:var(--coral)}
+  .mod-card[data-color="sage"]{--mc:var(--sage)}
+  .mod-card[data-color="plum"]{--mc:var(--plum)}
+  .mod-card .ic{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center}
+  .mod-card .num{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;opacity:.7;text-transform:uppercase}
+  .mod-card h3{font-family:var(--f-display);font-weight:600;font-size:26px;margin:0;letter-spacing:-.01em;line-height:1.1}
+  .mod-card .sub{opacity:.85;font-size:14px;margin:0}
+  .mod-card .pg{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:11px;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+  .mod-card .bar{height:6px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden;margin-top:8px}
+  .mod-card .bar i{display:block;height:100%;background:var(--honey-soft);border-radius:99px}
+
+  /* TRAIL card */
+  .trail-card{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:20px;display:flex;gap:16px;align-items:center;box-shadow:var(--sh-1);
+    transition:transform .14s var(--ease),box-shadow .14s var(--ease);cursor:pointer;
+  }
+  .trail-card:hover{transform:translateY(-1px);box-shadow:var(--sh-2)}
+  .trail-card .num-circ{width:52px;height:52px;border-radius:50%;background:var(--paper-warm);display:grid;place-items:center;font-family:var(--f-display);font-weight:600;font-size:22px;color:var(--navy);flex-shrink:0}
+  .trail-card h4{font-family:var(--f-display);font-weight:600;font-size:20px;margin:0 0 6px;letter-spacing:-.01em;line-height:1.2}
+  .trail-card .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .trail-card .bar{flex:1;height:6px;background:var(--paper-warm);border-radius:99px;margin-top:10px;overflow:hidden}
+  .trail-card .bar i{display:block;height:100%;background:var(--sage);border-radius:99px}
+
+  /* MISSION node (Duo-like vertical) */
+  .mission-trail{position:relative;padding:24px 0;max-width:420px}
+  .mission-trail::before{
+    content:"";position:absolute;left:42px;top:32px;bottom:32px;width:3px;
+    background:repeating-linear-gradient(to bottom,var(--line-strong) 0 6px,transparent 6px 12px);
+  }
+  .miss-node{
+    display:flex;align-items:center;gap:18px;padding:10px 0;position:relative;cursor:pointer;
+  }
+  .miss-node .knob{
+    width:64px;height:64px;border-radius:50%;background:var(--paper-warm);border:3px solid var(--line-strong);
+    display:grid;place-items:center;color:var(--ink-mute);position:relative;z-index:1;
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,.08);
+    transition:transform .14s var(--ease);
+  }
+  .miss-node .knob:hover{transform:scale(1.04)}
+  .miss-node.done .knob{background:var(--sage);border-color:#3D5F42;color:#fff;box-shadow:inset 0 -4px 0 #3D5F42}
+  .miss-node.curr .knob{background:var(--coral);border-color:var(--coral-deep);color:#fff;box-shadow:inset 0 -4px 0 var(--coral-deep);animation:pulse 2s var(--ease) infinite}
+  .miss-node.locked{opacity:.55}
+  .miss-node .info h5{font-family:var(--f-display);font-weight:600;font-size:17px;margin:0;letter-spacing:-.01em}
+  .miss-node .info p{margin:2px 0 0;font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);letter-spacing:.06em;text-transform:uppercase}
+  @keyframes pulse{0%,100%{box-shadow:inset 0 -4px 0 var(--coral-deep),0 0 0 0 rgba(226,91,63,.4)}50%{box-shadow:inset 0 -4px 0 var(--coral-deep),0 0 0 12px rgba(226,91,63,0)}}
+
+  /* daily-mission CTA card */
+  .daily-card{
+    background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--paper);
+    border-radius:var(--r-xl);padding:28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .daily-card .stamp{font-family:var(--f-mono);font-size:11px;color:var(--honey-soft);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+  .daily-card h3{font-family:var(--f-display);font-weight:500;font-size:32px;margin:0;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+  .daily-card h3 em{color:var(--honey-soft);font-style:italic}
+
+  /* ============ GAMI ============ */
+  .streak{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:var(--r-pill);
+    background:linear-gradient(135deg,#FBE0CF,#F7CFB1);color:#8A3A1B;font-weight:700;font-size:15px;
+    border:1px solid #E8B997;
+  }
+  .streak svg{color:var(--streak)}
+
+  .xp-pill{
+    display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--r-pill);
+    background:#FBEAC9;color:#8B5A12;font-weight:700;font-size:14px;font-family:var(--f-mono);
+    border:1px solid #E7C078;
+  }
+
+  .lvl-stamp{
+    display:inline-flex;align-items:center;gap:10px;padding:6px 8px 6px 14px;
+    border-radius:var(--r-pill);background:var(--surface-2);border:1.5px solid var(--line-strong);
+  }
+  .lvl-stamp .lvl-num{
+    width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--honey-soft);
+    display:grid;place-items:center;font-family:var(--f-mono);font-weight:700;font-size:12px;
+  }
+  .lvl-stamp .lvl-name{font-weight:700;font-size:14px}
+
+  /* XP bar */
+  .xp-bar{display:flex;flex-direction:column;gap:6px;width:100%;max-width:280px}
+  .xp-bar .lbl-row{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.08em}
+  .xp-bar .bar{height:10px;background:var(--paper-warm);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+  .xp-bar .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--honey),var(--honey-soft));border-radius:99px}
+
+  /* difficulty pill (leetcode-style) */
+  .diff{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--r-pill);font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .diff.i{background:#D6E8D8;color:#2E5234}
+  .diff.m{background:#FBE5C9;color:#8B5A12}
+  .diff.a{background:#F7D8CE;color:#9B2715}
+
+  /* trophy */
+  .trophy{
+    display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 12px;
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);
+    width:128px;text-align:center;
+  }
+  .trophy .medal{
+    width:72px;height:72px;border-radius:50%;display:grid;place-items:center;position:relative;
+    background:radial-gradient(circle at 30% 30%,#F2C170,#C48630);color:#fff;
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,.18),0 4px 0 rgba(196,134,48,.4);
+  }
+  .trophy .medal.locked{background:#D9CFB8;color:var(--ink-mute);box-shadow:inset 0 -3px 0 rgba(0,0,0,.06)}
+  .trophy .medal.new::after{
+    content:"NOVO!";position:absolute;top:-8px;right:-12px;font-family:var(--f-mono);font-size:9px;
+    font-weight:700;padding:3px 8px;border-radius:99px;background:var(--coral);color:#fff;letter-spacing:.08em;transform:rotate(8deg);
+  }
+  .trophy .ti{font-weight:700;font-size:13px;line-height:1.25}
+  .trophy .ts{font-family:var(--f-mono);font-size:10px;color:var(--ink-mute);letter-spacing:.06em;text-transform:uppercase}
+
+  /* career stamp full */
+  .career-block{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;
+    display:flex;align-items:center;gap:14px;width:fit-content;
+  }
+  .career-block .seal{width:54px;height:54px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:22px;flex-shrink:0;position:relative}
+  .career-block .seal::before{content:"";position:absolute;inset:-5px;border:1.5px dashed var(--line-strong);border-radius:50%}
+  .career-block .career-meta{display:flex;flex-direction:column;gap:2px}
+  .career-block .career-meta .role{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em}
+  .career-block .career-meta .next{font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.08em}
+
+  /* ============ EXERCISE ============ */
+  .exercise{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;
+    display:flex;flex-direction:column;gap:18px;max-width:560px;
+  }
+  .ex-q{font-family:var(--f-display);font-weight:500;font-size:24px;letter-spacing:-.01em;line-height:1.25;margin:0}
+  .ex-opt{
+    display:flex;align-items:center;gap:14px;padding:14px 16px;
+    border:2px solid var(--line-strong);background:var(--surface);border-radius:var(--r-md);
+    cursor:pointer;font-weight:600;font-size:16px;text-align:left;font:inherit;font-weight:600;width:100%;
+    min-height:56px;transition:.14s var(--ease);
+  }
+  .ex-opt:hover{border-color:var(--navy);background:var(--paper-warm)}
+  .ex-opt .key{
+    width:32px;height:32px;border-radius:8px;background:var(--paper-warm);border:1.5px solid var(--line-strong);
+    font-family:var(--f-mono);font-weight:700;font-size:13px;display:grid;place-items:center;color:var(--ink-soft);flex-shrink:0;
+  }
+  .ex-opt.sel{border-color:var(--navy);background:var(--paper-warm)}
+  .ex-opt.sel .key{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+  .ex-opt.ok{border-color:var(--sage);background:#E5EFE6}
+  .ex-opt.ok .key{background:var(--sage);color:#fff;border-color:var(--sage)}
+  .ex-opt.wr{border-color:var(--coral);background:#FBE5DE}
+  .ex-opt.wr .key{background:var(--coral);color:#fff;border-color:var(--coral)}
+
+  .fill{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;margin:0 4px;background:var(--paper-warm);border:1.5px dashed var(--line-strong);border-radius:8px;font-family:var(--f-mono);font-weight:600;color:var(--ink)}
+  .fill.ok{background:#E5EFE6;border-color:var(--sage);border-style:solid}
+  .fill.wr{background:#FBE5DE;border-color:var(--coral);border-style:solid}
+
+  .feedback{
+    display:flex;align-items:flex-start;gap:14px;padding:18px;border-radius:var(--r-md);
+    border:1.5px solid;font-size:15px;
+  }
+  .feedback.ok{background:#E5EFE6;border-color:var(--sage);color:#2E5234}
+  .feedback.wr{background:#FBE5DE;border-color:#D88068;color:#7A2B17}
+  .feedback strong{font-family:var(--f-display);font-weight:600;font-size:18px;display:block;margin-bottom:2px;letter-spacing:-.01em}
+  .feedback .ic{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.6);display:grid;place-items:center}
+
+  /* mock interface (excel/whatsapp etc) */
+  .sim-excel{
+    background:#fff;border:1px solid var(--line-strong);border-radius:var(--r-md);overflow:hidden;font-family:var(--f-mono);font-size:13px;
+  }
+  .sim-excel .toolbar{background:#1F6E43;color:#fff;padding:6px 10px;font-size:12px;font-weight:600;display:flex;gap:14px}
+  .sim-excel table{width:100%;border-collapse:collapse}
+  .sim-excel th,.sim-excel td{border:1px solid #DADADA;padding:6px 10px;text-align:left;height:30px}
+  .sim-excel th{background:#F5F5F5;color:#666;font-weight:500;width:40px;text-align:center}
+  .sim-excel .colhead{background:#F5F5F5;color:#666;font-weight:500;text-align:center}
+  .sim-excel td.sel{outline:2px solid #1F6E43;outline-offset:-2px;background:#E8F0E8}
+  .sim-excel .formula{padding:6px 10px;background:#FAFAFA;border-bottom:1px solid var(--line);color:var(--ink)}
+  .sim-excel .formula .fx{color:#7A8294;margin-right:6px}
+
+  /* ============ CONTENT BLOCKS ============ */
+  .hook{
+    padding:24px;background:var(--paper-warm);border-left:4px solid var(--coral);border-radius:var(--r-md);
+    font-family:var(--f-display);font-weight:500;font-size:22px;font-style:italic;line-height:1.4;letter-spacing:-.01em;color:var(--ink);
+  }
+  .hook::before{content:""";font-family:var(--f-display);font-size:42px;line-height:0;vertical-align:-.3em;color:var(--coral);margin-right:6px;font-weight:700}
+
+  .concept{padding:0;margin:24px 0;max-width:60ch}
+  .concept h4{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0 0 8px;letter-spacing:-.015em}
+  .concept p{margin:0 0 12px}
+
+  .glossary{background:var(--surface);border:1px dashed var(--line-strong);border-radius:var(--r-md);padding:16px;max-width:520px}
+  .glossary .gl-title{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-mute);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .glossary dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+  .glossary dt{font-weight:700;font-family:var(--f-mono);font-size:13px;color:var(--navy)}
+  .glossary dd{margin:0;font-size:14px;color:var(--ink-soft)}
+
+  .keypts{display:grid;gap:10px;max-width:540px}
+  .keypts li{display:flex;gap:14px;align-items:flex-start;list-style:none;padding:12px 14px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md)}
+  .keypts ul{padding:0;margin:0;display:contents}
+  .keypts .pn{width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--honey-soft);display:grid;place-items:center;font-family:var(--f-mono);font-weight:700;font-size:13px;flex-shrink:0}
+
+  .why{padding:16px;background:#F4EBD3;border-radius:var(--r-md);max-width:540px;display:flex;gap:14px;align-items:flex-start}
+  .why .ic{color:var(--honey);flex-shrink:0;margin-top:2px}
+  .why strong{font-family:var(--f-display);font-weight:600;font-size:16px;display:block;margin-bottom:2px;letter-spacing:-.01em}
+  .why p{margin:0;font-size:14px;color:var(--ink-soft)}
+
+  .checklist{display:grid;gap:8px;max-width:540px}
+  .checklist label{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);cursor:pointer;min-height:52px}
+  .checklist .box{width:22px;height:22px;border:1.5px solid var(--line-strong);background:var(--paper-warm);border-radius:6px;flex-shrink:0;display:grid;place-items:center;color:transparent;margin-top:2px}
+  .checklist input{position:absolute;opacity:0;pointer-events:none}
+  .checklist input:checked + .box{background:var(--sage);border-color:var(--sage);color:#fff}
+  .checklist input:checked ~ .txt{color:var(--ink-mute);text-decoration:line-through}
+
+  /* ============ FEEDBACK / OVERLAY ============ */
+  .toast{
+    display:inline-flex;align-items:center;gap:12px;padding:14px 18px;border-radius:var(--r-md);
+    background:var(--navy);color:var(--paper);font-weight:600;font-size:15px;box-shadow:var(--sh-3);
+  }
+  .toast .dot{width:8px;height:8px;border-radius:50%;background:var(--sage-soft)}
+  .toast.ok .dot{background:var(--sage-soft)}
+  .toast.wr .dot{background:var(--coral)}
+
+  .alert{
+    display:flex;gap:12px;padding:14px 18px;border-radius:var(--r-md);background:var(--paper-warm);
+    border:1px solid var(--line-strong);max-width:560px;font-size:14px;
+  }
+  .alert.warn{background:#FBEAC9;border-color:#E7C078;color:#7C5610}
+  .alert .ic{flex-shrink:0;color:var(--honey)}
+
+  .modal{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-xl);padding:32px;
+    max-width:420px;box-shadow:var(--sh-3);
+  }
+  .modal h3{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0 0 8px;letter-spacing:-.01em}
+  .modal p{margin:0 0 20px;color:var(--ink-soft);font-size:15px}
+  .modal .actions{display:flex;gap:10px;flex-wrap:wrap}
+
+  .tooltip{position:relative;display:inline-flex}
+  .tooltip .tt{
+    position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+    background:var(--navy-deep);color:var(--paper);font-size:12px;font-weight:500;
+    padding:6px 10px;border-radius:8px;white-space:nowrap;
+  }
+  .tooltip .tt::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--navy-deep)}
+
+  .celebrate{
+    background:linear-gradient(135deg,#FBEAC9,var(--paper));border:1px solid var(--honey-soft);
+    border-radius:var(--r-xl);padding:36px;text-align:center;max-width:420px;position:relative;overflow:hidden;
+  }
+  .celebrate .burst{
+    width:96px;height:96px;border-radius:50%;background:radial-gradient(circle,#F2C170,#C48630);color:#fff;
+    display:grid;place-items:center;margin:0 auto 16px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.18),0 6px 0 rgba(196,134,48,.4);
+  }
+  .celebrate h3{font-family:var(--f-display);font-weight:500;font-size:34px;letter-spacing:-.025em;margin:0 0 6px;line-height:1.05;font-variation-settings:"opsz" 144}
+  .celebrate .sub{color:var(--ink-soft);margin:0 0 20px;font-size:16px}
+  .celebrate .stats{display:flex;gap:10px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+
+  .empty{
+    background:var(--surface-2);border:1.5px dashed var(--line-strong);border-radius:var(--r-lg);
+    padding:36px;text-align:center;max-width:480px;
+  }
+  .empty .ic{width:64px;height:64px;border-radius:50%;background:var(--paper-warm);color:var(--ink-mute);display:grid;place-items:center;margin:0 auto 14px}
+  .empty h4{font-family:var(--f-display);font-weight:600;font-size:20px;margin:0 0 6px;letter-spacing:-.01em}
+  .empty p{margin:0 0 16px;color:var(--ink-soft);font-size:14px}
+
+  /* ============ DATA / IDENT ============ */
+  .avatar{width:48px;height:48px;border-radius:50%;background:var(--navy);color:var(--honey-soft);display:grid;place-items:center;font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.02em}
+  .avatar.s{width:32px;height:32px;font-size:13px}
+  .avatar.l{width:72px;height:72px;font-size:26px}
+
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:var(--r-pill);background:var(--paper-warm);border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--ink-soft)}
+  .chip[data-c="navy"]{background:#DFE3EA;color:var(--navy);border-color:#C4CCD8}
+  .chip[data-c="sky"]{background:#DCE6F1;color:#2D4F6E;border-color:#B6C9DA}
+  .chip[data-c="coral"]{background:#FBE5DE;color:#9B3A1F;border-color:#E8B6A8}
+  .chip[data-c="sage"]{background:#E0EAD8;color:#2E5234;border-color:#BDD0B0}
+  .chip[data-c="plum"]{background:#E5D8E8;color:#4B2E5A;border-color:#C9B0CF}
+
+  .divider{height:1px;background:var(--line);margin:24px 0}
+
+  .pg-linear{display:flex;flex-direction:column;gap:6px;width:240px}
+  .pg-linear .bar{height:8px;border-radius:99px;background:var(--paper-warm);overflow:hidden;border:1px solid var(--line)}
+  .pg-linear .bar i{display:block;height:100%;background:var(--navy);border-radius:99px}
+  .pg-linear .lbl{font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);letter-spacing:.06em;text-transform:uppercase;display:flex;justify-content:space-between}
+
+  /* circular progress */
+  .pg-circ{width:80px;height:80px;position:relative;display:grid;place-items:center}
+  .pg-circ svg{width:80px;height:80px;transform:rotate(-90deg);position:absolute;inset:0}
+  .pg-circ .lbl{font-family:var(--f-mono);font-weight:700;font-size:14px}
+
+  /* ============ FOOTER ============ */
+  footer{padding:64px 20px;text-align:center;color:var(--ink-mute);font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  footer a{color:inherit}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="mk">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+        <path d="M5 13h17v8a5 5 0 0 1-5 5h-7a5 5 0 0 1-5-5v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M22 15h2.5a2.5 2.5 0 0 1 0 5H22" stroke="currentColor" stroke-width="2"/>
+        <path d="M4 28h19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M11 9c-1-1.5-1-3 0-4.5M16 9c-1-1.5-1-3 0-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    Escritório — UI Kit
+  </div>
+  <div class="crumb">
+    <a href="identidade-visual.html">identidade</a>·
+    <a href="logo-sugestoes.html">logos</a>·
+    componentes·
+    <a href="prototipo.html">protótipo</a>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="toc">
+    <h4>Capítulos</h4>
+    <a href="#acoes">01 · Ações</a>
+    <a href="#form">02 · Formulários</a>
+    <a href="#nav">03 · Navegação</a>
+    <a href="#cards">04 · Cards</a>
+    <a href="#gami">05 · Gamificação</a>
+    <a href="#ex">06 · Exercícios</a>
+    <a href="#conteudo">07 · Conteúdo de aula</a>
+    <a href="#feed">08 · Feedback</a>
+    <a href="#ident">09 · Identidade & dados</a>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <div class="kicker">UI Kit · 9 categorias · 60+ componentes</div>
+      <h1>Cada peça com <em>nome</em>, <em>estado</em> e <em>razão</em>.</h1>
+      <p>Este é o catálogo vivo do sistema Escritório. Tudo o que está aqui é construído com os
+      tokens da identidade. Use por nome ("botão CTA L", "trilha vertical de missões", "pílula de
+      dificuldade média"). Se não estiver aqui, ainda não existe.</p>
+    </div>
+
+    <!-- ============ 01 AÇÕES ============ -->
+    <section class="cat" id="acoes">
+      <h2><span class="n">01</span>Ações</h2>
+      <p class="lede">Botões. Hit target ≥ 44px em todos. Foco honey visível. Hover: leve elevação.</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Hierarquia</h3><span class="b-meta">5 níveis · 3 tamanhos</span></div>
+        <p class="b-note">Use <strong>primário (coral)</strong> apenas 1 vez por tela. Secundário para ações neutras. Ghost para ações de baixa frequência. Destrutivo só em ações irreversíveis.</p>
+        <div class="stage">
+          <div class="row">
+            <button class="btn">Concluir missão</button>
+            <button class="btn sec">Salvar</button>
+            <button class="btn gh">Pular</button>
+            <button class="btn dest">Recomeçar</button>
+            <a href="#" class="btn link">Ver detalhes →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Tamanhos</h3><span class="b-meta">S · M · L · XL</span></div>
+        <div class="stage">
+          <div class="row" style="align-items:center">
+            <button class="btn s">Pequeno</button>
+            <button class="btn">Médio (padrão)</button>
+            <button class="btn l">Grande</button>
+            <button class="btn xl">CTA da missão</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Estados</h3><span class="b-meta">default · hover · focus · active · disabled · loading</span></div>
+        <div class="stage">
+          <div class="state-row">
+            <div class="state"><span class="lbl">default</span><button class="btn">Botão</button></div>
+            <div class="state"><span class="lbl">hover</span><button class="btn" style="background:var(--coral-deep);transform:translateY(-1px);box-shadow:var(--sh-2)">Botão</button></div>
+            <div class="state"><span class="lbl">focus</span><button class="btn" style="box-shadow:var(--focus),var(--sh-1)">Botão</button></div>
+            <div class="state"><span class="lbl">loading</span><button class="btn load">Salvando</button></div>
+            <div class="state"><span class="lbl">disabled</span><button class="btn" disabled>Botão</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Botões-ícone</h3><span class="b-meta">Square 44/36 · sempre com aria-label</span></div>
+        <div class="stage">
+          <div class="row">
+            <button class="btn ico" aria-label="Voltar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
+            <button class="btn sec ico" aria-label="Compartilhar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 11 15 7M9 13 15 17"/></svg></button>
+            <button class="btn gh ico" aria-label="Mais opções"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
+            <button class="btn ico s" aria-label="Fechar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 FORM ============ -->
+    <section class="cat" id="form">
+      <h2><span class="n">02</span>Formulários</h2>
+      <p class="lede">Campos com label, ajuda e estado de erro sempre visíveis. Nunca placeholder como única instrução.</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Texto, busca, área</h3></div>
+        <div class="stage" data-grid="1">
+          <label class="field">
+            <label>Seu nome</label>
+            <input class="input" type="text" placeholder="Como devemos te chamar?" value="">
+            <span class="help">Aparece nas saudações da home.</span>
+          </label>
+          <label class="field">
+            <label>E-mail</label>
+            <div class="input-ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              <input class="input" type="email" placeholder="voce@exemplo.com">
+            </div>
+            <span class="help">Não enviamos nada. É só para você lembrar.</span>
+          </label>
+          <label class="field">
+            <label>Busca</label>
+            <div class="input-ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input class="input" type="search" placeholder="Buscar trilha, missão...">
+            </div>
+          </label>
+          <label class="field">
+            <label>Anotação da missão</label>
+            <textarea class="input" placeholder="Use F4 para fixar...&#10;Atalho funciona em fórmulas."></textarea>
+            <span class="help">Suas anotações ficam só no seu aparelho.</span>
+          </label>
+          <label class="field">
+            <label>Vertente preferida</label>
+            <select class="input">
+              <option>Computador</option>
+              <option>Celular</option>
+              <option>Misto</option>
+            </select>
+          </label>
+          <label class="field">
+            <label>Senha do backup</label>
+            <input class="input err" type="password" value="123" placeholder="">
+            <span class="err">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+              Use ao menos 6 caracteres.
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Seleção</h3></div>
+        <div class="stage">
+          <div style="display:grid;gap:8px">
+            <label class="check"><input type="checkbox" checked><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span> Quero receber lembretes da ofensiva</label>
+            <label class="check"><input type="checkbox"><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span> Mostrar dicas avançadas (atalhos)</label>
+          </div>
+          <div style="display:grid;gap:8px">
+            <label class="check" data-radio="1"><input type="radio" name="r1" checked><span class="box"></span> Iniciante</label>
+            <label class="check" data-radio="1"><input type="radio" name="r1"><span class="box"></span> Intermediário</label>
+            <label class="check" data-radio="1"><input type="radio" name="r1"><span class="box"></span> Avançado</label>
+          </div>
+          <div style="display:grid;gap:14px">
+            <label class="switch"><input type="checkbox" checked><span class="track"></span> Modo silencioso (sem sons)</label>
+            <label class="switch"><input type="checkbox"><span class="track"></span> Alto contraste</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Slider · aumentar fonte</h3><span class="b-meta">17 · 19 · 21 px</span></div>
+        <div class="stage">
+          <div class="slider-row">
+            <span style="font-family:var(--f-mono);font-size:11px;color:var(--ink-mute)">A</span>
+            <input type="range" class="sl" min="0" max="2" step="1" value="1">
+            <span style="font-family:var(--f-mono);font-size:18px;color:var(--ink-mute);font-weight:700">A</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 NAV ============ -->
+    <section class="cat" id="nav">
+      <h2><span class="n">03</span>Navegação</h2>
+      <p class="lede">Mesmo modelo mental no celular e no PC. Voltar e Início sempre acessíveis.</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Abas da missão</h3><span class="b-meta">4 passos lineares</span></div>
+        <div class="stage" data-tight="1" style="flex-direction:column;align-items:flex-start">
+          <div class="tabs">
+            <button class="active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h12a4 4 0 0 1 4 4v10H8a4 4 0 0 1-4-4V5Z"/></svg> Aula</button>
+            <button>Prática</button>
+            <button>Desafio</button>
+            <button>Validação</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Segmented control</h3></div>
+        <div class="stage" data-tight="1">
+          <div class="seg">
+            <button class="active">Computador</button>
+            <button>Celular</button>
+            <button>Misto</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Bottom nav · mobile</h3></div>
+        <div class="stage">
+          <div class="bottomnav">
+            <button class="bn-btn active"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 12 9-9 9 9M5 10v10h14V10"/></svg> Início</button>
+            <button class="bn-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M3 12h6M15 12h6M12 3v6M12 15v6"/></svg> Trilhas</button>
+            <button class="bn-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg> Agenda</button>
+            <button class="bn-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg> Perfil</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Sidebar · desktop</h3></div>
+        <div class="stage" data-tight="1">
+          <div class="sidebar">
+            <div class="sb-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 12 9-9 9 9M5 10v10h14V10"/></svg> Início</div>
+            <div class="sb-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="6" rx="2"/><rect x="4" y="14" width="16" height="6" rx="2"/></svg> Módulos</div>
+            <div class="sb-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M3 12h6M15 12h6M12 3v6M12 15v6"/></svg> Trilhas</div>
+            <div class="sb-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg> Agenda</div>
+            <div class="sb-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 4h8v3a4 4 0 0 1-8 0V4Z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3"/><path d="M10 14h4v3h-4z"/><path d="M8 20h8"/></svg> Troféus</div>
+            <div class="sb-divider"></div>
+            <div class="sb-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg> Maria Helena</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Breadcrumb · stepper</h3></div>
+        <div class="stage" style="flex-direction:column;align-items:flex-start;gap:24px">
+          <nav class="breadcrumb" aria-label="trilha">
+            <a href="#">Início</a>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <a href="#">Computador</a>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <a href="#">Fundamentos</a>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <span class="here">Missão 3 — Travando células</span>
+          </nav>
+          <div class="stepper" style="width:340px">
+            <span class="dot done"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span class="bar done"></span>
+            <span class="dot done"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span>
+            <span class="bar done"></span>
+            <span class="dot curr">3</span>
+            <span class="bar"></span>
+            <span class="dot">4</span>
+            <span class="bar"></span>
+            <span class="dot">5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 CARDS ============ -->
+    <section class="cat" id="cards">
+      <h2><span class="n">04</span>Cards</h2>
+      <p class="lede">Cada tipo tem hierarquia visual própria. Cor sinaliza vertente. Progresso é sempre concreto (X de Y).</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Card de módulo</h3><span class="b-meta">5 variações de cor</span></div>
+        <div class="stage" data-grid="1">
+          <button class="mod-card">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+            <span class="num">M1 · 4 trilhas</span>
+            <h3>Computador</h3>
+            <p class="sub">Office, e-mail, IA, currículo</p>
+            <div class="pg"><span>8 de 24 missões</span><span>33%</span></div>
+            <div class="bar"><i style="width:33%"></i></div>
+          </button>
+          <button class="mod-card" data-color="sky">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+            <span class="num">M2 · 5 trilhas</span>
+            <h3>Celular</h3>
+            <p class="sub">WhatsApp, PIX, Gov.br, mapas</p>
+            <div class="pg"><span>3 de 30 missões</span><span>10%</span></div>
+            <div class="bar"><i style="width:10%"></i></div>
+          </button>
+          <button class="mod-card" data-color="coral">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18l-2 12H5L3 7Z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg></div>
+            <span class="num">M3 · 3 trilhas</span>
+            <h3>Mercado</h3>
+            <p class="sub">LinkedIn, entrevista, freelance</p>
+            <div class="pg"><span>0 de 18 missões</span><span>0%</span></div>
+            <div class="bar"><i style="width:0%"></i></div>
+          </button>
+          <button class="mod-card" data-color="sage">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v5c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-3Z"/></svg></div>
+            <span class="num">M4 · 3 trilhas</span>
+            <h3>Segurança</h3>
+            <p class="sub">Golpes, senha, vazamento, PIX</p>
+            <div class="pg"><span>12 de 22 missões</span><span>54%</span></div>
+            <div class="bar"><i style="width:54%"></i></div>
+          </button>
+          <button class="mod-card" data-color="plum">
+            <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5v14M5 5h10l-2 3 2 3H5"/></svg></div>
+            <span class="num">M5 · 6 trilhas</span>
+            <h3>Inglês</h3>
+            <p class="sub">A1 → B1 técnico</p>
+            <div class="pg"><span>5 de 40 missões</span><span>12%</span></div>
+            <div class="bar"><i style="width:12%"></i></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Card de trilha</h3></div>
+        <div class="stage" style="flex-direction:column">
+          <div class="trail-card" style="width:100%;max-width:680px">
+            <div class="num-circ">T2</div>
+            <div style="flex:1">
+              <h4>Excel sem medo — fórmulas e funções</h4>
+              <div class="meta">
+                <span class="chip" data-c="navy">Computador</span>
+                <span class="diff m">Intermediário</span>
+                <span style="font-family:var(--f-mono);font-size:12px;color:var(--ink-mute)">6 missões · ~45 min</span>
+              </div>
+              <div class="bar"><i style="width:50%"></i></div>
+            </div>
+            <button class="btn s">Continuar</button>
+          </div>
+          <div class="trail-card" style="width:100%;max-width:680px">
+            <div class="num-circ">T5</div>
+            <div style="flex:1">
+              <h4>WhatsApp seguro — golpes e privacidade</h4>
+              <div class="meta">
+                <span class="chip" data-c="sage">Segurança</span>
+                <span class="diff i">Iniciante</span>
+                <span style="font-family:var(--f-mono);font-size:12px;color:var(--ink-mute)">4 missões · ~30 min</span>
+              </div>
+              <div class="bar"><i style="width:100%;background:var(--honey)"></i></div>
+            </div>
+            <span class="chip" data-c="sage">✓ Concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Trilha vertical de missões</h3><span class="b-meta">3 estados · concluída · atual · bloqueada</span></div>
+        <div class="stage">
+          <div class="mission-trail">
+            <div class="miss-node done">
+              <div class="knob"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 4 4L19 6"/></svg></div>
+              <div class="info"><h5>O que é uma planilha</h5><p>Concluído · +40 XP</p></div>
+            </div>
+            <div class="miss-node done">
+              <div class="knob"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 4 4L19 6"/></svg></div>
+              <div class="info"><h5>Soma e média</h5><p>Concluído · +60 XP</p></div>
+            </div>
+            <div class="miss-node curr">
+              <div class="knob"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div>
+              <div class="info"><h5>Travando células com $</h5><p>Atual · ~8 min · +60 XP</p></div>
+            </div>
+            <div class="miss-node locked">
+              <div class="knob"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="info"><h5>PROCV simples</h5><p>Bloqueada</p></div>
+            </div>
+            <div class="miss-node locked">
+              <div class="knob"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="info"><h5>Desafio final da trilha</h5><p>Bloqueada</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Card "missão do dia"</h3></div>
+        <div class="stage">
+          <div class="daily-card" style="width:100%">
+            <div>
+              <span class="stamp">Sua missão de hoje</span>
+              <h3>Travar uma <em>célula</em> com cifrão</h3>
+              <p style="opacity:.7;margin:8px 0 0;font-size:14px">Excel · 8 min · +60 XP</p>
+            </div>
+            <button class="btn l">Começar agora</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 GAMIFICAÇÃO ============ -->
+    <section class="cat" id="gami">
+      <h2><span class="n">05</span>Gamificação</h2>
+      <p class="lede">Sem ranking. Sem vidas. Só progresso pessoal celebrado.</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Ofensiva · XP · nível</h3></div>
+        <div class="stage">
+          <div class="streak">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c2 4 6 6 6 11a6 6 0 1 1-12 0c0-3 2-4 3-7 1.5 2 3 3 3 6 0-3 0-7 0-10Z"/></svg>
+            12 dias seguidos
+          </div>
+          <span class="xp-pill">+60 XP</span>
+          <span class="lvl-stamp">
+            <span class="lvl-num">3</span>
+            <span class="lvl-name">Analista Júnior</span>
+          </span>
+          <div class="xp-bar">
+            <div class="lbl-row"><span>Para o próximo nível</span><span>740 / 1000</span></div>
+            <div class="bar"><i style="width:74%"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Carimbo de carreira</h3><span class="b-meta">Estagiário → Coordenador</span></div>
+        <div class="stage">
+          <div class="career-block">
+            <div class="seal">A</div>
+            <div class="career-meta">
+              <span class="role">Analista Júnior</span>
+              <span class="next">Próximo: Pleno · 260 XP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Pílulas de dificuldade</h3></div>
+        <div class="stage">
+          <div class="row">
+            <span class="diff i">● Iniciante</span>
+            <span class="diff m">●● Intermediário</span>
+            <span class="diff a">●●● Avançado</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Troféus</h3><span class="b-meta">conquistado · novo · bloqueado</span></div>
+        <div class="stage" data-grid="1">
+          <div class="trophy">
+            <div class="medal new">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15,9 22,10 17,15 18,22 12,18 6,22 7,15 2,10 9,9"/></svg>
+            </div>
+            <span class="ti">Primeira semana</span>
+            <span class="ts">Ofensiva · 7 dias</span>
+          </div>
+          <div class="trophy">
+            <div class="medal">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8v3a4 4 0 0 1-8 0V4Z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3"/><path d="M10 14h4v3h-4z"/><path d="M8 20h8"/></svg>
+            </div>
+            <span class="ti">10 missões</span>
+            <span class="ts">Marco · 10/10</span>
+          </div>
+          <div class="trophy">
+            <div class="medal" style="background:radial-gradient(circle at 30% 30%,#A28FE0,#5E3D9A)">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5v14M5 5h10l-2 3 2 3H5"/></svg>
+            </div>
+            <span class="ti">First Words</span>
+            <span class="ts">Inglês · A1</span>
+          </div>
+          <div class="trophy">
+            <div class="medal locked">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            </div>
+            <span class="ti" style="color:var(--ink-mute)">100 missões</span>
+            <span class="ts">Faltam 78</span>
+          </div>
+          <div class="trophy">
+            <div class="medal" style="background:radial-gradient(circle at 30% 30%,#8FD09C,#3D5F42)">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v5c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-3Z"/></svg>
+            </div>
+            <span class="ti">Detetive de golpes</span>
+            <span class="ts">Segurança · domínio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Escudo da ofensiva</h3></div>
+        <div class="stage">
+          <div class="row">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:48px;height:48px;border-radius:14px;background:#DCE6F1;color:#2D4F6E;display:grid;place-items:center">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 5v7c0 4 3 7 8 10 5-3 8-6 8-10V5l-8-3Z"/></svg>
+              </div>
+              <div><strong>1 escudo</strong><div style="font-size:13px;color:var(--ink-soft)">protege 1 dia perdido</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 EXERCISES ============ -->
+    <section class="cat" id="ex">
+      <h2><span class="n">06</span>Exercícios interativos</h2>
+      <p class="lede">Quatro modelos de exercício. Feedback imediato, sempre com ícone + cor + texto (acessibilidade).</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Escolha a opção</h3><span class="b-meta">Estados: neutro · selecionado · acerto · erro</span></div>
+        <div class="stage">
+          <div class="exercise">
+            <span class="kicker" style="margin:0">Decisão · segurança</span>
+            <p class="ex-q">Você recebe um WhatsApp do seu "filho" pedindo PIX de R$ 800 num número novo. O que você faz?</p>
+            <button class="ex-opt"><span class="key">A</span> Faço o PIX rápido para ajudar</button>
+            <button class="ex-opt sel"><span class="key">B</span> Ligo no número antigo dele antes</button>
+            <button class="ex-opt"><span class="key">C</span> Peço um áudio de confirmação</button>
+            <button class="ex-opt"><span class="key">D</span> Mando dinheiro pela metade só por garantia</button>
+          </div>
+          <div class="exercise">
+            <span class="kicker" style="margin:0">Resultado · acerto</span>
+            <p class="ex-q">Você recebe um WhatsApp do seu "filho" pedindo PIX de R$ 800 num número novo. O que você faz?</p>
+            <button class="ex-opt"><span class="key">A</span> Faço o PIX rápido para ajudar</button>
+            <button class="ex-opt ok"><span class="key">B ✓</span> Ligo no número antigo dele antes</button>
+            <button class="ex-opt"><span class="key">C</span> Peço um áudio de confirmação</button>
+            <button class="ex-opt"><span class="key">D</span> Mando dinheiro pela metade só por garantia</button>
+            <div class="feedback ok">
+              <div class="ic" style="color:var(--sage)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 4 4L19 6"/></svg></div>
+              <div><strong>Boa!</strong>Ligar para o número antigo é a primeira regra contra golpe de WhatsApp. O número novo é o disfarce do golpista.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Complete a lacuna</h3></div>
+        <div class="stage">
+          <div class="exercise">
+            <span class="kicker" style="margin:0">Excel · fórmula</span>
+            <p class="ex-q">Complete: para somar de B2 até B10, escreve-se</p>
+            <div style="font-family:var(--f-mono);font-size:20px;line-height:1.6">
+              =SOMA<span class="fill ok">(B2:B10)</span>
+            </div>
+            <div class="feedback ok">
+              <div class="ic" style="color:var(--sage)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 4 4L19 6"/></svg></div>
+              <div><strong>Perfeito.</strong>Os dois-pontos (<code>:</code>) ligam a primeira à última célula.</div>
+            </div>
+          </div>
+          <div class="exercise">
+            <span class="kicker" style="margin:0">Inglês · gramática</span>
+            <p class="ex-q">She <span class="fill wr">work</span> at a coffee shop.</p>
+            <div class="feedback wr">
+              <div class="ic" style="color:var(--coral)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 8v5M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg></div>
+              <div><strong>Quase!</strong>Lembre que com <strong>she/he/it</strong> precisamos do "s": <em>works</em>.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Simulação · planilha do Excel</h3></div>
+        <div class="stage">
+          <div class="sim-excel" style="width:100%;max-width:520px">
+            <div class="toolbar">Início · Inserir · Fórmulas</div>
+            <div class="formula"><span class="fx">fx</span>=B2*$C$2</div>
+            <table>
+              <tr><th></th><th class="colhead">A</th><th class="colhead">B</th><th class="colhead">C</th></tr>
+              <tr><th>1</th><td>Produto</td><td>Preço</td><td>Imposto</td></tr>
+              <tr><th>2</th><td>Café</td><td>8.00</td><td>0.05</td></tr>
+              <tr><th>3</th><td>Pão</td><td>3.50</td><td>—</td></tr>
+              <tr><th>4</th><td>Total</td><td class="sel">0,40</td><td>—</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 CONTEÚDO DE AULA ============ -->
+    <section class="cat" id="conteudo">
+      <h2><span class="n">07</span>Conteúdo de aula</h2>
+      <p class="lede">Blocos prontos para montar qualquer missão. Sempre nessa ordem: gancho → conceito → exemplo → glossário → 3 pontos → por que importa.</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Gancho · citação de abertura</h3></div>
+        <div class="stage" style="flex-direction:column">
+          <div class="hook" style="width:100%;max-width:640px">
+            Toda planilha que dá trabalho de refazer depois é uma planilha que esqueceu de travar uma célula.
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Bloco de conceito</h3></div>
+        <div class="stage" style="flex-direction:column">
+          <div class="concept">
+            <h4>O que é "travar" uma célula?</h4>
+            <p>Travar é dizer pro Excel: "quando eu copiar essa fórmula pra baixo, <strong>não mude esta referência</strong>". É um cifrão antes da letra (coluna) ou do número (linha) — ou nos dois.</p>
+            <p>Sem trava: <code>=B2*C2</code> vira <code>=B3*C3</code> quando você arrasta. Com trava em C2: <code>=B2*$C$2</code> mantém o C2 mesmo arrastando.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Glossário e 3 pontos-chave</h3></div>
+        <div class="stage" data-grid="1">
+          <div class="glossary">
+            <div class="gl-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5a2 2 0 0 1 2-2h12v18"/><path d="M4 19a2 2 0 0 0 2 2h12"/></svg>
+              Palavras novas
+            </div>
+            <dl>
+              <dt>Célula</dt><dd>cada quadradinho da planilha (A1, B5...)</dd>
+              <dt>Fórmula</dt><dd>cálculo que começa com <code>=</code></dd>
+              <dt>Referência</dt><dd>quando uma célula usa o valor de outra</dd>
+              <dt>$ (cifrão)</dt><dd>fixa a coluna, a linha ou as duas</dd>
+            </dl>
+          </div>
+          <ol class="keypts">
+            <li><div class="pn">1</div><div><strong>F4</strong> alterna entre os modos de trava ao editar.</div></li>
+            <li><div class="pn">2</div><div>Travar <strong>só a coluna</strong>: <code>$C2</code>. Só a linha: <code>C$2</code>.</div></li>
+            <li><div class="pn">3</div><div>Quando em dúvida, trave os dois (<code>$C$2</code>) — é o mais comum.</div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Por que importa · checklist de validação</h3></div>
+        <div class="stage" data-grid="1">
+          <div class="why">
+            <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></div>
+            <div><strong>Por que isso importa</strong><p>Em todo emprego que mexe com Excel, a primeira coisa que diferencia um iniciante de alguém pago melhor é saber travar referência. Salva planilhas inteiras de virarem refeitas.</p></div>
+          </div>
+          <div class="checklist">
+            <label><input type="checkbox" checked><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span><span class="txt">Sei colocar <code>$</code> antes da letra e do número</span></label>
+            <label><input type="checkbox"><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span><span class="txt">Sei usar a tecla <code>F4</code> para alternar os modos</span></label>
+            <label><input type="checkbox"><span class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span><span class="txt">Consigo arrastar a fórmula sem ela quebrar</span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 FEEDBACK ============ -->
+    <section class="cat" id="feed">
+      <h2><span class="n">08</span>Feedback & overlays</h2>
+      <p class="lede">Mensagens curtas, calorosas, sempre com ação. Celebrações breves, sem confete excessivo.</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Toast & alerta</h3></div>
+        <div class="stage" style="flex-direction:column;align-items:flex-start;gap:14px">
+          <div class="toast ok"><span class="dot"></span> Progresso salvo</div>
+          <div class="toast wr"><span class="dot"></span> Sem conexão · salvando local</div>
+          <div class="alert">
+            <div class="ic" style="color:var(--coral)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></div>
+            <div><strong>Você está há 12 dias seguidos.</strong> Cumpra uma missão antes de meia-noite para manter sua ofensiva.</div>
+          </div>
+          <div class="alert warn">
+            <div class="ic" style="color:#7C5610"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/></svg></div>
+            <div><strong>1 escudo disponível.</strong> Será usado automaticamente se você perder um dia.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Modal · tooltip</h3></div>
+        <div class="stage" data-grid="1">
+          <div class="modal">
+            <h3>Recomeçar trilha?</h3>
+            <p>Você vai perder o progresso desta trilha (3 missões concluídas). Seu XP e troféus continuam.</p>
+            <div class="actions">
+              <button class="btn dest">Sim, recomeçar</button>
+              <button class="btn sec">Cancelar</button>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:40px;padding:40px 20px">
+            <span class="tooltip">
+              <span class="tt">Use F4 para alternar</span>
+              <button class="btn sec">Hover aqui</button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Celebração</h3><span class="b-meta">missão · level up · troféu</span></div>
+        <div class="stage" data-grid="1">
+          <div class="celebrate">
+            <div class="burst">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15,9 22,10 17,15 18,22 12,18 6,22 7,15 2,10 9,9"/></svg>
+            </div>
+            <h3>Missão concluída!</h3>
+            <p class="sub">Você travou a célula. Pronto pro próximo passo.</p>
+            <div class="stats">
+              <span class="xp-pill">+60 XP</span>
+              <div class="streak">🔥 Dia 13</div>
+            </div>
+            <button class="btn">Próxima missão</button>
+          </div>
+          <div class="celebrate" style="background:linear-gradient(135deg,#E0EAD8,var(--paper))">
+            <div class="burst" style="background:radial-gradient(circle,#A8C5A5,#3D5F42)">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4h8v3a4 4 0 0 1-8 0V4Z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3"/><path d="M10 14h4v3h-4z"/><path d="M8 20h8"/></svg>
+            </div>
+            <h3>Novo troféu!</h3>
+            <p class="sub">Detetive de Golpes · você dominou o módulo Segurança.</p>
+            <button class="btn">Ver coleção</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Estado vazio</h3></div>
+        <div class="stage">
+          <div class="empty">
+            <div class="ic">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M3 12h6M15 12h6M12 3v6M12 15v6"/></svg>
+            </div>
+            <h4>Nenhuma trilha começada ainda</h4>
+            <p>Escolha um módulo e comece pela primeira trilha. Você pode parar a qualquer momento — seu progresso fica salvo.</p>
+            <button class="btn">Ver módulos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 IDENT ============ -->
+    <section class="cat" id="ident">
+      <h2><span class="n">09</span>Identidade & dados</h2>
+      <p class="lede">Avatar, chips, progresso. Pequenos elementos repetidos que mantêm coesão no app inteiro.</p>
+
+      <div class="block">
+        <div class="b-head"><h3>Avatar</h3></div>
+        <div class="stage">
+          <div class="avatar s">M</div>
+          <div class="avatar">MH</div>
+          <div class="avatar l">MH</div>
+          <div class="avatar l" style="background:var(--coral);color:#fff">P</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Chips · tags</h3></div>
+        <div class="stage">
+          <span class="chip" data-c="navy">Computador</span>
+          <span class="chip" data-c="sky">Celular</span>
+          <span class="chip" data-c="coral">Mercado</span>
+          <span class="chip" data-c="sage">Segurança</span>
+          <span class="chip" data-c="plum">Inglês</span>
+          <span class="chip">Novo</span>
+          <span class="chip">~8 min</span>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Progresso linear & circular</h3></div>
+        <div class="stage">
+          <div class="pg-linear">
+            <div class="lbl"><span>Trilha · Excel</span><span>4/8</span></div>
+            <div class="bar"><i style="width:50%"></i></div>
+          </div>
+          <div class="pg-linear">
+            <div class="lbl"><span>Trilha · WhatsApp</span><span>4/4 ✓</span></div>
+            <div class="bar"><i style="width:100%;background:var(--sage)"></i></div>
+          </div>
+          <div class="pg-circ">
+            <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="var(--paper-warm)" stroke-width="8" fill="none"/><circle cx="40" cy="40" r="34" stroke="var(--coral)" stroke-width="8" fill="none" stroke-dasharray="213.6" stroke-dashoffset="64.1" stroke-linecap="round"/></svg>
+            <span class="lbl">70%</span>
+          </div>
+          <div class="pg-circ">
+            <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" stroke="var(--paper-warm)" stroke-width="8" fill="none"/><circle cx="40" cy="40" r="34" stroke="var(--sage)" stroke-width="8" fill="none" stroke-dasharray="213.6" stroke-dashoffset="0" stroke-linecap="round"/></svg>
+            <span class="lbl" style="color:var(--sage)">✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="b-head"><h3>Divisor & rótulo de seção</h3></div>
+        <div class="stage" style="flex-direction:column;align-items:stretch">
+          <div style="font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);letter-spacing:.12em;text-transform:uppercase">Hoje</div>
+          <div class="divider"></div>
+          <div style="font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);letter-spacing:.12em;text-transform:uppercase">Esta semana</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>Escritório · UI Kit · 60+ componentes · v1 · 05.2026 — <a href="identidade-visual.html">identidade</a> · <a href="prototipo.html">protótipo</a> · <a href="prompt-ia.md">prompt para IA</a></footer>
+
+</body>
+</html>

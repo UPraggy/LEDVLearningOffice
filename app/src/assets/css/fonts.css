@@ -1,0 +1,59 @@
+/* Fraunces + Plus Jakarta Sans + JetBrains Mono já vêm do <link> em index.html.
+   Este arquivo concentra reset tipográfico e helpers globais. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { margin: 0; padding: 0; height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--f-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(180,160,120,.10), transparent 50%),
+    radial-gradient(circle at 90% 30%, rgba(226,91,63,.05), transparent 40%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+h1 { font-weight: 500; letter-spacing: -.025em; line-height: .95; font-variation-settings: "opsz" 144; }
+
+p { margin: 0; }
+a { color: var(--coral-deep); text-underline-offset: 3px; }
+
+button { font-family: inherit; font-size: inherit; cursor: pointer; }
+
+/* Foco visível obrigatório — honey ring 3px */
+:focus-visible {
+  outline: 3px solid var(--honey);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+.t-mono {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.t-kicker {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);  /* #4A5670 = 6.4:1 sobre paper — WCAG AA OK */
+  display: inline-flex; align-items: center; gap: var(--s-2);
+}
+.t-kicker::before {
+  content: ""; width: 24px; height: 1px; background: var(--ink-soft);
+}

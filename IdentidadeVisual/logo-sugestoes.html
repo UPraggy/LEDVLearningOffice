@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escritório — 5 sugestões de logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EBDD; --paper-warm:#EDE3D0; --surface:#FBF7EE; --surface-2:#FFFCF5;
+    --ink:#1A2540; --ink-soft:#4A5670; --ink-mute:#7A8294; --line:#D9CFB8;
+    --navy:#1B2A4E; --navy-deep:#0E1A36;
+    --coral:#E25B3F; --honey:#D49545; --honey-soft:#E8B978;
+    --sage:#4F7A55; --plum:#6B3F7A; --sky:#4F7CAC;
+    --f-display:"Fraunces", Georgia, serif;
+    --f-body:"Plus Jakarta Sans", system-ui, sans-serif;
+    --f-mono:"JetBrains Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--f-body);background:var(--paper);color:var(--ink);line-height:1.55;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:48px 24px}
+  a{color:var(--coral);text-underline-offset:3px}
+
+  header{padding:24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:rgba(251,247,238,.7);backdrop-filter:blur(8px);position:sticky;top:0;z-index:10}
+  header .nm{font-family:var(--f-display);font-weight:600;font-size:20px;letter-spacing:-.01em}
+  header .crumb{font-family:var(--f-mono);font-size:12px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase}
+
+  .hero{padding:80px 24px 48px}
+  .kicker{font-family:var(--f-mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+  .kicker::before{content:"";width:24px;height:1px;background:var(--ink-mute)}
+  .hero h1{font-family:var(--f-display);font-weight:500;font-size:clamp(40px,7vw,72px);line-height:1;letter-spacing:-.025em;margin:0 0 16px;font-variation-settings:"opsz" 144;max-width:18ch}
+  .hero h1 em{font-style:italic;color:var(--coral)}
+  .hero p{font-size:19px;max-width:62ch;color:var(--ink-soft)}
+
+  /* === LOGO SHOWCASE === */
+  .opt{
+    margin-bottom:48px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:24px;
+    overflow:hidden;
+  }
+  .opt-head{
+    display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;
+    padding:24px 32px;border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .opt-num{
+    font-family:var(--f-display);font-weight:500;font-size:64px;line-height:1;
+    color:var(--coral);font-variation-settings:"opsz" 144;letter-spacing:-.04em;
+  }
+  .opt-meta h2{font-family:var(--f-display);font-weight:600;font-size:30px;margin:0 0 4px;letter-spacing:-.02em;line-height:1.1}
+  .opt-meta .tagline{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+  .opt-mood{display:flex;gap:6px;flex-wrap:wrap}
+  .mood-chip{font-family:var(--f-mono);font-size:11px;padding:6px 10px;border-radius:999px;background:var(--paper-warm);border:1px solid var(--line);color:var(--ink-soft);letter-spacing:.04em}
+
+  .opt-body{display:grid;grid-template-columns:1.6fr 1fr;gap:0}
+  @media(max-width:880px){.opt-body{grid-template-columns:1fr}}
+  .stage{
+    min-height:360px;display:grid;place-items:center;padding:48px;
+    background:var(--surface);position:relative;
+  }
+  .stage::before{
+    content:"";position:absolute;inset:24px;border:1px dashed var(--line);border-radius:14px;pointer-events:none;
+  }
+  .stage[data-bg="navy"]{background:var(--navy)} .stage[data-bg="navy"]::before{border-color:rgba(232,220,196,.18)}
+  .stage[data-bg="paper"]{background:var(--paper-warm)}
+  .stage[data-bg="coral"]{background:var(--coral)}
+  .stage[data-bg="cream"]{background:#F7F0DD}
+  .stage[data-bg="plum"]{background:var(--plum)}
+  .stage[data-bg="sage"]{background:var(--sage)}
+  .stage[data-bg="ink"]{background:var(--navy-deep)}
+
+  .panel{padding:32px;display:flex;flex-direction:column;gap:20px;background:var(--surface-2);border-left:1px solid var(--line)}
+  @media(max-width:880px){.panel{border-left:0;border-top:1px solid var(--line)}}
+  .panel h3{font-family:var(--f-display);font-weight:600;font-size:18px;margin:0;letter-spacing:-.01em}
+  .panel p{margin:0;font-size:15px;color:var(--ink-soft);line-height:1.55}
+  .panel .label{font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block}
+  .panel .pros li{margin-bottom:6px;font-size:14px;color:var(--ink-soft)}
+  .panel ul{margin:0;padding-left:18px}
+  .panel .palette-row{display:flex;gap:6px}
+  .panel .palette-row .pp{width:26px;height:26px;border-radius:6px;border:1px solid rgba(0,0,0,.06)}
+
+  /* === MINI variations strip === */
+  .strip{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border-top:1px solid var(--line);
+  }
+  @media(max-width:780px){.strip{grid-template-columns:repeat(2,1fr)}}
+  .strip .tile{
+    padding:24px;display:grid;place-items:center;background:var(--surface);
+    min-height:120px;position:relative;
+  }
+  .strip .tile small{
+    position:absolute;top:8px;left:10px;font-family:var(--f-mono);font-size:9px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase;
+  }
+  .strip .tile[data-bg="navy"]{background:var(--navy)}
+  .strip .tile[data-bg="navy"] small{color:rgba(232,220,196,.6)}
+  .strip .tile[data-bg="paper"]{background:var(--paper-warm)}
+  .strip .tile[data-bg="coral"]{background:var(--coral)} .strip .tile[data-bg="coral"] small{color:rgba(242,235,221,.7)}
+  .strip .tile[data-bg="white"]{background:#fff}
+  .strip .tile[data-bg="ink"]{background:var(--navy-deep)} .strip .tile[data-bg="ink"] small{color:rgba(232,220,196,.5)}
+
+  /* === LOGO ATOMS (re-usable inside SVG containers) === */
+  .word{font-family:var(--f-display);font-weight:600;letter-spacing:-.025em;line-height:1}
+  .word-sans{font-family:var(--f-body);font-weight:700;letter-spacing:-.02em;line-height:1}
+  .tagline-mono{font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.7;margin-top:6px;display:block;font-weight:500}
+
+  footer{padding:64px 24px;text-align:center;color:var(--ink-mute);font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nm">Escritório · sugestões de logo</div>
+  <div class="crumb"><a href="identidade-visual.html" style="text-decoration:none;color:inherit">← guia de identidade</a></div>
+</header>
+
+<div class="hero wrap">
+  <div class="kicker">Cinco direções · escolha uma · misture livremente</div>
+  <h1>O símbolo é um <em>ritual</em>, não uma decoração.</h1>
+  <p>Cada uma das cinco propostas a seguir parte de uma metáfora diferente para "aprender informática
+  de verdade". O ponto comum: dual-audience (criança/adulto), legível em 24px, funciona em 1 cor e
+  em monocromático. Marque a sua favorita em comentário.</p>
+</div>
+
+<div class="wrap" style="padding-top:0">
+
+  <!-- ============ OPTION 1 — Café + Livro ============ -->
+  <div class="opt">
+    <div class="opt-head">
+      <div class="opt-num">01</div>
+      <div class="opt-meta">
+        <h2>O Ritual</h2>
+        <span class="tagline">Xícara · vapor · sublinhado de livro</span>
+      </div>
+      <div class="opt-mood">
+        <span class="mood-chip">caloroso</span>
+        <span class="mood-chip">editorial</span>
+        <span class="mood-chip">evolução do atual</span>
+      </div>
+    </div>
+    <div class="opt-body">
+      <div class="stage" data-bg="navy">
+        <!-- big lockup -->
+        <div style="display:flex;align-items:center;gap:20px;color:var(--honey-soft)">
+          <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
+            <!-- cup body -->
+            <path d="M8 26h33v16a10 10 0 0 1-10 10H18a10 10 0 0 1-10-10V26Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+            <!-- handle -->
+            <path d="M41 30h5a5 5 0 0 1 0 10h-5" stroke="currentColor" stroke-width="3"/>
+            <!-- saucer / book underline -->
+            <path d="M5 56h39" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M14 60h21" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+            <!-- steam as opening quote marks -->
+            <path d="M19 18c-2-3-2-6 0-9M28 18c-2-3-2-6 0-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div class="word" style="font-size:64px;color:var(--paper)">Escritório</div>
+            <span class="tagline-mono" style="color:var(--honey-soft)">Aprender · trabalhar · crescer</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div>
+          <span class="label">Conceito</span>
+          <h3>Evolução, não revolução</h3>
+        </div>
+        <p>Mantém a xícara que já existe, mas adiciona um <strong>sublinhado de livro</strong> embaixo do pires e duas linhas curvas como <strong>aspas/vapor</strong> — ler texto, conversar com ele. A serifa do "Escritório" tem ar de livro impresso.</p>
+        <div>
+          <span class="label">A favor</span>
+          <ul class="pros">
+            <li>Continuidade com a marca atual</li>
+            <li>Símbolo isolado funciona em 24px</li>
+            <li>Aspas dão personalidade sem virar mascote</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Paleta primária</span>
+          <div class="palette-row">
+            <div class="pp" style="background:var(--navy)"></div>
+            <div class="pp" style="background:var(--honey-soft)"></div>
+            <div class="pp" style="background:var(--paper)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <div class="tile" data-bg="navy"><small>negativo</small>
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="var(--honey-soft)" stroke-width="3">
+          <path d="M8 26h33v16a10 10 0 0 1-10 10H18a10 10 0 0 1-10-10V26Z"/>
+          <path d="M41 30h5a5 5 0 0 1 0 10h-5"/><path d="M5 56h39" stroke-linecap="round"/>
+          <path d="M19 18c-2-3-2-6 0-9M28 18c-2-3-2-6 0-9" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="paper"><small>positivo</small>
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="var(--navy)" stroke-width="3">
+          <path d="M8 26h33v16a10 10 0 0 1-10 10H18a10 10 0 0 1-10-10V26Z"/>
+          <path d="M41 30h5a5 5 0 0 1 0 10h-5"/><path d="M5 56h39" stroke-linecap="round"/>
+          <path d="M19 18c-2-3-2-6 0-9M28 18c-2-3-2-6 0-9" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="coral"><small>1 cor</small>
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="var(--paper)" stroke-width="3">
+          <path d="M8 26h33v16a10 10 0 0 1-10 10H18a10 10 0 0 1-10-10V26Z"/>
+          <path d="M41 30h5a5 5 0 0 1 0 10h-5"/><path d="M5 56h39" stroke-linecap="round"/>
+          <path d="M19 18c-2-3-2-6 0-9M28 18c-2-3-2-6 0-9" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="white"><small>favicon 16px</small>
+        <div style="width:32px;height:32px;background:var(--navy);border-radius:8px;display:grid;place-items:center">
+          <svg width="20" height="20" viewBox="0 0 64 64" fill="none" stroke="var(--honey-soft)" stroke-width="4">
+            <path d="M8 26h33v16a10 10 0 0 1-10 10H18a10 10 0 0 1-10-10V26Z"/>
+            <path d="M41 30h5a5 5 0 0 1 0 10h-5"/>
+            <path d="M19 18c-2-3-2-6 0-9M28 18c-2-3-2-6 0-9" stroke-width="3.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION 2 — Mark E + Pencil ============ -->
+  <div class="opt">
+    <div class="opt-head">
+      <div class="opt-num">02</div>
+      <div class="opt-meta">
+        <h2>O Lápis</h2>
+        <span class="tagline">Letra E desenhada por um traço de lápis</span>
+      </div>
+      <div class="opt-mood">
+        <span class="mood-chip">moderno</span>
+        <span class="mood-chip">geométrico</span>
+        <span class="mood-chip">tipo Codewars</span>
+      </div>
+    </div>
+    <div class="opt-body">
+      <div class="stage" data-bg="paper">
+        <div style="display:flex;align-items:center;gap:24px">
+          <!-- E carved -->
+          <svg width="130" height="130" viewBox="0 0 64 64" fill="none">
+            <rect x="6" y="6" width="52" height="52" rx="14" fill="var(--navy)"/>
+            <path d="M18 18h22M18 30h18M18 42h22" stroke="var(--honey-soft)" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="49" cy="42" r="3.5" fill="var(--coral)"/>
+          </svg>
+          <div>
+            <div class="word" style="font-size:64px;color:var(--navy)">Escritório</div>
+            <span class="tagline-mono" style="color:var(--ink-mute)">Plataforma de estudo digital</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div>
+          <span class="label">Conceito</span>
+          <h3>Três linhas, um clique de cor</h3>
+        </div>
+        <p>O "E" é desenhado como três linhas horizontais (atalho mental: lista de tarefas, parágrafo, planilha). Um <strong>ponto coral</strong> no fim da última linha marca o passo concluído — referência sutil ao XP.</p>
+        <div>
+          <span class="label">A favor</span>
+          <ul class="pros">
+            <li>Lê em 16px (squircle + 3 traços)</li>
+            <li>Ar de app — encaixa bem em PWA</li>
+            <li>O ponto coral conversa com o sistema</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Paleta primária</span>
+          <div class="palette-row">
+            <div class="pp" style="background:var(--navy)"></div>
+            <div class="pp" style="background:var(--honey-soft)"></div>
+            <div class="pp" style="background:var(--coral)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <div class="tile" data-bg="navy"><small>squircle</small>
+        <svg width="64" height="64" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="14" fill="var(--honey-soft)"/><path d="M18 18h22M18 30h18M18 42h22" stroke="var(--navy)" stroke-width="5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="tile" data-bg="paper"><small>contorno</small>
+        <svg width="64" height="64" viewBox="0 0 64 64"><rect x="7" y="7" width="50" height="50" rx="13" stroke="var(--navy)" stroke-width="2.5" fill="none"/><path d="M18 18h22M18 30h18M18 42h22" stroke="var(--navy)" stroke-width="5" stroke-linecap="round"/><circle cx="49" cy="42" r="3.5" fill="var(--coral)"/></svg>
+      </div>
+      <div class="tile" data-bg="coral"><small>solid</small>
+        <svg width="64" height="64" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="14" fill="var(--paper)"/><path d="M18 18h22M18 30h18M18 42h22" stroke="var(--coral)" stroke-width="5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="tile" data-bg="white"><small>monoline</small>
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="var(--navy)" stroke-width="3"><rect x="8" y="8" width="48" height="48" rx="12"/><path d="M18 18h22M18 30h18M18 42h22" stroke-width="4" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION 3 — Stairs / Career ============ -->
+  <div class="opt">
+    <div class="opt-head">
+      <div class="opt-num">03</div>
+      <div class="opt-meta">
+        <h2>A Escada</h2>
+        <span class="tagline">Carreira como degraus que sobem</span>
+      </div>
+      <div class="opt-mood">
+        <span class="mood-chip">narrativo</span>
+        <span class="mood-chip">progressão</span>
+        <span class="mood-chip">conceito forte</span>
+      </div>
+    </div>
+    <div class="opt-body">
+      <div class="stage" data-bg="cream">
+        <div style="display:flex;align-items:center;gap:24px">
+          <svg width="130" height="130" viewBox="0 0 64 64" fill="none">
+            <!-- 4 steps rising -->
+            <rect x="6"  y="42" width="14" height="16" rx="3" fill="var(--navy)"/>
+            <rect x="20" y="32" width="14" height="26" rx="3" fill="var(--navy)" opacity=".85"/>
+            <rect x="34" y="22" width="14" height="36" rx="3" fill="var(--navy)" opacity=".7"/>
+            <rect x="48" y="12" width="14" height="46" rx="3" fill="var(--coral)"/>
+            <!-- star on top of last -->
+            <circle cx="55" cy="9" r="4" fill="var(--honey)"/>
+          </svg>
+          <div>
+            <div class="word" style="font-size:60px;color:var(--navy)">Escritório</div>
+            <span class="tagline-mono" style="color:var(--ink-mute)">Estagiário → Coordenador</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div>
+          <span class="label">Conceito</span>
+          <h3>O símbolo é o produto</h3>
+        </div>
+        <p>Quatro degraus subindo + estrela mostarda no topo. Conta literalmente a metáfora central do app — a carreira do Estagiário ao Coordenador. Cada degrau pode ser usado isolado como ícone de nível.</p>
+        <div>
+          <span class="label">A favor</span>
+          <ul class="pros">
+            <li>Sistema vivo: 4 ícones de nível derivam dele</li>
+            <li>Funciona como gráfico em telas de progresso</li>
+            <li>Difícil de confundir com outros logos de edtech</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Cuidados</span>
+          <p style="font-size:13px;color:var(--ink-mute)">Pode soar "corporate growth chart" se não couber arrendondamento generoso. Manter raio dos degraus alto.</p>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <div class="tile" data-bg="navy"><small>positivo</small>
+        <svg width="56" height="56" viewBox="0 0 64 64">
+          <rect x="6"  y="42" width="14" height="16" rx="3" fill="var(--paper)"/>
+          <rect x="20" y="32" width="14" height="26" rx="3" fill="var(--paper)" opacity=".7"/>
+          <rect x="34" y="22" width="14" height="36" rx="3" fill="var(--paper)" opacity=".55"/>
+          <rect x="48" y="12" width="14" height="46" rx="3" fill="var(--coral)"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="paper"><small>1 cor</small>
+        <svg width="56" height="56" viewBox="0 0 64 64">
+          <rect x="6"  y="42" width="14" height="16" rx="3" fill="var(--navy)"/>
+          <rect x="20" y="32" width="14" height="26" rx="3" fill="var(--navy)"/>
+          <rect x="34" y="22" width="14" height="36" rx="3" fill="var(--navy)"/>
+          <rect x="48" y="12" width="14" height="46" rx="3" fill="var(--navy)"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="coral"><small>invertido</small>
+        <svg width="56" height="56" viewBox="0 0 64 64">
+          <rect x="6"  y="42" width="14" height="16" rx="3" fill="var(--paper)"/>
+          <rect x="20" y="32" width="14" height="26" rx="3" fill="var(--paper)"/>
+          <rect x="34" y="22" width="14" height="36" rx="3" fill="var(--paper)"/>
+          <rect x="48" y="12" width="14" height="46" rx="3" fill="var(--paper)"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="white"><small>linear</small>
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="var(--navy)" stroke-width="3.4" stroke-linecap="round">
+          <path d="M6 50V42h14v-10h14v-10h14v-10"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION 4 — Open Brackets ============ -->
+  <div class="opt">
+    <div class="opt-head">
+      <div class="opt-num">04</div>
+      <div class="opt-meta">
+        <h2>Os Colchetes</h2>
+        <span class="tagline">Aspas técnicas que viram aspas editoriais</span>
+      </div>
+      <div class="opt-mood">
+        <span class="mood-chip">tech</span>
+        <span class="mood-chip">jovem</span>
+        <span class="mood-chip">tipo LeetCode/HackerRank</span>
+      </div>
+    </div>
+    <div class="opt-body">
+      <div class="stage" data-bg="navy">
+        <div style="display:flex;align-items:baseline;gap:8px;color:var(--paper)">
+          <span style="font-family:var(--f-mono);font-size:90px;font-weight:500;color:var(--coral);line-height:.9">[</span>
+          <div class="word" style="font-size:68px;color:var(--paper)">Escritório</div>
+          <span style="font-family:var(--f-mono);font-size:90px;font-weight:500;color:var(--coral);line-height:.9">]</span>
+        </div>
+      </div>
+      <div class="panel">
+        <div>
+          <span class="label">Conceito</span>
+          <h3>Estudo é código + texto</h3>
+        </div>
+        <p>Colchetes em <strong>mono</strong> abraçam a serifa do nome. O efeito visual diz "aqui se aprende texto e código ao mesmo tempo" — fala com o público mais jovem que vem do mundo dev sem se afastar do leitor 40+.</p>
+        <div>
+          <span class="label">A favor</span>
+          <ul class="pros">
+            <li>Lockup forte sem precisar de símbolo</li>
+            <li>Conversa com refs Codewars/Exercism</li>
+            <li>Símbolo destacável: só os colchetes</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Paleta primária</span>
+          <div class="palette-row">
+            <div class="pp" style="background:var(--navy)"></div>
+            <div class="pp" style="background:var(--coral)"></div>
+            <div class="pp" style="background:var(--paper)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <div class="tile" data-bg="navy"><small>símbolo</small>
+        <div style="font-family:var(--f-mono);font-weight:500;font-size:48px;color:var(--coral);line-height:1">[ ]</div>
+      </div>
+      <div class="tile" data-bg="paper"><small>símbolo</small>
+        <div style="font-family:var(--f-mono);font-weight:500;font-size:48px;color:var(--navy);line-height:1">[ ]</div>
+      </div>
+      <div class="tile" data-bg="coral"><small>texto</small>
+        <span class="word" style="font-size:30px;color:var(--paper)">[ E ]</span>
+      </div>
+      <div class="tile" data-bg="white"><small>lockup tight</small>
+        <span style="font-family:var(--f-mono);color:var(--coral);font-size:24px">[</span><span class="word" style="font-size:22px;color:var(--navy);margin:0 4px">Esc</span><span style="font-family:var(--f-mono);color:var(--coral);font-size:24px">]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OPTION 5 — Constellation ============ -->
+  <div class="opt">
+    <div class="opt-head">
+      <div class="opt-num">05</div>
+      <div class="opt-meta">
+        <h2>A Constelação</h2>
+        <span class="tagline">Trilha de pontos que conecta uma estrela</span>
+      </div>
+      <div class="opt-mood">
+        <span class="mood-chip">aspiracional</span>
+        <span class="mood-chip">trilha visual</span>
+        <span class="mood-chip">universal</span>
+      </div>
+    </div>
+    <div class="opt-body">
+      <div class="stage" data-bg="ink">
+        <div style="display:flex;align-items:center;gap:24px;color:var(--paper)">
+          <svg width="130" height="130" viewBox="0 0 64 64" fill="none">
+            <!-- trilha de pontos -->
+            <line x1="10" y1="50" x2="22" y2="40" stroke="var(--paper)" stroke-width="1.4" opacity=".4" stroke-dasharray="2 3"/>
+            <line x1="22" y1="40" x2="36" y2="44" stroke="var(--paper)" stroke-width="1.4" opacity=".4" stroke-dasharray="2 3"/>
+            <line x1="36" y1="44" x2="50" y2="22" stroke="var(--paper)" stroke-width="1.4" opacity=".4" stroke-dasharray="2 3"/>
+            <circle cx="10" cy="50" r="3.5" fill="var(--paper)" opacity=".5"/>
+            <circle cx="22" cy="40" r="3.5" fill="var(--paper)" opacity=".7"/>
+            <circle cx="36" cy="44" r="3.5" fill="var(--paper)"/>
+            <!-- big star -->
+            <polygon points="50,8 53,20 65,21 55.5,28 59,40 50,33 41,40 44.5,28 35,21 47,20"
+              fill="var(--honey)" transform="translate(-2 -2) scale(.95)"/>
+          </svg>
+          <div>
+            <div class="word" style="font-size:64px;color:var(--paper)">Escritório</div>
+            <span class="tagline-mono" style="color:rgba(232,220,196,.7)">Cada missão · um passo · uma estrela</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div>
+          <span class="label">Conceito</span>
+          <h3>Mapa de progresso, marca</h3>
+        </div>
+        <p>Uma trilha pontilhada conecta pontos pequenos a uma estrela mostarda — o mesmo desenho usado na <strong>trilha vertical</strong> da home. Marca e produto compartilham gramática visual.</p>
+        <div>
+          <span class="label">A favor</span>
+          <ul class="pros">
+            <li>Funciona como ilustração editorial em headers</li>
+            <li>Universal — criança entende, adulto também</li>
+            <li>Estrela = troféu/XP, integra com gamificação</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Cuidados</span>
+          <p style="font-size:13px;color:var(--ink-mute)">Em tamanhos pequenos (24px) os pontos somem. Usar variante simplificada (só a estrela) para favicon.</p>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <div class="tile" data-bg="ink"><small>completo</small>
+        <svg width="72" height="56" viewBox="0 0 64 56" fill="none">
+          <line x1="10" y1="46" x2="22" y2="36" stroke="var(--paper)" stroke-width="1.4" opacity=".4" stroke-dasharray="2 3"/>
+          <line x1="22" y1="36" x2="36" y2="40" stroke="var(--paper)" stroke-width="1.4" opacity=".4" stroke-dasharray="2 3"/>
+          <line x1="36" y1="40" x2="48" y2="18" stroke="var(--paper)" stroke-width="1.4" opacity=".4" stroke-dasharray="2 3"/>
+          <circle cx="10" cy="46" r="2.8" fill="var(--paper)" opacity=".5"/>
+          <circle cx="22" cy="36" r="2.8" fill="var(--paper)" opacity=".7"/>
+          <circle cx="36" cy="40" r="2.8" fill="var(--paper)"/>
+          <polygon points="48,6 50.4,14 58,15 52,20 54,28 48,23 42,28 44,20 38,15 45.6,14" fill="var(--honey)"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="paper"><small>1 cor</small>
+        <svg width="72" height="56" viewBox="0 0 64 56" fill="none">
+          <line x1="10" y1="46" x2="22" y2="36" stroke="var(--navy)" stroke-width="1.4" stroke-dasharray="2 3"/>
+          <line x1="22" y1="36" x2="36" y2="40" stroke="var(--navy)" stroke-width="1.4" stroke-dasharray="2 3"/>
+          <line x1="36" y1="40" x2="48" y2="18" stroke="var(--navy)" stroke-width="1.4" stroke-dasharray="2 3"/>
+          <circle cx="10" cy="46" r="2.8" fill="var(--navy)"/>
+          <circle cx="22" cy="36" r="2.8" fill="var(--navy)"/>
+          <circle cx="36" cy="40" r="2.8" fill="var(--navy)"/>
+          <polygon points="48,6 50.4,14 58,15 52,20 54,28 48,23 42,28 44,20 38,15 45.6,14" fill="var(--navy)"/>
+        </svg>
+      </div>
+      <div class="tile" data-bg="coral"><small>simplificado</small>
+        <svg width="48" height="48" viewBox="0 0 32 32"><polygon points="16,3 19,12 28,13 21,19 23,28 16,23 9,28 11,19 4,13 13,12" fill="var(--paper)"/></svg>
+      </div>
+      <div class="tile" data-bg="white"><small>favicon (só estrela)</small>
+        <div style="width:32px;height:32px;background:var(--navy);border-radius:8px;display:grid;place-items:center">
+          <svg width="22" height="22" viewBox="0 0 32 32"><polygon points="16,3 19,12 28,13 21,19 23,28 16,23 9,28 11,19 4,13 13,12" fill="var(--honey)"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ RECOMENDAÇÃO ============ -->
+  <div style="background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:40px;margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center">
+    <div style="width:80px;height:80px;background:var(--coral);border-radius:24px;display:grid;place-items:center;color:var(--paper);font-family:var(--f-display);font-weight:700;font-size:48px">→</div>
+    <div>
+      <span class="kicker" style="margin-bottom:8px">Recomendação do designer</span>
+      <h3 style="font-family:var(--f-display);font-weight:600;font-size:28px;margin:0 0 8px;letter-spacing:-.02em">Opção 01 (O Ritual) para a marca · Opção 05 (estrela) como ícone de progresso interno</h3>
+      <p style="margin:0;color:var(--ink-soft);font-size:16px">A xícara mantém o equity da marca atual e o tom acolhedor que diferencia da concorrência tech-fria. A estrela da Constelação volta como elemento de sistema (troféu, marcador de missão concluída), criando coesão entre marca e produto sem precisar trocar o símbolo principal.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>Escritório · sugestões de marca · v 1 · 05.2026 — <a href="identidade-visual.html" style="color:inherit">guia completo</a> · <a href="componentes.html" style="color:inherit">UI kit</a> · <a href="prototipo.html" style="color:inherit">protótipo</a></footer>
+
+</body>
+</html>

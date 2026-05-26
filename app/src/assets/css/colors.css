@@ -1,0 +1,123 @@
+/* =========================================================================
+   ESCRITÓRIO — TOKENS DE IDENTIDADE VISUAL
+   100% fiel ao guia (IdentidadeVisual/identidade-visual.html v2.0).
+   Cole no :root do app. Tudo aqui, nada solto no código.
+   ========================================================================= */
+:root {
+  /* ---- BASE · papel & tinta ---- */
+  --paper:        #F2EBDD;
+  --paper-warm:   #EDE3D0;
+  --surface:      #FBF7EE;
+  --surface-2:    #FFFCF5;
+  --ink:          #1A2540;
+  --ink-soft:     #4A5670;
+  --ink-mute:     #7A8294;
+  --line:         #D9CFB8;
+  --line-strong:  #B5A582;
+
+  /* ---- BRAND ---- */
+  --navy:         #1B2A4E;   /* Computador */
+  --navy-deep:    #0E1A36;
+  --coral:        #E25B3F;   /* Ação primária */
+  --coral-deep:   #C44525;
+  --honey:        #D49545;   /* XP · conquista */
+  --honey-soft:   #E8B978;
+  --sage:         #4F7A55;   /* Sucesso */
+  --sage-soft:    #8AAB8E;
+  --plum:         #6B3F7A;   /* Inglês */
+  --sky:          #4F7CAC;   /* Celular */
+
+  /* ---- SEMÂNTICAS ---- */
+  --success: var(--sage);
+  --warn:    var(--coral);
+  --xp:      var(--honey);
+  --streak:  #E07A3A;
+
+  /* ---- MÓDULOS (cores chip) ---- */
+  --mod-computador: #1B2A4E;
+  --mod-celular:    #4F7CAC;
+  --mod-mercado:    #E25B3F;
+  --mod-seguranca:  #4F7A55;
+  --mod-ingles:     #6B3F7A;
+
+  /* ---- PALETA EXPANDIDA (v8 — Vinho/Marsala/Magenta/Roxo/Ouro rosa) ---- */
+  --vinho:       #5C1F2D;
+  --vinho-soft:  #8A3F4E;
+  --marsala:     #964F4C;
+  --marsala-soft:#B57A77;
+  --magenta:     #C73E7C;
+  --magenta-soft:#E07AA8;
+  --roxo:        #6B2C5E;
+  --roxo-soft:   #9A5A8A;
+  --ouro-rosa:   #D4A574;
+  --ouro-rosa-soft: #E8C39A;
+
+  /* Variações tonais por módulo (3 tons cada — base + soft + deep) */
+  --comp-base: #1B2A4E; --comp-soft: #4F6BA0; --comp-deep: #0E1A36;
+  --cel-base:  #4F7CAC; --cel-soft:  #8FB1D5; --cel-deep:  #2E5680;
+  --merc-base: #E25B3F; --merc-soft: #F4A089; --merc-deep: #A23218;
+  --seg-base:  #4F7A55; --seg-soft:  #8AAB8E; --seg-deep:  #2D4A33;
+  --ing-base:  #6B3F7A; --ing-soft:  #A07AAE; --ing-deep:  #432356;
+
+  /* ---- RAIOS ---- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  /* ---- SOMBRAS ---- */
+  --sh-1: 0 1px 0 rgba(26,37,64,.06), 0 1px 2px rgba(26,37,64,.04);
+  --sh-2: 0 2px 4px rgba(26,37,64,.06), 0 6px 14px rgba(26,37,64,.05);
+  --sh-3: 0 8px 22px rgba(26,37,64,.08), 0 18px 40px rgba(26,37,64,.06);
+  --sh-press: 0 1px 0 rgba(26,37,64,.10);
+
+  /* ---- TIPO ---- */
+  --f-display: "Fraunces", Georgia, serif;
+  --f-body:    "Plus Jakarta Sans", system-ui, sans-serif;
+  --f-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- ESPAÇAMENTO (base 4) ---- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px;
+  --s-4: 16px; --s-5: 20px; --s-6: 24px;
+  --s-7: 32px; --s-8: 40px; --s-9: 56px; --s-10: 72px;
+
+  /* ---- MOTION ---- */
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --t-micro: 120ms;
+  --t-base:  220ms;
+  --t-cele:  480ms;
+
+  /* ---- ACESSIBILIDADE 40+ (escalonável) ---- */
+  --fs-body: 17px;          /* corpo mínimo absoluto */
+  --fs-body-lg: 19px;       /* botão aumentar fonte */
+}
+
+:root[data-fontsize="lg"] {
+  --fs-body: 19px;
+  --fs-body-lg: 21px;
+}
+
+/* 3 níveis de fonte */
+:root[data-fontstep="0"] { --fs-body: 17px; --fs-body-lg: 19px; }
+:root[data-fontstep="1"] { --fs-body: 19px; --fs-body-lg: 21px; }
+:root[data-fontstep="2"] { --fs-body: 21px; --fs-body-lg: 24px; }
+
+/* Alto contraste — escurece fundo e intensifica textos */
+:root[data-contrast="high"] {
+  --paper: #FFF8E7;
+  --paper-warm: #F8EFD8;
+  --surface: #FFFEF9;
+  --surface-2: #FFFFFF;
+  --ink: #000000;
+  --ink-soft: #1A2540;
+  --ink-mute: #4A5670;
+  --line: #B5A582;
+  --line-strong: #7A6A4A;
+  --coral: #C44525;
+  --coral-deep: #8A2A10;
+}
+:root[data-contrast="high"] body {
+  background-image: none;
+}

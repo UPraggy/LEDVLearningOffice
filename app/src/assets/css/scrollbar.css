@@ -1,0 +1,6 @@
+/* Scrollbar discreta no tema papel */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: var(--paper-warm); border-radius: 10px; }
+*::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 10px; border: 2px solid var(--paper-warm); }
+*::-webkit-scrollbar-thumb:hover { background: var(--ink-soft); }
+html { scrollbar-color: var(--line-strong) var(--paper-warm); scrollbar-width: thin; }

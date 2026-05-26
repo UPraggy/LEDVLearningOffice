@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escritório — Identidade Visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* === BASE (papel + tinta) === */
+    --paper:        #F2EBDD;   /* fundo principal */
+    --paper-warm:   #EDE3D0;   /* fundo seções */
+    --surface:      #FBF7EE;   /* card */
+    --surface-2:    #FFFCF5;   /* card elevado */
+    --ink:          #1A2540;   /* texto principal navy quase preto */
+    --ink-soft:     #4A5670;   /* texto secundário */
+    --ink-mute:     #7A8294;   /* texto suporte */
+    --line:         #D9CFB8;   /* divisor */
+    --line-strong:  #B5A582;
+
+    /* === BRAND === */
+    --navy:         #1B2A4E;   /* tinta-brand / Computador */
+    --navy-deep:    #0E1A36;
+    --coral:        #E25B3F;   /* ação primária */
+    --coral-deep:   #C44525;
+    --honey:        #D49545;   /* XP / conquista (mostarda) */
+    --honey-soft:   #E8B978;
+    --sage:         #4F7A55;   /* sucesso */
+    --sage-soft:    #8AAB8E;
+    --plum:         #6B3F7A;   /* Inglês */
+    --sky:          #4F7CAC;   /* Celular */
+
+    /* === SEMANTIC === */
+    --success:  var(--sage);
+    --warn:     var(--coral);
+    --xp:       var(--honey);
+    --streak:   #E07A3A;
+
+    /* === RADIUS === */
+    --r-xs: 6px;   --r-sm: 10px;   --r-md: 14px;
+    --r-lg: 20px;  --r-xl: 28px;   --r-pill: 999px;
+
+    /* === SHADOW === */
+    --sh-1: 0 1px 0 rgba(26,37,64,.06), 0 1px 2px rgba(26,37,64,.04);
+    --sh-2: 0 2px 4px rgba(26,37,64,.06), 0 6px 14px rgba(26,37,64,.05);
+    --sh-3: 0 8px 22px rgba(26,37,64,.08), 0 18px 40px rgba(26,37,64,.06);
+    --sh-press: 0 1px 0 rgba(26,37,64,.10);
+
+    /* === TYPE === */
+    --f-display: "Fraunces", Georgia, serif;
+    --f-body:    "Plus Jakarta Sans", system-ui, sans-serif;
+    --f-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+    /* === SPACING (base 4) === */
+    --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px;
+    --s-5:20px; --s-6:24px; --s-7:32px; --s-8:40px; --s-9:56px; --s-10:72px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:var(--f-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height:1.55;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 20% 0%, rgba(180,160,120,.10), transparent 50%),
+      radial-gradient(circle at 90% 30%, rgba(226,91,63,.05), transparent 40%);
+  }
+  a{color:var(--coral-deep);text-underline-offset:3px}
+
+  .wrap{max-width:1180px;margin:0 auto;padding: var(--s-8) var(--s-6)}
+  .gridcol{display:grid;gap:var(--s-6)}
+
+  /* === HEADER === */
+  .top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding: var(--s-5) var(--s-6);
+    border-bottom:1px solid var(--line);
+    background: rgba(251,247,238,.7);
+    backdrop-filter: blur(8px);
+    position:sticky;top:0;z-index:10;
+  }
+  .brand-row{display:flex;align-items:center;gap:var(--s-3)}
+  .brand-mark{width:44px;height:44px;background:var(--navy);border-radius:12px;display:grid;place-items:center;color:var(--honey-soft)}
+  .brand-name{font-family:var(--f-display);font-weight:600;font-size:22px;letter-spacing:-.01em}
+  .brand-meta{color:var(--ink-mute);font-size:13px;font-family:var(--f-mono)}
+  .nav-pill{display:flex;gap:6px;background:var(--surface);padding:6px;border-radius:var(--r-pill);border:1px solid var(--line)}
+  .nav-pill a{
+    padding:8px 14px;font-size:14px;font-weight:600;color:var(--ink-soft);
+    text-decoration:none;border-radius:var(--r-pill);
+  }
+  .nav-pill a.active{background:var(--ink);color:var(--paper)}
+
+  /* === HERO === */
+  .hero{
+    padding: var(--s-10) var(--s-6);
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, transparent 60%, rgba(180,150,90,.06)),
+      radial-gradient(circle at 80% 50%, rgba(226,91,63,.08), transparent 60%);
+  }
+  .hero h1{
+    font-family:var(--f-display);
+    font-weight:500;
+    font-size: clamp(48px, 8vw, 88px);
+    line-height:.95;
+    letter-spacing:-.025em;
+    margin:0 0 var(--s-6);
+    font-variation-settings:"opsz" 144;
+    max-width:14ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--coral);font-weight:500}
+  .hero p{font-size:20px;max-width:62ch;color:var(--ink-soft)}
+  .kicker{
+    font-family:var(--f-mono);font-size:13px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-mute);margin-bottom:var(--s-4);
+    display:flex;align-items:center;gap:var(--s-2);
+  }
+  .kicker::before{content:"";width:24px;height:1px;background:var(--ink-mute)}
+
+  /* === SECTION === */
+  section{padding: var(--s-10) 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:var(--s-4);margin-bottom:var(--s-8)}
+  .sec-head h2{
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(34px,4.5vw,56px);
+    margin:0;letter-spacing:-.02em;line-height:1;
+  }
+  .sec-head h2 .num{color:var(--coral);font-family:var(--f-mono);font-size:.5em;vertical-align:top;margin-right:.4em;font-weight:600}
+  .sec-head p{margin:0;max-width:42ch;color:var(--ink-soft)}
+
+  /* === CONCEPT 3-COL === */
+  .concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5)}
+  .concept{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-lg);padding:var(--s-6);
+    display:flex;flex-direction:column;gap:var(--s-3);
+  }
+  .concept .ic{width:40px;height:40px;border-radius:var(--r-md);display:grid;place-items:center;background:var(--paper-warm);color:var(--navy)}
+  .concept h3{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0;letter-spacing:-.01em}
+  .concept p{margin:0;color:var(--ink-soft);font-size:15px}
+  .concept .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);font-weight:600}
+  @media(max-width:780px){ .concepts{grid-template-columns:1fr} }
+
+  /* === LOGO LOCKUPS === */
+  .logo-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--s-4)}
+  .logo-card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-lg);padding:var(--s-7);
+    display:flex;align-items:center;justify-content:center;min-height:200px;position:relative;
+  }
+  .logo-card[data-dark="1"]{background:var(--navy);color:var(--paper)}
+  .logo-card[data-coral="1"]{background:var(--coral);color:var(--paper)}
+  .logo-card .label{position:absolute;top:14px;left:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+  .logo-card[data-dark="1"] .label,.logo-card[data-coral="1"] .label{color:rgba(242,235,221,.7)}
+  @media(max-width:780px){ .logo-grid{grid-template-columns:1fr 1fr} }
+
+  /* logo lockup */
+  .lockup{display:flex;align-items:center;gap:14px}
+  .lockup .mark{width:64px;height:64px;border-radius:16px;background:var(--navy);display:grid;place-items:center;color:var(--honey-soft)}
+  .lockup .word{font-family:var(--f-display);font-weight:600;font-size:36px;letter-spacing:-.02em;line-height:1}
+  .lockup .word small{display:block;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-top:4px}
+  .logo-card[data-dark="1"] .lockup .word small,
+  .logo-card[data-coral="1"] .lockup .word small{color:rgba(242,235,221,.6)}
+
+  /* === PALETTE === */
+  .pal-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--s-3)}
+  .swatch{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;
+  }
+  .swatch .chip{height:88px}
+  .swatch .meta{padding:var(--s-3) var(--s-4);font-size:13px}
+  .swatch .name{font-weight:700;display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .swatch .hex{display:block;color:var(--ink-mute);font-family:var(--f-mono);font-size:12px;margin-top:2px}
+  .swatch .role{display:block;color:var(--ink-soft);font-size:12px;margin-top:6px}
+  @media(max-width:980px){.pal-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.pal-grid{grid-template-columns:repeat(2,1fr)}}
+
+  .module-row{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s-3);margin-top:var(--s-4)}
+  .mod-chip{
+    border-radius:var(--r-lg);padding:var(--s-5);color:#fff;
+    display:flex;flex-direction:column;gap:var(--s-2);min-height:120px;
+    position:relative;overflow:hidden;
+  }
+  .mod-chip .num{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;opacity:.7}
+  .mod-chip h4{font-family:var(--f-display);font-weight:600;font-size:24px;margin:0;letter-spacing:-.01em}
+  .mod-chip .hex{font-family:var(--f-mono);font-size:11px;opacity:.7;margin-top:auto}
+  .mod-chip[data-wcag]::after{content:attr(data-wcag);position:absolute;top:12px;right:12px;background:rgba(255,255,255,.18);font-size:10px;font-family:var(--f-mono);padding:3px 7px;border-radius:var(--r-pill);font-weight:600}
+  @media(max-width:780px){.module-row{grid-template-columns:repeat(2,1fr)}}
+
+  /* === TYPOGRAPHY SPECIMEN === */
+  .type-stack{display:grid;grid-template-columns:auto 1fr;gap:var(--s-4) var(--s-7);align-items:baseline;border-top:1px solid var(--line);padding-top:var(--s-5);margin-top:var(--s-5)}
+  .type-stack .ref{font-family:var(--f-mono);font-size:12px;color:var(--ink-mute);letter-spacing:.06em;text-transform:uppercase;padding-top:8px}
+  .type-stack .sample{margin:0;letter-spacing:-.01em}
+  .t-h1{font-family:var(--f-display);font-weight:500;font-size:64px;line-height:1;font-variation-settings:"opsz" 144;letter-spacing:-.025em}
+  .t-h2{font-family:var(--f-display);font-weight:600;font-size:42px;line-height:1.05;letter-spacing:-.02em}
+  .t-h3{font-family:var(--f-display);font-weight:600;font-size:28px;line-height:1.15;letter-spacing:-.01em}
+  .t-h4{font-family:var(--f-body);font-weight:700;font-size:22px;line-height:1.25}
+  .t-lg{font-family:var(--f-body);font-weight:500;font-size:20px;line-height:1.5}
+  .t-body{font-family:var(--f-body);font-weight:400;font-size:17px;line-height:1.6}
+  .t-sm{font-family:var(--f-body);font-weight:500;font-size:14px;line-height:1.45;color:var(--ink-soft)}
+  .t-mono{font-family:var(--f-mono);font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+
+  /* === SPACING & RADII & SHADOW === */
+  .triple{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-5)}
+  @media(max-width:780px){.triple{grid-template-columns:1fr}}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s-6)}
+  .panel h3{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0 0 var(--s-4);letter-spacing:-.01em}
+
+  .space-bars{display:flex;align-items:flex-end;gap:var(--s-2);height:80px;margin-top:var(--s-3)}
+  .space-bars .b{background:var(--ink);width:18px;border-radius:3px 3px 0 0;position:relative}
+  .space-bars .b::after{content:attr(data-v);position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:10px;color:var(--ink-mute)}
+
+  .radii-row{display:flex;gap:var(--s-3);flex-wrap:wrap;margin-top:var(--s-3)}
+  .radii-row .r{background:var(--paper-warm);width:64px;height:64px;border:1px solid var(--line);display:grid;place-items:end;padding:6px;font-family:var(--f-mono);font-size:10px;color:var(--ink-mute)}
+
+  .shadow-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4);margin-top:var(--s-3)}
+  .sh{background:var(--surface-2);height:90px;border-radius:var(--r-md);display:grid;place-items:center;font-family:var(--f-mono);font-size:11px;color:var(--ink-mute)}
+  .sh.sh1{box-shadow:var(--sh-1)} .sh.sh2{box-shadow:var(--sh-2)} .sh.sh3{box-shadow:var(--sh-3)}
+
+  /* === ICON GRID === */
+  .icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:var(--s-2)}
+  .ic-cell{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);aspect-ratio:1;display:grid;place-items:center;color:var(--ink);position:relative}
+  .ic-cell .nm{position:absolute;bottom:6px;font-family:var(--f-mono);font-size:9px;color:var(--ink-mute);letter-spacing:.04em}
+  @media(max-width:780px){.icon-grid{grid-template-columns:repeat(4,1fr)}}
+
+  /* === VOICE === */
+  .voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5)}
+  .voice-grid .panel ul{margin:0;padding:0;list-style:none}
+  .voice-grid .panel li{padding:var(--s-3) 0;border-bottom:1px dashed var(--line);font-size:15px;display:flex;gap:var(--s-3);align-items:flex-start}
+  .voice-grid .panel li:last-child{border-bottom:0}
+  .voice-grid .yes::before{content:"✓";color:var(--sage);font-weight:700;flex-shrink:0}
+  .voice-grid .no::before{content:"✕";color:var(--coral);font-weight:700;flex-shrink:0}
+  @media(max-width:780px){.voice-grid{grid-template-columns:1fr}}
+
+  /* === ACCESS === */
+  .access{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-4)}
+  .access .panel{padding:var(--s-5)}
+  .access h4{font-family:var(--f-display);font-weight:600;font-size:18px;margin:0 0 var(--s-2);letter-spacing:-.01em}
+  .access .big{font-family:var(--f-mono);font-size:34px;font-weight:600;color:var(--coral);letter-spacing:-.02em;display:block;line-height:1}
+  .access p{font-size:14px;color:var(--ink-soft);margin:var(--s-2) 0 0}
+  @media(max-width:780px){.access{grid-template-columns:repeat(2,1fr)}}
+
+  /* === CODE === */
+  pre.code{background:var(--navy-deep);color:#E8DCC4;border-radius:var(--r-lg);padding:var(--s-6);font-family:var(--f-mono);font-size:13px;overflow:auto;line-height:1.7}
+  pre.code .com{color:#7E8AAB}
+  pre.code .var{color:#E8B978}
+  pre.code .val{color:#A8C5A5}
+
+  footer{padding: var(--s-9) 0;color:var(--ink-mute);text-align:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+  /* === MOTION SPEC === */
+  .motion-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4);margin-top:var(--s-4)}
+  .motion-card{background:var(--paper-warm);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--s-4)}
+  .motion-card .ms{font-family:var(--f-mono);font-size:28px;font-weight:600;color:var(--navy)}
+  .motion-card small{font-family:var(--f-mono);font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px}
+  .motion-card .ease{font-family:var(--f-mono);font-size:11px;color:var(--ink-soft);margin-top:4px}
+  @media(max-width:780px){.motion-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="top">
+  <div class="brand-row">
+    <div class="brand-mark">
+      <!-- mark: coffee + book steam -->
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+        <path d="M5 13h17v8a5 5 0 0 1-5 5h-7a5 5 0 0 1-5-5v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M22 15h2.5a2.5 2.5 0 0 1 0 5H22" stroke="currentColor" stroke-width="2"/>
+        <path d="M4 28h19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M11 9c-1-1.5-1-3 0-4.5M16 9c-1-1.5-1-3 0-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">Escritório</div>
+      <div class="brand-meta">v 2.0 · guia de marca</div>
+    </div>
+  </div>
+  <nav class="nav-pill" aria-label="seções">
+    <a href="#conceito" class="active">Conceito</a>
+    <a href="#logo">Logo</a>
+    <a href="#paleta">Paleta</a>
+    <a href="#tipo">Tipo</a>
+    <a href="#sistema">Sistema</a>
+    <a href="#voz">Voz</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Identidade visual · documento vivo · maio 2026</div>
+    <h1>Estudar pode ser <em>quente</em>, não corporativo.</h1>
+    <p>Escritório é uma plataforma de qualificação digital onde uma pessoa de 12 ou de 60 anos
+    senta com uma xícara de café e sai dali sabendo usar Excel, evitando golpes, escrevendo
+    um e-mail decente. Este documento é a costura visual que faz isso possível —
+    da cor da chama da ofensiva ao espaçamento entre dois cards.</p>
+  </div>
+</section>
+
+<!-- ============ CONCEPT ============ -->
+<section id="conceito">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">01</span>Conceito</h2>
+      <p>Três personalidades em equilíbrio. Se uma sumir, o tom quebra.</p>
+    </div>
+    <div class="concepts">
+      <div class="concept">
+        <div class="ic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 19h16v2H4z"/><path d="M8 8h8M8 12h6"/></svg>
+        </div>
+        <span class="tag">Editorial</span>
+        <h3>Caderno bonito, não SaaS</h3>
+        <p>Hierarquia tipográfica clara, espaçamento generoso, ar de revista impressa. A serifa
+        nos títulos é o tom de "publicação séria, mas amigável" — longe do dashboard genérico.</p>
+      </div>
+      <div class="concept">
+        <div class="ic" style="background:#F1DDD3;color:var(--coral-deep)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6"/><path d="m9 11 3-3 3 3"/><path d="M5 13h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-8Z"/><path d="M3 22h18"/></svg>
+        </div>
+        <span class="tag" style="color:var(--coral-deep)">Acolhedor</span>
+        <h3>Café às 7h, não cubículo</h3>
+        <p>Base papel/creme, tinta navy, coral quente. Sensação de ritual — sentar, ler, praticar,
+        progredir. Tom adulto-competente: nunca infantil, nunca paternalista.</p>
+      </div>
+      <div class="concept">
+        <div class="ic" style="background:#DCEADD;color:var(--sage)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V8"/><path d="m5 15 7-7 7 7"/><circle cx="12" cy="4" r="2"/></svg>
+        </div>
+        <span class="tag" style="color:var(--sage)">Gamificado, gentil</span>
+        <h3>Sem ranking, sem vidas</h3>
+        <p>Ofensiva (chama 🔥), escudo de proteção, XP e carimbo de carreira. Nada que puna —
+        celebra progresso pessoal. Criança não chora, adulto não se intimida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGO ============ -->
+<section id="logo">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">02</span>Marca</h2>
+      <p>Xícara + livro aberto: o ritual de quem estuda enquanto toma café. Duas aspas no vapor remetem ao "estudar é conversar com texto".</p>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-card">
+        <span class="label">Lockup horizontal · principal</span>
+        <div class="lockup">
+          <div class="mark">
+            <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
+              <path d="M5 13h17v8a5 5 0 0 1-5 5h-7a5 5 0 0 1-5-5v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M22 15h2.5a2.5 2.5 0 0 1 0 5H22" stroke="currentColor" stroke-width="2"/>
+              <path d="M4 28h19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M11 9c-1-1.5-1-3 0-4.5M16 9c-1-1.5-1-3 0-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="word">Escritório<small>Aprender · trabalhar · crescer</small></div>
+        </div>
+      </div>
+      <div class="logo-card" data-dark="1">
+        <span class="label">Sobre tinta</span>
+        <div class="lockup">
+          <div class="mark" style="background:transparent;border:2px solid var(--honey-soft)">
+            <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
+              <path d="M5 13h17v8a5 5 0 0 1-5 5h-7a5 5 0 0 1-5-5v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M22 15h2.5a2.5 2.5 0 0 1 0 5H22" stroke="currentColor" stroke-width="2"/>
+              <path d="M4 28h19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M11 9c-1-1.5-1-3 0-4.5M16 9c-1-1.5-1-3 0-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="word" style="color:var(--paper)">Escritório</div>
+        </div>
+      </div>
+      <div class="logo-card" data-coral="1">
+        <span class="label">Sobre coral</span>
+        <div class="lockup">
+          <div class="mark" style="background:var(--paper);color:var(--coral)">
+            <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
+              <path d="M5 13h17v8a5 5 0 0 1-5 5h-7a5 5 0 0 1-5-5v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M22 15h2.5a2.5 2.5 0 0 1 0 5H22" stroke="currentColor" stroke-width="2"/>
+              <path d="M4 28h19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M11 9c-1-1.5-1-3 0-4.5M16 9c-1-1.5-1-3 0-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="word" style="color:var(--paper)">Escritório</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-grid" style="margin-top:var(--s-4)">
+      <div class="logo-card" style="background:var(--surface-2)">
+        <span class="label">Símbolo isolado · favicon</span>
+        <div class="mark" style="width:120px;height:120px;border-radius:28px;background:var(--navy);display:grid;place-items:center;color:var(--honey-soft)">
+          <svg width="68" height="68" viewBox="0 0 32 32" fill="none">
+            <path d="M5 13h17v8a5 5 0 0 1-5 5h-7a5 5 0 0 1-5-5v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M22 15h2.5a2.5 2.5 0 0 1 0 5H22" stroke="currentColor" stroke-width="2"/>
+            <path d="M4 28h19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M11 9c-1-1.5-1-3 0-4.5M16 9c-1-1.5-1-3 0-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="logo-card">
+        <span class="label">Monograma</span>
+        <div style="font-family:var(--f-display);font-weight:600;font-size:120px;color:var(--navy);letter-spacing:-.04em;line-height:1">E<span style="color:var(--coral)">.</span></div>
+      </div>
+      <div class="logo-card">
+        <span class="label">Stamp · selo</span>
+        <div style="width:140px;height:140px;border:2px solid var(--coral);border-radius:50%;display:grid;place-items:center;color:var(--coral);font-family:var(--f-display);font-weight:600;font-size:18px;text-align:center;line-height:1.1">
+          ESCRITÓRIO<br><span style="font-family:var(--f-mono);font-size:9px;letter-spacing:.18em">DESDE 2025</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:var(--s-6);color:var(--ink-soft);max-width:60ch">
+      <strong>Área de respiro:</strong> manter no mínimo a altura do símbolo (X) em volta da marca.
+      <strong>Tamanho mínimo:</strong> 24px de altura para o ícone isolado; 32px para o lockup horizontal.
+      <strong>Não:</strong> não distorcer, não rotacionar, não trocar a cor da xícara por gradiente, não colocar sobre foto sem máscara.
+    </p>
+
+    <p style="margin-top:var(--s-4);font-size:14px;color:var(--ink-mute);font-family:var(--f-mono)">
+      → Veja 5 sugestões alternativas em <a href="logo-sugestoes.html">logo-sugestoes.html</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ PALETTE ============ -->
+<section id="paleta">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">03</span>Paleta</h2>
+      <p>Cada cor tem papel semântico. WCAG AA validado em pares texto/fundo.</p>
+    </div>
+
+    <h3 style="font-family:var(--f-display);font-weight:600;font-size:22px;margin:0 0 var(--s-3);letter-spacing:-.01em">Base · papel & tinta</h3>
+    <div class="pal-grid">
+      <div class="swatch"><div class="chip" style="background:var(--paper)"></div><div class="meta"><span class="name">Paper</span><span class="hex">#F2EBDD</span><span class="role">Fundo principal</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--paper-warm)"></div><div class="meta"><span class="name">Paper warm</span><span class="hex">#EDE3D0</span><span class="role">Fundo de seções</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--surface)"></div><div class="meta"><span class="name">Surface</span><span class="hex">#FBF7EE</span><span class="role">Card</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--surface-2)"></div><div class="meta"><span class="name">Surface 2</span><span class="hex">#FFFCF5</span><span class="role">Card elevado</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--ink)"></div><div class="meta"><span class="name">Ink</span><span class="hex">#1A2540</span><span class="role">Texto principal · 13.4:1</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--ink-soft)"></div><div class="meta"><span class="name">Ink soft</span><span class="hex">#4A5670</span><span class="role">Secundário · 6.4:1</span></div></div>
+    </div>
+
+    <h3 style="font-family:var(--f-display);font-weight:600;font-size:22px;margin:var(--s-7) 0 var(--s-3);letter-spacing:-.01em">Ação & estado</h3>
+    <div class="pal-grid">
+      <div class="swatch"><div class="chip" style="background:var(--navy)"></div><div class="meta"><span class="name">Navy</span><span class="hex">#1B2A4E</span><span class="role">Brand · Computador</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--coral)"></div><div class="meta"><span class="name">Coral</span><span class="hex">#E25B3F</span><span class="role">Ação primária</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--honey)"></div><div class="meta"><span class="name">Honey</span><span class="hex">#D49545</span><span class="role">XP · conquista</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--sage)"></div><div class="meta"><span class="name">Sage</span><span class="hex">#4F7A55</span><span class="role">Sucesso</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--streak)"></div><div class="meta"><span class="name">Streak</span><span class="hex">#E07A3A</span><span class="role">Ofensiva (chama)</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--plum)"></div><div class="meta"><span class="name">Plum</span><span class="hex">#6B3F7A</span><span class="role">Inglês</span></div></div>
+    </div>
+
+    <h3 style="font-family:var(--f-display);font-weight:600;font-size:22px;margin:var(--s-7) 0 var(--s-3);letter-spacing:-.01em">Cores dos 5 módulos</h3>
+    <div class="module-row">
+      <div class="mod-chip" style="background:var(--navy)" data-wcag="AAA"><span class="num">M1</span><h4>Computador</h4><span class="hex">#1B2A4E</span></div>
+      <div class="mod-chip" style="background:var(--sky)" data-wcag="AA"><span class="num">M2</span><h4>Celular</h4><span class="hex">#4F7CAC</span></div>
+      <div class="mod-chip" style="background:var(--coral)" data-wcag="AA"><span class="num">M3</span><h4>Mercado</h4><span class="hex">#E25B3F</span></div>
+      <div class="mod-chip" style="background:var(--sage)" data-wcag="AA"><span class="num">M4</span><h4>Segurança</h4><span class="hex">#4F7A55</span></div>
+      <div class="mod-chip" style="background:var(--plum)" data-wcag="AAA"><span class="num">M5</span><h4>Inglês</h4><span class="hex">#6B3F7A</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TYPOGRAPHY ============ -->
+<section id="tipo">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">04</span>Tipografia</h2>
+      <p>Três famílias. Cada uma com função clara. Corpo 17px mínimo (pré-presbiopia).</p>
+    </div>
+
+    <div class="triple">
+      <div class="panel">
+        <span class="t-mono" style="color:var(--ink-mute)">Display</span>
+        <div style="font-family:var(--f-display);font-weight:500;font-size:88px;line-height:1;letter-spacing:-.03em;margin:var(--s-3) 0;font-variation-settings:'opsz' 144">Aa</div>
+        <strong>Fraunces</strong> · Google Fonts<br>
+        <span class="t-sm">Serifa varível, opsz 144 nos títulos grandes. Italic dramático em destaques.</span>
+      </div>
+      <div class="panel">
+        <span class="t-mono" style="color:var(--ink-mute)">Corpo & UI</span>
+        <div style="font-family:var(--f-body);font-weight:600;font-size:88px;line-height:1;letter-spacing:-.02em;margin:var(--s-3) 0">Aa</div>
+        <strong>Plus Jakarta Sans</strong> · Google Fonts<br>
+        <span class="t-sm">Sans humanista geométrica. Pesos 400, 500, 600, 700. Excelente em telas pequenas.</span>
+      </div>
+      <div class="panel">
+        <span class="t-mono" style="color:var(--ink-mute)">Mono · técnica</span>
+        <div style="font-family:var(--f-mono);font-weight:500;font-size:78px;line-height:1;margin:var(--s-3) 0">Aa</div>
+        <strong>JetBrains Mono</strong> · Google Fonts<br>
+        <span class="t-sm">Para código, fórmulas Excel, atalhos, metadados. Lembra que aqui se aprende tecnologia.</span>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--f-display);font-weight:600;font-size:22px;margin:var(--s-8) 0 0;letter-spacing:-.01em">Escala</h3>
+    <div class="type-stack">
+      <span class="ref">H1 · 64/100 · -2.5%</span><h1 class="sample t-h1">Aprender é confiar no próximo passo.</h1>
+      <span class="ref">H2 · 42/105 · -2%</span><h2 class="sample t-h2">Hoje é dia de Excel.</h2>
+      <span class="ref">H3 · 28/115 · -1%</span><h3 class="sample t-h3">Missão 3 — Travar uma célula com $</h3>
+      <span class="ref">H4 · 22/125</span><h4 class="sample t-h4">Por que isso importa</h4>
+      <span class="ref">Body L · 20/150</span><p class="sample t-lg">Travar uma referência é a diferença entre uma planilha que funciona e uma que precisa ser refeita do zero toda vez.</p>
+      <span class="ref">Body · 17/160</span><p class="sample t-body">Você vai usar a tecla F4 para fixar a célula. Em telas pequenas, o atalho aparece no menu de fórmulas. Pratique três vezes antes de seguir.</p>
+      <span class="ref">Small · 14/145</span><p class="sample t-sm">Dica: se você usa Mac, troque F4 por Cmd+T no editor de fórmulas.</p>
+      <span class="ref">Mono · 13 · CAPS</span><span class="sample t-mono">+60 XP · trilha 02 · 8 min</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM ============ -->
+<section id="sistema">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">05</span>Sistema</h2>
+      <p>Espaçamento em base 4, quatro níveis de raio, três de elevação. Tudo varível.</p>
+    </div>
+
+    <div class="triple">
+      <div class="panel">
+        <h3>Espaçamento</h3>
+        <p class="t-sm">Escala base 4. Use os tokens, nunca números soltos.</p>
+        <div class="space-bars">
+          <div class="b" style="height:4px"  data-v="4"></div>
+          <div class="b" style="height:8px"  data-v="8"></div>
+          <div class="b" style="height:12px" data-v="12"></div>
+          <div class="b" style="height:16px" data-v="16"></div>
+          <div class="b" style="height:24px" data-v="24"></div>
+          <div class="b" style="height:32px" data-v="32"></div>
+          <div class="b" style="height:48px" data-v="48"></div>
+          <div class="b" style="height:72px" data-v="72"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Raios</h3>
+        <p class="t-sm">Quatro níveis. Pills só para chips de status e ofensiva.</p>
+        <div class="radii-row">
+          <div class="r" style="border-radius:6px">6</div>
+          <div class="r" style="border-radius:10px">10</div>
+          <div class="r" style="border-radius:14px">14</div>
+          <div class="r" style="border-radius:20px">20</div>
+          <div class="r" style="border-radius:28px">28</div>
+          <div class="r" style="border-radius:999px">∞</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Sombras</h3>
+        <p class="t-sm">Use sh-1 em cards estáticos; sh-2 em hover; sh-3 só em modais.</p>
+        <div class="shadow-row">
+          <div class="sh sh1">sh-1</div>
+          <div class="sh sh2">sh-2</div>
+          <div class="sh sh3">sh-3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOTION -->
+    <div class="panel" style="margin-top:var(--s-5)">
+      <h3>Motion</h3>
+      <p class="t-sm">Sóbrio. Durações curtas. Curva calma. Animação serve para comunicar progresso, não para impressionar.</p>
+      <div class="motion-row">
+        <div class="motion-card">
+          <small>Hover / micro</small>
+          <div class="ms">120ms</div>
+          <div class="ease">ease-out · cubic-bezier(.2,.8,.2,1)</div>
+        </div>
+        <div class="motion-card">
+          <small>Transição padrão</small>
+          <div class="ms">220ms</div>
+          <div class="ease">ease-out · feedback de input, troca de aba</div>
+        </div>
+        <div class="motion-card">
+          <small>Celebração</small>
+          <div class="ms">480ms</div>
+          <div class="ease">spring suave · troféu, XP ganho, missão concluída</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ICONS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">06</span>Iconografia</h2>
+      <p>Família lucide-like · stroke 1.8px · cantos arredondados · grid 24px.</p>
+    </div>
+    <div class="icon-grid">
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span class="nm">computer</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/></svg><span class="nm">phone</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18l-2 12H5L3 7Z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg><span class="nm">market</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v5c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-3Z"/></svg><span class="nm">shield</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5v14M5 5h10l-2 3 2 3H5"/></svg><span class="nm">english</span></div>
+      <div class="ic-cell" style="color:var(--streak)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c2 4 6 6 6 11a6 6 0 1 1-12 0c0-3 2-4 3-7 1.5 2 3 3 3 6 0-3 0-7 0-10Z"/></svg><span class="nm">streak</span></div>
+      <div class="ic-cell" style="color:var(--sky)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 5v7c0 4 3 7 8 10 5-3 8-6 8-10V5l-8-3Z"/></svg><span class="nm">shield-freeze</span></div>
+      <div class="ic-cell" style="color:var(--honey)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12,2 15,9 22,10 17,15 18,22 12,18 6,22 7,15 2,10 9,9"/></svg><span class="nm">xp</span></div>
+      <div class="ic-cell" style="color:var(--honey)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 4h8v3a4 4 0 0 1-8 0V4Z"/><path d="M5 5H3v2a3 3 0 0 0 3 3M19 5h2v2a3 3 0 0 1-3 3"/><path d="M10 14h4v3h-4z"/><path d="M8 20h8"/></svg><span class="nm">trophy</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h7l2-3 4 6 2-3h3"/></svg><span class="nm">activity</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg><span class="nm">calendar</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h13l3 3v13a1 1 0 0 1-1 1H4V4Z"/><path d="M8 4v5h8V4M8 14h8"/></svg><span class="nm">save</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 12 4 4L19 6"/></svg><span class="nm">check</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span class="nm">help</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="nm">locked</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg><span class="nm">next</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v6H4zM4 14h16v6H4z"/></svg><span class="nm">module</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><span class="nm">done</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/></svg><span class="nm">plus</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="nm">search</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg><span class="nm">restart</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M6 7v13h12V7M9 7V4h6v3"/></svg><span class="nm">archive</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg><span class="nm">add</span></div>
+      <div class="ic-cell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span class="nm">user</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VOICE ============ -->
+<section id="voz">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">07</span>Voz</h2>
+      <p>Adulto competente, caloroso, sem jargão. Nem corporativo, nem infantil.</p>
+    </div>
+    <div class="voice-grid">
+      <div class="panel">
+        <h3 style="color:var(--sage)">Sim — fale assim</h3>
+        <ul>
+          <li class="yes">"Boa! Você travou a célula." → reconhece o feito.</li>
+          <li class="yes">"Quase. Lembre da tecla F4." → erro com pista, sem julgamento.</li>
+          <li class="yes">"Você está há 7 dias seguidos. Vamos pelo oitavo?" → convida, não pressiona.</li>
+          <li class="yes">"Concluir · +60 XP" → mostra o ganho, valoriza o esforço.</li>
+          <li class="yes">"Falta uma missão pro próximo nível." → cria expectativa concreta.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3 style="color:var(--coral-deep)">Não — evite</h3>
+        <ul>
+          <li class="no">"É super fácil!" → diminui quem está aprendendo.</li>
+          <li class="no">"Errado ❌" → punitivo, gera medo de tentar.</li>
+          <li class="no">"Vamos lá, campeão!" → infantiliza adulto.</li>
+          <li class="no">"Otimize seu workflow de produtividade" → jargão SaaS.</li>
+          <li class="no">"Você perdeu sua sequência 💔" → emoji + culpa = retenção pior.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACCESS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">08</span>Acessibilidade dual-idade</h2>
+      <p>Os números fixos. 10 anos e 60 anos clicam no mesmo botão.</p>
+    </div>
+    <div class="access">
+      <div class="panel"><h4>Corpo</h4><span class="big">17px</span><p>Mínimo absoluto. Botão flutuante leva a 19/21px.</p></div>
+      <div class="panel"><h4>Contraste</h4><span class="big">4.5:1</span><p>Mínimo em texto normal · 3:1 em texto ≥ 24px. WCAG AA.</p></div>
+      <div class="panel"><h4>Toque</h4><span class="big">44px</span><p>Alvo mínimo. Espaçamento entre toques ≥ 8px.</p></div>
+      <div class="panel"><h4>Foco</h4><span class="big">3px</span><p>Anel honey visível em tudo. Nunca <code>outline: none</code>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CSS TOKENS ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="num">09</span>Tokens CSS</h2>
+      <p>Cole no <code>:root</code> do app. Tudo aqui, nada solto no código.</p>
+    </div>
+<pre class="code">:root {
+  <span class="com">/* Base · papel & tinta */</span>
+  <span class="var">--paper</span>:        <span class="val">#F2EBDD</span>;
+  <span class="var">--paper-warm</span>:   <span class="val">#EDE3D0</span>;
+  <span class="var">--surface</span>:      <span class="val">#FBF7EE</span>;
+  <span class="var">--surface-2</span>:    <span class="val">#FFFCF5</span>;
+  <span class="var">--ink</span>:          <span class="val">#1A2540</span>;
+  <span class="var">--ink-soft</span>:     <span class="val">#4A5670</span>;
+  <span class="var">--ink-mute</span>:     <span class="val">#7A8294</span>;
+  <span class="var">--line</span>:         <span class="val">#D9CFB8</span>;
+
+  <span class="com">/* Brand · ação · módulos */</span>
+  <span class="var">--navy</span>:    <span class="val">#1B2A4E</span>;  <span class="com">/* Computador */</span>
+  <span class="var">--sky</span>:     <span class="val">#4F7CAC</span>;  <span class="com">/* Celular */</span>
+  <span class="var">--coral</span>:   <span class="val">#E25B3F</span>;  <span class="com">/* Ação · Mercado */</span>
+  <span class="var">--sage</span>:    <span class="val">#4F7A55</span>;  <span class="com">/* Sucesso · Segurança */</span>
+  <span class="var">--plum</span>:    <span class="val">#6B3F7A</span>;  <span class="com">/* Inglês */</span>
+  <span class="var">--honey</span>:   <span class="val">#D49545</span>;  <span class="com">/* XP · troféu */</span>
+  <span class="var">--streak</span>:  <span class="val">#E07A3A</span>;  <span class="com">/* Chama da ofensiva */</span>
+
+  <span class="com">/* Tipografia */</span>
+  <span class="var">--f-display</span>: <span class="val">"Fraunces", Georgia, serif</span>;
+  <span class="var">--f-body</span>:    <span class="val">"Plus Jakarta Sans", system-ui, sans-serif</span>;
+  <span class="var">--f-mono</span>:    <span class="val">"JetBrains Mono", ui-monospace, monospace</span>;
+
+  <span class="com">/* Espaçamento · base 4 */</span>
+  <span class="var">--s-1</span>:<span class="val">4px</span>; <span class="var">--s-2</span>:<span class="val">8px</span>; <span class="var">--s-3</span>:<span class="val">12px</span>;
+  <span class="var">--s-4</span>:<span class="val">16px</span>; <span class="var">--s-5</span>:<span class="val">20px</span>; <span class="var">--s-6</span>:<span class="val">24px</span>;
+  <span class="var">--s-7</span>:<span class="val">32px</span>; <span class="var">--s-8</span>:<span class="val">40px</span>; <span class="var">--s-9</span>:<span class="val">56px</span>;
+
+  <span class="com">/* Raios · Sombras · Motion */</span>
+  <span class="var">--r-sm</span>:<span class="val">10px</span>; <span class="var">--r-md</span>:<span class="val">14px</span>;
+  <span class="var">--r-lg</span>:<span class="val">20px</span>; <span class="var">--r-pill</span>:<span class="val">999px</span>;
+  <span class="var">--sh-1</span>: <span class="val">0 1px 2px rgba(26,37,64,.06)</span>;
+  <span class="var">--sh-2</span>: <span class="val">0 6px 14px rgba(26,37,64,.06)</span>;
+  <span class="var">--sh-3</span>: <span class="val">0 18px 40px rgba(26,37,64,.08)</span>;
+  <span class="var">--ease-out</span>: <span class="val">cubic-bezier(.2, .8, .2, 1)</span>;
+}</pre>
+  </div>
+</section>
+
+<footer>Escritório · guia de identidade · v 2.0 · 05.2026</footer>
+
+</body>
+</html>

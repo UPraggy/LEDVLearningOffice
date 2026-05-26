@@ -1,0 +1,94 @@
+.topMenu {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s-4) var(--s-6);
+  background: rgba(251, 247, 238, .82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  min-height: 64px;
+}
+
+.topMenu .brand {
+  display: flex; align-items: center; gap: var(--s-3);
+  text-decoration: none; color: inherit;
+}
+
+.topMenu .nav-pill {
+  display: flex; gap: 4px;
+  background: var(--surface);
+  padding: 4px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+}
+.topMenu .nav-pill a {
+  padding: 8px 14px; font-size: 14px; font-weight: 600;
+  color: var(--ink-soft); text-decoration: none;
+  border-radius: var(--r-pill);
+  transition: background var(--t-micro) var(--ease-out), color var(--t-micro);
+}
+.topMenu .nav-pill a:hover { color: var(--ink); }
+.topMenu .nav-pill a.active { background: var(--ink); color: var(--paper); }
+
+.topMenu .right {
+  display: flex; align-items: center; gap: var(--s-3);
+}
+.topMenu .streak-mini {
+  display: flex; align-items: center; gap: 6px;
+  color: var(--streak); font-weight: 700; font-size: 14px;
+}
+
+.topMenu .menu-toggle {
+  width: 44px; height: 44px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  color: var(--ink);
+}
+
+/* ========= LATERAL (mobile) ========= */
+.lateralMenu {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 84vw; max-width: 340px;
+  background: var(--surface-2);
+  border-left: 1px solid var(--line);
+  box-shadow: var(--sh-3);
+  padding: var(--s-7) var(--s-5);
+  z-index: 60;
+  transform: translateX(100%);
+  transition: transform var(--t-base) var(--ease-out);
+  display: flex; flex-direction: column; gap: var(--s-3);
+}
+.lateralMenu.aberto { transform: translateX(0); }
+
+.lateralBackdrop {
+  position: fixed; inset: 0; z-index: 55;
+  background: rgba(14,26,54,.42);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--t-base) var(--ease-out);
+}
+.lateralBackdrop.aberto { opacity: 1; pointer-events: auto; }
+
+.lateralMenu a {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-4);
+  border-radius: var(--r-md);
+  color: var(--ink); text-decoration: none;
+  font-weight: 600;
+  border: 1px solid transparent;
+  min-height: 48px;
+}
+.lateralMenu a:hover { background: var(--paper-warm); }
+.lateralMenu a.active { background: var(--ink); color: var(--paper); }
+
+.lateralMenu .lat-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: var(--s-3);
+}
+.lateralMenu .lat-close {
+  width: 40px; height: 40px;
+  border-radius: var(--r-md);
+  background: var(--paper-warm); border: 1px solid var(--line);
+  display: grid; place-items: center;
+}

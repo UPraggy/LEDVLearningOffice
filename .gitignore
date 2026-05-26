@@ -1,0 +1,44 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# build
+app/dist/
+dist/
+build/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# editor / SO
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+
+# env
+.env
+.env.local
+.env.*.local
+
+# vite
+.vite/
+
+# validation screenshots (geradas localmente)
+validation/
+validation-*/
+
+# claude tooling
+.claude/launch.json
+
+# binários antigos do projeto
+PortifolioV5*.zip
+visual-inspector*.zip
+visual-inspector*.rar
+*.bat
+memória.txt
+skills-lock.json

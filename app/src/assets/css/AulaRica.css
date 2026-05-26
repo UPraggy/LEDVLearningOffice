@@ -1,0 +1,199 @@
+/* =========================================================================
+   AULA RICA — blocos editoriais variados (inspirados em Awwwards / Recent.design /
+   Stripe-style editorial pages). Cada bloco é opcional; a aula constrói uma
+   coreografia visual que evita "parede de texto".
+   ========================================================================= */
+
+.aula-rica { display: flex; flex-direction: column; gap: var(--s-5); }
+
+.aula-rica h2 { font-size: 30px; }
+.aula-rica h3 { font-size: 20px; margin-top: var(--s-2); }
+
+/* ===== CALLOUT — destaque colorido ===== */
+.callout {
+  display: flex; gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-md);
+  background: var(--paper-warm);
+  border-left: 4px solid var(--coral);
+  font-size: 15px; line-height: 1.55; color: var(--ink);
+}
+.callout.info  { border-left-color: var(--sky); background: rgba(79,124,172,.08); }
+.callout.warn  { border-left-color: var(--coral); background: rgba(226,91,63,.08); }
+.callout.ok    { border-left-color: var(--sage); background: rgba(79,122,85,.08); }
+.callout.honey { border-left-color: var(--honey); background: rgba(212,149,69,.10); }
+.callout .ic   { flex-shrink: 0; opacity: .8; }
+.callout strong { display: block; font-family: var(--f-display); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+
+/* ===== DO / DONT ===== */
+.do-dont {
+  display: grid; gap: var(--s-3);
+  grid-template-columns: 1fr 1fr;
+}
+.do-dont .col {
+  padding: var(--s-5);
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: var(--s-2);
+}
+.do-dont .col.do  { background: rgba(79,122,85,.07); border-color: rgba(79,122,85,.3); }
+.do-dont .col.dont{ background: rgba(226,91,63,.05); border-color: rgba(226,91,63,.3); }
+.do-dont .col h4 {
+  font-family: var(--f-display); font-size: 18px; font-weight: 600;
+  display: flex; gap: 8px; align-items: center; margin: 0;
+}
+.do-dont .col.do h4   { color: var(--sage); }
+.do-dont .col.dont h4 { color: var(--coral-deep); }
+.do-dont ul { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.do-dont li { font-size: 14px; padding-left: 22px; position: relative; line-height: 1.45; }
+.do-dont .do li::before    { content: '✓'; color: var(--sage); position: absolute; left: 0; font-weight: 700; }
+.do-dont .dont li::before  { content: '✕'; color: var(--coral); position: absolute; left: 0; font-weight: 700; }
+@media (max-width: 600px) { .do-dont { grid-template-columns: 1fr; } }
+
+/* ===== COMPARISON (versus) ===== */
+.versus {
+  display: grid; grid-template-columns: 1fr 80px 1fr;
+  gap: var(--s-3); align-items: stretch;
+  margin-top: var(--s-2);
+}
+.versus .lado {
+  padding: var(--s-5); background: var(--surface-2);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  display: flex; flex-direction: column; gap: var(--s-2);
+}
+.versus .lado h4 {
+  font-family: var(--f-display); font-weight: 600; font-size: 18px;
+  letter-spacing: -.01em; margin: 0;
+}
+.versus .lado.a h4 { color: var(--coral-deep); }
+.versus .lado.b h4 { color: var(--sage); }
+.versus .vs {
+  display: grid; place-items: center;
+  font-family: var(--f-display); font-style: italic;
+  font-size: 28px; color: var(--ink-mute); font-weight: 500;
+}
+@media (max-width: 600px) {
+  .versus { grid-template-columns: 1fr; }
+  .versus .vs { font-size: 22px; padding: 4px; }
+}
+
+/* ===== TIMELINE (cronograma) ===== */
+.timeline {
+  display: flex; flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: var(--s-6);
+}
+.timeline::before {
+  content: ''; position: absolute;
+  left: 13px; top: 8px; bottom: 8px; width: 2px;
+  background: var(--line-strong);
+}
+.timeline-step {
+  position: relative;
+  padding: var(--s-3) 0 var(--s-4) var(--s-4);
+}
+.timeline-step::before {
+  content: ''; position: absolute;
+  left: -29px; top: var(--s-3);
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--coral); border: 3px solid var(--paper);
+  box-shadow: 0 0 0 2px var(--coral);
+}
+.timeline-step .quando {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--coral); font-weight: 700;
+}
+.timeline-step h4 {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 18px; letter-spacing: -.005em; margin: 4px 0;
+}
+.timeline-step p { font-size: 14px; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+
+/* ===== QUOTE / TESTIMONIAL ===== */
+.aula-quote {
+  position: relative;
+  background: var(--navy);
+  color: var(--paper);
+  border-radius: var(--r-lg);
+  padding: var(--s-7) var(--s-6);
+  overflow: hidden;
+}
+.aula-quote::before {
+  content: '"'; position: absolute;
+  font-family: var(--f-display); font-style: italic;
+  font-size: 220px; line-height: .8;
+  top: 10px; left: 18px;
+  color: var(--honey-soft); opacity: .25;
+}
+.aula-quote blockquote {
+  margin: 0; padding-left: 60px;
+  font-family: var(--f-display); font-weight: 400; font-style: italic;
+  font-size: 22px; line-height: 1.4;
+  letter-spacing: -.005em;
+}
+.aula-quote cite {
+  display: block; padding-left: 60px;
+  font-style: normal; font-family: var(--f-mono);
+  color: var(--honey-soft); font-size: 12px;
+  margin-top: var(--s-3); letter-spacing: .1em; text-transform: uppercase;
+}
+@media (max-width: 600px) {
+  .aula-quote { padding: var(--s-5) var(--s-4); }
+  .aula-quote::before { font-size: 140px; }
+  .aula-quote blockquote { padding-left: 30px; font-size: 18px; }
+  .aula-quote cite { padding-left: 30px; }
+}
+
+/* ===== STAT BIG (números grandes editoriais) ===== */
+.stat-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--s-3);
+}
+.stat-big {
+  padding: var(--s-5);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+.stat-big .num {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 48px; line-height: 1; letter-spacing: -.03em;
+  color: var(--coral);
+}
+.stat-big .lbl {
+  font-size: 13px; color: var(--ink-soft); margin-top: var(--s-2);
+}
+
+/* ===== KEYBOARD KEY (atalhos) ===== */
+.kbd {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px 4px;
+  font-family: var(--f-mono); font-weight: 600; font-size: 12px;
+  background: var(--surface-2);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  min-width: 22px;
+  justify-content: center;
+}
+
+/* ===== STEPS NUMERADOS DA AULA (visual rico) ===== */
+.aula-steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: var(--s-3);
+}
+.aula-step {
+  padding: var(--s-4); background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  position: relative;
+}
+.aula-step .num {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: 32px; color: var(--coral); line-height: 1;
+  letter-spacing: -.04em;
+}
+.aula-step h4 { font-family: var(--f-display); font-weight: 600; font-size: 15px; margin: var(--s-2) 0 4px; }
+.aula-step p { font-size: 13px; color: var(--ink-soft); }
