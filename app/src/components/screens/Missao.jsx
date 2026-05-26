@@ -7,6 +7,9 @@ import Icone from '../subComponents/Icone.jsx';
 import Interacoes from '../Interacoes.jsx';
 import AulaRica from '../AulaRica.jsx';
 import Som from '../subComponents/Som.jsx';
+import TrofeuIcone from '../subComponents/TrofeuIcone.jsx';
+import BotaoVoz from '../subComponents/BotaoVoz.jsx';
+import '../../assets/css/Trofeus.css';
 import { TRILHAS, MISSOES, TROFEUS } from '../../data/estrutura.js';
 import { useApp } from '../subComponents/AppContext.jsx';
 import { getConteudo } from '../../data/conteudo/index.js';
@@ -27,9 +30,13 @@ function Pratica({ pratica }) {
     return c;
   });
 
+  const textoPratica = [pratica.instrucao, ...(pratica.passos || []).map(p => typeof p === 'string' ? p : (p.texto || ''))].filter(Boolean).join('. ');
   return (
     <div className="bloco anima-up">
-      <h2>Mão na massa</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--s-3)', flexWrap: 'wrap' }}>
+        <h2 style={{ margin: 0 }}>Mão na massa</h2>
+        {textoPratica && <BotaoVoz texto={textoPratica} label="Ouvir prática" />}
+      </div>
       <p style={{ color: 'var(--ink-soft)', marginBottom: 'var(--s-4)' }}>{pratica.instrucao}</p>
 
       <div style={{
@@ -108,9 +115,13 @@ function Desafio({ desafio, trilhaId, missaoId }) {
     setEvidencia(null);
   };
 
+  const textoDesafio = [desafio.cenario, ...(desafio.requisitos || []), desafio.dica].filter(Boolean).join('. ');
   return (
     <div className="bloco anima-up">
-      <h2>Agora sozinho</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--s-3)', flexWrap: 'wrap' }}>
+        <h2 style={{ margin: 0 }}>Agora sozinho</h2>
+        {textoDesafio && <BotaoVoz texto={textoDesafio} label="Ouvir desafio" />}
+      </div>
       <p style={{ fontSize: 17 }}>{desafio.cenario}</p>
       <div className="desafio-box">
         <strong>O que entregar:</strong>
@@ -290,13 +301,9 @@ export default function Missao({ ativaResp }) {
                       if (!t) return null;
                       return (
                         <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)' }}>
-                          <div style={{
-                            width: 48, height: 48, borderRadius: '50%',
-                            background: 'linear-gradient(135deg, var(--honey), var(--coral))',
-                            color: '#fff', display: 'grid', placeItems: 'center', flexShrink: 0,
-                            boxShadow: 'var(--sh-1)',
-                          }}>
-                            <Trophy size={22} />
+                          <div className={`troph-medal mod-${t.mod || 'honey'}`} data-tier={t.tier}
+                            style={{ width: 56, height: 56, flexShrink: 0 }}>
+                            <TrofeuIcone nome={t.icon} size={28} />
                           </div>
                           <div>
                             <div style={{ fontFamily: 'var(--f-display)', fontWeight: 600, fontSize: 18, letterSpacing: '-.005em' }}>{t.nome}</div>

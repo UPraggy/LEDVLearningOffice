@@ -123,6 +123,8 @@ function AppProviderInner({ children }) {
     },
     podeAbrirCaixa: GlobalVar.podeAbrirCaixaHoje(progresso),
     marcarMentorLida(id) { setProgresso(p => GlobalVar.marcarMentorLida(p, id)); },
+    responderMentor(id, texto) { setProgresso(p => GlobalVar.responderMentor(p, id, texto)); },
+    atualizarInboxMentor() { setProgresso(p => GlobalVar.atualizarInboxMentor(p)); },
     addDiario(entry) { setProgresso(p => GlobalVar.addDiario(p, entry)); },
     removerDiario(id) { setProgresso(p => GlobalVar.removerDiario(p, id)); },
     alternarSom() {

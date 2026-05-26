@@ -59,6 +59,19 @@
   --seg-base:  #4F7A55; --seg-soft:  #8AAB8E; --seg-deep:  #2D4A33;
   --ing-base:  #6B3F7A; --ing-soft:  #A07AAE; --ing-deep:  #432356;
 
+  /* Gradientes prontos por módulo (reusáveis em medalhas/badges) */
+  --gradient-comp:      linear-gradient(135deg, var(--comp-soft), var(--comp-base) 50%, var(--comp-deep));
+  --gradient-cel:       linear-gradient(135deg, var(--cel-soft),  var(--cel-base) 50%, var(--cel-deep));
+  --gradient-merc:      linear-gradient(135deg, var(--merc-soft), var(--merc-base) 50%, var(--merc-deep));
+  --gradient-seg:       linear-gradient(135deg, var(--seg-soft),  var(--seg-base) 50%, var(--seg-deep));
+  --gradient-ing:       linear-gradient(135deg, var(--ing-soft),  var(--ing-base) 50%, var(--ing-deep));
+  --gradient-vinho:     linear-gradient(135deg, var(--vinho-soft), var(--vinho));
+  --gradient-marsala:   linear-gradient(135deg, var(--marsala-soft), var(--marsala));
+  --gradient-magenta:   linear-gradient(135deg, var(--magenta-soft), var(--magenta));
+  --gradient-roxo:      linear-gradient(135deg, var(--roxo-soft), var(--roxo));
+  --gradient-ouro-rosa: linear-gradient(135deg, var(--ouro-rosa-soft), var(--ouro-rosa));
+  --gradient-honey:     linear-gradient(135deg, #F4C771, var(--coral));
+
   /* ---- RAIOS ---- */
   --r-xs: 6px;
   --r-sm: 10px;

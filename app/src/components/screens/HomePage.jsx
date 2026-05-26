@@ -8,6 +8,7 @@ import {
 import { useApp } from '../subComponents/AppContext.jsx';
 import GlobalVar from '../subComponents/GlobalVar.jsx';
 import Som from '../subComponents/Som.jsx';
+import BotaoVoz from '../subComponents/BotaoVoz.jsx';
 import { TROFEUS } from '../../data/estrutura.js';
 import '../../assets/css/HomePage.css';
 import '../../assets/css/Arcade.css';
@@ -179,7 +180,12 @@ export default function HomePage() {
       {proxima && (
         <div className="daily-card" onClick={() => navigate(`/missao/${proxima.trilha.id}/${proxima.missao.id}`)}>
           <div style={{ flex: 1 }}>
-            <span className="stamp">Sua missão de hoje</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-2)', flexWrap: 'wrap' }}>
+              <span className="stamp">Sua missão de hoje</span>
+              <span onClick={(e) => e.stopPropagation()}>
+                <BotaoVoz texto={`Sua missão de hoje: ${proxima.missao.titulo}. ${proxima.missao.desc || ''}`} compacto />
+              </span>
+            </div>
             <h3>{proxima.missao.titulo}</h3>
             <div className="daily-meta">
               <span className="chip">{proxima.trilha.nome}</span>
