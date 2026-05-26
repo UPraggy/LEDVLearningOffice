@@ -32,6 +32,7 @@ const PROGRESSO_INICIAL = {
     moduloAtual: '',
     onboardingFeito: false,
     somAtivo: true,
+    vozLigada: true,        // botão "Ouvir" aparece nas aulas por padrão
   },
   caixaDoDiaUltima: null,        // ISO date da última caixa aberta
   caixaDoDiaTotal: 0,            // contador (pra troféu "7 caixas seguidas")

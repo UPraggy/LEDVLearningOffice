@@ -110,8 +110,8 @@ export function useVoiceSynthesis() {
 
   const speak = useCallback(async (texto) => {
     if (!texto || typeof texto !== 'string') return;
-    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
+    // Voz é independente de prefers-reduced-motion — é leitura auxiliar,
+    // não animação. Controlada pela preferência `vozLigada` (botão UI).
 
     parar();
 

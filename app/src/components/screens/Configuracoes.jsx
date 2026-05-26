@@ -139,13 +139,15 @@ export default function Configuracoes() {
             <p>
               Voz neural sintetizada no seu próprio aparelho — funciona offline. Primeiro uso
               baixa ~60 MB (cacheado pra sempre). Aparece um botão "Ouvir" nas aulas e mensagens.
+              {' '}{p.vozLigada !== false ? 'Atualmente ligada.' : 'Atualmente desligada — botões "Ouvir" estão ocultos.'}
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8, alignItems: 'center' }}>
-              {voice.pronto ? (
+              {p.vozLigada !== false && voice.pronto && (
                 <button className="btn btn-ghost btn-sm" onClick={() => voice.speak('Olá! Sou a Cadu. Já estou pronta para ler suas aulas.')}>
                   <Volume2 size={14} /> Testar voz
                 </button>
-              ) : (
+              )}
+              {p.vozLigada !== false && !voice.pronto && (
                 <button className="btn btn-primary btn-sm" disabled={voice.carregando} onClick={voice.preload}>
                   {voice.carregando ? <><RefreshCw size={14} className="ic-spin" /> Baixando ~60 MB…</> : <><Mic size={14} /> Baixar voz agora</>}
                 </button>
@@ -155,7 +157,11 @@ export default function Configuracoes() {
               )}
             </div>
           </div>
-          <div />
+          <label className="switch" title={p.vozLigada !== false ? 'Desligar voz' : 'Ligar voz'}>
+            <input type="checkbox" checked={p.vozLigada !== false}
+              onChange={(e) => setPreferencia('vozLigada', e.target.checked)} />
+            <span className="track" />
+          </label>
         </div>
       </section>
 
