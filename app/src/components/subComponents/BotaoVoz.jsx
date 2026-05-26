@@ -1,11 +1,18 @@
-/* Botão de voz — usa Piper Cadu offline. Tem fallback pra Web Speech. */
+/* Botão de voz — usa Piper Cadu offline. Tem fallback pra Web Speech.
+ * Só renderiza se `progresso.preferencias.vozLigada !== false` (ligada por
+ * padrão). Usuário pode desligar em Configurações > Voz.
+ */
 import { Volume2, Loader2, Square } from 'lucide-react';
 import { useVoiceSynthesis } from '../../hooks/useVoiceSynthesis.js';
+import { useApp } from './AppContext.jsx';
 
 export default function BotaoVoz({ texto, label, compacto = false }) {
+  const { progresso } = useApp();
   const { speak, parar, carregando, falando, pronto, erro } = useVoiceSynthesis();
 
   if (!texto || !texto.trim()) return null;
+  // Pref ligada por padrão; só esconde se explicitamente desligada
+  if (progresso?.preferencias?.vozLigada === false) return null;
 
   const acionar = () => {
     if (falando) parar();
