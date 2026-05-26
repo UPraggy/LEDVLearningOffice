@@ -8,6 +8,7 @@ import {
   MODULOS, TRILHAS, MISSOES, NIVEIS, XP_POR_NIVEL,
   atualizarOfensiva, avaliarTrofeus, nivelPorXP,
 } from '../../data/estrutura.js';
+import { gerarInbox as gerarInboxMentor } from '../../data/mentor-pool.js';
 
 const CHAVE = 'escritorio-progresso';
 
@@ -155,29 +156,37 @@ export default class GlobalVar {
     return { ...p, atividadePorDia, recordes };
   }
 
-  /** Mensagens do mentor — seed inicial dinâmica por estado do usuário. */
+  /** Mensagens do mentor — usa pool dinâmico (mentor-pool.js).
+   *  Recebe o progresso e a inbox existente; merge sem duplicar. */
   static seedMentorInbox(p) {
-    const nome = (p.user?.nome || 'Estudante').split(' ')[0];
-    const ts = Date.now();
-    const dia = 86400000;
-    return [
-      { id: 'm1', from: 'Carlos Mendes', role: 'Coordenador',
-        title: `Bom dia, ${nome}. Sua tarefa de hoje:`,
-        body: 'Olha, eu vi que você tá com ritmo bom. Tente concluir 1 missão hoje pra manter a ofensiva — e me responde aqui contando como foi.',
-        ts, status: 'new', tag: 'missão', color: 'navy' },
-      { id: 'm2', from: 'Carlos Mendes', role: 'Coordenador',
-        title: 'Recapitulação rápida',
-        body: 'Você já fez algumas missões. Próximo objetivo: completar uma trilha inteira. Trilha pequena conta também.',
-        ts: ts - dia, status: 'read', tag: 'recap', color: 'sage' },
-      { id: 'm3', from: 'Carlos Mendes', role: 'Coordenador',
-        title: 'Você sabe identificar um golpe de WhatsApp?',
-        body: 'Achei que faria sentido praticar antes da próxima trilha de Segurança. Vou anexar uma simulação rápida — entre na trilha PIX quando puder.',
-        ts: ts - 3 * dia, status: 'replied', tag: 'prep', color: 'coral' },
-    ];
+    return gerarInboxMentor(p, p.mentorInbox || []);
+  }
+
+  /** Recalcula mentor (chamar quando o progresso muda significativamente). */
+  static atualizarInboxMentor(p) {
+    const inbox = gerarInboxMentor(p, p.mentorInbox || []);
+    const novo = { ...p, mentorInbox: inbox };
+    GlobalVar.salvarProgresso(novo);
+    return novo;
   }
 
   static marcarMentorLida(p, id) {
     const inbox = (p.mentorInbox || []).map(m => m.id === id && m.status === 'new' ? { ...m, status: 'read' } : m);
+    const novo = { ...p, mentorInbox: inbox };
+    GlobalVar.salvarProgresso(novo);
+    return novo;
+  }
+
+  /** Aluno respondeu ao mentor. Marca status=replied e guarda resposta. */
+  static responderMentor(p, id, textoResposta) {
+    const inbox = (p.mentorInbox || []).map(m => {
+      if (m.id !== id) return m;
+      return {
+        ...m, status: 'replied',
+        respostaAluno: textoResposta,
+        respondidoEm: Date.now(),
+      };
+    });
     const novo = { ...p, mentorInbox: inbox };
     GlobalVar.salvarProgresso(novo);
     return novo;
