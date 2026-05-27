@@ -655,4 +655,443 @@ export const INTERACOES_EXEMPLO = {
     ],
   },
 
+  // ============ AMB-SEG-2 — Senhas fortes (refs: NIST SP 800-63B) ============
+  'amb-seg-2': {
+    aulaBlocos: [
+      {
+        tipo: 'callout', variante: 'info',
+        titulo: 'Esquece "P@ssw0rd!"',
+        texto: 'O NIST (instituto americano de padrões, o cara que define segurança digital pro mundo todo) já mudou a regra: SENHA LONGA bate SENHA COMPLICADA. Frase com 4 palavras aleatórias > "Tr0c4@123".',
+      },
+      {
+        tipo: 'aula_steps',
+        titulo: 'Como pensar numa senha que você lembra (e o hacker não quebra)',
+        items: [
+          { titulo: '1. 4 palavras aleatórias', texto: 'Tipo: "girafa-violino-quinta-marmelada". 28 caracteres. Muito mais difícil de quebrar que "Senha@123".' },
+          { titulo: '2. Uma senha por conta crítica', texto: 'Email, banco e governo NUNCA compartilham a mesma senha. Pra resto, use gerenciador.' },
+          { titulo: '3. Gerenciador de senhas', texto: 'Bitwarden é grátis e open-source. Você decora UMA senha mestre forte e ele guarda o resto.' },
+          { titulo: '4. 2FA sempre que possível', texto: 'Aplicativo (Google Authenticator, Authy) é melhor que SMS. SMS pode ser interceptado.' },
+        ],
+      },
+      {
+        tipo: 'stats',
+        titulo: 'Por que isso importa',
+        items: [
+          { numero: '81%', texto: 'das invasões usam senha fraca ou vazada (Verizon DBIR)' },
+          { numero: '23 mi', texto: 'usam ainda "123456" como senha (NCSC Reino Unido)' },
+          { numero: '2s', texto: 'tempo pra quebrar "senha123" — frase longa leva séculos' },
+        ],
+      },
+      {
+        tipo: 'do_dont',
+        titulo: 'O que MUDOU no padrão recente (NIST 2024)',
+        do: [
+          'Tamanho importa mais que símbolos especiais.',
+          'Trocar senha SÓ quando suspeitar vazamento.',
+          'Verificar se sua senha vazou em haveibeenpwned.com.',
+        ],
+        dont: [
+          'Trocar a cada 30 dias só por trocar (regra ultrapassada).',
+          'Substituir letra por número achando que é seguro (P@ssw0rd já caiu).',
+          'Anotar em post-it no monitor (clássico, e perigoso).',
+        ],
+      },
+    ],
+    interacoes: [
+      {
+        tipo: 'versus',
+        prompt: 'Qual dessas é mais segura na prática?',
+        opcaoA: { titulo: 'Tr0c4@2024!', desc: '12 caracteres, com tudo: maiúscula, número, símbolo' },
+        opcaoB: { titulo: 'cavalo-azulejo-quinta-pamonha', desc: '29 caracteres, só letras minúsculas e hífens' },
+        resposta: 'B',
+        xp: 12,
+        feedback_ok: 'Sim! Por matemática: cada caractere extra multiplica a dificuldade. 29 letras minúsculas batem 12 caracteres "complicados". E você lembra melhor.',
+        feedback_err: 'A intuição engana. O computador tenta MILHÕES por segundo. Tamanho da senha é exponencial — frase longa vence.',
+      },
+      {
+        tipo: 'scenario_branch',
+        titulo: 'Sua senha do email vazou num site',
+        situacao: 'Você recebe um alerta: "sua senha do email foi vazada num site que você se cadastrou em 2019". O que fazer PRIMEIRO?',
+        opcoes: [
+          { titulo: 'Trocar a senha do email AGORA', certo: true, feedback: 'Perfeito. O email é a chave-mestra — se cair, ladrão recupera senha de TUDO via "esqueci minha senha". Trocar email é prioridade absoluta.' },
+          { titulo: 'Ignorar, faz tempo desse cadastro', certo: false, feedback: 'Risco grande. Se você reutilizou essa senha em outros lugares, todos estão expostos. E se for a do email, o estrago é total.' },
+          { titulo: 'Excluir a conta do site antigo', certo: false, feedback: 'Bom passo mas não primeiro. O dano já foi feito. Prioridade: blindar o email AGORA, depois lidar com o site.' },
+        ],
+        xp: 14,
+      },
+      {
+        tipo: 'choose',
+        prompt: 'Você precisa criar 2FA pro seu banco. Qual a opção MAIS segura?',
+        opcoes: [
+          'Receber código por SMS no celular.',
+          'Usar aplicativo Authenticator (Google/Authy).',
+          'Email de confirmação.',
+          'Pergunta secreta tipo "nome do seu cachorro".',
+        ],
+        resposta: 1, xp: 10,
+        feedback_ok: 'Isso. App gera código offline a cada 30s, ninguém intercepta. SMS é interceptável (golpe SIM swap), email pode estar comprometido.',
+        feedback_err: 'O melhor é o app autenticador. SMS já foi furado por golpe SIM-swap várias vezes no Brasil. Pergunta secreta qualquer um descobre no Facebook.',
+      },
+      {
+        tipo: 'fill_blank',
+        prompt: 'Complete a regra de ouro (recomendação NIST 2024):',
+        frase: 'Senha boa é senha ___ e ___ — não senha curta e cheia de símbolos.',
+        tokens: ['longa', 'única', 'fácil', 'complicada', 'antiga', 'aleatória'],
+        respostas: ['longa', 'única'],
+        xp: 10,
+        feedback_ok: 'Exato. Tamanho e ser única (uma por conta crítica) batem complexidade artificial.',
+        feedback_err: 'Padrão atualizado: LONGA + ÚNICA. Esquece o "tem que ter @ e número".',
+      },
+    ],
+  },
+
+  // ============ PC-EXCEL-3 — Fórmulas básicas (refs: Microsoft Learn, MOS) ============
+  'pc-excel-3': {
+    aulaBlocos: [
+      {
+        tipo: 'callout', variante: 'tip',
+        titulo: 'A coisa que muda sua vida no Excel',
+        texto: 'Fórmula começa com "=". Só isso. Depois você escreve a conta. O Excel faz pra você. É como ter uma calculadora que sabe o nome das células.',
+      },
+      {
+        tipo: 'aula_steps',
+        titulo: '5 fórmulas que resolvem 80% do dia a dia',
+        items: [
+          { titulo: '=SOMA(A1:A10)', texto: 'Soma tudo do A1 até o A10. Bota o ":" no meio pra dizer "do x até o y".' },
+          { titulo: '=MÉDIA(B1:B12)', texto: 'Média aritmética. Útil pra notas, vendas mensais, qualquer coisa que precisa do "valor típico".' },
+          { titulo: '=MÁXIMO / =MÍNIMO', texto: 'Maior e menor valor de uma faixa. Tipo "qual foi o melhor mês de vendas?".' },
+          { titulo: '=CONT.SE(A:A;"vendido")', texto: 'Conta quantas células têm "vendido". Inventário virou simples.' },
+          { titulo: '=SE(B2>100;"Bom";"Ruim")', texto: 'Decisão automática. "Se B2 maior que 100, escreve Bom; senão, escreve Ruim".' },
+        ],
+      },
+      {
+        tipo: 'atalho',
+        tecla: 'F4', desc: 'após selecionar referência (ex: A1), trava ela com $A$1 — útil pra copiar fórmula sem mudar a referência. Macete que cai na prova MOS (Microsoft Office Specialist) e em todo concurso.',
+      },
+      {
+        tipo: 'quote',
+        texto: '"Quem domina fórmulas básicas economiza 4 horas por semana em trabalho repetitivo."',
+        fonte: 'Microsoft Learn / pesquisa interna 2023',
+      },
+    ],
+    interacoes: [
+      {
+        tipo: 'sim_planilha',
+        titulo_curto: 'Calcule a média',
+        prompt: 'Na célula B6, escreva a fórmula que calcula a MÉDIA das notas da coluna B (B2:B5).',
+        cabecalhos: ['Aluno', 'Nota'],
+        linhas: [
+          ['Ana', '8'],
+          ['Bruno', '6'],
+          ['Carla', '9'],
+          ['Diego', '7'],
+        ],
+        celulaAlvo: 'B6',
+        respostasAceitas: ['=MÉDIA(B2:B5)', '=MEDIA(B2:B5)', '=AVERAGE(B2:B5)'],
+        xp: 15,
+        feedback_ok: 'Mandou bem! Resultado: 7.5. Tanto faz MÉDIA (PT) ou AVERAGE (EN) — Excel aceita os dois conforme idioma instalado.',
+        feedback_err: 'Lembra: começa com =, depois MÉDIA, parênteses, e a faixa B2:B5.',
+      },
+      {
+        tipo: 'find_error',
+        prompt: 'A fórmula abaixo dá erro #NOME?. Onde tá o problema?',
+        codigo: '=SOMMA(A1:A10)',
+        opcoes: [
+          'A faixa A1:A10 não existe.',
+          'Falta o sinal de = no começo.',
+          'Está escrito SOMMA (com 2 M) — o certo é SOMA.',
+          'Faltam aspas ao redor da faixa.',
+        ],
+        resposta: 2, xp: 12,
+        feedback_ok: 'Isso! Erro #NOME? sempre é fórmula digitada errada. Aqui tem M sobrando. O certo é SOMA.',
+        feedback_err: 'O erro #NOME? aparece quando o Excel não reconhece o nome da função. Olhe letra por letra: SOMMA tem M a mais.',
+      },
+      {
+        tipo: 'drag_match',
+        labelA: 'Fórmula', labelB: 'O que faz',
+        prompt: 'Pareie a fórmula com o resultado:',
+        colA: ['=SE(A1>10;"OK";"NÃO")', '=CONT.SE(B:B;"sim")', '=MÁXIMO(C1:C20)', '=SOMA(D2:D5)'],
+        colB: ['Conta quantos "sim" tem na coluna B', 'Soma 4 células da coluna D', 'Mostra OK se A1 maior que 10', 'Pega o maior número da faixa'],
+        pares: [[0, 2], [1, 0], [2, 3], [3, 1]],
+        xp: 12,
+      },
+      {
+        tipo: 'time_pressure',
+        prompt: 'Sequência rápida — qual o resultado de "=SOMA(2;3;5)"?',
+        opcoes: ['10', '8', '15', '7'],
+        resposta: 0, xp: 8, segundos: 15,
+        feedback_ok: 'Rápido! 2+3+5=10. SOMA com ponto-e-vírgula soma valores avulsos.',
+        feedback_err: 'O ";" separa cada valor a ser somado. 2+3+5=10.',
+      },
+    ],
+  },
+
+  // ============ MOB-WPP-2 — Golpes via WhatsApp (refs: Anatel, FBI IC3) ============
+  'mob-wpp-2': {
+    aulaBlocos: [
+      {
+        tipo: 'callout', variante: 'aviso',
+        titulo: 'O WhatsApp é o canal preferido dos golpistas no Brasil',
+        texto: 'A Anatel registrou +500 mil denúncias de golpes via WhatsApp em 2024. O FBI (IC3, Internet Crime Center) coloca golpes de impersonação no top 3 mundial. Conhecer os 4 mais comuns blinda você.',
+      },
+      {
+        tipo: 'aula_steps',
+        titulo: 'Os 4 golpes que mais fazem vítima',
+        items: [
+          { titulo: 'Golpe do "filho/parente"', texto: '"Mãe, meu celular quebrou, esse é meu número novo, me manda PIX". CLÁSSICO. Sempre ligue pra pessoa pelo número antigo antes de mandar nada.' },
+          { titulo: 'Falso suporte do banco', texto: '"Aqui é do Itaú, detectamos invasão". Banco NUNCA pede senha, código ou pra instalar app por mensagem.' },
+          { titulo: 'Promoção / sorteio premiado', texto: '"Você ganhou um iPhone 15! Clique aqui pra retirar". Se você não se cadastrou, NÃO ganhou nada.' },
+          { titulo: 'Clonagem por código de 6 dígitos', texto: '"Te mandei um código sem querer, me reenvia?" — esse código É O ACESSO AO SEU WHATSAPP. Nunca repasse.' },
+        ],
+      },
+      {
+        tipo: 'stats',
+        titulo: 'O custo real desse golpe',
+        items: [
+          { numero: 'R$ 1,8 bi', texto: 'perdidos em golpes digitais no Brasil em 2024 (Febraban)' },
+          { numero: '60+', texto: 'idade média da vítima do "golpe do filho" — alvo preferido' },
+          { numero: '4 min', texto: 'tempo médio entre "sequestrar" o WhatsApp e mandar PIX pros contatos' },
+        ],
+      },
+      {
+        tipo: 'do_dont',
+        titulo: 'Reflexos que salvam',
+        do: [
+          'Ligar pro número ANTIGO antes de qualquer PIX urgente.',
+          'Ativar verificação em 2 etapas no WhatsApp (Config → Conta).',
+          'Pedir foto, áudio ou videochamada de quem diz ser parente.',
+        ],
+        dont: [
+          'Mandar código de 6 dígitos pra ninguém — NUNCA.',
+          'Confiar em "promoção" que pede dados ou clique em link.',
+          'Resolver dinheiro pelo WhatsApp sob pressão emocional.',
+        ],
+      },
+    ],
+    interacoes: [
+      {
+        tipo: 'sim_chat',
+        prompt: 'Você recebe essa mensagem. Como responder?',
+        mensagens: [
+          { de: 'desconhecido', texto: 'Oi mãe, meu celular caiu na água e tô usando o do amigo. Esse é meu número novo, salva aí 😘' },
+          { de: 'desconhecido', texto: 'Preciso fazer um pix urgente de R$ 850 pra pagar uma conta hoje. Você consegue?' },
+        ],
+        opcoes: [
+          { texto: 'Claro filho, me passa a chave 💸', certo: false, feedback: 'NÃO. Esse é o golpe mais clássico. Ligue pro número antigo do seu filho ANTES de qualquer coisa.' },
+          { texto: 'Liga aqui no número antigo pra eu confirmar que é você.', certo: true, feedback: 'PERFEITO. Resposta padrão de quem não cai. Golpista não tem como ligar do número original — vai sumir.' },
+          { texto: 'Manda áudio agora dizendo "oi mãe"', certo: false, feedback: 'Quase bom, mas IA já clona voz. Ligação pro número ORIGINAL é mais seguro que áudio.' },
+          { texto: 'Quanto e pra que chave?', certo: false, feedback: 'Você caiu na conversa. Cada resposta sua dá mais informação pro golpista te manipular.' },
+        ],
+        xp: 18,
+      },
+      {
+        tipo: 'choose',
+        prompt: 'Alguém manda "te mandei um código de 6 dígitos sem querer, me devolve aí?". Você:',
+        opcoes: [
+          'Devolve o código — coitado, foi sem querer.',
+          'Pergunta primeiro de quem é antes de mandar.',
+          'NÃO MANDA, e bloqueia. Esse código é o acesso ao seu WhatsApp.',
+          'Manda só metade do código por segurança.',
+        ],
+        resposta: 2, xp: 14,
+        feedback_ok: 'Exato! Esse código é o LOGIN do seu WhatsApp. Se você manda, perde o WhatsApp na hora e o golpista começa a pedir PIX pros SEUS contatos.',
+        feedback_err: 'JAMAIS mande código de 6 dígitos pra ninguém. Esse é literalmente a senha de entrada do seu WhatsApp.',
+      },
+      {
+        tipo: 'true_false',
+        prompt: 'Avalie cada afirmação:',
+        afirmacoes: [
+          { texto: 'O banco pode te ligar pelo WhatsApp e pedir sua senha em caso de fraude.', resposta: false, feedback: 'Banco NUNCA pede senha por canal nenhum. Nem por telefone, nem por mensagem.' },
+          { texto: 'Verificação em 2 etapas no WhatsApp é só uma senha extra opcional.', resposta: false, feedback: 'É a diferença entre ter ou não ter sua conta clonada. É essencial.' },
+          { texto: 'IA já consegue clonar voz com 3 segundos de áudio.', resposta: true, feedback: 'Verdade. Ferramentas como ElevenLabs fazem isso. Por isso "áudio do filho" não é mais prova.' },
+          { texto: 'Se o número é diferente, sempre desconfie de pedido de dinheiro.', resposta: true, feedback: 'Regra de ouro. Número novo + urgência financeira = golpe até prova em contrário.' },
+        ],
+        xp: 16,
+      },
+    ],
+  },
+
+  // ============ PC-IA-1 — Introdução à IA (refs: Stanford HAI, MIT) ============
+  'pc-ia-1': {
+    aulaBlocos: [
+      {
+        tipo: 'callout', variante: 'info',
+        titulo: 'IA não é mágica — é estatística rápida',
+        texto: 'A IA generativa (ChatGPT, Gemini, Claude) é, no fundo, um programa que aprendeu a prever a próxima palavra lendo bilhões de textos. Não pensa, não sente, mas é incrivelmente útil quando você sabe pedir.',
+      },
+      {
+        tipo: 'aula_steps',
+        titulo: 'A regra dos 4 P para um bom pedido (Prompt)',
+        items: [
+          { titulo: 'Papel', texto: 'Diga o papel que a IA deve assumir. "Aja como um professor de matemática paciente para um aluno de 50 anos".' },
+          { titulo: 'Pedido', texto: 'O que você quer? Seja específico. "Me explique juros compostos em 3 parágrafos".' },
+          { titulo: 'Público', texto: 'Quem vai ler? "Vou usar pra explicar pra minha mãe que não fez faculdade".' },
+          { titulo: 'Padrão', texto: 'Formato esperado. "Use exemplo com R$ 1000 e linguagem do dia a dia, sem jargão".' },
+        ],
+      },
+      {
+        tipo: 'quote',
+        texto: '"A maior diferença entre quem usa IA bem e mal não é a IA — é a clareza do pedido."',
+        fonte: 'Andrew Ng (Stanford, fundador Coursera)',
+      },
+      {
+        tipo: 'do_dont',
+        titulo: 'Cuidados que evitam furada',
+        do: [
+          'Sempre confira número, data e fonte que a IA der.',
+          'Use IA pra rascunho, brainstorming, simplificação de texto.',
+          'Diga "se não tiver certeza, fale que não tem".',
+        ],
+        dont: [
+          'Pedir conselho médico, jurídico ou financeiro como verdade absoluta.',
+          'Colar dados pessoais, senhas ou documentos sigilosos.',
+          'Achar que IA "sabe tudo" — ela inventa fatos com confiança (chamam de "alucinação").',
+        ],
+      },
+    ],
+    interacoes: [
+      {
+        tipo: 'versus',
+        prompt: 'Qual desses é um prompt MELHOR pra IA?',
+        opcaoA: { titulo: 'Me fala sobre investimento', desc: 'Direto e curto' },
+        opcaoB: { titulo: 'Aja como educador financeiro. Explique em 200 palavras as 3 opções básicas de investimento (poupança, Tesouro, CDB) pra alguém de 60 anos que nunca investiu, sem usar jargão de banco.', desc: 'Detalhado com papel, público, formato' },
+        resposta: 'B',
+        xp: 14,
+        feedback_ok: 'Isso! Quanto mais contexto, mais útil a resposta. "Me fala sobre X" devolve genérico tipo Wikipedia. Pedido bom = resposta sob medida.',
+        feedback_err: 'Pedido genérico = resposta genérica. A regra é: diga o papel, o público, o tamanho e o formato. Aí a IA entrega ouro.',
+      },
+      {
+        tipo: 'sort_order',
+        titulo_curto: 'Monte um prompt em ordem',
+        prompt: 'Arraste os blocos pra formar um prompt forte:',
+        itens: [
+          { id: 1, texto: 'Aja como um nutricionista experiente' },
+          { id: 2, texto: 'Crie um cardápio simples de 3 refeições por dia' },
+          { id: 3, texto: 'para uma pessoa com diabetes tipo 2 começando dieta' },
+          { id: 4, texto: 'em formato de lista, com preços médios de mercado brasileiro' },
+        ],
+        ordemCerta: [1, 2, 3, 4],
+        xp: 14,
+        feedback_ok: 'Boa. Papel → Pedido → Público → Padrão. É a ordem que dá resultado consistente.',
+      },
+      {
+        tipo: 'true_false',
+        prompt: 'Sobre o uso de IA generativa:',
+        afirmacoes: [
+          { texto: 'A IA pode "inventar" fatos com tom de certeza (alucinar).', resposta: true, feedback: 'Verdade. Estudo do MIT (2024) mostrou 27% das respostas factuais têm algum erro. Sempre confira.' },
+          { texto: 'Tudo que você manda pra IA pode ser usado pra treinar a próxima versão.', resposta: true, feedback: 'Depende da configuração. Por padrão muitas ferramentas usam suas conversas. NUNCA cole CPF, senha ou dado sigiloso.' },
+          { texto: 'IA substitui pesquisa médica ou jurídica.', resposta: false, feedback: 'Não. Use IA pra ORGANIZAR perguntas, não pra dar veredito. Em saúde e direito, profissional humano é insubstituível.' },
+          { texto: 'Você pode pedir pra IA simplificar um texto complicado.', resposta: true, feedback: 'Sim, e é dos melhores usos. "Me explica isso como se eu tivesse 12 anos" funciona perfeito.' },
+        ],
+        xp: 14,
+      },
+      {
+        tipo: 'transform',
+        titulo_curto: 'Reescreva um prompt ruim',
+        prompt: 'Transforme o pedido fraco em um pedido bom. Pedido fraco: "me ajuda com currículo". Reescreva usando ao menos 2 dos 4 P (Papel, Pedido, Público, Padrão).',
+        criterios: [
+          { label: 'Tem mais de 50 caracteres', minLen: 50 },
+          { label: 'Inclui um papel (ex: "aja como", "seja um")', contemOu: ['aja como', 'seja um', 'finja ser', 'como um'] },
+          { label: 'Especifica formato ou tamanho', contemOu: ['parágrafo', 'lista', 'palavras', 'tópicos', 'linhas', 'item'] },
+        ],
+        placeholder: 'Aja como recrutador de RH com 10 anos de experiência. Revise meu currículo focando em...',
+        xp: 18,
+        feedback_ok: 'Excelente! Esse padrão você pode reusar em todo prompt da vida.',
+      },
+    ],
+  },
+
+  // ============ MKT-CARREIRA-2 — LinkedIn essencial (refs: Harvard Business Review) ============
+  'mkt-carreira-2': {
+    aulaBlocos: [
+      {
+        tipo: 'callout', variante: 'info',
+        titulo: 'LinkedIn é o currículo que trabalha sozinho',
+        texto: 'Em 2025, 87% dos recrutadores começam a busca por candidato no LinkedIn (relatório Jobvite). Não precisa ter milhares de contatos — precisa de perfil COMPLETO e atualizado.',
+      },
+      {
+        tipo: 'aula_steps',
+        titulo: 'As 5 partes do perfil que pesam mais',
+        items: [
+          { titulo: 'Foto profissional', texto: 'Cara visível, fundo neutro, roupa do dia a dia profissional. Sem selfie de festa. Perfis com foto têm 21x mais visualizações.' },
+          { titulo: 'Headline (sob o nome)', texto: 'NÃO ponha só "desempregado" ou cargo antigo. Ponha o que você FAZ. Ex: "Assistente administrativa | Excel e atendimento ao cliente"' },
+          { titulo: 'Sobre (resumo)', texto: '3 parágrafos: quem você é, o que faz bem, o que está buscando. Em primeira pessoa. Sem jargão corporativo.' },
+          { titulo: 'Experiência com VERBOS DE AÇÃO', texto: '"Organizei", "reduzi", "atendi 50 clientes/dia". Não "responsável por X" — chato e vago.' },
+          { titulo: 'Habilidades + Recomendações', texto: 'Liste 10-15 habilidades reais. Peça pra 2-3 ex-colegas uma recomendação curta.' },
+        ],
+      },
+      {
+        tipo: 'quote',
+        texto: '"Seu LinkedIn não precisa estar perfeito — precisa estar honesto, completo e atualizado nos últimos 6 meses."',
+        fonte: 'Harvard Business Review, "Build a LinkedIn Profile that Works" 2023',
+      },
+      {
+        tipo: 'stats',
+        titulo: 'O impacto de cada melhoria',
+        items: [
+          { numero: '21x', texto: 'mais visualizações com foto profissional' },
+          { numero: '6x', texto: 'mais contatos de recrutador com Sobre preenchido' },
+          { numero: '40%', texto: 'mais chance de ser chamado pra entrevista com habilidades listadas' },
+        ],
+      },
+    ],
+    interacoes: [
+      {
+        tipo: 'find_error',
+        prompt: 'Veja essa headline de LinkedIn. Qual o problema?',
+        codigo: '"Procurando recolocação | Desempregado há 6 meses | Aceito qualquer oportunidade"',
+        opcoes: [
+          'Está muito curta.',
+          'Foca no problema (desemprego) e não no valor que entrega.',
+          'Tem caractere | que não pode usar.',
+          'Não tem nenhum problema.',
+        ],
+        resposta: 1, xp: 12,
+        feedback_ok: 'Exato! Headline vende o que você FAZ, não o que você precisa. "Atendente bilíngue | Vendas e relacionamento com cliente" funciona muito melhor.',
+        feedback_err: 'O problema é o ângulo: vende o problema (desemprego) ao invés do valor (suas competências). Recrutador busca por habilidade, não por pena.',
+      },
+      {
+        tipo: 'drag_zones',
+        prompt: 'Classifique cada frase como BOA ou RUIM pra Experiência:',
+        zonas: ['Boa', 'Ruim'],
+        itens: [
+          { texto: 'Responsável pelo financeiro', zona: 1 },
+          { texto: 'Organizei o caixa diário de R$ 5k e reduzi erros em 30%', zona: 0 },
+          { texto: 'Atendia clientes', zona: 1 },
+          { texto: 'Atendi em média 40 clientes/dia, com 95% de satisfação no NPS', zona: 0 },
+          { texto: 'Trabalhei lá', zona: 1 },
+          { texto: 'Lideri equipe de 4 pessoas em projeto de implantação de Excel', zona: 0 },
+        ],
+        xp: 16,
+        feedback_ok: 'Mandou bem. Verbo de ação + número específico = entrevista. Vago + genérico = perfil ignorado.',
+      },
+      {
+        tipo: 'transform',
+        titulo_curto: 'Reescreva uma experiência',
+        prompt: 'A frase abaixo é fraca. Reescreva-a usando verbo de ação + número/resultado. Original: "Trabalhei no atendimento de uma loja".',
+        criterios: [
+          { label: 'Começa com verbo no passado (ex: "Atendi", "Organizei")', regexOu: ['^[A-ZÁÉÍÓÚ][a-záéíóúç]+(ei|i|amos|aram)'] },
+          { label: 'Tem um número (clientes, vendas, etc.)', regex: '\\d' },
+          { label: 'Tem mais de 40 caracteres', minLen: 40 },
+        ],
+        placeholder: 'Atendi 60 clientes por dia em loja de varejo, com foco em...',
+        xp: 18,
+        feedback_ok: 'Boa! Esse padrão você usa em todas as suas experiências no LinkedIn.',
+      },
+      {
+        tipo: 'choose',
+        prompt: 'Você está montando o "Sobre". Qual abertura é a MELHOR?',
+        opcoes: [
+          '"Profissional dinâmico, proativo e com sinergia em ambientes desafiadores."',
+          '"Sou atendente há 8 anos. Aprendi a manter cliente difícil calmo e resolver problema rápido — duas coisas que faltam em todo lugar."',
+          '"Procuro vaga urgente, aceito qualquer área, tenho disponibilidade total."',
+          '"Olá! Bem-vindo ao meu perfil. Por favor, leia até o fim."',
+        ],
+        resposta: 1, xp: 12,
+        feedback_ok: 'Sim! Concreto, honesto, mostra COMPETÊNCIA real. A primeira ("dinâmico, proativo") é o tipo de frase que recrutador pula direto.',
+        feedback_err: 'O segredo é especificidade. "Atendente há 8 anos, sei lidar com cliente difícil" vence "profissional dinâmico" sempre.',
+      },
+    ],
+  },
+
 };
