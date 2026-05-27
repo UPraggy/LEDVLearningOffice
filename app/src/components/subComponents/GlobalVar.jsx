@@ -34,6 +34,9 @@ const PROGRESSO_INICIAL = {
     onboardingFeito: false,
     somAtivo: true,
     vozLigada: true,        // botão "Ouvir" aparece nas aulas por padrão
+    vozAutoPlay: true,      // toca aula automaticamente ao entrar
+    notifLigado: false,     // notificações locais
+    horaLembrete: '19:00',  // lembrete diário (HH:MM)
   },
   caixaDoDiaUltima: null,        // ISO date da última caixa aberta
   caixaDoDiaTotal: 0,            // contador (pra troféu "7 caixas seguidas")

@@ -17,14 +17,19 @@ let _audioCtx = null;
 async function loadOrt() {
   if (_ort) return _ort;
   const mod = await import('onnxruntime-web');
-  // Configura paths do WASM (arquivos em node_modules → servidos pelo Vite em /node_modules/...)
-  // Vite serve módulos com path absoluto via /node_modules/... em dev.
-  // Em produção, copiamos manualmente os .wasm pra /piper/wasm/ (build script).
   try {
-    mod.env.wasm.numThreads = Math.min(4, navigator.hardwareConcurrency || 2);
+    // Aponta os .wasm pra cópia pública (vide /public/piper/wasm/).
+    // Sem isso, o ORT tenta servir do mesmo caminho do bundle e falha em prod.
+    mod.env.wasm.wasmPaths = '/piper/wasm/';
+    // Threads só ativam com SharedArrayBuffer (COOP/COEP). Detecta antes.
+    const hasSAB = typeof SharedArrayBuffer !== 'undefined';
+    mod.env.wasm.numThreads = hasSAB ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
     mod.env.wasm.simd = true;
-    // wasmPaths fallback — onnxruntime-web procura ao lado por padrão
-  } catch {}
+    mod.env.wasm.proxy = false;
+    mod.env.logLevel = 'warning';
+  } catch (e) {
+    console.warn('[Piper] Configuração ORT falhou:', e);
+  }
   _ort = mod;
   return mod;
 }
@@ -34,17 +39,22 @@ async function loadModel() {
   if (_loading) return _loading;
   _loading = (async () => {
     const ort = await loadOrt();
+    console.info('[Piper] Baixando modelo Cadu (~60MB) — só na primeira vez…');
     const [modelResp, configResp] = await Promise.all([
       fetch('/piper/cadu.onnx'),
       fetch('/piper/cadu.onnx.json'),
     ]);
-    if (!modelResp.ok || !configResp.ok) throw new Error('Falha ao baixar modelo Piper');
+    if (!modelResp.ok || !configResp.ok) {
+      throw new Error(`Falha ao baixar modelo Piper (model=${modelResp.status} cfg=${configResp.status})`);
+    }
     const [buf, json] = await Promise.all([modelResp.arrayBuffer(), configResp.json()]);
+    console.info(`[Piper] Modelo baixado (${(buf.byteLength / 1048576).toFixed(1)}MB). Criando sessão ONNX…`);
     _session = await ort.InferenceSession.create(buf, {
       executionProviders: ['wasm'],
       graphOptimizationLevel: 'all',
     });
     _config = json;
+    console.info('[Piper] Pronto. inputs:', _session.inputNames, 'outputs:', _session.outputNames);
     return { session: _session, config: _config };
   })();
   return _loading;

@@ -163,6 +163,20 @@ export default function Configuracoes() {
             <span className="track" />
           </label>
         </div>
+        {p.vozLigada !== false && (
+          <div className="setting-card" style={{ marginTop: 8 }}>
+            <div className="sc-l"><Volume2 size={20} /></div>
+            <div className="sc-mid">
+              <strong>Tocar aula automaticamente</strong>
+              <p>Quando você entrar numa missão, a aula começa a ser lida sozinha — pra você poder se concentrar no que está vendo. Pode pausar a qualquer momento no botão "Parar".</p>
+            </div>
+            <label className="switch" title={p.vozAutoPlay !== false ? 'Desligar auto-play' : 'Ligar auto-play'}>
+              <input type="checkbox" checked={p.vozAutoPlay !== false}
+                onChange={(e) => setPreferencia('vozAutoPlay', e.target.checked)} />
+              <span className="track" />
+            </label>
+          </div>
+        )}
       </section>
 
       <section className="block">

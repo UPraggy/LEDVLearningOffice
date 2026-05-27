@@ -14,8 +14,11 @@
      paragrafo          { texto }   ← parágrafo enriquecido
    Mantém também os campos legados: estrutura, exemplo, vocabulario.
    ========================================================================= */
+import { useEffect, useRef } from 'react';
 import { Info, AlertTriangle, CheckCircle2, Sparkles, Clock } from 'lucide-react';
 import BotaoVoz from './subComponents/BotaoVoz.jsx';
+import { useVoiceSynthesis } from '../hooks/useVoiceSynthesis.js';
+import { useApp } from './subComponents/AppContext.jsx';
 import '../assets/css/AulaRica.css';
 
 function Callout({ variante = 'info', titulo, texto }) {
@@ -167,15 +170,33 @@ const BLOCOS = {
 };
 
 export default function AulaRica({ aula, vertente }) {
-  if (!aula) return null;
+  const { progresso } = useApp();
+  const { speak, parar } = useVoiceSynthesis();
+  const autoPlayedRef = useRef(false);
 
   // Reúne todo o texto da aula em uma string única (pra "ouvir aula inteira")
-  const textoCompleto = [
+  const textoCompleto = aula ? [
     aula.gancho,
     aula.conceito?.titulo, aula.conceito?.texto,
     ...(aula.chave || []),
     aula.porque,
-  ].filter(Boolean).join('. ');
+  ].filter(Boolean).join('. ') : '';
+
+  // Auto-play: se voz estiver ligada (default true), toca a aula assim que monta.
+  // Auto-play roda 1× por montagem (evita repetir em re-render por preferência).
+  useEffect(() => {
+    if (autoPlayedRef.current) return;
+    if (!aula || !textoCompleto) return;
+    if (progresso?.preferencias?.vozLigada === false) return;
+    if (progresso?.preferencias?.vozAutoPlay === false) return; // pode desligar só o auto
+    autoPlayedRef.current = true;
+    // Pequeno delay pra deixar a UI montar e o usuário ter chance de pausar
+    const t = setTimeout(() => { speak(textoCompleto); }, 600);
+    return () => { clearTimeout(t); parar(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [aula]);
+
+  if (!aula) return null;
 
   return (
     <div className="bloco anima-up aula-rica">
