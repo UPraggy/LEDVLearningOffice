@@ -1,9 +1,10 @@
 /* Configurações — fontStep / contraste / audiência / som / dados / reset. */
 import { useEffect, useRef, useState } from 'react';
-import { Type, Contrast, User, Volume2, VolumeX, Download, Upload, RefreshCw, Trash2, Bell, BellOff, Mic } from 'lucide-react';
+import { Type, Contrast, User, Volume2, Download, Upload, RefreshCw, Trash2, Bell, BellOff, Mic } from 'lucide-react';
 import { useApp } from '../subComponents/AppContext.jsx';
 import GlobalVar from '../subComponents/GlobalVar.jsx';
 import Notifica from '../subComponents/Notifica.jsx';
+import IconeSom from '../subComponents/IconeSom.jsx';
 import { useVoiceSynthesis } from '../../hooks/useVoiceSynthesis.js';
 import '../../assets/css/Screens.css';
 
@@ -118,7 +119,7 @@ export default function Configuracoes() {
       <section className="block">
         <div className="block-head"><h2>Som</h2></div>
         <div className="setting-card">
-          <div className="sc-l">{somAtivo ? <Volume2 size={20} /> : <VolumeX size={20} />}</div>
+          <div className="sc-l"><IconeSom ativo={somAtivo} size={20} /></div>
           <div className="sc-mid">
             <strong>Efeitos sonoros</strong>
             <p>Toques curtos em acertos, erros e celebrações. Sem voz, sem música.</p>
