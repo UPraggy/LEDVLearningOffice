@@ -114,13 +114,13 @@
 
 /* ===== MENTOR INBOX ===== */
 .mentor-grid {
-  display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--s-5);
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5);
 }
 @media (max-width: 900px) { .mentor-grid { grid-template-columns: 1fr; } }
 
 .mentor-list { display: flex; flex-direction: column; gap: var(--s-2); }
 .mentor-card {
-  display: flex; gap: var(--s-3);
+  display: flex; flex-direction: column; gap: var(--s-3);
   padding: var(--s-4);
   background: var(--surface);
   border: 1px solid var(--line);
@@ -130,6 +130,8 @@
   font: inherit; color: var(--ink);
   transition: background var(--t-micro), border var(--t-micro);
 }
+.mentor-card-main { display: flex; gap: var(--s-3); outline: none; }
+.mentor-card-main:focus-visible { box-shadow: 0 0 0 3px rgba(226,91,63,.18); border-radius: var(--r-sm); }
 .mentor-card:hover { background: var(--surface-2); }
 .mentor-card.mc-new { border-left-color: var(--coral); }
 .mentor-card.mc-replied { opacity: .7; }
@@ -177,6 +179,39 @@
 .mentor-detail h3 { font-family: var(--f-display); font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
 .mentor-detail p { line-height: 1.55; color: var(--ink-soft); font-size: 15px; }
 .md-actions { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.mentor-card-detail {
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.mentor-card-detail h3 {
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+.mentor-card-detail p { line-height: 1.55; color: var(--ink-soft); font-size: 15px; }
+.mentor-reply {
+  background: rgba(79,124,172,.10);
+  border: 1px solid rgba(79,124,172,.3);
+  border-radius: var(--r-md);
+  padding: var(--s-3) var(--s-4);
+}
+.mentor-reply .kicker { margin: 0; color: var(--sky); }
+.mentor-reply p, .mentor-auto p { margin: 4px 0 0; font-size: 14px; }
+.mentor-auto {
+  background: var(--paper-warm);
+  border-left: 3px solid var(--coral);
+  border-radius: var(--r-sm);
+  padding: var(--s-3) var(--s-4);
+}
+.mentor-auto .kicker, .mentor-composer .kicker { margin: 0; }
+.mentor-composer { margin: var(--s-2) 0 0; }
+.mentor-composer textarea.input { min-height: 80px; }
+.mentor-quick-replies { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.mentor-quick-replies .chip { cursor: pointer; }
 
 /* ===== DIÁRIO ===== */
 .composer {

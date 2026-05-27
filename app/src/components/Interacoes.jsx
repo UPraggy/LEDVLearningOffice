@@ -24,7 +24,7 @@
    nunca punitivo. Voz: "Quase. Pista X." em vez de "Errado".
    ========================================================================= */
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { CheckCircle2, XCircle, RotateCw, Sparkles, Lightbulb, Timer, ArrowRight } from 'lucide-react';
+import { CheckCircle2, XCircle, RotateCw, Sparkles, Lightbulb, Timer, ArrowRight, Image as ImageIcon } from 'lucide-react';
 import Som from './subComponents/Som.jsx';
 import '../assets/css/Interacoes.css';
 
@@ -334,9 +334,55 @@ function SortOrder({ item, onDone }) {
 // FIND_ERROR — marcar tokens errados em um texto
 // ============================================================
 function FindError({ item, onDone }) {
+  const opcoes = item.opcoes || [];
+  const usaOpcoes = typeof item.codigo === 'string' && opcoes.length > 0;
+  const [escolha, setEscolha] = useState(null);
+  const [statusOpcao, setStatusOpcao] = useState(null);
   const tokens = item.tokens || []; // [{txt, ok?: bool, sep?: bool}]
   const [marcados, setMarcados] = useState(new Set());
   const [status, setStatus] = useState(null);
+
+  if (usaOpcoes) {
+    const responder = (i) => {
+      if (statusOpcao === 'ok') return;
+      const ok = i === item.resposta;
+      setEscolha(i);
+      setStatusOpcao(ok ? 'ok' : 'err');
+      Som.tocar(ok ? 'success' : 'error');
+      if (ok) onDone?.();
+    };
+    const resetOpcoes = () => { setEscolha(null); setStatusOpcao(null); };
+
+    return (
+      <div className={`inter-card ${statusOpcao || ''}`}>
+        <div className="head"><span className="tag">Caca ao erro - escolha a causa</span></div>
+        {item.prompt && <p className="prompt">{item.prompt}</p>}
+        <pre className="find-error-code"><code>{item.codigo}</code></pre>
+        <div className="find-error-options">
+          {opcoes.map((op, i) => {
+            let cls = '';
+            if (statusOpcao) {
+              if (i === item.resposta) cls = 'right';
+              else if (i === escolha) cls = 'wrong';
+            } else if (i === escolha) cls = 'sel';
+            return (
+              <button key={i} className={`choose-opt ${cls}`} onClick={() => responder(i)}>
+                <span className="letra">{LETRAS[i]}</span>
+                <span>{op}</span>
+              </button>
+            );
+          })}
+        </div>
+        <Feedback status={statusOpcao} certoMsg={item.feedback_ok} erroMsg={item.feedback_err} />
+        <div className="inter-foot">
+          <span className="xp-bonus">+{item.xp || 12} XP bonus</span>
+          {statusOpcao === 'err' && (
+            <button className="btn btn-ghost btn-sm" onClick={resetOpcoes}><RotateCw size={14} /> Tentar de novo</button>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   const toggle = (i) => {
     if (status === 'ok') return;
@@ -387,6 +433,25 @@ function FindError({ item, onDone }) {
         ) : null}
       </div>
     </div>
+  );
+}
+
+// ============================================================
+// IMAGEM - exemplo visual dentro de missoes
+// ============================================================
+function Imagem({ item }) {
+  return (
+    <figure className="iax-imagem">
+      <div className="iax-imagem-media">
+        <img src={item.url} alt={item.alt || item.legenda || 'Exemplo visual'} loading="lazy" />
+      </div>
+      {(item.legenda || item.titulo) && (
+        <figcaption>
+          <ImageIcon size={14} />
+          <span>{item.legenda || item.titulo}</span>
+        </figcaption>
+      )}
+    </figure>
   );
 }
 
@@ -1155,6 +1220,7 @@ const TIPOS = {
   calc_live: CalcLive,
   scenario_branch: ScenarioBranch,
   drag_zones: DragZones,
+  imagem: Imagem,
 };
 
 export default function Interacoes({ interacoes = [], onAcerto }) {

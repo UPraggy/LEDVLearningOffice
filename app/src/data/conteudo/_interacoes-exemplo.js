@@ -66,6 +66,8 @@ export const INTERACOES_EXEMPLO = {
         opcoes: ['Verdadeiro', 'Falso'],
         resposta: 1, xp: 5,
         feedback_err: 'Falso! O Iniciar fica no canto inferior ESQUERDO. À direita ficam relógio e Wi-Fi.',
+        feedback_ok: 'Isso. No Excel em portugues, use ponto-e-virgula entre todos os argumentos: =PROCV(E2; A:C; 3; 0).',
+        feedback_err: 'Olhe so os separadores. A formula comecou com virgula depois de E2, mas o restante usa ponto-e-virgula.',
       },
       {
         tipo: 'drag_match',
@@ -130,6 +132,12 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        url: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Mesa de trabalho com planilhas e calculadora',
+        legenda: 'Exemplo visual: confira nomes, valores e contexto antes de confirmar um pagamento.',
+      },
       // ============ 1) MICRO-INTERAÇÃO DE ABERTURA — 10 segundos ============
       {
         tipo: 'time_pressure',
@@ -453,6 +461,12 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Pessoa verificando seguranca no notebook',
+        legenda: 'Exemplo visual: seguranca digital e feita de pequenos checkpoints antes do clique.',
+      },
       { tipo: 'time_pressure',
         segundos: 12,
         cenario: 'De: banco-segur4nca@hotmail.com — "Sua senha vai expirar em 1h. Clique aqui pra atualizar."',
@@ -776,6 +790,12 @@ export const INTERACOES_EXEMPLO = {
     ],
     interacoes: [
       {
+        tipo: 'imagem',
+        url: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Planilha aberta em um notebook',
+        legenda: 'Exemplo visual: uma planilha simples fica confiavel quando a formula conversa com a tabela certa.',
+      },
+      {
         tipo: 'sim_planilha',
         titulo_curto: 'Calcule a média',
         prompt: 'Na célula B6, escreva a fórmula que calcula a MÉDIA das notas da coluna B (B2:B5).',
@@ -795,14 +815,20 @@ export const INTERACOES_EXEMPLO = {
       {
         tipo: 'find_error',
         prompt: 'A fórmula abaixo dá erro #NOME?. Onde tá o problema?',
-        codigo: '=SOMMA(A1:A10)',
+        codigo: '=PROCV(E2, A:C; 3; 0)',
         opcoes: [
           'A faixa A1:A10 não existe.',
           'Falta o sinal de = no começo.',
           'Está escrito SOMMA (com 2 M) — o certo é SOMA.',
           'Faltam aspas ao redor da faixa.',
         ],
-        resposta: 2, xp: 12,
+        opcoes: [
+          'Tem virgula misturada com ponto-e-virgula.',
+          'A funcao PROCV nao existe.',
+          'A tabela A:C deveria estar entre aspas.',
+          'O 0 final deve ser removido.',
+        ],
+        resposta: 0, xp: 12,
         feedback_ok: 'Isso! Erro #NOME? sempre é fórmula digitada errada. Aqui tem M sobrando. O certo é SOMA.',
         feedback_err: 'O erro #NOME? aparece quando o Excel não reconhece o nome da função. Olhe letra por letra: SOMMA tem M a mais.',
       },
@@ -869,6 +895,12 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        url: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Pessoa usando celular com aplicativo de mensagens',
+        legenda: 'Exemplo visual: em mensagens, desconfie de pressa, numero novo e pedido financeiro.',
+      },
       {
         tipo: 'sim_chat',
         prompt: 'Você recebe essa mensagem. Como responder?',
@@ -950,6 +982,12 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        url: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Pessoa usando recursos de inteligencia artificial no computador',
+        legenda: 'Exemplo visual: IA ajuda melhor quando voce da contexto, objetivo e formato esperado.',
+      },
       {
         tipo: 'versus',
         prompt: 'Qual desses é um prompt MELHOR pra IA?',

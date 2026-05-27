@@ -152,8 +152,8 @@ function AppProviderInner({ children }) {
         const novo = { ...p, preferencias: { ...p.preferencias, somAtivo: !atual } };
         GlobalVar.salvarProgresso(novo);
         // toca um blip de confirmação se acabou de LIGAR
-        if (!atual) { Som.setMuted(false); Som.tocar('toggle'); }
-        else { Som.tocar('toggle'); Som.setMuted(true); }
+        if (!atual) { Som.setMuted(false); Som.warmup(); Som.tocar('toggle'); }
+        else { Som.warmup(); Som.tocar('toggle'); Som.setMuted(true); }
         return novo;
       });
     },

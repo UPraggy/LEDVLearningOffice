@@ -1,5 +1,5 @@
 /* HomePage rica — 9 blocos do proto. */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Gift, Star, Shield, Lightbulb, Zap, Trophy, Flame, ChevronRight,
@@ -10,6 +10,9 @@ import GlobalVar from '../subComponents/GlobalVar.jsx';
 import Som from '../subComponents/Som.jsx';
 import BotaoVoz from '../subComponents/BotaoVoz.jsx';
 import { TROFEUS } from '../../data/estrutura.js';
+import { DESAFIOS_SEMANA } from '../../data/desafio-semana-pool.js';
+import { RELAMPAGO_POOL } from '../../data/relampago-pool.js';
+import { escolherDoDia, diasRestantesSemana, isoWeekKey, seedDoTexto } from '../../data/daily-utils.js';
 import '../../assets/css/HomePage.css';
 import '../../assets/css/Arcade.css';
 
@@ -20,7 +23,7 @@ function diaSemana() {
 }
 
 export default function HomePage() {
-  const { progresso, abrirCaixaDoDia, podeAbrirCaixa, toast } = useApp();
+  const { progresso, abrirCaixaDoDia, podeAbrirCaixa, toast, atualizar } = useApp();
   const navigate = useNavigate();
   const user = progresso.user || {};
   const nomeCurto = (user.nome || 'Estudante').split(' ')[0];
@@ -45,17 +48,21 @@ export default function HomePage() {
   const RewardIc = recompensa && (ICON_RECOMP[recompensa.ic] || Gift);
 
   const desafioSemana = useMemo(() => {
+    const weekKey = isoWeekKey();
+    const ativo = DESAFIOS_SEMANA[seedDoTexto(weekKey) % DESAFIOS_SEMANA.length] || DESAFIOS_SEMANA[0];
     const seteDiasAtras = Date.now() - 7 * 86400000;
-    const feitasSeg = (progresso.atividadeRecente || [])
-      .filter(a => a.tipo === 'missao' && a.ts >= seteDiasAtras && /seguran|amb-seg|sec-/i.test(a.sub || ''))
+    const feitas = (progresso.atividadeRecente || [])
+      .filter(a => a.tipo === 'missao' && a.ts >= seteDiasAtras && ativo.match.test(`${a.titulo || ''} ${a.sub || ''}`))
       .length;
     return {
       titulo: 'Semana da Segurança',
       sub: 'Cumpra 5 missões do módulo Segurança até domingo',
       reward: 'Troféu Guarda-costas + 200 XP',
-      progress: Math.min(5, feitasSeg),
-      total: 5,
-      modulo: 'seguranca',
+      ...ativo,
+      progress: Math.min(ativo.total, feitas),
+      total: ativo.total,
+      modulo: ativo.modulo,
+      diasRestantes: diasRestantesSemana(),
     };
   }, [progresso.atividadeRecente]);
 
@@ -76,14 +83,26 @@ export default function HomePage() {
     return arr;
   }, [progresso.atividadePorDia]);
 
-  const [lightAns, setLightAns] = useState(null);
+  const hoje = GlobalVar.diaAtualFunc();
+  const relampagoAtual = useMemo(() => escolherDoDia(RELAMPAGO_POOL, progresso, hoje, 'relampago'), [progresso, hoje]);
+  const relampagoEstado = relampagoAtual ? (progresso.relampago || {})[hoje] : null;
+  const [lightAns, setLightAns] = useState(() => relampagoEstado?.id === relampagoAtual?.id ? relampagoEstado.escolha : null);
+  useEffect(() => {
+    setLightAns(relampagoEstado?.id === relampagoAtual?.id ? relampagoEstado.escolha : null);
+  }, [relampagoEstado?.id, relampagoEstado?.escolha, relampagoAtual?.id]);
   function respLight(idx) {
-    if (lightAns !== null) return;
+    if (lightAns !== null || !relampagoAtual) return;
     setLightAns(idx);
-    Som.tocar(idx === 1 ? 'success' : 'error');
+    const ok = idx === relampagoAtual.resposta;
+    atualizar({
+      relampago: {
+        ...(progresso.relampago || {}),
+        [hoje]: { id: relampagoAtual.id, escolha: idx, ok },
+      },
+    });
+    Som.tocar(ok ? 'success' : 'error');
   }
 
-  const hoje = GlobalVar.diaAtualFunc();
   const arcadeDone = !!(progresso.modoArcade || {})[hoje]?.resolvido;
   const [invite, setInvite] = useState(() => {
     // Mostra popup uma única vez por dia se ainda não fez o arcade
@@ -214,7 +233,7 @@ export default function HomePage() {
 
       <div className="week-challenge">
         <div>
-          <span className="kicker">Desafio da semana · 3 dias restantes</span>
+          <span className="kicker">Desafio da semana · {desafioSemana.diasRestantes} dias restantes</span>
           <h3>{desafioSemana.titulo}</h3>
           <p>{desafioSemana.sub}</p>
           <div className="wc-progress">
@@ -286,6 +305,24 @@ export default function HomePage() {
             <span className="kicker" style={{ margin: 0 }}>~2 min</span>
           </div>
           <div className="lightning">
+            <div className="l-q">"{relampagoAtual?.pergunta || 'Desafio relampago indisponivel hoje.'}"</div>
+            <div className="l-opts">
+              {(relampagoAtual?.opcoes || []).map((op, i) => {
+                let cls = '';
+                if (lightAns !== null) {
+                  if (i === relampagoAtual.resposta) cls = 'right';
+                  else if (i === lightAns) cls = 'wrong';
+                }
+                return <button key={i} className={`l-opt ${cls}`} onClick={() => respLight(i)}>{op}</button>;
+              })}
+            </div>
+            {lightAns !== null && relampagoAtual && (
+              <p style={{ fontSize: 13, color: 'var(--ink-soft)', marginTop: 6 }}>
+                {lightAns === relampagoAtual.resposta ? relampagoAtual.feedback_ok : relampagoAtual.feedback_err}
+              </p>
+            )}
+          </div>
+          <div className="lightning" style={{ display: 'none' }}>
             <div className="l-q">"Você recebe um WhatsApp do seu filho pedindo PIX em um número novo. O que faz primeiro?"</div>
             <div className="l-opts">
               {['Faço o PIX', 'Ligo no número antigo', 'Peço um áudio'].map((op, i) => {
