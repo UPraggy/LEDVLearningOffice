@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Menu, X, Flame, Type, Volume2, VolumeX } from 'lucide-react';
+import { Menu, X, Flame, Type } from 'lucide-react';
 import { MarcaLockup } from './subComponents/Marca.jsx';
 import { useApp } from './subComponents/AppContext.jsx';
+import IconeSom from './subComponents/IconeSom.jsx';
 import '../assets/css/TopMenu.css';
 
 const ITENS = [
@@ -47,7 +48,7 @@ export default function TopMenu({ ativaResp }) {
           <button className="menu-toggle" onClick={alternarSom}
             aria-label={somAtivo ? 'Desligar som' : 'Ligar som'}
             title={somAtivo ? 'Som ligado' : 'Som desligado'}>
-            {somAtivo ? <Volume2 size={18} /> : <VolumeX size={18} />}
+            <IconeSom ativo={somAtivo} size={18} />
           </button>
           <button className="menu-toggle" onClick={alternarFonte} aria-label="Aumentar fonte" title="Aumentar fonte">
             <Type size={18} />

@@ -25,6 +25,16 @@ function AppProviderInner({ children }) {
     if (_bootToastShown) return;
     _bootToastShown = true;
     Notifica.reativarPendentes();
+    // Agenda lembrete de risco da ofensiva pra hoje 21h, se o aluno
+    // tem streak ativo e ainda não fez missão hoje
+    const streak = progresso?.user?.streak || 0;
+    const hoje = GlobalVar.diaAtualFunc?.() || new Date().toISOString().slice(0, 10);
+    const ultimaConclusao = progresso?.user?.ultimaConclusao;
+    if (streak >= 2 && ultimaConclusao !== hoje &&
+        progresso?.preferencias?.notifLigado &&
+        Notifica.permissao() === 'granted') {
+      Notifica.lembreteRiscoStreak({ horaHHMM: '21:00', streak });
+    }
     const novos = getBoot().trofeusNovos || [];
     if (!novos.length) return;
     setTimeout(() => {
@@ -81,6 +91,15 @@ function AppProviderInner({ children }) {
             r.trofeusNovos.forEach((id, i) => setTimeout(() => toast.mostrarTrofeu(id), i * 800));
           }, 800);
         }
+        // Notificações OS — só se o usuário ligou notificações
+        if (r.progresso?.preferencias?.notifLigado && Notifica.permissao() === 'granted') {
+          (r.trofeusNovos || []).forEach(id => Notifica.trofeu(id));
+          // Marco semanal
+          const total = (r.progresso.missoesCompletas || []).length;
+          if (total > 0 && total % 7 === 0) {
+            Notifica.marcoSemana(total);
+          }
+        }
         return r.progresso;
       });
       return resultado;
@@ -133,8 +152,8 @@ function AppProviderInner({ children }) {
         const novo = { ...p, preferencias: { ...p.preferencias, somAtivo: !atual } };
         GlobalVar.salvarProgresso(novo);
         // toca um blip de confirmação se acabou de LIGAR
-        if (!atual) { Som.setMuted(false); Som.tocar('toggle'); }
-        else { Som.tocar('toggle'); Som.setMuted(true); }
+        if (!atual) { Som.setMuted(false); Som.warmup(); Som.tocar('toggle'); }
+        else { Som.warmup(); Som.tocar('toggle'); Som.setMuted(true); }
         return novo;
       });
     },

@@ -6,10 +6,19 @@ export default defineConfig({
   server: {
     port: 5173,
     fs: { strict: false },
-    // Headers pra WASM SIMD/threads do onnxruntime
+    // Headers pra WASM SIMD/threads do onnxruntime (SharedArrayBuffer requer COOP+COEP)
     headers: {
       'Cross-Origin-Opener-Policy':   'same-origin',
       'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Resource-Policy': 'cross-origin',
+    },
+  },
+  preview: {
+    port: 4173,
+    headers: {
+      'Cross-Origin-Opener-Policy':   'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Resource-Policy': 'cross-origin',
     },
   },
   optimizeDeps: {

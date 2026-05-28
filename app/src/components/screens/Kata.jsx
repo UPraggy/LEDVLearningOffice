@@ -1,10 +1,11 @@
 /* Kata diário — desafio rotativo determinístico (mesmo pra todos no dia, troca todo dia). */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BookOpenCheck, Lightbulb, CheckCircle2, XCircle, Flame } from 'lucide-react';
 import { useApp } from '../subComponents/AppContext.jsx';
 import GlobalVar from '../subComponents/GlobalVar.jsx';
 import Som from '../subComponents/Som.jsx';
 import { KATAS } from '../../data/decks-srs.js';
+import { filtrarPorNivel } from '../../data/daily-utils.js';
 import '../../assets/css/SrsKata.css';
 
 export default function Kata() {
@@ -12,7 +13,8 @@ export default function Kata() {
   const [escolha, setEscolha] = useState(null);
   const [respondido, setRespondido] = useState(false);
 
-  const { kata, estado } = GlobalVar.kataDeHoje(progresso, KATAS) || {};
+  const katasNivel = useMemo(() => filtrarPorNivel(KATAS, progresso), [progresso]);
+  const { kata, estado } = GlobalVar.kataDeHoje(progresso, katasNivel) || {};
   if (!kata) return <div className="screen"><p>Nenhum kata configurado.</p></div>;
 
   // Calcula sequência de katas resolvidos consecutivos

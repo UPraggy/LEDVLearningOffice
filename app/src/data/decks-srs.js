@@ -69,6 +69,8 @@ export const DECKS = {
 export const KATAS = [
   {
     id: 'k-pix-1',
+    modulo: 'seguranca',
+    nivel: 1,
     titulo: 'Defenda os R$ 500',
     cor: 'coral',
     cenario: 'Você recebe SMS: "BANCO X: detectamos transação suspeita de R$ 500 em sua conta. Confirme em bit.ly/abc123 ou perde acesso em 1h." Quantos sinais de golpe há nesse SMS?',
@@ -78,6 +80,8 @@ export const KATAS = [
   },
   {
     id: 'k-excel-1',
+    modulo: 'mercado',
+    nivel: 2,
     titulo: 'Arraste sem quebrar',
     cor: 'navy',
     cenario: 'Em D2 você tem =B2*C2. Quer arrastar pra D3, D4, D5 e que o C2 NÃO mude (porque é a célula da alíquota). Qual fórmula coloca em D2?',
@@ -87,6 +91,8 @@ export const KATAS = [
   },
   {
     id: 'k-en-1',
+    modulo: 'ingles',
+    nivel: 1,
     titulo: 'Hello, world',
     cor: 'plum',
     cenario: 'Você chega numa reunião às 14h. Como cumprimenta?',
@@ -96,6 +102,8 @@ export const KATAS = [
   },
   {
     id: 'k-wpp-1',
+    modulo: 'celular',
+    nivel: 1,
     titulo: 'Mãe ou golpista?',
     cor: 'coral',
     cenario: 'Sua mãe te manda WhatsApp de número novo: "filho, perdi meu celular, pode me mandar PIX urgente?". O que você faz PRIMEIRO?',
@@ -110,6 +118,8 @@ export const KATAS = [
   },
   {
     id: 'k-senha-1',
+    modulo: 'seguranca',
+    nivel: 3,
     titulo: 'Senha invencível',
     cor: 'sage',
     cenario: 'Qual dessas senhas é MAIS forte (resistente a ataque)?',
@@ -124,6 +134,8 @@ export const KATAS = [
   },
   {
     id: 'k-procv-1',
+    modulo: 'mercado',
+    nivel: 2,
     titulo: 'PROCV travado',
     cor: 'navy',
     cenario: 'Você tem uma tabela de produtos em A1:C100 (A=código, B=nome, C=preço). Em F2 você quer buscar o preço do código em E2. Qual fórmula?',
@@ -138,6 +150,8 @@ export const KATAS = [
   },
   {
     id: 'k-gov-1',
+    modulo: 'celular',
+    nivel: 2,
     titulo: 'Conta Gov.br ouro',
     cor: 'sky',
     cenario: 'Por que vale a pena ter conta Gov.br nível ouro (vs prata ou bronze)?',

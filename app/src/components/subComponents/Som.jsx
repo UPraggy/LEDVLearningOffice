@@ -10,6 +10,7 @@ let _ctx = null;
 let _muted = false;
 let _baseGain = 0.18;        // volume mestre — discreto
 let _ready = false;
+const _dev = typeof import.meta !== 'undefined' && import.meta.env?.DEV;
 
 function getCtx() {
   if (typeof window === 'undefined') return null;
@@ -18,10 +19,20 @@ function getCtx() {
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) return null;
       _ctx = new AC();
-    } catch { return null; }
+      if (_dev) console.debug('[Som] AudioContext criado', _ctx.state);
+    } catch (e) {
+      if (_dev) console.debug('[Som] falha ao criar AudioContext', e);
+      return null;
+    }
   }
   // Em browsers que travam o audio antes do 1º gesto, resume em qualquer interação.
-  if (_ctx.state === 'suspended') _ctx.resume().catch(() => {});
+  if (_ctx.state === 'suspended') {
+    _ctx.resume()
+      .then(() => { _ready = true; if (_dev) console.debug('[Som] AudioContext retomado'); })
+      .catch((e) => { if (_dev) console.debug('[Som] resume bloqueado', e); });
+  } else {
+    _ready = true;
+  }
   return _ctx;
 }
 
@@ -31,14 +42,16 @@ function _arm() {
     _ready = true;
     const ctx = getCtx();
     if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
-    window.removeEventListener('pointerdown', arm);
-    window.removeEventListener('keydown', arm);
-    window.removeEventListener('touchstart', arm);
+    window.removeEventListener('pointerdown', arm, true);
+    window.removeEventListener('click', arm, true);
+    window.removeEventListener('keydown', arm, true);
+    window.removeEventListener('touchstart', arm, true);
   };
   if (typeof window !== 'undefined') {
-    window.addEventListener('pointerdown', arm, { once: true });
-    window.addEventListener('keydown', arm, { once: true });
-    window.addEventListener('touchstart', arm, { once: true });
+    window.addEventListener('pointerdown', arm, { once: true, capture: true });
+    window.addEventListener('click', arm, { once: true, capture: true });
+    window.addEventListener('keydown', arm, { once: true, capture: true });
+    window.addEventListener('touchstart', arm, { once: true, capture: true });
   }
 }
 _arm();
@@ -155,7 +168,24 @@ const Som = {
     if (_muted) return;
     const fn = PRESETS[nome];
     if (!fn) return;
+    getCtx();
     try { fn(); } catch {}
+  },
+  /** Prepara o AudioContext durante um gesto do usuario, sem som perceptivel. */
+  warmup() {
+    const ctx = getCtx();
+    if (!ctx || _muted || !_ready) return;
+    try {
+      const gain = ctx.createGain();
+      gain.gain.value = 0.0001;
+      const osc = ctx.createOscillator();
+      osc.frequency.value = 440;
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.01);
+    } catch (e) {
+      if (_dev) console.debug('[Som] warmup falhou', e);
+    }
   },
   setMuted(v) { _muted = !!v; },
   isMuted() { return _muted; },

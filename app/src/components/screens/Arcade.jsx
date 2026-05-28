@@ -6,14 +6,15 @@ import { useApp } from '../subComponents/AppContext.jsx';
 import GlobalVar from '../subComponents/GlobalVar.jsx';
 import Som from '../subComponents/Som.jsx';
 import { ARCADE_POOL } from '../../data/arcade-pool.js';
+import { filtrarPorNivel } from '../../data/daily-utils.js';
 import '../../assets/css/Arcade.css';
 
-function pegarSessao(seed) {
+function pegarSessao(seed, poolBase = ARCADE_POOL) {
   // Sorteia 3 itens determinísticos pelo dia (mesmos pra todos no dia)
   const tipos = ['decida_rapido', 'acha_o_erro', 'verdade_mito'];
   const out = [];
   for (const tipo of tipos) {
-    const pool = ARCADE_POOL.filter(p => p.tipo === tipo);
+    const pool = poolBase.filter(p => p.tipo === tipo);
     if (!pool.length) continue;
     const idx = Math.abs(seed + tipo.charCodeAt(0)) % pool.length;
     out.push(pool[idx]);
@@ -27,7 +28,8 @@ export default function Arcade() {
   const navigate = useNavigate();
   const hoje = GlobalVar.diaAtualFunc();
   const seed = Math.abs([...hoje].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0));
-  const sessao = useMemo(() => pegarSessao(seed), [seed]);
+  const poolNivel = useMemo(() => filtrarPorNivel(ARCADE_POOL, progresso), [progresso]);
+  const sessao = useMemo(() => pegarSessao(seed, poolNivel), [seed, poolNivel]);
 
   const arcEstado = (progresso.modoArcade || {})[hoje] || { resolvido: false, acertos: 0 };
   const [idx, setIdx] = useState(0);

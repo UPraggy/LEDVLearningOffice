@@ -127,4 +127,46 @@ export default class Notifica {
   static listarAgendados() {
     return JSON.parse(localStorage.getItem(TIMERS_KEY) || '{}');
   }
+
+  /** Alerta imediato — usado quando o aluno desbloqueia troféu. Idempotente
+   *  no mesmo "tag" pra não duplicar se o usuário trocar de tela rápido. */
+  static async trofeu(nomeTrofeu) {
+    return Notifica.mostrar('Novo troféu conquistado', nomeTrofeu, {
+      tag: 'trofeu-' + nomeTrofeu.toLowerCase().replace(/\s+/g, '-'),
+      url: '/trofeus',
+    });
+  }
+
+  /** Lembrete de risco da ofensiva — agenda pra HH:00 do mesmo dia caso o
+   *  aluno ainda não tenha aberto o app. Default: alerta 21h. */
+  static lembreteRiscoStreak({ horaHHMM = '21:00', streak = 0 } = {}) {
+    const [hh, mm] = horaHHMM.split(':').map(Number);
+    const agora = new Date();
+    const alvo = new Date();
+    alvo.setHours(hh, mm, 0, 0);
+    if (alvo <= agora) return null; // já passou — não agenda hoje
+    return Notifica.agendar({
+      id: 'streak-risco',
+      delayMs: alvo - agora,
+      titulo: `Sua ofensiva de ${streak} dia${streak > 1 ? 's' : ''} está em risco`,
+      body: 'Faz 1 missão curtinha — 3 minutos resolvem. Não perca o que já construiu.',
+      url: '/',
+    });
+  }
+
+  /** Alerta de Arcade liberado (1× por dia). */
+  static async arcadeLiberado() {
+    return Notifica.mostrar('Arcade Diário disponível', 'Modo relâmpago de hoje está liberado — bônus de XP se acertar tudo.', {
+      tag: 'arcade',
+      url: '/arcade',
+    });
+  }
+
+  /** Alerta de marco semanal (1× por semana). */
+  static async marcoSemana(qtdMissoes) {
+    return Notifica.mostrar(`Você fez ${qtdMissoes} missões essa semana`, 'Bom ritmo. Olha sua estante de troféus pra ver o quanto avançou.', {
+      tag: 'marco-semana',
+      url: '/perfil',
+    });
+  }
 }

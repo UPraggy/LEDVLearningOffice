@@ -34,6 +34,9 @@ const PROGRESSO_INICIAL = {
     onboardingFeito: false,
     somAtivo: true,
     vozLigada: true,        // botão "Ouvir" aparece nas aulas por padrão
+    vozAutoPlay: true,      // toca aula automaticamente ao entrar
+    notifLigado: false,     // notificações locais
+    horaLembrete: '19:00',  // lembrete diário (HH:MM)
   },
   caixaDoDiaUltima: null,        // ISO date da última caixa aberta
   caixaDoDiaTotal: 0,            // contador (pra troféu "7 caixas seguidas")
@@ -159,15 +162,27 @@ export default class GlobalVar {
   /** Mensagens do mentor — usa pool dinâmico (mentor-pool.js).
    *  Recebe o progresso e a inbox existente; merge sem duplicar. */
   static seedMentorInbox(p) {
-    return gerarInboxMentor(p, p.mentorInbox || []);
+    return GlobalVar.limitarMentorDiario(gerarInboxMentor(p, p.mentorInbox || []));
   }
 
   /** Recalcula mentor (chamar quando o progresso muda significativamente). */
   static atualizarInboxMentor(p) {
-    const inbox = gerarInboxMentor(p, p.mentorInbox || []);
+    const inbox = GlobalVar.limitarMentorDiario(gerarInboxMentor(p, p.mentorInbox || []));
     const novo = { ...p, mentorInbox: inbox };
     GlobalVar.salvarProgresso(novo);
     return novo;
+  }
+
+  static limitarMentorDiario(inbox) {
+    const inicioHoje = new Date();
+    inicioHoje.setHours(0, 0, 0, 0);
+    let novasHoje = 0;
+    return (inbox || []).filter(m => {
+      const criadaHoje = (m.ts || 0) >= inicioHoje.getTime();
+      if (m.status !== 'new' || !criadaHoje) return true;
+      novasHoje += 1;
+      return novasHoje <= 2;
+    });
   }
 
   static marcarMentorLida(p, id) {
