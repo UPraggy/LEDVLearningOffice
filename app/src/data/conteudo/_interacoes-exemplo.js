@@ -48,6 +48,12 @@ export const INTERACOES_EXEMPLO = {
     ],
     interacoes: [
       {
+        tipo: 'imagem',
+        url: '/generated/missions/pc-fund-1.svg',
+        alt: 'Ilustração de um monitor com uma pasta de arquivos ao lado',
+        legenda: 'Observe os blocos principais antes de clicar: área de trabalho, ícones, janelas e a barra de tarefas.',
+      },
+      {
         tipo: 'choose',
         prompt: 'O que abre quando você dá 2 cliques rápidos num ícone?',
         opcoes: [
@@ -83,15 +89,38 @@ export const INTERACOES_EXEMPLO = {
       {
         tipo: 'hotspot',
         prompt: 'Você quer abrir o menu Iniciar. Clique onde ele está.',
-        cena: '🖥️ Tela do Windows — clique no Iniciar',
+        cenaTpl: 'windows-desktop',
+        cenaData: { ico1: 'Documentos', ico2: 'Navegador', ico3: 'Lixeira', hora: '14:32' },
+        cenaImg: '/generated/interactive/windows-desktop.svg',
+        alt: 'Área de trabalho do Windows com ícones e barra de tarefas embaixo',
         areas: [
-          { x: 0, y: 92, w: 12, h: 8, ok: true },     // canto inferior esquerdo
-          { x: 88, y: 92, w: 12, h: 8, ok: false },   // canto inferior direito
-          { x: 40, y: 40, w: 20, h: 15, ok: false },  // meio da tela
+          { x: 0, y: 90, w: 9, h: 9, ok: true },      // botão Iniciar (canto inferior esquerdo)
+          { x: 88, y: 90, w: 12, h: 9, ok: false },   // relógio (canto inferior direito)
+          { x: 30, y: 30, w: 22, h: 18, ok: false },  // meio da tela
         ],
         xp: 8,
-        feedback_ok: 'Boa! Esse é o lugar.',
+        feedback_ok: 'Boa! Esse é o lugar — canto inferior esquerdo.',
         feedback_err: 'Quase. O Iniciar fica no canto inferior ESQUERDO. A área marcada agora mostra onde ele deveria estar.',
+      },
+      {
+        tipo: 'hotspot',
+        prompt: 'No Explorador de Arquivos, clique na pasta onde guardamos documentos.',
+        cenaTpl: 'janela-arquivos',
+        cenaData: {
+          titulo: 'Explorador de Arquivos',
+          caminho: 'Este Computador › Documentos',
+          pastas: 'Documentos|Imagens|Downloads|Trabalho',
+          arquivo: 'relatorio-vendas.xlsx',
+        },
+        cenaImg: '/generated/interactive/janela-arquivos.svg',
+        alt: 'Janela do Explorador de Arquivos do Windows com pastas listadas',
+        areas: [
+          { x: 30, y: 30, w: 40, h: 10, ok: true },   // pasta "Documentos" (1ª da lista)
+          { x: 5,  y: 74, w: 20, h: 8,  ok: false },  // Lixeira (lateral)
+        ],
+        xp: 8,
+        feedback_ok: 'Isso. A pasta "Documentos" é onde ficam textos e planilhas. A lateral mostra os atalhos rápidos.',
+        feedback_err: 'Essa é a Lixeira. A pasta de documentos é a primeira da lista à direita, marcada em destaque.',
       },
     ],
   },
@@ -134,9 +163,18 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Mesa de trabalho com planilhas e calculadora',
-        legenda: 'Exemplo visual: confira nomes, valores e contexto antes de confirmar um pagamento.',
+        url: '/generated/missions/mob-pix-7.svg',
+        alt: 'Ilustração de um celular com QR Code e moedas, representando um pagamento PIX',
+        legenda: 'Exemplo visual: confira o nome, o valor e o contexto antes de confirmar um pagamento.',
+      },
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/wpp-golpe.svg',
+        alt: 'Conversa de WhatsApp pedindo PIX urgente',
+        prompt: 'Antes de responder: toque no detalhe do topo que pede atenção redobrada.',
+        areas: [{ x: 14, y: 14, w: 44, h: 9, ok: true }],
+        xp: 15,
+        feedback_ok: 'Exato. "Novo número" + pedido de PIX urgente = ligue para o número antigo antes de qualquer coisa.',
+        feedback_err: 'Quase. Repare no topo: aviso de "novo número" somado à pressa por dinheiro é o padrão do golpe.',
       },
       // ============ 1) MICRO-INTERAÇÃO DE ABERTURA — 10 segundos ============
       {
@@ -154,14 +192,17 @@ export const INTERACOES_EXEMPLO = {
       {
         tipo: 'hotspot',
         prompt: 'Você vai fazer um PIX. Antes de confirmar, qual área você SEMPRE deve conferir?',
-        cena: '📱 Tela de confirmação do PIX',
+        cenaImg: '/generated/interactive/pix-confirmacao.svg',
+        cenaTpl: 'pix-confirmacao',
+        cenaData: { recebedor: 'MARIA S. OLIVEIRA ME', doc: 'CPF/CNPJ ••• 22.104/0001-55 · Banco 260', valor: 'R$ 980,00' },
+        alt: 'Tela de confirmação de PIX mostrando nome do recebedor, valor e botão confirmar',
         areas: [
-          // Topo: nome do recebedor (RESPOSTA CERTA — confira isso!)
-          { x: 5,  y: 10, w: 90, h: 22, ok: true },
+          // Topo: nome/CPF do recebedor (RESPOSTA CERTA — confira isso!)
+          { x: 9,  y: 29, w: 82, h: 20, ok: true },
           // Meio: valor
-          { x: 30, y: 38, w: 40, h: 18, ok: false },
+          { x: 12, y: 54, w: 30, h: 10, ok: false },
           // Botão "confirmar"
-          { x: 20, y: 75, w: 60, h: 18, ok: false },
+          { x: 14, y: 78, w: 72, h: 13, ok: false },
         ],
         xp: 10,
         feedback_ok: 'Isso. O NOME do recebedor é a última defesa. Se o nome não bate, não confirme.',
@@ -183,6 +224,97 @@ export const INTERACOES_EXEMPLO = {
         xp: 12,
         feedback_ok: 'Os 3 sinais: AMEAÇA ("bloqueada"), URGÊNCIA ("AGORA"), LINK ENCURTADO ("bit.ly").',
         feedback_err: 'Quase. Pense: o que te assusta? o que te dá pressa? onde o link aponta?',
+      },
+
+      // ============ 3b) SIMULAÇÃO — SMS de banco falso ============
+      {
+        tipo: 'hotspot',
+        prompt: 'Chegou esse SMS. Onde está a parte mais perigosa — a que você NUNCA deve tocar?',
+        cenaImg: '/generated/interactive/sms-banco.svg',
+        cenaTpl: 'sms-banco',
+        cenaData: { sub: 'remetente: +55 21 9 ****-7788', link: 'http://itau-seguro.cc/desbloqueio', hora: 'hoje 08:34' },
+        alt: 'Tela de SMS de um suposto banco com link encurtado',
+        areas: [
+          // Link encurtado dentro da mensagem (RESPOSTA CERTA)
+          { x: 8,  y: 62, w: 50, h: 11, ok: true },
+          // Nome do remetente no topo
+          { x: 9,  y: 12, w: 40, h: 9,  ok: false },
+          // Corpo do texto (aviso)
+          { x: 9,  y: 40, w: 70, h: 14, ok: false },
+        ],
+        xp: 12,
+        feedback_ok: 'Exato. O LINK é a isca. Banco de verdade não manda link por SMS pra "desbloquear".',
+        feedback_err: 'O remetente e o texto enganam de propósito. O perigo real é o LINK — nunca toque nele.',
+      },
+
+      // ============ 3c) SIMULAÇÃO — site de benefício do governo falso ============
+      {
+        tipo: 'hotspot',
+        prompt: 'Esse "site do governo" pede um pagamento pra liberar um benefício. O que denuncia o golpe?',
+        cenaImg: '/generated/interactive/site-gov-falso.svg',
+        cenaTpl: 'site-gov-falso',
+        cenaData: { urlBase: 'http://gov-br-beneficio.', urlTld: 'online', urlPath: '/inss', titulo: 'Liberação do seu benefício', corpo: 'Há um valor a receber em seu nome. Para liberar,|pague a taxa de regularização abaixo via PIX.', valorReceber: 'Valor a receber: R$ 3.480,00', botao: 'Pagar taxa R$ 47,90' },
+        alt: 'Página falsa imitando um site do governo pedindo pagamento de taxa',
+        areas: [
+          // Botão "pagar taxa" (RESPOSTA CERTA — governo não cobra taxa pra liberar benefício)
+          { x: 6,  y: 73, w: 40, h: 13, ok: true },
+          // Título/banner do topo
+          { x: 6,  y: 14, w: 60, h: 12, ok: false },
+          // Texto do benefício
+          { x: 6,  y: 40, w: 70, h: 16, ok: false },
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. Governo NUNCA cobra taxa pra liberar benefício. Pedir pagamento = golpe.',
+        feedback_err: 'O layout copia o site real. O que entrega é o PEDIDO DE PAGAMENTO — benefício não tem taxa.',
+      },
+
+      // ============ 3b) HOTSPOT — golpe do "PIX por engano" ============
+      {
+        tipo: 'hotspot',
+        prompt: 'Caiu um PIX que você não esperava e o "remetente" pede pra devolver. O que NÃO fazer?',
+        cenaTpl: 'pix-recebido',
+        cenaData: {
+          title: 'Banco · PIX',
+          sub: 'comprovante',
+          badge: '$',
+          remetente: 'CLEBER A. DA SILVA',
+          valor: 'R$ 850,00',
+          aviso: 'Recebi por engano, pode me devolver no PIX?',
+          botao: 'Devolver agora',
+        },
+        cenaImg: '/generated/interactive/pix-recebido.svg',
+        alt: 'Notificação de PIX recebido com pedido de devolução imediata',
+        areas: [
+          { x: 14, y: 75, w: 72, h: 13, ok: true },  // botão "Devolver agora"
+          { x: 30, y: 40, w: 40, h: 12, ok: false }, // valor recebido
+        ],
+        xp: 12,
+        feedback_ok: 'Certo. Não devolva pelo botão nem pra chave que ele mandar. Confira no extrato e devolva pela MESMA transação.',
+        feedback_err: 'Esse é o golpe: o PIX pode ser estornado depois, e você fica no prejuízo. Nunca devolva por fora — só pelo extrato.',
+      },
+
+      // ============ 3c) HOTSPOT — SMS falso de benefício do governo ============
+      {
+        tipo: 'hotspot',
+        prompt: 'Chegou um SMS dizendo que você tem dinheiro a receber do governo. O que NÃO se deve tocar?',
+        cenaTpl: 'sms-gov',
+        cenaData: {
+          title: 'Mensagens',
+          sub: 'remetente: GOV-BR',
+          badge: 'M',
+          cabecalho: 'GOV.BR: benefício liberado',
+          corpo: 'Você tem R$ 1.200 a receber. Confirme seus|dados em até 24h pelo link oficial:',
+          link: 'http://gov-br.benef-2024.top',
+          hora: 'hoje 11:05',
+        },
+        cenaImg: '/generated/interactive/sms-gov.svg',
+        alt: 'SMS se passando pelo GOV.BR com um link suspeito para liberar benefício',
+        areas: [
+          { x: 8, y: 62, w: 50, h: 11, ok: true },  // o link suspeito
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. O governo usa só o gov.br oficial — nunca um link ".top" por SMS. Não clique e apague.',
+        feedback_err: 'O perigo é o LINK. Domínio terminado em ".top" não é do governo. Acesse sempre digitando gov.br você mesmo.',
       },
 
       // ============ 4) COMBO RÁPIDO — 5 perguntas em sequência ============
@@ -334,6 +466,12 @@ export const INTERACOES_EXEMPLO = {
     ],
     interacoes: [
       {
+        tipo: 'imagem',
+        url: '/generated/missions/en-a1-basico-1.svg',
+        alt: 'Ilustração de um globo com balões de fala em inglês',
+        legenda: 'Primeiros passos: cumprimente, ouça, repita e avance em blocos curtos.',
+      },
+      {
         tipo: 'flashcard',
         prompt: 'Vire cada carta. Clique "Sei essa" quando dominar.',
         xp: 6,
@@ -394,6 +532,14 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        tpl: 'excel-erro',
+        tplData: { titulo: 'Planilha — Preços', formula: '=PROCV(E2; A:C; 3; 0)', erro: '#N/D', errCol: 'F', errRow: '2' },
+        url: '/generated/interactive/excel-erro.svg',
+        alt: 'Planilha mostrando a fórmula =PROCV(E2; A:C; 3; 0) e uma célula com o erro #N/D',
+        legenda: 'Quando o PROCV não acha o valor, a célula mostra #N/D. Vamos aprender a montar a fórmula certa.',
+      },
       { tipo: 'sim_planilha',
         prompt: 'A tabela tem código (A), nome (B), preço (C). Em F2 você quer buscar o preço do código que está em E2. Digite a fórmula:',
         cols: ['A','B','C','D','E','F'],
@@ -463,9 +609,76 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Pessoa verificando seguranca no notebook',
-        legenda: 'Exemplo visual: seguranca digital e feita de pequenos checkpoints antes do clique.',
+        url: '/generated/missions/amb-seg-4.svg',
+        alt: 'Ilustração de um e-mail com alerta sendo fisgado por um anzol, ao lado de um escudo',
+        legenda: 'Exemplo visual: segurança digital é feita de pequenas conferências antes do clique.',
+      },
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/email-phishing.svg',
+        alt: 'E-mail dizendo que a conta será bloqueada',
+        prompt: 'Toque no endereço de quem enviou. É esse detalhe que entrega o golpe.',
+        areas: [{ x: 6, y: 26, w: 66, h: 9, ok: true }],
+        xp: 15,
+        feedback_ok: 'Isso! "bradescco" tem um C a mais. O domínio é falso — nenhum clique antes de conferir isso.',
+        feedback_err: 'Quase. Olhe a linha "De:" lá em cima: o endereço do remetente é o que mais entrega a farsa.',
+      },
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/popup-virus.svg',
+        cenaTpl: 'popup-virus',
+        cenaData: { site: 'www.receitas-faceis.info', tituloPopup: '⚠ Alerta do sistema', manchete: 'Seu computador está infectado!', l1: '5 ameaças encontradas. Limpe agora para', l2: 'proteger suas fotos e senhas.', botao: 'Limpar agora (grátis)' },
+        alt: 'Pop-up dizendo que o computador está infectado, com um botão verde de limpar',
+        prompt: 'Esse aviso pulou enquanto você lia uma notícia. Qual é a ação SEGURA?',
+        areas: [
+          { x: 69, y: 20, w: 9, h: 9, ok: true },     // fechar no X
+          { x: 30, y: 60, w: 40, h: 12, ok: false },  // botão verde "limpar agora"
+        ],
+        xp: 12,
+        feedback_ok: 'Exato. Feche no X (ou feche a aba). Nenhum site verdadeiro escaneia vírus do seu PC por pop-up.',
+        feedback_err: 'Cuidado: o botão verde é a isca. Esse "antivírus" instala o golpe. A saída segura é fechar no X.',
+      },
+      { tipo: 'hotspot',
+        cenaTpl: 'popup-atualizacao',
+        cenaData: {
+          site: 'www.assistir-filme-gratis.stream',
+          titulo: 'Atualização necessária',
+          manchete: 'Seu navegador está desatualizado',
+          l1: 'Instale a atualização para continuar',
+          l2: 'assistindo. É rápido e gratuito.',
+          botao: 'Atualizar agora',
+        },
+        cenaImg: '/generated/interactive/popup-atualizacao.svg',
+        alt: 'Pop-up num site de filmes pedindo para atualizar o navegador',
+        prompt: 'Você ia assistir um filme e isso apareceu. Qual a ação segura?',
+        areas: [
+          { x: 84, y: 22, w: 8,  h: 9,  ok: true },   // X fechar
+          { x: 30, y: 62, w: 40, h: 12, ok: false },  // botão "Atualizar agora"
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. Navegador atualiza sozinho — nunca por pop-up de site. Feche no X e saia desse site.',
+        feedback_err: 'Esse "atualizar" baixa o golpe. Atualização de navegador vem do próprio programa, jamais de um site de filme.',
+      },
+      { tipo: 'hotspot',
+        cenaTpl: 'loja-app',
+        cenaData: {
+          title: 'Loja de Aplicativos',
+          sub: 'resultado da busca',
+          badge: 'L',
+          app: 'Banco Oficial Pro',
+          dev: 'Desenvolvedor desconhecido',
+          nota: '★ 2,1 · 312 avaliações',
+          selo: 'NÃO verificado',
+          botao: 'Instalar',
+        },
+        cenaImg: '/generated/interactive/loja-app.svg',
+        alt: 'App de banco na loja com desenvolvedor desconhecido e muitas permissões',
+        prompt: 'Procurou o app do banco e achou este. Qual detalhe diz "NÃO instale"?',
+        areas: [
+          { x: 8,  y: 30, w: 30, h: 10, ok: true },   // selo "NÃO verificado" / dev desconhecido
+          { x: 70, y: 30, w: 22, h: 10, ok: false },  // botão instalar
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. "Desenvolvedor desconhecido" + nota baixa + permissões demais = app falso. Baixe só o oficial.',
+        feedback_err: 'Antes de instalar, olhe quem fez o app e a nota. Aqui é dev desconhecido pedindo SMS e contatos — fuja.',
       },
       { tipo: 'time_pressure',
         segundos: 12,
@@ -544,6 +757,17 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/wpp-chefe.svg',
+        cenaTpl: 'wpp-chefe',
+        cenaData: { title: 'Diretoria RH', sub: 'novo número · online', badge: 'D', hora1: '10:47', hora2: '10:48', msg1: 'Está em reunião? Preciso de um favor rápido e|sigiloso. Compre 5 cartões-presente de R$ 200 e|me mande os códigos. Depois te reembolso.', msg2: 'É urgente, não comente com ninguém do|escritório por enquanto. Confio em você.' },
+        alt: 'WhatsApp de um suposto chefe pedindo a compra urgente de cartões-presente',
+        prompt: 'Chegou no trabalho. Qual detalhe do topo é o maior sinal de golpe?',
+        areas: [{ x: 13, y: 13, w: 52, h: 10, ok: true }],
+        xp: 14,
+        feedback_ok: 'Isso: "novo número". Chefe de verdade não pede cartão-presente sigiloso por um número desconhecido. Confirme pessoalmente.',
+        feedback_err: 'Olhe o topo: "novo número". Pedido urgente + sigiloso + número novo = golpe do falso superior.',
+      },
       { tipo: 'sim_chat',
         prompt: 'Você quer pedir uma planilha pro João no grupo. Qual é a melhor forma?',
         mensagens: [
@@ -593,6 +817,12 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        url: '/generated/missions/pc-ia-2.svg',
+        alt: 'Ilustração de um monitor com balões de conversa, representando um prompt de IA',
+        legenda: 'Um bom pedido para a IA combina contexto, objetivo e formato esperado.',
+      },
       { tipo: 'transform',
         titulo_curto: 'Reescreva o prompt',
         prompt: 'Transforme o prompt vago em um forte. Use os 4 elementos da aula.',
@@ -712,6 +942,95 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      { tipo: 'hotspot',
+        cenaTpl: 'navegador-url',
+        cenaData: {
+          aba: 'Banco do Brasil — Acesso',
+          urlBase: 'http://bb-atendimento-cliente.',
+          urlTld: 'top',
+          urlPath: '/login',
+          marca: 'Banco do Brasil',
+          chamada: 'Confirme seus dados para reativar sua conta',
+          campo1: 'Agência e conta',
+          campo2: 'Senha de 8 dígitos',
+          botao: 'Entrar',
+        },
+        cenaImg: '/generated/interactive/navegador-url.svg',
+        alt: 'Navegador aberto numa página que imita o Banco do Brasil pedindo login',
+        prompt: 'Antes de digitar sua senha aqui: que parte da tela revela se o site é falso?',
+        areas: [
+          { x: 9, y: 11, w: 74, h: 8, ok: true },     // barra de endereço (domínio + cadeado)
+          { x: 6, y: 75, w: 24, h: 10, ok: false },   // botão "Entrar"
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. A barra de endereço entrega tudo: "não seguro" + domínio terminado em .top = página falsa.',
+        feedback_err: 'O formulário parece real de propósito. A verdade está na BARRA DE ENDEREÇO: confira o cadeado e o domínio.',
+      },
+      {
+        tipo: 'hotspot',
+        cenaTpl: 'email-entrega',
+        cenaData: {
+          title: 'Correios',
+          sub: 'Aviso de entrega',
+          badge: 'C',
+          deBase: 'correios@entrega-rastreio.',
+          deTld: 'click',
+          assunto: 'Sua encomenda está parada na alfândega',
+          corpo: 'Há uma taxa pendente de R$ 4,90. Pague agora|para liberar sua encomenda e evitar a devolução.',
+          botao: 'Rastrear e pagar taxa',
+        },
+        cenaImg: '/generated/interactive/email-entrega.svg',
+        alt: 'Email avisando sobre uma encomenda parada, com remetente suspeito e link',
+        prompt: 'Esse email diz que sua encomenda está parada. O que prova que é golpe ANTES de clicar?',
+        areas: [
+          { x: 11, y: 28, w: 62, h: 8,  ok: true },   // domínio do remetente (errado)
+          { x: 9,  y: 70, w: 40, h: 11, ok: false },  // botão "rastrear"
+          { x: 9,  y: 48, w: 70, h: 14, ok: false },  // corpo do texto
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. Olhe o REMETENTE: o domínio não é dos Correios de verdade. Email falso se entrega no endereço.',
+        feedback_err: 'O texto e o botão imitam o real. A prova está no e-mail do REMETENTE — confira o domínio antes de tudo.',
+      },
+      {
+        tipo: 'hotspot',
+        cenaTpl: 'email-lista',
+        cenaData: {
+          title: 'Caixa de entrada',
+          sub: '3 não lidos',
+          badge: '@',
+          itens: 'Maria (RH);Folha de ponto de maio;ok|premios@sorteio-online.win;VOCÊ GANHOU um iPhone 15!;bad|Escola Municipal;Reunião de pais — quinta;ok',
+        },
+        cenaImg: '/generated/interactive/email-lista.svg',
+        alt: 'Caixa de entrada com três e-mails, um deles claramente suspeito',
+        prompt: 'Três e-mails na caixa. Toque no que você NÃO deve abrir.',
+        areas: [
+          { x: 6, y: 42, w: 88, h: 13, ok: true },   // e-mail suspeito (linha 2)
+          { x: 6, y: 16, w: 88, h: 13, ok: false },  // Maria (RH)
+          { x: 6, y: 68, w: 88, h: 13, ok: false },  // Escola
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. Remetente estranho + "VOCÊ GANHOU" em maiúsculas = phishing. Nem abrir: marcar como spam.',
+        feedback_err: 'Os outros dois são de pessoas reais que você conhece. O perigoso é o do "prêmio" com remetente desconhecido.',
+      },
+      {
+        tipo: 'hotspot',
+        cenaTpl: 'ligacao-golpe',
+        cenaData: {
+          chamador: 'Central de Segurança · Banco',
+          numero: '+55 11 4002-8922',
+          aviso: 'chamada não identificada',
+        },
+        cenaImg: '/generated/interactive/ligacao-golpe.svg',
+        alt: 'Tela de ligação recebida de número desconhecido se passando pelo banco',
+        prompt: '"Central de Segurança" ligando do nada pedindo seus dados. O que fazer?',
+        areas: [
+          { x: 24, y: 78, w: 18, h: 14, ok: true },   // recusar (vermelho)
+          { x: 58, y: 78, w: 18, h: 14, ok: false },  // atender (verde)
+        ],
+        xp: 12,
+        feedback_ok: 'Certo. Banco não liga pedindo senha ou código. Recuse, e ligue VOCÊ no número do verso do cartão.',
+        feedback_err: 'Cuidado: atender já abre espaço pro golpista te pressionar. Banco de verdade nunca pede senha por telefone.',
+      },
       {
         tipo: 'versus',
         prompt: 'Qual dessas é mais segura na prática?',
@@ -791,9 +1110,30 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Planilha aberta em um notebook',
-        legenda: 'Exemplo visual: uma planilha simples fica confiavel quando a formula conversa com a tabela certa.',
+        url: '/generated/missions/pc-excel-3.svg',
+        alt: 'Ilustração de uma planilha ao lado de um gráfico de barras',
+        legenda: 'Exemplo visual: uma planilha fica confiável quando a fórmula conversa com a tabela certa.',
+      },
+      {
+        tipo: 'hotspot',
+        prompt: 'Esta planilha soma o orçamento da casa. Clique na célula que mostra o TOTAL.',
+        cenaTpl: 'excel-soma',
+        cenaData: {
+          titulo: 'Planilha — Orçamento do mês',
+          formula: '=SOMA(B2:B6)',
+          cabecalhos: 'Item|Valor',
+          total: 'R$ 1.880',
+          itens: 'Aluguel;R$ 900|Luz;R$ 180|Água;R$ 90|Mercado;R$ 600|Internet;R$ 110',
+        },
+        cenaImg: '/generated/interactive/excel-soma.svg',
+        alt: 'Planilha de orçamento com itens e uma célula de total destacada',
+        areas: [
+          { x: 40, y: 88, w: 26, h: 9, ok: true },   // célula do TOTAL (verde, embaixo)
+          { x: 6,  y: 11, w: 60, h: 7, ok: false },  // barra de fórmula
+        ],
+        xp: 10,
+        feedback_ok: 'Isso. O total verde lá embaixo é o resultado do =SOMA. A barra de fórmula só mostra como ele foi calculado.',
+        feedback_err: 'Essa é a barra de fórmula (mostra o cálculo). O TOTAL é a célula verde no fim da coluna de valores.',
       },
       {
         tipo: 'sim_planilha',
@@ -897,9 +1237,9 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Pessoa usando celular com aplicativo de mensagens',
-        legenda: 'Exemplo visual: em mensagens, desconfie de pressa, numero novo e pedido financeiro.',
+        url: '/generated/missions/mob-wpp-2.svg',
+        alt: 'Ilustração de um celular com balões de conversa de um aplicativo de mensagens',
+        legenda: 'Exemplo visual: em mensagens, desconfie de pressa, número novo e pedido financeiro.',
       },
       {
         tipo: 'sim_chat',
@@ -915,6 +1255,26 @@ export const INTERACOES_EXEMPLO = {
           { texto: 'Quanto e pra que chave?', certo: false, feedback: 'Você caiu na conversa. Cada resposta sua dá mais informação pro golpista te manipular.' },
         ],
         xp: 18,
+      },
+      { tipo: 'hotspot',
+        cenaTpl: 'wpp-promo',
+        cenaData: {
+          title: 'Família ❤',
+          sub: '12 participantes',
+          badge: 'T',
+          autor: 'Tia Cleusa',
+          msg1: 'Gente, o Assaí tá dando R$ 500 em compras pra',
+          destaque: 'comemorar 50 anos! Só fazer o cadastro:',
+          chamada: 'Garanti o meu, corram que acaba hoje!',
+          link: 'http://assai-aniversario50.xyz/premio',
+        },
+        cenaImg: '/generated/interactive/wpp-promo.svg',
+        alt: 'Mensagem no grupo da família com link de uma promoção falsa de supermercado',
+        prompt: 'A tia compartilhou no grupo. Toque no que você NÃO deve clicar.',
+        areas: [{ x: 10, y: 67, w: 62, h: 9, ok: true }],
+        xp: 12,
+        feedback_ok: 'Isso. "Supermercado dando R$ 500" + link estranho (.xyz) = golpe. Nem clicar, nem repassar.',
+        feedback_err: 'O perigo é o LINK da "promoção". Prêmio fácil pedindo cadastro é isca — não clique e avise a tia.',
       },
       {
         tipo: 'choose',
@@ -984,9 +1344,9 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Pessoa usando recursos de inteligencia artificial no computador',
-        legenda: 'Exemplo visual: IA ajuda melhor quando voce da contexto, objetivo e formato esperado.',
+        url: '/generated/missions/pc-ia-1.svg',
+        alt: 'Ilustração de um monitor com balões de conversa de uma assistente de IA',
+        legenda: 'Exemplo visual: a IA ajuda melhor quando você dá contexto, objetivo e formato esperado.',
       },
       {
         tipo: 'versus',

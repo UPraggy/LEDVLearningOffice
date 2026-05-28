@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="SMS falso de benefício do governo">
+  
+  <rect width="1000" height="640" fill="#E9EEF2"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#fff" stroke="#D9CFB8" stroke-width="3"/>
+  <rect x="48" y="34" width="904" height="108" rx="30" fill="#1B2A4E"/>
+  <rect x="48" y="92" width="904" height="50" fill="#1B2A4E"/>
+  <circle cx="126" cy="88" r="34" fill="#4F7A55"/>
+  <text x="126" y="98" text-anchor="middle" fill="#fff" font-family="Arial" font-size="30" font-weight="700">M</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Mensagens</text>
+  <text x="180" y="116" fill="#BFD2DE" font-family="Arial" font-size="20" font-weight="700">remetente: GOV-BR</text>
+  <rect x="92" y="190" width="720" height="250" rx="24" fill="#F2EBDD"/>
+  <path d="M92 226 l-24 -6 l24 -24 z" fill="#F2EBDD"/>
+  <text x="124" y="240" fill="#1A2540" font-family="Arial" font-size="24" font-weight="700">GOV.BR: benefício liberado</text>
+  <text x="124" y="288" fill="#1A2540" font-family="Arial" font-size="23"><tspan x="124" dy="0">Você tem R$ 1.200 a receber. Confirme seus</tspan><tspan x="124" dy="34">dados em até 24h pelo link oficial:</tspan></text>
+  <text x="124" y="404" fill="#1B5FA8" font-family="Arial" font-size="26" font-weight="700" text-decoration="underline">http://gov-br.benef-2024.top</text>
+  <text x="700" y="430" fill="#7A8294" font-family="Arial" font-size="17">hoje 11:05</text>
+</svg>

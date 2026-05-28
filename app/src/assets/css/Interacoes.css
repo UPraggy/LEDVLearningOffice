@@ -259,6 +259,8 @@
   object-fit: cover;
   display: block;
 }
+.iax-imagem-svg { width: 100%; line-height: 0; }
+.iax-imagem-svg svg { display: block; width: 100%; height: auto; }
 .iax-imagem figcaption {
   display: flex;
   align-items: center;
@@ -278,6 +280,13 @@
   aspect-ratio: 16/9;
   overflow: hidden;
 }
+.hotspot-stage.has-img { aspect-ratio: auto; background: var(--surface); cursor: pointer; }
+.hotspot-img {
+  display: block; width: 100%; height: auto;
+  user-select: none; -webkit-user-drag: none; pointer-events: none;
+}
+.hotspot-svg { line-height: 0; pointer-events: none; }
+.hotspot-svg svg { display: block; width: 100%; height: auto; }
 .hotspot-bg {
   position: absolute; inset: 0;
   display: grid; place-items: center;
