@@ -48,6 +48,12 @@ export const INTERACOES_EXEMPLO = {
     ],
     interacoes: [
       {
+        tipo: 'imagem',
+        url: '/generated/missions/pc-fund-1.svg',
+        alt: 'Ilustração de um monitor com uma pasta de arquivos ao lado',
+        legenda: 'Observe os blocos principais antes de clicar: área de trabalho, ícones, janelas e a barra de tarefas.',
+      },
+      {
         tipo: 'choose',
         prompt: 'O que abre quando você dá 2 cliques rápidos num ícone?',
         opcoes: [
@@ -83,14 +89,15 @@ export const INTERACOES_EXEMPLO = {
       {
         tipo: 'hotspot',
         prompt: 'Você quer abrir o menu Iniciar. Clique onde ele está.',
-        cena: '🖥️ Tela do Windows — clique no Iniciar',
+        cenaImg: '/generated/interactive/windows-desktop.svg',
+        alt: 'Área de trabalho do Windows com ícones e barra de tarefas embaixo',
         areas: [
-          { x: 0, y: 92, w: 12, h: 8, ok: true },     // canto inferior esquerdo
-          { x: 88, y: 92, w: 12, h: 8, ok: false },   // canto inferior direito
-          { x: 40, y: 40, w: 20, h: 15, ok: false },  // meio da tela
+          { x: 0, y: 90, w: 9, h: 9, ok: true },      // botão Iniciar (canto inferior esquerdo)
+          { x: 88, y: 90, w: 12, h: 9, ok: false },   // relógio (canto inferior direito)
+          { x: 30, y: 30, w: 22, h: 18, ok: false },  // meio da tela
         ],
         xp: 8,
-        feedback_ok: 'Boa! Esse é o lugar.',
+        feedback_ok: 'Boa! Esse é o lugar — canto inferior esquerdo.',
         feedback_err: 'Quase. O Iniciar fica no canto inferior ESQUERDO. A área marcada agora mostra onde ele deveria estar.',
       },
     ],
@@ -134,9 +141,18 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Mesa de trabalho com planilhas e calculadora',
-        legenda: 'Exemplo visual: confira nomes, valores e contexto antes de confirmar um pagamento.',
+        url: '/generated/missions/mob-pix-7.svg',
+        alt: 'Ilustração de um celular com QR Code e moedas, representando um pagamento PIX',
+        legenda: 'Exemplo visual: confira o nome, o valor e o contexto antes de confirmar um pagamento.',
+      },
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/wpp-golpe.svg',
+        alt: 'Conversa de WhatsApp pedindo PIX urgente',
+        prompt: 'Antes de responder: toque no detalhe do topo que pede atenção redobrada.',
+        areas: [{ x: 14, y: 14, w: 44, h: 9, ok: true }],
+        xp: 15,
+        feedback_ok: 'Exato. "Novo número" + pedido de PIX urgente = ligue para o número antigo antes de qualquer coisa.',
+        feedback_err: 'Quase. Repare no topo: aviso de "novo número" somado à pressa por dinheiro é o padrão do golpe.',
       },
       // ============ 1) MICRO-INTERAÇÃO DE ABERTURA — 10 segundos ============
       {
@@ -154,14 +170,15 @@ export const INTERACOES_EXEMPLO = {
       {
         tipo: 'hotspot',
         prompt: 'Você vai fazer um PIX. Antes de confirmar, qual área você SEMPRE deve conferir?',
-        cena: '📱 Tela de confirmação do PIX',
+        cenaImg: '/generated/interactive/pix-confirmacao.svg',
+        alt: 'Tela de confirmação de PIX mostrando nome do recebedor, valor e botão confirmar',
         areas: [
-          // Topo: nome do recebedor (RESPOSTA CERTA — confira isso!)
-          { x: 5,  y: 10, w: 90, h: 22, ok: true },
+          // Topo: nome/CPF do recebedor (RESPOSTA CERTA — confira isso!)
+          { x: 9,  y: 29, w: 82, h: 20, ok: true },
           // Meio: valor
-          { x: 30, y: 38, w: 40, h: 18, ok: false },
+          { x: 12, y: 54, w: 30, h: 10, ok: false },
           // Botão "confirmar"
-          { x: 20, y: 75, w: 60, h: 18, ok: false },
+          { x: 14, y: 78, w: 72, h: 13, ok: false },
         ],
         xp: 10,
         feedback_ok: 'Isso. O NOME do recebedor é a última defesa. Se o nome não bate, não confirme.',
@@ -183,6 +200,44 @@ export const INTERACOES_EXEMPLO = {
         xp: 12,
         feedback_ok: 'Os 3 sinais: AMEAÇA ("bloqueada"), URGÊNCIA ("AGORA"), LINK ENCURTADO ("bit.ly").',
         feedback_err: 'Quase. Pense: o que te assusta? o que te dá pressa? onde o link aponta?',
+      },
+
+      // ============ 3b) SIMULAÇÃO — SMS de banco falso ============
+      {
+        tipo: 'hotspot',
+        prompt: 'Chegou esse SMS. Onde está a parte mais perigosa — a que você NUNCA deve tocar?',
+        cenaImg: '/generated/interactive/sms-banco.svg',
+        alt: 'Tela de SMS de um suposto banco com link encurtado',
+        areas: [
+          // Link encurtado dentro da mensagem (RESPOSTA CERTA)
+          { x: 8,  y: 62, w: 50, h: 11, ok: true },
+          // Nome do remetente no topo
+          { x: 9,  y: 12, w: 40, h: 9,  ok: false },
+          // Corpo do texto (aviso)
+          { x: 9,  y: 40, w: 70, h: 14, ok: false },
+        ],
+        xp: 12,
+        feedback_ok: 'Exato. O LINK é a isca. Banco de verdade não manda link por SMS pra "desbloquear".',
+        feedback_err: 'O remetente e o texto enganam de propósito. O perigo real é o LINK — nunca toque nele.',
+      },
+
+      // ============ 3c) SIMULAÇÃO — site de benefício do governo falso ============
+      {
+        tipo: 'hotspot',
+        prompt: 'Esse "site do governo" pede um pagamento pra liberar um benefício. O que denuncia o golpe?',
+        cenaImg: '/generated/interactive/site-gov-falso.svg',
+        alt: 'Página falsa imitando um site do governo pedindo pagamento de taxa',
+        areas: [
+          // Botão "pagar taxa" (RESPOSTA CERTA — governo não cobra taxa pra liberar benefício)
+          { x: 6,  y: 73, w: 40, h: 13, ok: true },
+          // Título/banner do topo
+          { x: 6,  y: 14, w: 60, h: 12, ok: false },
+          // Texto do benefício
+          { x: 6,  y: 40, w: 70, h: 16, ok: false },
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. Governo NUNCA cobra taxa pra liberar benefício. Pedir pagamento = golpe.',
+        feedback_err: 'O layout copia o site real. O que entrega é o PEDIDO DE PAGAMENTO — benefício não tem taxa.',
       },
 
       // ============ 4) COMBO RÁPIDO — 5 perguntas em sequência ============
@@ -334,6 +389,12 @@ export const INTERACOES_EXEMPLO = {
     ],
     interacoes: [
       {
+        tipo: 'imagem',
+        url: '/generated/missions/en-a1-basico-1.svg',
+        alt: 'Ilustração de um globo com balões de fala em inglês',
+        legenda: 'Primeiros passos: cumprimente, ouça, repita e avance em blocos curtos.',
+      },
+      {
         tipo: 'flashcard',
         prompt: 'Vire cada carta. Clique "Sei essa" quando dominar.',
         xp: 6,
@@ -394,6 +455,12 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        url: '/generated/interactive/excel-erro.svg',
+        alt: 'Planilha mostrando a fórmula =PROCV(E2; A:C; 3; 0) e uma célula com o erro #N/D',
+        legenda: 'Quando o PROCV não acha o valor, a célula mostra #N/D. Vamos aprender a montar a fórmula certa.',
+      },
       { tipo: 'sim_planilha',
         prompt: 'A tabela tem código (A), nome (B), preço (C). Em F2 você quer buscar o preço do código que está em E2. Digite a fórmula:',
         cols: ['A','B','C','D','E','F'],
@@ -463,9 +530,30 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Pessoa verificando seguranca no notebook',
-        legenda: 'Exemplo visual: seguranca digital e feita de pequenos checkpoints antes do clique.',
+        url: '/generated/missions/amb-seg-4.svg',
+        alt: 'Ilustração de um e-mail com alerta sendo fisgado por um anzol, ao lado de um escudo',
+        legenda: 'Exemplo visual: segurança digital é feita de pequenas conferências antes do clique.',
+      },
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/email-phishing.svg',
+        alt: 'E-mail dizendo que a conta será bloqueada',
+        prompt: 'Toque no endereço de quem enviou. É esse detalhe que entrega o golpe.',
+        areas: [{ x: 6, y: 26, w: 66, h: 9, ok: true }],
+        xp: 15,
+        feedback_ok: 'Isso! "bradescco" tem um C a mais. O domínio é falso — nenhum clique antes de conferir isso.',
+        feedback_err: 'Quase. Olhe a linha "De:" lá em cima: o endereço do remetente é o que mais entrega a farsa.',
+      },
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/popup-virus.svg',
+        alt: 'Pop-up dizendo que o computador está infectado, com um botão verde de limpar',
+        prompt: 'Esse aviso pulou enquanto você lia uma notícia. Qual é a ação SEGURA?',
+        areas: [
+          { x: 69, y: 20, w: 9, h: 9, ok: true },     // fechar no X
+          { x: 30, y: 60, w: 40, h: 12, ok: false },  // botão verde "limpar agora"
+        ],
+        xp: 12,
+        feedback_ok: 'Exato. Feche no X (ou feche a aba). Nenhum site verdadeiro escaneia vírus do seu PC por pop-up.',
+        feedback_err: 'Cuidado: o botão verde é a isca. Esse "antivírus" instala o golpe. A saída segura é fechar no X.',
       },
       { tipo: 'time_pressure',
         segundos: 12,
@@ -544,6 +632,15 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/wpp-chefe.svg',
+        alt: 'WhatsApp de um suposto chefe pedindo a compra urgente de cartões-presente',
+        prompt: 'Chegou no trabalho. Qual detalhe do topo é o maior sinal de golpe?',
+        areas: [{ x: 13, y: 13, w: 52, h: 10, ok: true }],
+        xp: 14,
+        feedback_ok: 'Isso: "novo número". Chefe de verdade não pede cartão-presente sigiloso por um número desconhecido. Confirme pessoalmente.',
+        feedback_err: 'Olhe o topo: "novo número". Pedido urgente + sigiloso + número novo = golpe do falso superior.',
+      },
       { tipo: 'sim_chat',
         prompt: 'Você quer pedir uma planilha pro João no grupo. Qual é a melhor forma?',
         mensagens: [
@@ -593,6 +690,12 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      {
+        tipo: 'imagem',
+        url: '/generated/missions/pc-ia-2.svg',
+        alt: 'Ilustração de um monitor com balões de conversa, representando um prompt de IA',
+        legenda: 'Um bom pedido para a IA combina contexto, objetivo e formato esperado.',
+      },
       { tipo: 'transform',
         titulo_curto: 'Reescreva o prompt',
         prompt: 'Transforme o prompt vago em um forte. Use os 4 elementos da aula.',
@@ -712,6 +815,32 @@ export const INTERACOES_EXEMPLO = {
       },
     ],
     interacoes: [
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/navegador-url.svg',
+        alt: 'Navegador aberto numa página que imita o Banco do Brasil pedindo login',
+        prompt: 'Antes de digitar sua senha aqui: que parte da tela revela se o site é falso?',
+        areas: [
+          { x: 9, y: 11, w: 74, h: 8, ok: true },     // barra de endereço (domínio + cadeado)
+          { x: 6, y: 75, w: 24, h: 10, ok: false },   // botão "Entrar"
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. A barra de endereço entrega tudo: "não seguro" + domínio terminado em .top = página falsa.',
+        feedback_err: 'O formulário parece real de propósito. A verdade está na BARRA DE ENDEREÇO: confira o cadeado e o domínio.',
+      },
+      {
+        tipo: 'hotspot',
+        cenaImg: '/generated/interactive/email-entrega.svg',
+        alt: 'Email avisando sobre uma encomenda parada, com remetente suspeito e link',
+        prompt: 'Esse email diz que sua encomenda está parada. O que prova que é golpe ANTES de clicar?',
+        areas: [
+          { x: 11, y: 28, w: 62, h: 8,  ok: true },   // domínio do remetente (errado)
+          { x: 9,  y: 70, w: 40, h: 11, ok: false },  // botão "rastrear"
+          { x: 9,  y: 48, w: 70, h: 14, ok: false },  // corpo do texto
+        ],
+        xp: 12,
+        feedback_ok: 'Isso. Olhe o REMETENTE: o domínio não é dos Correios de verdade. Email falso se entrega no endereço.',
+        feedback_err: 'O texto e o botão imitam o real. A prova está no e-mail do REMETENTE — confira o domínio antes de tudo.',
+      },
       {
         tipo: 'versus',
         prompt: 'Qual dessas é mais segura na prática?',
@@ -791,9 +920,9 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Planilha aberta em um notebook',
-        legenda: 'Exemplo visual: uma planilha simples fica confiavel quando a formula conversa com a tabela certa.',
+        url: '/generated/missions/pc-excel-3.svg',
+        alt: 'Ilustração de uma planilha ao lado de um gráfico de barras',
+        legenda: 'Exemplo visual: uma planilha fica confiável quando a fórmula conversa com a tabela certa.',
       },
       {
         tipo: 'sim_planilha',
@@ -897,9 +1026,9 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Pessoa usando celular com aplicativo de mensagens',
-        legenda: 'Exemplo visual: em mensagens, desconfie de pressa, numero novo e pedido financeiro.',
+        url: '/generated/missions/mob-wpp-2.svg',
+        alt: 'Ilustração de um celular com balões de conversa de um aplicativo de mensagens',
+        legenda: 'Exemplo visual: em mensagens, desconfie de pressa, número novo e pedido financeiro.',
       },
       {
         tipo: 'sim_chat',
@@ -915,6 +1044,15 @@ export const INTERACOES_EXEMPLO = {
           { texto: 'Quanto e pra que chave?', certo: false, feedback: 'Você caiu na conversa. Cada resposta sua dá mais informação pro golpista te manipular.' },
         ],
         xp: 18,
+      },
+      { tipo: 'hotspot',
+        cenaImg: '/generated/interactive/wpp-promo.svg',
+        alt: 'Mensagem no grupo da família com link de uma promoção falsa de supermercado',
+        prompt: 'A tia compartilhou no grupo. Toque no que você NÃO deve clicar.',
+        areas: [{ x: 10, y: 67, w: 62, h: 9, ok: true }],
+        xp: 12,
+        feedback_ok: 'Isso. "Supermercado dando R$ 500" + link estranho (.xyz) = golpe. Nem clicar, nem repassar.',
+        feedback_err: 'O perigo é o LINK da "promoção". Prêmio fácil pedindo cadastro é isca — não clique e avise a tia.',
       },
       {
         tipo: 'choose',
@@ -984,9 +1122,9 @@ export const INTERACOES_EXEMPLO = {
     interacoes: [
       {
         tipo: 'imagem',
-        url: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
-        alt: 'Pessoa usando recursos de inteligencia artificial no computador',
-        legenda: 'Exemplo visual: IA ajuda melhor quando voce da contexto, objetivo e formato esperado.',
+        url: '/generated/missions/pc-ia-1.svg',
+        alt: 'Ilustração de um monitor com balões de conversa de uma assistente de IA',
+        legenda: 'Exemplo visual: a IA ajuda melhor quando você dá contexto, objetivo e formato esperado.',
       },
       {
         tipo: 'versus',

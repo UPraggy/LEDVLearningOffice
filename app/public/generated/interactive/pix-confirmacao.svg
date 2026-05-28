@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Tela de confirmação de PIX">
+  
+  <rect width="1000" height="640" fill="#E9EEF2"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#fff" stroke="#D9CFB8" stroke-width="3"/>
+  <rect x="48" y="34" width="904" height="108" rx="30" fill="#1B7A4B"/>
+  <rect x="48" y="92" width="904" height="50" fill="#1B7A4B"/>
+  <circle cx="126" cy="88" r="34" fill="#4F7A55"/>
+  <text x="126" y="98" text-anchor="middle" fill="#fff" font-family="Arial" font-size="30" font-weight="700">$</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Banco · PIX</text>
+  <text x="180" y="116" fill="#BFD2DE" font-family="Arial" font-size="20" font-weight="700">confirme os dados</text>
+  <rect x="92" y="190" width="816" height="118" rx="18" fill="#F4F1E8" stroke="#D9CFB8" stroke-width="2"/>
+  <text x="120" y="226" fill="#7A8294" font-family="Arial" font-size="19">Você está enviando para</text>
+  <text x="120" y="262" fill="#1A2540" font-family="Arial" font-size="28" font-weight="700">J. P. SANTOS COMERCIO ME</text>
+  <text x="120" y="294" fill="#4A5670" font-family="Arial" font-size="21">CPF/CNPJ ••• 41.882/0001-09 · Banco 077</text>
+  <text x="120" y="356" fill="#7A8294" font-family="Arial" font-size="19">Valor</text>
+  <text x="120" y="402" fill="#1A2540" font-family="Arial" font-size="36" font-weight="700">R$ 1.250,00</text>
+  <rect x="140" y="500" width="720" height="84" rx="42" fill="#1B7A4B"/>
+  <text x="500" y="552" text-anchor="middle" fill="#fff" font-family="Arial" font-size="27" font-weight="700">Confirmar pagamento</text>
+
+</svg>

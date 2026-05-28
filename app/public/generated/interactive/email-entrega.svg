@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="E-mail falso sobre entrega de encomenda">
+  
+  <rect width="1000" height="640" fill="#E9EEF2"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#fff" stroke="#D9CFB8" stroke-width="3"/>
+  <rect x="48" y="34" width="904" height="108" rx="30" fill="#1B2A4E"/>
+  <rect x="48" y="92" width="904" height="50" fill="#1B2A4E"/>
+  <circle cx="126" cy="88" r="34" fill="#4F7A55"/>
+  <text x="126" y="98" text-anchor="middle" fill="#fff" font-family="Arial" font-size="30" font-weight="700">B</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Caixa de entrada</text>
+  <text x="180" y="116" fill="#BFD2DE" font-family="Arial" font-size="20" font-weight="700">há 3 minutos</text>
+  <text x="72" y="200" fill="#7A8294" font-family="Arial" font-size="20">De:</text>
+  <text x="120" y="200" fill="#1A2540" font-family="Arial" font-size="25" font-weight="700">correios@entrega-rastreio.<tspan fill="#B23A2E">click</tspan></text>
+  <text x="72" y="256" fill="#7A8294" font-family="Arial" font-size="20">Assunto:</text>
+  <text x="190" y="256" fill="#1A2540" font-family="Arial" font-size="24">Sua encomenda está retida</text>
+  <text x="72" y="324" fill="#4A5670" font-family="Arial" font-size="23"><tspan x="72" dy="0">Há uma taxa alfandegária pendente de R$ 9,90.</tspan><tspan x="72" dy="36">Pague em até 24h para liberar a entrega, senão o</tspan><tspan x="72" dy="36">pacote será devolvido ao remetente.</tspan></text>
+  <rect x="72" y="476" width="320" height="68" rx="14" fill="#E25B3F"/>
+  <text x="232" y="519" text-anchor="middle" fill="#fff" font-family="Arial" font-size="23" font-weight="700">Pagar e rastrear</text>
+
+</svg>

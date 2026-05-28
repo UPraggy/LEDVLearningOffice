@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Site falso imitando o gov.br">
+  <rect width="1000" height="640" fill="#EDF1F7"/>
+  <rect x="0" y="0" width="1000" height="60" fill="#fff" stroke="#C4CCDA" stroke-width="2"/>
+  <rect x="30" y="16" width="640" height="30" rx="15" fill="#F4F1E8"/>
+  <text x="48" y="38" fill="#1A2540" font-family="Arial" font-size="18">http://gov-br-beneficio.<tspan font-weight="700" fill="#B23A2E">online</tspan>/inss</text>
+  <rect x="0" y="60" width="1000" height="78" fill="#1351B4"/>
+  <text x="40" y="110" fill="#fff" font-family="Arial" font-size="34" font-weight="700">gov.br</text>
+  <text x="40" y="206" fill="#1A2540" font-family="Arial" font-size="30" font-weight="700">Liberação do seu benefício</text>
+  <text x="40" y="262" fill="#4A5670" font-family="Arial" font-size="23"><tspan x="40" dy="0">Há um valor a receber em seu nome. Para liberar,</tspan><tspan x="40" dy="34">pague a taxa de regularização abaixo via PIX.</tspan></text>
+  <rect x="40" y="320" width="500" height="70" rx="10" fill="#FCEEDB" stroke="#E0A93B" stroke-width="2"/>
+  <text x="64" y="364" fill="#9A6A12" font-family="Arial" font-size="23" font-weight="700">Valor a receber: R$ 3.480,00</text>
+  <rect x="60" y="470" width="400" height="80" rx="12" fill="#E25B3F"/>
+  <text x="260" y="520" text-anchor="middle" fill="#fff" font-family="Arial" font-size="25" font-weight="700">Pagar taxa R$ 47,90</text>
+
+</svg>
