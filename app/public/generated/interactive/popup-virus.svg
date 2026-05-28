@@ -2,7 +2,6 @@
   <rect width="1000" height="640" fill="#33414F"/>
   <rect x="0" y="0" width="1000" height="40" fill="#1E2933"/>
   <text x="20" y="27" fill="#9AA2B4" font-family="Arial" font-size="16">www.noticias-do-dia.info</text>
-  <!-- pop-up -->
   <rect x="230" y="140" width="540" height="360" rx="18" fill="#fff"/>
   <rect x="230" y="140" width="540" height="64" rx="18" fill="#C0392B"/>
   <rect x="230" y="180" width="540" height="24" fill="#C0392B"/>
@@ -13,5 +12,4 @@
   <text x="500" y="334" text-anchor="middle" fill="#4A5670" font-family="Arial" font-size="21">proteger seus dados bancários.</text>
   <rect x="300" y="392" width="400" height="72" rx="12" fill="#27AE60"/>
   <text x="500" y="438" text-anchor="middle" fill="#fff" font-family="Arial" font-size="24" font-weight="700">Limpar agora (grátis)</text>
-
 </svg>

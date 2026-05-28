@@ -26,6 +26,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CheckCircle2, XCircle, RotateCw, Sparkles, Lightbulb, Timer, ArrowRight, Image as ImageIcon } from 'lucide-react';
 import Som from './subComponents/Som.jsx';
+import { buildScene } from '../data/scene-templates.js';
 import '../assets/css/Interacoes.css';
 
 // ===== util =====
@@ -440,10 +441,15 @@ function FindError({ item, onDone }) {
 // IMAGEM - exemplo visual dentro de missoes
 // ============================================================
 function Imagem({ item }) {
+  // tpl + tplData → cena dinâmica inline (SVG paramétrico); url → imagem estática
+  const svg = item.tpl ? buildScene(item.tpl, item.tplData || {}, item.alt || item.legenda) : '';
   return (
     <figure className="iax-imagem">
       <div className="iax-imagem-media">
-        <img src={item.url} alt={item.alt || item.legenda || 'Exemplo visual'} loading="lazy" />
+        {svg
+          ? <div className="iax-imagem-svg" role="img" aria-label={item.alt || item.legenda || 'Exemplo visual'}
+              dangerouslySetInnerHTML={{ __html: svg }} />
+          : <img src={item.url} alt={item.alt || item.legenda || 'Exemplo visual'} loading="lazy" />}
       </div>
       {(item.legenda || item.titulo) && (
         <figcaption>
@@ -475,12 +481,20 @@ function Hotspot({ item, onDone }) {
   };
   const reset = () => { setClick(null); setStatus(null); };
 
+  // cenaTpl + cenaData → cena dinâmica inline; cenaImg → SVG estático; senão placeholder
+  const svg = item.cenaTpl ? buildScene(item.cenaTpl, item.cenaData || {}, item.alt || 'Tela simulada') : '';
+  const hasScene = !!(svg || item.cenaImg);
+
   return (
     <div className={`inter-card ${status || ''}`}>
       <div className="head"><span className="tag">Aponte e clique</span></div>
       {item.prompt && <p className="prompt">{item.prompt}</p>}
-      <div className="hotspot-stage" onClick={onClickStage}>
-        <div className="hotspot-bg">{item.cena || '🖥️ tela simulada'}</div>
+      <div className={`hotspot-stage ${hasScene ? 'has-img' : ''}`} onClick={onClickStage}>
+        {svg
+          ? <div className="hotspot-svg" dangerouslySetInnerHTML={{ __html: svg }} />
+          : item.cenaImg
+            ? <img className="hotspot-img" src={item.cenaImg} alt={item.alt || 'Tela simulada'} draggable="false" />
+            : <div className="hotspot-bg">{item.cena || '🖥️ tela simulada'}</div>}
         {/* mostra retângulos apenas quando há tentativa */}
         {status && (item.areas || []).map((a, i) => (
           <div key={i} className={`hotspot-area ${a.ok ? 'right' : ''}`}

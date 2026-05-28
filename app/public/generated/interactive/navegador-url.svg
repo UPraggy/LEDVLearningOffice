@@ -1,14 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Barra de endereço do navegador">
   <rect width="1000" height="640" fill="#DDE3EC"/>
   <rect x="0" y="0" width="1000" height="118" fill="#EDF1F7"/>
-  <!-- abas -->
   <rect x="30" y="14" width="260" height="46" rx="12" fill="#fff"/>
   <text x="58" y="44" fill="#3A4356" font-family="Arial" font-size="20">Banco do Brasil</text>
-  <!-- barra de endereço -->
   <rect x="90" y="72" width="740" height="46" rx="23" fill="#fff" stroke="#C4CCDA" stroke-width="2"/>
   <text x="118" y="102" fill="#B23A2E" font-family="Arial" font-size="22" font-weight="700">⚠ não seguro</text>
   <text x="270" y="102" fill="#1A2540" font-family="Arial" font-size="22">http://bb-atendimento-cliente.<tspan font-weight="700" fill="#B23A2E">top</tspan>/login</text>
-  <!-- página -->
   <rect x="0" y="118" width="1000" height="522" fill="#fff"/>
   <rect x="0" y="118" width="1000" height="90" fill="#F4D000"/>
   <text x="60" y="176" fill="#0A3D91" font-family="Arial" font-size="34" font-weight="700">Banco do Brasil</text>
@@ -19,5 +16,4 @@
   <text x="80" y="433" fill="#9AA2B4" font-family="Arial" font-size="22">Senha</text>
   <rect x="60" y="480" width="240" height="62" rx="10" fill="#0A3D91"/>
   <text x="180" y="520" text-anchor="middle" fill="#fff" font-family="Arial" font-size="23" font-weight="700">Entrar</text>
-
 </svg>
