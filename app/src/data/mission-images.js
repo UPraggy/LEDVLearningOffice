@@ -1,3 +1,5 @@
+import { asset } from '../lib/asset.js';
+
 export function missionImagePath(trilhaId, missaoId) {
-  return `/generated/missions/${trilhaId}-${missaoId}.svg`;
+  return asset(`/generated/missions/${trilhaId}-${missaoId}.svg`);
 }

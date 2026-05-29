@@ -84,7 +84,7 @@ export default function Routes() {
   if (ativaResp == null) return null;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '') || '/'}>
       <AppProvider>
         <ConteudoRotas ativaResp={ativaResp} />
       </AppProvider>

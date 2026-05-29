@@ -6,6 +6,7 @@
    ========================================================================= */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { textoToIds } from '../lib/pt-g2p.js';
+import { asset } from '../lib/asset.js';
 
 let _ort = null;
 let _session = null;
@@ -17,7 +18,7 @@ async function loadOrt() {
   if (_ort) return _ort;
   const mod = await import('onnxruntime-web');
   try {
-    mod.env.wasm.wasmPaths = '/piper/wasm/';
+    mod.env.wasm.wasmPaths = asset('/piper/wasm/');
     const hasSAB = typeof SharedArrayBuffer !== 'undefined';
     mod.env.wasm.numThreads = hasSAB ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
     mod.env.wasm.simd = true;
@@ -37,8 +38,8 @@ async function loadModel() {
     const ort = await loadOrt();
     console.info('[Piper] Baixando modelo Cadu (~60MB) - so na primeira vez...');
     const [modelResp, configResp] = await Promise.all([
-      fetch('/piper/cadu.onnx'),
-      fetch('/piper/cadu.onnx.json'),
+      fetch(asset('/piper/cadu.onnx')),
+      fetch(asset('/piper/cadu.onnx.json')),
     ]);
     if (!modelResp.ok || !configResp.ok) {
       throw new Error(`Falha ao baixar modelo Piper (model=${modelResp.status} cfg=${configResp.status})`);
