@@ -109,6 +109,18 @@
       <button data-bg="#ffffff">Branco</button>
       <button data-bg="checker">Xadrez (alpha)</button>
     </div>
+
+    <h2>Web · pesquisar &amp; buscar referência</h2>
+    <div class="toolbar" style="margin-bottom:6px">
+      <input id="webQ" placeholder="ex.: color palette 2025 trends" style="flex:1;min-width:0">
+      <button id="webSearchBtn" title="Pesquisar na web">Pesquisar</button>
+    </div>
+    <div class="toolbar" style="margin-bottom:6px">
+      <input id="webUrl" placeholder="https://… (página de referência)" style="flex:1;min-width:0">
+      <button id="webFetchBtn" title="Ler página + extrair paleta">Buscar</button>
+    </div>
+    <p class="note">Lê páginas via proxy (r.jina.ai / allorigins) e extrai paleta + contraste de sites reais. Sem chave. Pode falhar por CORS/limite — tente outra URL.</p>
+    <div id="webOut" class="note" style="margin-top:6px"></div>
   </aside>
 
   <!-- CENTRO: palco -->
@@ -297,6 +309,83 @@ const TIPS=[
   ['Slides','1 ideia por slide. Título ≥30pt. Alto contraste. Gráfico > tabela. Remova chartjunk.'],
 ];
 document.getElementById('tips').innerHTML=TIPS.map(([t,b])=>`<details><summary>${t}</summary><div class="body">${b}</div></details>`).join('');
+
+// ---- Web: search + fetch (proxies CORS keyless) ---------------------------
+const webOut = document.getElementById('webOut');
+const PROXIES = {
+  // texto legível (markdown) de qualquer URL
+  read: u => 'https://r.jina.ai/' + u,
+  // HTML/CSS cru (p/ extrair cores) — dois fallbacks
+  raw: [
+    u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+    u => 'https://r.jina.ai/' + u,
+  ],
+  // busca: DuckDuckGo HTML via leitor → markdown com links
+  search: q => 'https://r.jina.ai/https://duckduckgo.com/html/?q=' + encodeURIComponent(q),
+};
+const norm = u => /^https?:\/\//i.test(u) ? u : 'https://' + u;
+
+async function tryFetch(urls){
+  let lastErr;
+  for(const u of urls){
+    try{ const r = await fetch(u); if(r.ok) return await r.text(); lastErr = new Error(r.status); }
+    catch(e){ lastErr = e; }
+  }
+  throw lastErr || new Error('falha');
+}
+
+async function webFetch(raw){
+  const u = norm(raw.trim()); if(!u) return;
+  webOut.innerHTML = '⏳ buscando ' + u + ' …';
+  try{
+    // 1) HTML cru p/ paleta
+    let html = '';
+    try{ html = await tryFetch(PROXIES.raw.map(f=>f(u))); }catch{}
+    if(html){
+      const fonts = [...new Set([...html.matchAll(/font-family\s*:\s*([^;"'}]+)/gi)].map(m=>m[1].trim()).filter(Boolean))].slice(0,6);
+      extractPalette(html);
+      meta.textContent = 'Web · ' + u + (fonts.length ? '  ·  fontes: ' + fonts.join(' / ') : '');
+      art.innerHTML = '<div class="note" style="padding:40px">Paleta e contraste extraídos de <b>'+u+'</b> →</div>';
+    }
+    // 2) texto legível
+    const txt = await tryFetch([PROXIES.read(u)]);
+    const clip = txt.slice(0, 4000);
+    webOut.innerHTML = '<div style="max-height:240px;overflow:auto;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px;white-space:pre-wrap;font-size:12px">'
+      + clip.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + (txt.length>4000?'\n\n…[truncado]':'') + '</div>';
+  }catch(e){ webOut.innerHTML = '<span style="color:var(--bad)">Erro: '+e.message+' — tente outra URL ou verifique CORS/limite do proxy.</span>'; }
+}
+
+async function webSearch(q){
+  q = q.trim(); if(!q) return;
+  webOut.innerHTML = '⏳ pesquisando “' + q + '” …';
+  try{
+    const txt = await tryFetch([PROXIES.search(q)]);
+    // extrai pares [título](url) e URLs soltas do markdown
+    const links = [];
+    const reMd = /\[([^\]]{3,120})\]\((https?:\/\/[^)]+)\)/g; let m;
+    while((m = reMd.exec(txt)) && links.length < 25){
+      let url = m[2];
+      // DuckDuckGo embrulha em redirect uddg=
+      const dg = url.match(/uddg=([^&]+)/); if(dg) url = decodeURIComponent(dg[1]);
+      const title = m[1].trim();
+      if(/duckduckgo\.com\/(html|y\.js|l\/)/.test(url)) continue;
+      if(title.startsWith('![') || /\.(ico|png|jpe?g|gif|svg|webp)(\?|$)/i.test(url)) continue;
+      if(/external-content\.duckduckgo\.com|duckduckgo\.com\/i\//.test(url)) continue;
+      links.push({ t: title, u: url });
+    }
+    const seen = new Set();
+    const uniq = links.filter(l=>{ if(seen.has(l.u))return false; seen.add(l.u); return true; }).slice(0,12);
+    webOut.innerHTML = uniq.length
+      ? uniq.map(l=>`<div style="padding:5px 0;border-bottom:1px solid var(--line)"><a href="#" data-u="${l.u}" class="webres" style="color:var(--accent);text-decoration:none">${l.t.replace(/[<>]/g,'')}</a><div class="note" style="font-size:10px">${l.u}</div></div>`).join('')
+      : '<span class="note">Sem resultados extraíveis. Tente outra busca.</span>';
+    webOut.querySelectorAll('.webres').forEach(a=>a.onclick=e=>{ e.preventDefault(); document.getElementById('webUrl').value=a.dataset.u; webFetch(a.dataset.u); });
+  }catch(e){ webOut.innerHTML = '<span style="color:var(--bad)">Erro na busca: '+e.message+'</span>'; }
+}
+
+document.getElementById('webFetchBtn').onclick = ()=>webFetch(document.getElementById('webUrl').value);
+document.getElementById('webSearchBtn').onclick = ()=>webSearch(document.getElementById('webQ').value);
+document.getElementById('webUrl').addEventListener('keydown',e=>{ if(e.key==='Enter') webFetch(e.target.value); });
+document.getElementById('webQ').addEventListener('keydown',e=>{ if(e.key==='Enter') webSearch(e.target.value); });
 
 // init
 updateColor(); buildCols();

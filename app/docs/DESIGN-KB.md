@@ -344,3 +344,31 @@ Critérios objetivos que o `visual-inspector.html` verifica/relembra:
 > Como usar com a IA: ao revisar um visual, abra o **Visual Inspector**, carregue o SVG/print,
 > rode as ferramentas (grid, baseline, matriz de contraste, extração de paleta) e percorra este
 > checklist antes de aprovar.
+
+---
+
+## 16. Pesquisa na web dentro do Visual Inspector
+
+O `public/visual-inspector.html` agora **pesquisa e lê páginas da web** (sem chave), para aprender com
+referências reais e auditá-las na hora.
+
+**Como funciona (proxies CORS keyless):**
+- **Ler página (texto):** `https://r.jina.ai/<url>` → markdown limpo da página.
+- **Extrair paleta (HTML cru):** `https://api.allorigins.win/raw?url=<url>` (fallback p/ r.jina.ai)
+  → regex de hex `#RGB`/`#RRGGBB` → alimenta a **paleta** + **matriz de contraste WCAG**.
+- **Pesquisar:** `https://r.jina.ai/https://duckduckgo.com/html/?q=<q>` → links extraídos do markdown
+  (favicons/imagens filtrados). Clicar num resultado dispara o fetch daquela página.
+
+**Fluxo de uso:**
+1. Campo **Pesquisar** → tema (ex.: "accessible color palette"). Clique num resultado.
+2. Ou cole uma URL em **Buscar** → lê o texto + extrai paleta e contraste do site real.
+3. Audite a paleta extraída na matriz (vs claro/escuro) e na ferramenta de cor.
+
+**Limites:** SPAs sem hex inline no HTML não rendem paleta (só o texto vem). Proxies públicos têm
+limite de uso e podem falhar por CORS — tente outra URL. **Copyright:** usar para extrair dados de
+design (cores, contraste) e aprender padrões — **não** copiar conteúdo/texto das páginas.
+
+> Aprendizado factual já validado pela ferramenta: paletas “suaves” bem avaliadas (ex.: fundo creme
+> claro + headline azul-escuro ~`#001858`) atingem AAA para texto, enquanto cores de **acento**
+> (rosa/coral ~`#f582ae`/`#f45d48`) sobre fundo claro só passam como **texto grande / UI** — confirmando
+> a regra: acento para destaque e elementos grandes, nunca para corpo de texto.
