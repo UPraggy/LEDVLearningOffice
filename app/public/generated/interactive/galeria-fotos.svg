@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Galeria de fotos do celular"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  
+  <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
+  <linearGradient id="hg-4f7cac" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d86b3"/><stop offset="1" stop-color="#3c5e83"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-4f7cac)"/>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
+  <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Galeria</text>
+  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">128 fotos · álbum Família</text>
+  
+  <rect x="92" y="168" width="256" height="108" rx="14" fill="#7FA8C9"/>
+  <circle cx="152" cy="206" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M108 260 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="368" y="168" width="256" height="108" rx="14" fill="#D49545"/>
+  <circle cx="428" cy="206" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M384 260 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  <rect x="368" y="168" width="256" height="108" rx="14" fill="none" stroke="#4F7CAC" stroke-width="6"/>
+  <rect x="644" y="168" width="256" height="108" rx="14" fill="#9BBF8A"/>
+  <circle cx="704" cy="206" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M660 260 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="92" y="292" width="256" height="108" rx="14" fill="#C97F7F"/>
+  <circle cx="152" cy="330" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M108 384 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="368" y="292" width="256" height="108" rx="14" fill="#B59BCF"/>
+  <circle cx="428" cy="330" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M384 384 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="644" y="292" width="256" height="108" rx="14" fill="#7FBFB5"/>
+  <circle cx="704" cy="330" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M660 384 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="92" y="416" width="256" height="108" rx="14" fill="#D4B45A"/>
+  <circle cx="152" cy="454" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M108 508 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="368" y="416" width="256" height="108" rx="14" fill="#A0A8B8"/>
+  <circle cx="428" cy="454" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M384 508 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="644" y="416" width="256" height="108" rx="14" fill="#8AB0D4"/>
+  <circle cx="704" cy="454" r="20" fill="#ffffff" opacity="0.85"/>
+  <path d="M660 508 l52 -42 l38 30 l40 -34 l66 56 z" fill="#ffffff" opacity="0.4"/>
+  
+  <rect x="92" y="540" width="816" height="58" rx="16" fill="#F4F1E8" stroke="#D9CFB8" stroke-width="2"/>
+  <text x="200" y="577" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">Compartilhar</text>
+  <text x="500" y="577" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">Editar</text>
+  <text x="800" y="577" text-anchor="middle" fill="#C0392B" font-family="Arial" font-size="22" font-weight="700">Apagar</text>
+</svg>

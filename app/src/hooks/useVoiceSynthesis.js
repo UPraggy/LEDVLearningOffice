@@ -1,9 +1,8 @@
 /* =========================================================================
-   useVoiceSynthesis — TTS offline com Piper Cadu (pt-BR).
-   - Carrega o modelo só na primeira chamada (lazy).
-   - Cacheia em escopo de módulo — uma única instância pra toda a app.
-   - Honra prefers-reduced-motion: NÃO fala se ativo.
-   - Fallback: se o modelo Piper falhar, tenta Web Speech API.
+   useVoiceSynthesis - TTS offline com Piper Cadu (pt-BR).
+   - Carrega o modelo so na primeira chamada (lazy).
+   - Cacheia em escopo de modulo: uma unica instancia para toda a app.
+   - A voz do app e somente Piper/Cadu; nao usa voz do sistema.
    ========================================================================= */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { textoToIds } from '../lib/pt-g2p.js';
@@ -11,24 +10,21 @@ import { textoToIds } from '../lib/pt-g2p.js';
 let _ort = null;
 let _session = null;
 let _config = null;
-let _loading = null;          // Promise compartilhada do load
+let _loading = null;
 let _audioCtx = null;
 
 async function loadOrt() {
   if (_ort) return _ort;
   const mod = await import('onnxruntime-web');
   try {
-    // Aponta os .wasm pra cópia pública (vide /public/piper/wasm/).
-    // Sem isso, o ORT tenta servir do mesmo caminho do bundle e falha em prod.
     mod.env.wasm.wasmPaths = '/piper/wasm/';
-    // Threads só ativam com SharedArrayBuffer (COOP/COEP). Detecta antes.
     const hasSAB = typeof SharedArrayBuffer !== 'undefined';
     mod.env.wasm.numThreads = hasSAB ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
     mod.env.wasm.simd = true;
     mod.env.wasm.proxy = false;
     mod.env.logLevel = 'warning';
   } catch (e) {
-    console.warn('[Piper] Configuração ORT falhou:', e);
+    console.warn('[Piper] Configuracao ORT falhou:', e);
   }
   _ort = mod;
   return mod;
@@ -39,7 +35,7 @@ async function loadModel() {
   if (_loading) return _loading;
   _loading = (async () => {
     const ort = await loadOrt();
-    console.info('[Piper] Baixando modelo Cadu (~60MB) — só na primeira vez…');
+    console.info('[Piper] Baixando modelo Cadu (~60MB) - so na primeira vez...');
     const [modelResp, configResp] = await Promise.all([
       fetch('/piper/cadu.onnx'),
       fetch('/piper/cadu.onnx.json'),
@@ -48,16 +44,21 @@ async function loadModel() {
       throw new Error(`Falha ao baixar modelo Piper (model=${modelResp.status} cfg=${configResp.status})`);
     }
     const [buf, json] = await Promise.all([modelResp.arrayBuffer(), configResp.json()]);
-    console.info(`[Piper] Modelo baixado (${(buf.byteLength / 1048576).toFixed(1)}MB). Criando sessão ONNX…`);
+    console.info(`[Piper] Modelo baixado (${(buf.byteLength / 1048576).toFixed(1)}MB). Criando sessao ONNX...`);
     _session = await ort.InferenceSession.create(buf, {
       executionProviders: ['wasm'],
       graphOptimizationLevel: 'all',
     });
     _config = json;
-    console.info('[Piper] Pronto. inputs:', _session.inputNames, 'outputs:', _session.outputNames);
+    console.info('[Piper] Cadu pronto. inputs:', _session.inputNames, 'outputs:', _session.outputNames);
     return { session: _session, config: _config };
   })();
-  return _loading;
+  try {
+    return await _loading;
+  } catch (e) {
+    _loading = null;
+    throw e;
+  }
 }
 
 function getCtx() {
@@ -70,36 +71,19 @@ function getCtx() {
   return _audioCtx;
 }
 
-/** Fallback web speech (se o Piper quebrar ou pra MVP rápido). */
-function fallbackSpeak(texto) {
-  if (!('speechSynthesis' in window)) return false;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(texto);
-  u.lang = 'pt-BR'; u.rate = 0.95; u.pitch = 1;
-  // Tenta achar voz pt-BR no sistema
-  const vozes = speechSynthesis.getVoices();
-  const pt = vozes.find(v => /pt[-_]BR/i.test(v.lang)) || vozes.find(v => /pt/i.test(v.lang));
-  if (pt) u.voice = pt;
-  speechSynthesis.speak(u);
-  return true;
-}
-
 export function useVoiceSynthesis() {
   const [pronto, setPronto] = useState(!!(_session && _config));
   const [carregando, setCarregando] = useState(false);
   const [falando, setFalando] = useState(false);
   const [erro, setErro] = useState(null);
   const sourceRef = useRef(null);
-  const fallbackRef = useRef(false);
 
   const parar = useCallback(() => {
     try { sourceRef.current?.stop(); } catch {}
     sourceRef.current = null;
-    try { speechSynthesis?.cancel(); } catch {}
     setFalando(false);
   }, []);
 
-  // Cleanup
   useEffect(() => () => parar(), [parar]);
 
   const preload = useCallback(async () => {
@@ -110,9 +94,9 @@ export function useVoiceSynthesis() {
       setPronto(true);
       setErro(null);
     } catch (e) {
-      console.warn('[Piper] Modelo não carregou — usando Web Speech como fallback:', e?.message);
-      fallbackRef.current = true;
-      setErro('fallback');
+      console.warn('[Piper] Modelo Cadu nao carregou:', e?.message);
+      setPronto(false);
+      setErro('piper');
     } finally {
       setCarregando(false);
     }
@@ -120,17 +104,14 @@ export function useVoiceSynthesis() {
 
   const speak = useCallback(async (texto) => {
     if (!texto || typeof texto !== 'string') return;
-    // Voz é independente de prefers-reduced-motion — é leitura auxiliar,
-    // não animação. Controlada pela preferência `vozLigada` (botão UI).
-
     parar();
 
-    // Se já caiu pro fallback, usa Web Speech direto
-    if (fallbackRef.current) { setFalando(true); fallbackSpeak(texto); setTimeout(() => setFalando(false), texto.length * 80); return; }
-
     if (!pronto && !carregando) await preload();
-
-    if (fallbackRef.current) { setFalando(true); fallbackSpeak(texto); setTimeout(() => setFalando(false), texto.length * 80); return; }
+    if (!_session || !_config) {
+      setErro('piper');
+      setFalando(false);
+      return;
+    }
 
     setFalando(true);
     try {
@@ -141,21 +122,25 @@ export function useVoiceSynthesis() {
 
       const sampleRate = config.audio?.sample_rate || 22050;
       const lengthScale = config.inference?.length_scale ?? 1.0;
-      const noiseScale  = config.inference?.noise_scale  ?? 0.667;
-      const noiseW      = config.inference?.noise_w      ?? 0.8;
+      const noiseScale = config.inference?.noise_scale ?? 0.667;
+      const noiseW = config.inference?.noise_w ?? 0.8;
 
       const inputIds = BigInt64Array.from(ids.map(BigInt));
       const feeds = {
-        input:         new ort.Tensor('int64', inputIds, [1, ids.length]),
+        input: new ort.Tensor('int64', inputIds, [1, ids.length]),
         input_lengths: new ort.Tensor('int64', BigInt64Array.from([BigInt(ids.length)]), [1]),
-        scales:        new ort.Tensor('float32', Float32Array.from([noiseScale, lengthScale, noiseW]), [3]),
+        scales: new ort.Tensor('float32', Float32Array.from([noiseScale, lengthScale, noiseW]), [3]),
       };
       const output = await session.run(feeds);
       const audioFloat = output.output?.data ?? Object.values(output)[0]?.data;
-      if (!audioFloat) throw new Error('Saída de áudio vazia');
+      if (!audioFloat) throw new Error('Saida de audio vazia');
 
       const ctx = getCtx();
-      if (!ctx) { setFalando(false); return; }
+      if (!ctx) {
+        setErro('piper');
+        setFalando(false);
+        return;
+      }
       const buffer = ctx.createBuffer(1, audioFloat.length, sampleRate);
       buffer.copyToChannel(audioFloat, 0);
       const source = ctx.createBufferSource();
@@ -164,11 +149,11 @@ export function useVoiceSynthesis() {
       source.onended = () => setFalando(false);
       source.start();
       sourceRef.current = source;
+      setErro(null);
     } catch (e) {
-      console.warn('[Piper] Síntese falhou — fallback Web Speech:', e?.message);
-      fallbackRef.current = true;
-      fallbackSpeak(texto);
-      setTimeout(() => setFalando(false), texto.length * 80);
+      console.warn('[Piper] Sintese Cadu falhou:', e?.message);
+      setErro('piper');
+      setFalando(false);
     }
   }, [pronto, carregando, preload, parar]);
 

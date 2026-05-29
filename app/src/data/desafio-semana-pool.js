@@ -1,9 +1,9 @@
 export const DESAFIOS_SEMANA = [
   {
     slug: 'seguranca',
-    titulo: 'Semana da Seguranca',
-    sub: 'Cumpra 5 missoes de seguranca ate domingo',
-    reward: 'Trofeu Guarda-costas + 200 XP',
+    titulo: 'Semana da Segurança',
+    sub: 'Cumpra 5 missões de segurança até domingo',
+    reward: 'Troféu Guarda-costas + 200 XP',
     total: 5,
     modulo: 'seguranca',
     match: /seguran|amb-seg|sec-/i,
@@ -11,7 +11,7 @@ export const DESAFIOS_SEMANA = [
   {
     slug: 'excel',
     titulo: 'Semana das Planilhas',
-    sub: 'Conclua 4 praticas de Excel ou trabalho com dados',
+    sub: 'Conclua 4 práticas de Excel ou trabalho com dados',
     reward: 'Calculista em foco + 160 XP',
     total: 4,
     modulo: 'mercado',
@@ -20,7 +20,7 @@ export const DESAFIOS_SEMANA = [
   {
     slug: 'whatsapp',
     titulo: 'Semana do WhatsApp Profissional',
-    sub: 'Resolva 4 missoes de mensagens, grupos ou etiqueta digital',
+    sub: 'Resolva 4 missões de mensagens, grupos ou etiqueta digital',
     reward: 'Comunicador atento + 140 XP',
     total: 4,
     modulo: 'celular',
@@ -29,7 +29,7 @@ export const DESAFIOS_SEMANA = [
   {
     slug: 'ia',
     titulo: 'Semana da IA no Trabalho',
-    sub: 'Pratique 3 missoes com prompts, revisao e automacao leve',
+    sub: 'Pratique 3 missões com prompts, revisão e automação leve',
     reward: 'Assistente de IA + 180 XP',
     total: 3,
     modulo: 'mercado',
@@ -38,7 +38,7 @@ export const DESAFIOS_SEMANA = [
   {
     slug: 'carreira',
     titulo: 'Semana da Carreira',
-    sub: 'Complete 4 passos de curriculo, LinkedIn ou comunicacao profissional',
+    sub: 'Complete 4 passos de currículo, LinkedIn ou comunicação profissional',
     reward: 'Ofensiva aberta + 180 XP',
     total: 4,
     modulo: 'mercado',
@@ -46,8 +46,8 @@ export const DESAFIOS_SEMANA = [
   },
   {
     slug: 'ingles',
-    titulo: 'Semana do Ingles Vivo',
-    sub: 'Finalize 5 missoes de ingles no seu nivel atual',
+    titulo: 'Semana do Inglês Vivo',
+    sub: 'Finalize 5 missões de inglês no seu nível atual',
     reward: 'First sprint + 150 XP',
     total: 5,
     modulo: 'ingles',
@@ -56,7 +56,7 @@ export const DESAFIOS_SEMANA = [
   {
     slug: 'computador',
     titulo: 'Semana do Computador sem Medo',
-    sub: 'Complete 4 missoes de arquivos, navegador, Word ou nuvem',
+    sub: 'Complete 4 missões de arquivos, navegador, Word ou nuvem',
     reward: 'Dono do PC + 150 XP',
     total: 4,
     modulo: 'computador',

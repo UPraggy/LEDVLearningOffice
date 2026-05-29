@@ -13,6 +13,10 @@ import '../../assets/css/Trofeus.css';
 import { TRILHAS, MISSOES, TROFEUS } from '../../data/estrutura.js';
 import { useApp } from '../subComponents/AppContext.jsx';
 import { getConteudo } from '../../data/conteudo/index.js';
+import { missionImagePath } from '../../data/mission-images.js';
+import { buildMissionScene } from '../../data/mission-scene.js';
+import { buildScene, SCENE_LABELS } from '../../data/scene-templates.js';
+import { sceneForMission } from '../../data/scene-for-mission.js';
 import '../../assets/css/Missao.css';
 
 function Aula({ aula, vertente }) {
@@ -240,6 +244,15 @@ export default function Missao({ ativaResp }) {
     };
   }, [conteudo, meta]);
 
+  // Cena interativa ilustrativa (biblioteca scene-templates) — determinística
+  // por missão. Some quando a missão tem interações próprias (passo "Jogar").
+  const cenaIlustra = useMemo(() => {
+    if (!trilha || !meta) return null;
+    const slug = sceneForMission(trilha, meta);
+    const label = SCENE_LABELS[slug] || slug;
+    return { slug, label, svg: buildScene(slug, {}, label) };
+  }, [trilha, meta]);
+
   if (!trilha || !meta) return <Navigate to="/modulos" replace />;
 
   const itensVal = conteudoFinal.validacao || [];
@@ -347,6 +360,20 @@ export default function Missao({ ativaResp }) {
           </Link>
 
           <header className="missao-header">
+            <figure className="mission-visual" aria-label={`Imagem da missao ${meta.titulo}`}>
+              <div
+                className="mission-visual-svg"
+                role="img"
+                aria-label={meta.titulo}
+                dangerouslySetInnerHTML={{
+                  __html: buildMissionScene({
+                    trilha,
+                    missao: meta,
+                    total: (MISSOES[trilhaId] || []).length,
+                  }),
+                }}
+              />
+            </figure>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)', flexWrap: 'wrap' }}>
               <div style={{ width: 48, height: 48, borderRadius: 'var(--r-md)', background: trilha.cor, color: '#fff', display: 'grid', placeItems: 'center' }}>
                 <Icone nome={trilha.iconeNome} size={24} />
@@ -378,7 +405,22 @@ export default function Missao({ ativaResp }) {
           </div>
 
           {/* Conteúdo da etapa */}
-          {ETAPAS[etapa].id === 'aula' && <Aula aula={conteudoFinal.aula || {}} vertente={trilha.vertente} />}
+          {ETAPAS[etapa].id === 'aula' && (
+            <>
+              {!temInteracoes && cenaIlustra && (
+                <figure className="cena-ilustra anima-up">
+                  <div
+                    className="cena-ilustra-svg"
+                    role="img"
+                    aria-label={cenaIlustra.label}
+                    dangerouslySetInnerHTML={{ __html: cenaIlustra.svg }}
+                  />
+                  <figcaption>{cenaIlustra.label}</figcaption>
+                </figure>
+              )}
+              <Aula aula={conteudoFinal.aula || {}} vertente={trilha.vertente} />
+            </>
+          )}
           {ETAPAS[etapa].id === 'jogar' && (
             <div className="bloco anima-up">
               <h2>Vamos jogar?</h2>

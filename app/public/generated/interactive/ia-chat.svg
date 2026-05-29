@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Conversa com um assistente de inteligência artificial"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  
+  <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
+  <linearGradient id="hg-1b2a4e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3b5c"/><stop offset="1" stop-color="#15203b"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-1b2a4e)"/>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
+  <circle cx="126" cy="88" r="34" fill="#5f6a83"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">✦</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Assistente</text>
+  <text x="180" y="116" fill="#9fa6b5" font-family="Arial" font-size="20" font-weight="700">pergunte em linguagem simples</text>
+  <rect x="430" y="172" width="478" height="78" rx="22" fill="#4F7CAC"/>
+  <text x="908" y="218" text-anchor="end" fill="#fff" font-family="Arial" font-size="23">Como faço um currículo simples?</text>
+  <circle cx="124" cy="320" r="30" fill="#1B2A4E"/>
+  <text x="124" y="330" text-anchor="middle" fill="#fff" font-family="Arial" font-size="26" font-weight="700">✦</text>
+  <rect x="92" y="290" width="700" height="170" rx="22" fill="#F2EBDD"/>
+  <text x="124" y="338" fill="#1A2540" font-family="Arial" font-size="23"><tspan x="124" dy="0">Claro! Comece com seu nome e contato. Depois liste</tspan><tspan x="124" dy="38">suas experiências e cursos, do mais recente para o</tspan><tspan x="124" dy="38">mais antigo. Quer que eu monte um modelo pra você?</tspan></text>
+  <rect x="92" y="506" width="800" height="74" rx="37" fill="#F4F1E8" stroke="#C9C0AC" stroke-width="2"/>
+  <text x="132" y="551" fill="#9AA2B4" font-family="Arial" font-size="23">Digite sua pergunta…</text>
+  <circle cx="850" cy="543" r="38" fill="#4F7A55" filter="url(#sh-card)"/><circle cx="850" cy="543" r="38" fill="url(#sheen)"/><path d="M835 543 h30 M854 531 l14 12 l-14 12" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -153,8 +153,8 @@ export default function Configuracoes() {
                   {voice.carregando ? <><RefreshCw size={14} className="ic-spin" /> Baixando ~60 MB…</> : <><Mic size={14} /> Baixar voz agora</>}
                 </button>
               )}
-              {voice.erro === 'fallback' && (
-                <span style={{ fontSize: 12, color: 'var(--coral-deep)' }}>Modelo falhou — usando voz do sistema como fallback.</span>
+              {voice.erro && (
+                <span style={{ fontSize: 12, color: 'var(--coral-deep)' }}>Modelo Cadu nao carregou. Tente baixar a voz novamente.</span>
               )}
             </div>
           </div>

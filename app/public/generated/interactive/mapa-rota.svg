@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Mapa com rota até um endereço"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  
+  <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
+  <linearGradient id="hg-4f7cac" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d86b3"/><stop offset="1" stop-color="#3c5e83"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-4f7cac)"/>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
+  <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Mapas</text>
+  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">rota a pé</text>
+  <rect x="92" y="160" width="816" height="290" rx="18" fill="#E7EEDF"/>
+  <path d="M120 200 h300 v90 h180 v110 h260" fill="none" stroke="#C9C0AC" stroke-width="10" stroke-linecap="round"/>
+  <path d="M120 200 h300 v90 h180" fill="none" stroke="#4F7CAC" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="120" cy="200" r="16" fill="#fff" stroke="#4F7CAC" stroke-width="6"/>
+  <path d="M600 372 c0 -34 -26 -52 -26 -78 a26 26 0 1 1 52 0 c0 26 -26 44 -26 78 z" fill="#E25B3F"/>
+  <circle cx="600" cy="296" r="11" fill="#fff"/>
+  <rect x="92" y="468" width="816" height="118" rx="18" fill="#F4F1E8" stroke="#D9CFB8" stroke-width="2"/>
+  <text x="120" y="512" fill="#1A2540" font-family="Arial" font-size="25" font-weight="700">UBS Centro — Rua das Flores, 120</text>
+  <text x="120" y="556" fill="#4F7A55" font-family="Arial" font-size="24" font-weight="700">12 min · 900 m</text>
+</svg>

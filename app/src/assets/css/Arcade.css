@@ -2,6 +2,22 @@
    ARCADE DIÁRIO — card na home + tela cheia da sessão
    ========================================================================= */
 
+/* === Acha o erro: código neutro + alternativas (sem sinalizar o alvo) === */
+.find-error-code {
+  margin: 0 0 var(--s-3);
+  padding: var(--s-5);
+  border-radius: var(--r-md);
+  background: var(--navy-deep, #131d33);
+  color: #E8DCC4;
+  font-family: var(--f-mono);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.find-error-code code { font: inherit; }
+.find-error-options { display: grid; gap: var(--s-2); }
+
 /* === Card na Home === */
 .arcade-card {
   display: grid;

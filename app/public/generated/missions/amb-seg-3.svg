@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Verificação em duas etapas (2FA)">
+  <defs>
+    <linearGradient id="mbg-e9f1ea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eff5ef"/><stop offset="1" stop-color="#d6ded7"/></linearGradient>
+    <linearGradient id="mhd-203a2b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f5649"/><stop offset="1" stop-color="#1a3023"/></linearGradient>
+    <linearGradient id="macc-4f7a55" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#648a69"/><stop offset="1" stop-color="#426647"/></linearGradient>
+    <linearGradient id="m-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="m-glow" cx="0.5" cy="0.1" r="0.9"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="m-panel" x="-12%" y="-12%" width="124%" height="124%"><feDropShadow dx="0" dy="14" stdDeviation="24" flood-color="#13231a" flood-opacity=".16"/></filter>
+    <filter id="m-obj" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#13231a" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#mbg-e9f1ea)"/>
+  <rect width="1200" height="360" fill="url(#m-glow)"/>
+  <circle cx="1080" cy="40" r="190" fill="#4F7A55" opacity=".12"/>
+  <circle cx="120" cy="660" r="220" fill="#E25B3F" opacity=".10"/>
+  <circle cx="703" cy="411" r="7" fill="#203A2B" opacity=".06"/><circle cx="682" cy="462" r="5" fill="#203A2B" opacity=".06"/><circle cx="312" cy="385" r="4" fill="#203A2B" opacity=".06"/><circle cx="634" cy="456" r="6" fill="#203A2B" opacity=".06"/><circle cx="796" cy="294" r="5" fill="#203A2B" opacity=".06"/>
+  <rect x="64" y="150" width="1072" height="430" rx="40" fill="#F6F3EA" filter="url(#m-panel)"/>
+  <rect x="64" y="150" width="1072" height="430" rx="40" fill="none" stroke="#ced4d0" stroke-width="2"/>
+  <rect x="64" y="150" width="1072" height="200" rx="40" fill="url(#m-sheen)"/>
+  <g filter="url(#m-obj)">
+      <rect x="462" y="320" width="156" height="130" rx="18" fill="#fff" stroke="#203A2B" stroke-width="9"/>
+      <path d="M494 320 v-26 a46 46 0 0 1 92 0 v26" fill="none" stroke="#203A2B" stroke-width="9"/>
+      <circle cx="540" cy="374" r="16" fill="#4F7A55"/>
+      <rect x="533" y="384" width="14" height="34" rx="7" fill="#4F7A55"/>
+      <path d="M800 230 L896 268 L878 384 C866 448 834 490 800 516 C766 490 734 448 722 384 L704 268 Z" fill="#fff" stroke="#203A2B" stroke-width="9"/>
+      <path d="M766 346 L794 376 L844 310" fill="none" stroke="#4F7A55" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <path d="M0 0 h1200 v96 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#mhd-203a2b)"/>
+  <path d="M0 0 h1200 v44 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#m-sheen)"/>
+  <text x="72" y="52" fill="#e56f56" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="700" letter-spacing="5">DEFESA DIGITAL</text>
+  <text x="72" y="98" fill="#fff" font-family="'Fraunces', Georgia, serif" font-size="40" font-weight="700">Verificação em duas etapas</text>
+  <rect x="64" y="600" width="170" height="46" rx="23" fill="url(#mhd-203a2b)" filter="url(#m-obj)"/>
+  <text x="92" y="631" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="21" font-weight="700">Missão 03</text>
+  <rect x="248" y="600" width="138" height="46" rx="23" fill="url(#macc-4f7a55)" filter="url(#m-obj)"/>
+  <text x="280" y="631" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="21" font-weight="700">10 min</text>
+  <text x="1136" y="631" text-anchor="end" fill="#203A2B" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="700" opacity=".5">03/09</text>
+</svg>

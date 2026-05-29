@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Resultados de uma busca na internet"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  
+  <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
+  <linearGradient id="hg-1b2a4e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3b5c"/><stop offset="1" stop-color="#15203b"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-1b2a4e)"/>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
+  <circle cx="126" cy="88" r="34" fill="#5f6a83"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Buscar</text>
+  <text x="180" y="116" fill="#9fa6b5" font-family="Arial" font-size="20" font-weight="700">navegador · resultados</text>
+  <rect x="92" y="168" width="816" height="64" rx="32" fill="#F4F1E8" stroke="#C9C0AC" stroke-width="2"/>
+  <circle cx="140" cy="200" r="14" fill="none" stroke="#7A8294" stroke-width="4"/>
+  <line x1="151" y1="211" x2="164" y2="224" stroke="#7A8294" stroke-width="4" stroke-linecap="round"/>
+  <text x="186" y="209" fill="#1A2540" font-family="Arial" font-size="24">como emitir segunda via da conta de luz</text>
+  <text x="92" y="296" fill="#1B5FA8" font-family="Arial" font-size="26" font-weight="700">Segunda via de conta — site oficial da distribuidora</text>
+  <text x="92" y="328" fill="#3F8A4F" font-family="Arial" font-size="19">www.distribuidora.com.br › segunda-via</text>
+  <text x="92" y="364" fill="#3A4256" font-family="Arial" font-size="21"><tspan x="92" dy="0">Acesse com seu CPF e o número da instalação para baixar a</tspan><tspan x="92" dy="30">fatura em PDF sem custo.</tspan></text>
+  <line x1="92" y1="448" x2="908" y2="448" stroke="#E2DAC8" stroke-width="2"/>
+  <text x="92" y="500" fill="#1B5FA8" font-family="Arial" font-size="26" font-weight="700">Como pagar a conta de luz pelo aplicativo</text>
+  <text x="92" y="532" fill="#3F8A4F" font-family="Arial" font-size="19">www.distribuidora.com.br › app</text>
+</svg>
