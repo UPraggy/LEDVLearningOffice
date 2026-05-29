@@ -11,7 +11,7 @@
   --surface-2:    #FFFCF5;
   --ink:          #1A2540;
   --ink-soft:     #4A5670;
-  --ink-mute:     #7A8294;
+  --ink-mute:     #5D6474;   /* a11y: AA 5:1 sobre papel (era #7A8294 = 3.25:1) */
   --line:         #D9CFB8;
   --line-strong:  #B5A582;
 

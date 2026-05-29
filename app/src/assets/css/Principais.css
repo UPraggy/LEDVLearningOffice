@@ -95,10 +95,11 @@ html, body, #root { overflow-x: hidden; }     /* prevenção contra scroll horiz
   letter-spacing: .08em; text-transform: uppercase;
   border: 1px solid var(--line);
 }
-.chip-coral { background: rgba(226,91,63,.12); color: var(--coral-deep); border-color: rgba(226,91,63,.3); }
+/* texto dos chips escurecido p/ AA 4.5:1 (rótulo 11px = texto pequeno); fundo/marca intactos */
+.chip-coral { background: rgba(226,91,63,.12); color: #b33f22; border-color: rgba(226,91,63,.3); }
 .chip-honey { background: rgba(212,149,69,.16); color: #8d5a1f; border-color: rgba(212,149,69,.4); }
-.chip-sage  { background: rgba(79,122,85,.14); color: var(--sage); border-color: rgba(79,122,85,.3); }
-.chip-streak{ background: rgba(224,122,58,.16); color: #b25420; border-color: rgba(224,122,58,.35); }
+.chip-sage  { background: rgba(79,122,85,.14); color: #476e4c; border-color: rgba(79,122,85,.3); }
+.chip-streak{ background: rgba(224,122,58,.16); color: #a14c1d; border-color: rgba(224,122,58,.35); }
 .chip-plum  { background: rgba(107,63,122,.14); color: var(--plum); border-color: rgba(107,63,122,.3); }
 
 /* ===== Section heads ===== */
