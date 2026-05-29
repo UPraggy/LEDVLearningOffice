@@ -17,13 +17,24 @@
     <div id="root"></div>
     <script type="module" src="/src/index.jsx"></script>
     <script>
-      // SW só na raiz (base '/'); em subpath (GitHub Pages) ele cacheia caminhos
-      // absolutos e quebraria o app — então desativa e limpa registros antigos.
+      // SW só na raiz (base '/'). Em subpath ele cacheia caminhos absolutos e
+      // quebraria o app — então desativa e limpa registros antigos.
       if ('serviceWorker' in navigator) {
         if ('%BASE_URL%' === '/') {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('%BASE_URL%service-worker.js').catch(() => {});
-          });
+          navigator.serviceWorker.register('%BASE_URL%service-worker.js').then(() => {
+            // O SW injeta COOP/COEP → reativa crossOriginIsolated (threads do Piper).
+            // Recarrega 1x quando o SW assume o controle, p/ a página vir com os headers.
+            if (!window.crossOriginIsolated && !sessionStorage.getItem('coiReloaded')) {
+              const reload = () => {
+                sessionStorage.setItem('coiReloaded', '1');
+                window.location.reload();
+              };
+              if (navigator.serviceWorker.controller) reload();
+              else navigator.serviceWorker.addEventListener('controllerchange', reload, { once: true });
+            } else if (window.crossOriginIsolated) {
+              sessionStorage.removeItem('coiReloaded');
+            }
+          }).catch(() => {});
         } else {
           navigator.serviceWorker.getRegistrations?.().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
         }
