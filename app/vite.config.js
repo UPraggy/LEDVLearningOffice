@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  // Subpath para GitHub Pages (projeto). GH_PAGES=1 no build de deploy.
+  base: process.env.GH_PAGES ? '/LEDVLearningOffice/' : '/',
   plugins: [react()],
   server: {
     port: 5173,

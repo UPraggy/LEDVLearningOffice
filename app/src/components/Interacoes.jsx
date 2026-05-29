@@ -27,6 +27,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { CheckCircle2, XCircle, RotateCw, Sparkles, Lightbulb, Timer, ArrowRight, Image as ImageIcon } from 'lucide-react';
 import Som from './subComponents/Som.jsx';
 import { buildScene } from '../data/scene-templates.js';
+import { asset } from '../lib/asset.js';
 import '../assets/css/Interacoes.css';
 
 // ===== util =====
@@ -449,7 +450,7 @@ function Imagem({ item }) {
         {svg
           ? <div className="iax-imagem-svg" role="img" aria-label={item.alt || item.legenda || 'Exemplo visual'}
               dangerouslySetInnerHTML={{ __html: svg }} />
-          : <img src={item.url} alt={item.alt || item.legenda || 'Exemplo visual'} loading="lazy" />}
+          : <img src={asset(item.url)} alt={item.alt || item.legenda || 'Exemplo visual'} loading="lazy" />}
       </div>
       {(item.legenda || item.titulo) && (
         <figcaption>
@@ -493,7 +494,7 @@ function Hotspot({ item, onDone }) {
         {svg
           ? <div className="hotspot-svg" dangerouslySetInnerHTML={{ __html: svg }} />
           : item.cenaImg
-            ? <img className="hotspot-img" src={item.cenaImg} alt={item.alt || 'Tela simulada'} draggable="false" />
+            ? <img className="hotspot-img" src={asset(item.cenaImg)} alt={item.alt || 'Tela simulada'} draggable="false" />
             : <div className="hotspot-bg">{item.cena || '🖥️ tela simulada'}</div>}
         {/* mostra retângulos apenas quando há tentativa */}
         {status && (item.areas || []).map((a, i) => (

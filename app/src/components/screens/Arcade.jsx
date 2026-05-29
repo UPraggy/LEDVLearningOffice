@@ -65,7 +65,7 @@ export default function Arcade() {
     let ok = false;
     if (q.tipo === 'decida_rapido') ok = val === q.resposta;
     else if (q.tipo === 'verdade_mito') ok = val === q.resposta;
-    else if (q.tipo === 'acha_o_erro') ok = q.tokens[val]?.ok === false;
+    else if (q.tipo === 'acha_o_erro') ok = val === q.resposta;
     Som.tocar(ok ? 'success' : 'error');
     setResultado(r => [...r, ok ? 'ok' : 'err']);
   };
@@ -102,7 +102,7 @@ export default function Arcade() {
         </div>
 
         <div className="arcade-q">
-          <span className="tema">{q.tema?.toUpperCase()} · {q.tipo.replace('_', ' ')}</span>
+          <span className="tema">{q.tema?.toUpperCase()} · {q.tipo.replace(/_/g, ' ')}</span>
           <h3>{q.pergunta}</h3>
 
           {q.tipo === 'decida_rapido' && (
@@ -142,19 +142,24 @@ export default function Arcade() {
           )}
 
           {q.tipo === 'acha_o_erro' && (
-            <div style={{ background: 'var(--navy-deep)', color: '#E8DCC4', padding: 'var(--s-4)', borderRadius: 'var(--r-md)', lineHeight: 2 }}>
-              {q.tokens.map((t, i) => {
-                if (t.sep) return <span key={i}>{t.txt}</span>;
-                let cls = '';
-                if (escolha !== null) {
-                  if (t.ok === false) cls = 'right';
-                  else if (i === escolha) cls = 'wrong';
-                }
-                return (
-                  <span key={i} className={`arcade-token ${cls}`} onClick={() => responder(i)}>{t.txt}</span>
-                );
-              })}
-            </div>
+            <>
+              <pre className="find-error-code"><code>{q.codigo}</code></pre>
+              <div className="find-error-options arcade-opts">
+                {q.opcoes.map((op, i) => {
+                  let cls = '';
+                  if (escolha !== null) {
+                    if (i === q.resposta) cls = 'right';
+                    else if (i === escolha) cls = 'wrong';
+                  }
+                  return (
+                    <button key={i} className={`arcade-opt ${cls}`} onClick={() => responder(i)} disabled={escolha !== null && !cls}>
+                      <span className="letra">{['A', 'B', 'C', 'D'][i]}</span>
+                      <span>{op}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </>
           )}
 
           {escolha !== null && (() => {

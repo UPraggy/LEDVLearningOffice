@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Tela de redação de um novo e-mail"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  
+  <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
+  <linearGradient id="hg-1b2a4e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3b5c"/><stop offset="1" stop-color="#15203b"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-1b2a4e)"/>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
+  <circle cx="126" cy="88" r="34" fill="#5f6a83"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">✉</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Nova mensagem</text>
+  <text x="180" y="116" fill="#9fa6b5" font-family="Arial" font-size="20" font-weight="700">redigir e-mail</text>
+  <text x="108" y="200" fill="#7A8294" font-family="Arial" font-size="20">Para</text>
+  <text x="200" y="200" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">recrutamento@empresa.com.br</text>
+  <line x1="92" y1="218" x2="908" y2="218" stroke="#E2DAC8" stroke-width="2"/>
+  <text x="108" y="262" fill="#7A8294" font-family="Arial" font-size="20">Assunto</text>
+  <text x="220" y="262" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">Candidatura — vaga de atendente</text>
+  <line x1="92" y1="280" x2="908" y2="280" stroke="#E2DAC8" stroke-width="2"/>
+  <text x="108" y="332" fill="#2A3550" font-family="Arial" font-size="23"><tspan x="108" dy="0">Olá, segue meu currículo em anexo para a vaga</tspan><tspan x="108" dy="40">anunciada. Tenho disponibilidade para entrevista</tspan><tspan x="108" dy="40">nesta semana. Obrigada pela atenção.</tspan></text>
+  <rect x="108" y="470" width="300" height="50" rx="10" fill="#F4F1E8" stroke="#C9C0AC" stroke-width="2"/>
+  <rect x="124" y="484" width="22" height="22" rx="4" fill="#4F7CAC"/>
+  <text x="160" y="502" fill="#1A2540" font-family="Arial" font-size="20">curriculo-maria.pdf</text>
+  <rect x="108" y="540" width="200" height="60" rx="14" fill="#4F7A55"/>
+  <text x="208" y="579" text-anchor="middle" fill="#fff" font-family="Arial" font-size="24" font-weight="700">Enviar</text>
+</svg>

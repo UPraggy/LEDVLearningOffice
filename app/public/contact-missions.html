@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Missões</title>
+<style>
+  body{margin:0;background:#11161f;color:#E8DCC4;font-family:system-ui,sans-serif}
+  h1{text-align:center;font-weight:600;padding:18px 0 14px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:0 24px 48px;max-width:1500px;margin:0 auto}
+  figure{margin:0;background:#1b2230;border:1px solid #2c3647;border-radius:14px;overflow:hidden}
+  figure img{width:100%;display:block}
+  figcaption{padding:8px 12px;font-size:13px;font-family:monospace;opacity:.6}
+</style></head><body>
+<h1>Imagens de Missão (amostra por módulo)</h1>
+<div class="grid" id="g"></div>
+<script>
+const ids=["amb-com-1","amb-seg-6","en-a1-pessoas-3","en-a2-lugares-4","en-b1-conversa-6","mkt-carreira-6","mob-gov-1","mob-pix-4","mob-wpp-7","pc-excel-2","pc-ia-3","pc-meet-7","sec-ataque-1","sec-senha-2","mkt-excel-3","mob-saude-5","mob-maps-2","pc-nav-1"];
+const g=document.getElementById('g');
+for(const id of ids){const f=document.createElement('figure');f.innerHTML='<img loading="lazy" src="/generated/missions/'+id+'.svg" alt="'+id+'"><figcaption>'+id+'</figcaption>';g.appendChild(f);}
+</script></body></html>
