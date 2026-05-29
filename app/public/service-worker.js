@@ -1,7 +1,7 @@
 // service-worker.js
 // Este service worker faz o app funcionar offline (cache) e ser instalável.
 // Versione a cada deploy mudando o número abaixo:
-const CACHE_VERSION = 'escritorio-v2';
+const CACHE_VERSION = 'escritorio-v3';
 const PIPER_CACHE  = 'escritorio-piper-v1';
 
 // Arquivos críticos que devem estar disponíveis offline desde a primeira visita.

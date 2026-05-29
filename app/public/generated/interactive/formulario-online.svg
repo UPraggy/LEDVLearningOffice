@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Formulário de cadastro online"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
+  <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
+  <linearGradient id="hg-4f7cac" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d86b3"/><stop offset="1" stop-color="#3c5e83"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-4f7cac)"/>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
+  <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">▤</text>
+  <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Cadastro</text>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">formulário online</text><text x="124" y="214" fill="#5A6173" font-family="Arial" font-size="21">Nome completo</text>
+       <rect x="124" y="228" width="752" height="58" rx="10" fill="#ffffff"/><rect x="124" y="228" width="752" height="58" rx="10" fill="none" stroke="#D9CFB8" stroke-width="2"/><text x="124" y="314" fill="#5A6173" font-family="Arial" font-size="21">E-mail</text>
+       <rect x="124" y="328" width="752" height="58" rx="10" fill="#ffffff"/><rect x="124" y="328" width="752" height="58" rx="10" fill="none" stroke="#D9CFB8" stroke-width="2"/><text x="124" y="414" fill="#5A6173" font-family="Arial" font-size="21">Telefone</text>
+       <rect x="124" y="428" width="752" height="58" rx="10" fill="#ffffff"/><rect x="124" y="428" width="752" height="58" rx="10" fill="none" stroke="#D9CFB8" stroke-width="2"/>
+  <rect x="124" y="520" width="240" height="62" rx="14" fill="#4F7CAC" filter="url(#sh-card)"/><rect x="124" y="520" width="240" height="31" rx="14" fill="url(#sheen)"/><text x="244" y="559.16" text-anchor="middle" fill="#ffffff" font-family="Arial" font-size="24" font-weight="700">Enviar</text>
+</svg>

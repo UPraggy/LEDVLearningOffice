@@ -11,6 +11,8 @@
    - notificação imediata
    ========================================================================= */
 
+import { asset } from '../../lib/asset.js';
+
 const TIMERS_KEY = 'escritorio-notif-timers';
 
 export default class Notifica {
@@ -39,15 +41,15 @@ export default class Notifica {
         const reg = await navigator.serviceWorker.ready;
         await reg.showNotification(titulo, {
           body,
-          icon: '/icons/icon-192.png',
-          badge: '/icons/icon-72.png',
+          icon: asset('/icons/icon-192.png'),
+          badge: asset('/icons/icon-72.png'),
           vibrate: [200, 100, 200],
           tag: opts.tag || 'escritorio',
           data: { url: opts.url || '/', ...opts },
           actions: opts.actions || [],
         });
       } else {
-        new Notification(titulo, { body, icon: '/icons/icon-192.png' });
+        new Notification(titulo, { body, icon: asset('/icons/icon-192.png') });
       }
       return true;
     } catch (e) {

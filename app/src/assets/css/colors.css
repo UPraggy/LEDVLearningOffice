@@ -11,15 +11,15 @@
   --surface-2:    #FFFCF5;
   --ink:          #1A2540;
   --ink-soft:     #4A5670;
-  --ink-mute:     #7A8294;
+  --ink-mute:     #5D6474;   /* a11y: AA 5:1 sobre papel (era #7A8294 = 3.25:1) */
   --line:         #D9CFB8;
   --line-strong:  #B5A582;
 
   /* ---- BRAND ---- */
   --navy:         #1B2A4E;   /* Computador */
   --navy-deep:    #0E1A36;
-  --coral:        #E25B3F;   /* Ação primária */
-  --coral-deep:   #C44525;
+  --coral:        #D93E20;   /* Ação primária — alt.B: AA 4.5:1 c/ branco (era #E25B3F = 3.62) */
+  --coral-deep:   #A42F18;   /* hover/escuro — AAA 7:1 c/ branco */
   --honey:        #D49545;   /* XP · conquista */
   --honey-soft:   #E8B978;
   --sage:         #4F7A55;   /* Sucesso */
@@ -36,7 +36,7 @@
   /* ---- MÓDULOS (cores chip) ---- */
   --mod-computador: #1B2A4E;
   --mod-celular:    #4F7CAC;
-  --mod-mercado:    #E25B3F;
+  --mod-mercado:    #D93E20;
   --mod-seguranca:  #4F7A55;
   --mod-ingles:     #6B3F7A;
 
@@ -55,7 +55,7 @@
   /* Variações tonais por módulo (3 tons cada — base + soft + deep) */
   --comp-base: #1B2A4E; --comp-soft: #4F6BA0; --comp-deep: #0E1A36;
   --cel-base:  #4F7CAC; --cel-soft:  #8FB1D5; --cel-deep:  #2E5680;
-  --merc-base: #E25B3F; --merc-soft: #F4A089; --merc-deep: #A23218;
+  --merc-base: #D93E20; --merc-soft: #F4A089; --merc-deep: #A23218;
   --seg-base:  #4F7A55; --seg-soft:  #8AAB8E; --seg-deep:  #2D4A33;
   --ing-base:  #6B3F7A; --ing-soft:  #A07AAE; --ing-deep:  #432356;
 
@@ -133,4 +133,23 @@
 }
 :root[data-contrast="high"] body {
   background-image: none;
+}
+
+/* Alto contraste automático: quando o SO pede mais contraste e o usuário
+   não escolheu manualmente, aplica os mesmos overrides (a11y 40+). */
+@media (prefers-contrast: more) {
+  :root:not([data-contrast]) {
+    --paper: #FFF8E7;
+    --paper-warm: #F8EFD8;
+    --surface: #FFFEF9;
+    --surface-2: #FFFFFF;
+    --ink: #000000;
+    --ink-soft: #1A2540;
+    --ink-mute: #4A5670;
+    --line: #B5A582;
+    --line-strong: #7A6A4A;
+    --coral: #C44525;
+    --coral-deep: #8A2A10;
+  }
+  :root:not([data-contrast]) body { background-image: none; }
 }

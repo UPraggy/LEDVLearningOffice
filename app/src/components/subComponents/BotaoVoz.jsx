@@ -1,6 +1,5 @@
-/* Botão de voz — usa Piper Cadu offline. Tem fallback pra Web Speech.
- * Só renderiza se `progresso.preferencias.vozLigada !== false` (ligada por
- * padrão). Usuário pode desligar em Configurações > Voz.
+/* Botao de voz - usa Piper Cadu offline.
+ * So renderiza se `progresso.preferencias.vozLigada !== false`.
  */
 import { Volume2, Loader2, Square } from 'lucide-react';
 import { useVoiceSynthesis } from '../../hooks/useVoiceSynthesis.js';
@@ -11,7 +10,6 @@ export default function BotaoVoz({ texto, label, compacto = false }) {
   const { speak, parar, carregando, falando, pronto, erro } = useVoiceSynthesis();
 
   if (!texto || !texto.trim()) return null;
-  // Pref ligada por padrão; só esconde se explicitamente desligada
   if (progresso?.preferencias?.vozLigada === false) return null;
 
   const acionar = () => {
@@ -20,7 +18,7 @@ export default function BotaoVoz({ texto, label, compacto = false }) {
   };
 
   const aria = falando ? 'Parar leitura'
-    : carregando ? 'Carregando voz'
+    : carregando ? 'Carregando voz Cadu'
     : `Ouvir: ${label || texto.slice(0, 40)}`;
 
   return (
@@ -30,14 +28,14 @@ export default function BotaoVoz({ texto, label, compacto = false }) {
       onClick={acionar}
       disabled={carregando && !falando}
       aria-label={aria}
-      title={erro === 'fallback' ? 'Usando voz do sistema (fallback)' : 'Ouvir com voz Cadu'}
+      title={erro ? 'Voz Cadu indisponivel. Tente baixar novamente em Configuracoes.' : 'Ouvir com voz Cadu'}
     >
       {carregando && !falando ? <Loader2 size={16} className="ic-spin" />
         : falando ? <Square size={14} />
         : <Volume2 size={14} />}
       {!compacto && (
         <span>
-          {falando ? 'Parar' : carregando ? 'Carregando…' : pronto ? 'Ouvir' : 'Ouvir'}
+          {falando ? 'Parar' : carregando ? 'Carregando...' : pronto ? 'Ouvir' : 'Ouvir'}
         </span>
       )}
     </button>

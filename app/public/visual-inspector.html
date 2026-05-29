@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual Inspector — base de design</title>
+<style>
+  :root{
+    --bg:#0E131C; --panel:#161D2A; --panel2:#1E2636; --line:#2B3547;
+    --ink:#E8EDF5; --mut:#94A0B4; --accent:#7CA0FF; --ok:#3FB36B; --warn:#E0B33A; --bad:#E0584E;
+    --r:12px; --sp:16px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,Segoe UI,Roboto,sans-serif}
+  header{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;gap:14px;align-items:center;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);z-index:10}
+  header h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.2px}
+  header .sp{flex:1}
+  .layout{display:grid;grid-template-columns:300px 1fr 320px;gap:0;align-items:start}
+  .col{padding:var(--sp);overflow:auto;max-height:calc(100vh - 57px);position:sticky;top:57px}
+  .col.left{border-right:1px solid var(--line)}
+  .col.right{border-left:1px solid var(--line)}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px}
+  h2{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:18px 0 8px}
+  h2:first-child{margin-top:0}
+  input,select,button{font:inherit;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+  input[type=color]{padding:2px;height:34px;width:46px}
+  button{cursor:pointer;background:var(--panel2)}
+  button:hover{border-color:var(--accent)}
+  button.on{background:var(--accent);color:#0E131C;border-color:var(--accent);font-weight:600}
+  label.row{display:flex;align-items:center;gap:8px;margin:6px 0;cursor:pointer;font-size:13px}
+  .toolbar{display:flex;flex-wrap:wrap;gap:6px}
+  .toolbar button{padding:6px 9px;font-size:12px}
+  .frame{position:relative;background:#E9EEF2;border-radius:10px;box-shadow:0 22px 40px rgba(0,0,0,.45);overflow:hidden;max-width:100%}
+  .frame svg,.frame img{display:block;width:100%;height:auto}
+  .ov{position:absolute;inset:0;pointer-events:none}
+  .ov.grid{background-size:var(--g,8px) var(--g,8px);background-image:
+     linear-gradient(to right,rgba(124,160,255,.28) 1px,transparent 1px),
+     linear-gradient(to bottom,rgba(124,160,255,.28) 1px,transparent 1px)}
+  .ov.cols{display:grid;gap:var(--gutter,16px);padding:0 var(--margin,24px)}
+  .ov.cols i{background:rgba(226,91,63,.16);border-left:1px dashed rgba(226,91,63,.5);border-right:1px dashed rgba(226,91,63,.5)}
+  .ov.center::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed rgba(63,179,107,.7)}
+  .ov.center::after{content:"";position:absolute;top:50%;left:0;right:0;border-top:1px dashed rgba(63,179,107,.7)}
+  .ov.thirds{background-image:
+     linear-gradient(to right,transparent calc(33.33% - 1px),rgba(224,179,58,.6) 33.33%,transparent calc(33.33% + 1px)),
+     linear-gradient(to right,transparent calc(66.66% - 1px),rgba(224,179,58,.6) 66.66%,transparent calc(66.66% + 1px)),
+     linear-gradient(to bottom,transparent calc(33.33% - 1px),rgba(224,179,58,.6) 33.33%,transparent calc(66.66% + 1px)),
+     linear-gradient(to bottom,transparent calc(66.66% - 1px),rgba(224,179,58,.6) 66.66%,transparent calc(66.66% + 1px))}
+  .sw{display:flex;flex-wrap:wrap;gap:6px}
+  .sw .chip{width:42px;height:42px;border-radius:8px;border:1px solid rgba(255,255,255,.15);position:relative;cursor:pointer}
+  .sw .chip span{position:absolute;bottom:-16px;left:0;right:0;text-align:center;font-size:9px;color:var(--mut)}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{text-align:left;padding:5px 6px;border-bottom:1px solid var(--line)}
+  .tag{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:600}
+  .tag.AAA{background:rgba(63,179,107,.2);color:#7be3a0}
+  .tag.AA{background:rgba(124,160,255,.2);color:#a9c2ff}
+  .tag.AAGrande,.tag.AA-Grande{background:rgba(224,179,58,.2);color:#f0d585}
+  .tag.Reprovado{background:rgba(224,88,78,.22);color:#ff9a92}
+  .ramp{display:flex;border-radius:8px;overflow:hidden;height:34px}
+  .ramp i{flex:1}
+  .ck{list-style:none;padding:0;margin:0;font-size:12.5px}
+  .ck li{padding:7px 0;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:flex-start}
+  .ck li::before{content:"☐";color:var(--mut)}
+  .ck li.done::before{content:"☑";color:var(--ok)}
+  .note{font-size:12px;color:var(--mut)}
+  code{background:var(--panel2);padding:1px 5px;border-radius:5px;font-size:12px}
+  .pair{display:flex;gap:8px;align-items:center;margin:6px 0}
+  .big{padding:10px 14px;border-radius:8px;font-weight:700}
+  details{margin:8px 0;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+  summary{cursor:pointer;padding:8px 10px;font-weight:600}
+  details .body{padding:0 10px 10px;font-size:12.5px;color:#cdd5e3}
+  @media(max-width:1100px){.layout{grid-template-columns:1fr}.col.left,.col.right{border:none;border-bottom:1px solid var(--line)}}
+  .modal{position:fixed;inset:0;background:rgba(6,9,14,.72);z-index:50;display:flex;justify-content:center;padding:34px}
+  .modal .sheet{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:880px;width:100%;max-height:100%;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .modal .top{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .modal .top .sp{flex:1}
+  .modal .doc{padding:18px 24px;overflow:auto}
+  .doc h1{font-size:22px;margin:.2em 0 .5em}
+  .doc h2{font-size:16px;color:var(--ink);text-transform:none;letter-spacing:0;margin:1.2em 0 .4em;border-top:1px solid var(--line);padding-top:.8em}
+  .doc h3{font-size:14px;margin:1em 0 .3em;color:var(--accent)}
+  .doc p,.doc li{font-size:13.5px;color:#cfd7e6}
+  .doc code{background:var(--panel2)}
+  .doc table{margin:8px 0}
+  .doc blockquote{border-left:3px solid var(--accent);margin:8px 0;padding:4px 12px;color:var(--mut)}
+  .doc a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔍 Visual Inspector</h1>
+  <span class="note">base de design · contraste · grid · paleta · checklist</span>
+  <span class="sp"></span>
+  <button id="docsBtn" title="Abrir base de conhecimento">📚 Docs</button>
+  <button id="tokensBtn" title="Tokens reais do app (colors.css)">🎨 Tokens</button>
+  <select id="preset" title="Carregar SVG do projeto"></select>
+  <input id="url" placeholder="/generated/interactive/wpp-chefe.svg" style="width:280px">
+  <button id="load">Carregar</button>
+</header>
+
+<!-- filtros de simulação de daltonismo (CVD) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="cb-prot"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
+  <filter id="cb-deut"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
+  <filter id="cb-trit"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0"/></filter>
+</defs></svg>
+
+<!-- modal de docs -->
+<div id="docs" class="modal" hidden>
+  <div class="sheet">
+    <div class="top">
+      <strong>📚 Base de conhecimento</strong>
+      <div class="toolbar" id="docTabs">
+        <button data-doc="/docs/DESIGN-KB.md" class="on">DESIGN-KB</button>
+        <button data-doc="/docs/DESIGN-RESEARCH.md">DESIGN-RESEARCH (web)</button>
+      </div>
+      <span class="sp"></span>
+      <button id="docsClose">✕ Fechar</button>
+    </div>
+    <div class="doc" id="docBody"><span class="note">carregando…</span></div>
+  </div>
+</div>
+
+<!-- modal de tokens reais do app (= "variables + modes" da Figma) -->
+<div id="tok" class="modal" hidden>
+  <div class="sheet">
+    <div class="top">
+      <strong>🎨 Tokens do app</strong>
+      <div class="toolbar" id="tokModes">
+        <button data-mode="" class="on">Padrão</button>
+        <button data-mode="contrast=high">Alto contraste</button>
+        <button data-mode="fontstep=2">Fonte grande</button>
+      </div>
+      <span class="sp"></span>
+      <button id="tokCss" title="Copiar tokens do modo atual">Copiar CSS</button>
+      <button id="tokClose">✕ Fechar</button>
+    </div>
+    <div class="doc" id="tokBody"><span class="note">carregando…</span></div>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- ESQUERDA: overlays + viewport -->
+  <aside class="col left">
+    <h2>Overlays</h2>
+    <div class="toolbar" id="ovTools">
+      <button data-ov="grid">Grid 8px</button>
+      <button data-ov="cols">Colunas</button>
+      <button data-ov="thirds">Regra dos terços</button>
+      <button data-ov="center">Centro</button>
+    </div>
+    <label class="row">Grid <input id="gridSize" type="range" min="4" max="32" step="4" value="8"> <span id="gridVal">8px</span></label>
+    <label class="row">Colunas <input id="colN" type="range" min="2" max="12" value="6"> <span id="colVal">6</span></label>
+
+    <h2>Viewport</h2>
+    <div class="toolbar">
+      <button data-w="375">Mobile 375</button>
+      <button data-w="768">Tablet 768</button>
+      <button data-w="1024">Desktop 1024</button>
+      <button data-w="1200">OG 1200</button>
+      <button data-w="0" class="on">Auto</button>
+    </div>
+
+    <h2>Simular daltonismo (CVD)</h2>
+    <div class="toolbar">
+      <button data-cvd="" class="on">Normal</button>
+      <button data-cvd="url(#cb-prot)">Protan</button>
+      <button data-cvd="url(#cb-deut)">Deuter</button>
+      <button data-cvd="url(#cb-trit)">Tritan</button>
+      <button data-cvd="grayscale(1)">Cinza</button>
+    </div>
+    <p class="note">Confere se a informação sobrevive sem cor (≈8% dos homens têm CVD).</p>
+
+    <h2>Fundo do palco</h2>
+    <div class="toolbar">
+      <button data-bg="#E9EEF2" class="on">Claro</button>
+      <button data-bg="#11161f">Escuro</button>
+      <button data-bg="#ffffff">Branco</button>
+      <button data-bg="checker">Xadrez (alpha)</button>
+    </div>
+
+    <h2>Web · pesquisar &amp; buscar referência</h2>
+    <div class="toolbar" style="margin-bottom:6px">
+      <input id="webQ" placeholder="ex.: color palette 2025 trends" style="flex:1;min-width:0">
+      <button id="webSearchBtn" title="Pesquisar na web">Pesquisar</button>
+    </div>
+    <div class="toolbar" style="margin-bottom:6px">
+      <input id="webUrl" placeholder="https://… (página de referência)" style="flex:1;min-width:0">
+      <button id="webFetchBtn" title="Ler página + extrair paleta">Buscar</button>
+    </div>
+    <p class="note">Lê páginas via proxy (r.jina.ai / allorigins) e extrai paleta + contraste de sites reais. Sem chave. Pode falhar por CORS/limite — tente outra URL.</p>
+    <div id="webOut" class="note" style="margin-top:6px"></div>
+  </aside>
+
+  <!-- CENTRO: palco -->
+  <main class="col stage">
+    <div id="frame" class="frame" style="width:760px">
+      <div id="art" class="note" style="padding:40px">Carregue um SVG (selecione um preset ou digite a URL).</div>
+      <div class="ov grid" data-ov="grid" hidden></div>
+      <div class="ov cols" data-ov="cols" hidden></div>
+      <div class="ov thirds" data-ov="thirds" hidden></div>
+      <div class="ov center" data-ov="center" hidden></div>
+    </div>
+    <div class="note" id="meta"></div>
+  </main>
+
+  <!-- DIREITA: análise -->
+  <aside class="col right">
+    <h2>Paleta extraída</h2>
+    <div class="sw" id="palette"><span class="note">—</span></div>
+    <div class="toolbar" style="margin-top:18px">
+      <button id="expCss" title="Copiar como variáveis CSS">Copiar CSS</button>
+      <button id="expJson" title="Copiar como JSON">Copiar JSON</button>
+    </div>
+
+    <h2>Matriz de contraste (WCAG)</h2>
+    <div id="matrix"><span class="note">Carregue um SVG ou use a ferramenta de cor.</span></div>
+
+    <h2>Ferramenta de cor</h2>
+    <div class="pair">
+      <input type="color" id="cFg" value="#1B2A4E">
+      <span>texto</span>
+      <input type="color" id="cBg" value="#F4F1E8">
+      <span>fundo</span>
+    </div>
+    <div id="cOut"></div>
+    <h2>Harmonias</h2>
+    <div id="harm"></div>
+    <h2>Tints &amp; Shades</h2>
+    <div class="ramp" id="ramp"></div>
+
+    <h2>Escala tipográfica &amp; espaçamento</h2>
+    <div class="pair">
+      <label class="row" style="margin:0">base <input id="tsBase" type="number" value="16" min="8" max="32" style="width:58px"></label>
+      <label class="row" style="margin:0">razão
+        <select id="tsRatio" style="padding:5px">
+          <option value="1.2">1.200 minor third</option>
+          <option value="1.25" selected>1.250 major third</option>
+          <option value="1.333">1.333 fourth</option>
+          <option value="1.5">1.500 fifth</option>
+          <option value="1.618">1.618 golden</option>
+        </select>
+      </label>
+    </div>
+    <div id="scaleOut"></div>
+
+    <h2>Checklist de qualidade</h2>
+    <ul class="ck" id="checklist"></ul>
+
+    <h2>Conceitos &amp; dicas</h2>
+    <div id="tips"></div>
+    <p class="note">Base completa em <code>docs/DESIGN-KB.md</code> · funções em <code>src/lib/design-kit.js</code></p>
+  </aside>
+</div>
+
+<script type="module">
+import K from '/src/lib/design-kit.js';
+
+// ---- presets (SVGs do projeto) -------------------------------------------
+const interactive = ["wpp-chefe","sms-banco","pix-confirmacao","windows-desktop","navegador-url","site-gov-falso","excel-erro","email-entrega","wpp-promo","popup-virus","wifi-publico","senha-forte","dois-fatores","qr-code","calculadora","ia-chat","tradutor","flashcard-ingles","menu-restaurante","carrinho-compras"];
+const missions = ["mob-pix-4","en-b1-conversa-6","sec-ataque-1","mkt-carreira-6","pc-excel-2","mob-wpp-7"];
+const sel = document.getElementById('preset');
+sel.innerHTML = '<option value="">— presets —</option>'
+  + '<optgroup label="Interativas">' + interactive.map(s=>`<option value="/generated/interactive/${s}.svg">${s}</option>`).join('') + '</optgroup>'
+  + '<optgroup label="Missões">' + missions.map(s=>`<option value="/generated/missions/${s}.svg">${s}</option>`).join('') + '</optgroup>';
+sel.onchange = ()=>{ if(sel.value){ document.getElementById('url').value = sel.value; load(sel.value); } };
+
+// ---- carregar e extrair ---------------------------------------------------
+const frame = document.getElementById('frame');
+const art = document.getElementById('art');
+const meta = document.getElementById('meta');
+
+async function load(u){
+  try{
+    const r = await fetch(u); if(!r.ok) throw new Error(r.status);
+    const txt = await r.text();
+    art.outerHTML = `<div id="art">${txt}</div>`; // injeta inline
+    rebindArt();
+    const svg = frame.querySelector('svg');
+    const vb = svg?.getAttribute('viewBox') || '';
+    meta.textContent = `${u}  ·  viewBox ${vb}`;
+    extractPalette(txt);
+    scoreChecklist(txt, svg);
+  }catch(e){ meta.textContent = 'Erro ao carregar: '+e.message; }
+}
+function rebindArt(){ /* art recriado; overlays continuam no frame */ }
+document.getElementById('load').onclick = ()=>load(document.getElementById('url').value.trim());
+
+function extractPalette(txt){
+  const found = new Map();
+  const re = /#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b/g; let m;
+  while((m = re.exec(txt))){ let h=m[0]; if(h.length===4)h='#'+h.slice(1).split('').map(c=>c+c).join(''); found.set(h.toLowerCase(),(found.get(h.toLowerCase())||0)+1); }
+  const colors = [...found.entries()].sort((a,b)=>b[1]-a[1]).map(e=>e[0]).slice(0,16);
+  const pal = document.getElementById('palette');
+  pal.innerHTML = colors.length ? colors.map(c=>`<div class="chip" style="background:${c}" title="${c}" data-c="${c}"><span>${c.replace('#','')}</span></div>`).join('') : '<span class="note">nenhuma cor sólida encontrada</span>';
+  pal.querySelectorAll('.chip').forEach(ch=>ch.onclick=()=>{ document.getElementById('cFg').value=ch.dataset.c; updateColor(); });
+  buildMatrix(colors);
+}
+
+function buildMatrix(colors){
+  const box = document.getElementById('matrix');
+  if(!colors.length){ box.innerHTML='<span class="note">—</span>'; return; }
+  // pares mais úteis: cada cor vs as cores mais claras e mais escuras (candidatas a fundo)
+  const byLum = [...colors].sort((a,b)=>K.relativeLuminance(a)-K.relativeLuminance(b));
+  const dark = byLum[0], light = byLum[byLum.length-1];
+  const rows = colors.map(c=>{
+    const w = K.wcag(c, light), b = K.wcag(c, dark);
+    return `<tr><td><span class="chip" style="display:inline-block;width:14px;height:14px;border-radius:3px;background:${c};vertical-align:middle"></span> ${c}</td>
+      <td>${w.ratio} <span class="tag ${w.level.replace(' ','-')}">${w.level}</span></td>
+      <td>${b.ratio} <span class="tag ${b.level.replace(' ','-')}">${b.level}</span></td></tr>`;
+  }).join('');
+  box.innerHTML = `<table><thead><tr><th>cor</th><th>vs claro</th><th>vs escuro</th></tr></thead><tbody>${rows}</tbody></table>
+    <p class="note">claro=${light} · escuro=${dark}</p>`;
+}
+
+// ---- overlays -------------------------------------------------------------
+document.querySelectorAll('#ovTools button').forEach(b=>{
+  b.onclick=()=>{ b.classList.toggle('on'); const el=frame.querySelector(`.ov[data-ov="${b.dataset.ov}"]`); el.hidden=!b.classList.contains('on'); if(b.dataset.ov==='cols') buildCols(); };
+});
+function buildCols(){ const n=+document.getElementById('colN').value; const el=frame.querySelector('.ov.cols'); el.style.gridTemplateColumns=`repeat(${n},1fr)`; el.innerHTML=Array.from({length:n},()=>'<i></i>').join(''); }
+document.getElementById('gridSize').oninput=e=>{ frame.querySelector('.ov.grid').style.setProperty('--g',e.target.value+'px'); document.getElementById('gridVal').textContent=e.target.value+'px'; };
+document.getElementById('colN').oninput=e=>{ document.getElementById('colVal').textContent=e.target.value; buildCols(); };
+
+// ---- viewport & fundo -----------------------------------------------------
+document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-w]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  const w=+b.dataset.w; frame.style.width = w? w+'px' : '760px';
+});
+document.querySelectorAll('[data-bg]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-bg]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  const v=b.dataset.bg;
+  if(v==='checker'){ frame.style.background='repeating-conic-gradient(#ccc 0% 25%,#fff 0% 50%) 50%/20px 20px'; }
+  else frame.style.background=v;
+});
+
+// ---- ferramenta de cor ----------------------------------------------------
+const cFg=document.getElementById('cFg'), cBg=document.getElementById('cBg');
+function updateColor(){
+  const fg=cFg.value, bg=cBg.value;
+  const w=K.wcag(fg,bg), wL=K.wcag(fg,bg,true);
+  const fix=K.ensureContrast(fg,bg,4.5);
+  document.getElementById('cOut').innerHTML=`
+    <div class="big" style="background:${bg};color:${fg}">Texto exemplo Aa</div>
+    <table style="margin-top:8px">
+      <tr><td>Contraste</td><td><b>${w.ratio}:1</b></td></tr>
+      <tr><td>Texto normal</td><td><span class="tag ${w.level.replace(' ','-')}">${w.level}</span></td></tr>
+      <tr><td>Texto grande</td><td><span class="tag ${wL.level.replace(' ','-')}">${wL.level}</span></td></tr>
+      <tr><td>bestTextOn(fundo)</td><td><code>${K.bestTextOn(bg)}</code></td></tr>
+      <tr><td>Corrige p/ AA</td><td><span class="chip" style="display:inline-block;width:14px;height:14px;border-radius:3px;background:${fix};vertical-align:middle"></span> <code>${fix}</code></td></tr>
+    </table>`;
+  // harmonias
+  const sets={Complementar:K.complement(fg),Análoga:K.analogous(fg),Tríade:K.triadic(fg),'Split':K.splitComplement(fg),Mono:K.monochrome(fg,5)};
+  document.getElementById('harm').innerHTML=Object.entries(sets).map(([k,arr])=>
+    `<div style="margin:6px 0"><div class="note">${k}</div><div class="ramp">${arr.map(c=>`<i style="background:${c}" title="${c}"></i>`).join('')}</div></div>`).join('');
+  document.getElementById('ramp').innerHTML=K.scale(fg,9).map(c=>`<i style="background:${c}" title="${c}"></i>`).join('');
+}
+cFg.oninput=updateColor; cBg.oninput=updateColor;
+
+// ---- checklist ------------------------------------------------------------
+const CHECKS=[
+  'Contraste de texto ≥ 4.5:1 (grande ≥ 3:1)',
+  'Informação não depende só de cor',
+  'Espaçamento em múltiplos de 8 (ou 4)',
+  'Tudo alinhado a uma borda/coluna',
+  'Um foco primário claro',
+  'Escala tipográfica modular, 2–3 pesos',
+  'Paleta restrita; acento ≤ ~10% da área',
+  'Profundidade coerente (1 direção de luz, sombra por elevação)',
+  'Cantos e traços consistentes',
+  'Formato de imagem certo + width/height definidos',
+  'Legível em mobile/tablet/desktop',
+  'A11y: foco visível, alt, reduced-motion',
+];
+function scoreChecklist(txt, svg){
+  const ul=document.getElementById('checklist');
+  // heurísticas simples só p/ marcar automaticamente alguns itens
+  const auto={};
+  auto[7]= /feDropShadow|filter=/.test(txt);            // profundidade
+  auto[8]= /(rx="\d+")/.test(txt);                       // cantos
+  auto[9]= /(width|height)=/.test(txt);                  // dimensões
+  ul.innerHTML=CHECKS.map((c,i)=>`<li class="${auto[i]?'done':''}">${c}</li>`).join('');
+  ul.querySelectorAll('li').forEach(li=>li.onclick=()=>li.classList.toggle('done'));
+}
+document.getElementById('checklist').innerHTML=CHECKS.map(c=>`<li>${c}</li>`).join('');
+document.querySelectorAll('#checklist li').forEach(li=>li.onclick=()=>li.classList.toggle('done'));
+
+// ---- dicas (resumo do KB) -------------------------------------------------
+const TIPS=[
+  ['Cor & 60-30-10','60% neutro, 30% apoio, 10% acento. Acento escasso = chama o olho. Gere variações por tints/shades, não por chute.'],
+  ['Gradiente vivo','Faça hue-shift leve (8–15°) entre as paradas, não só claro→escuro. Evite passar pelo cinza.'],
+  ['Contraste','Texto ≥4.5:1. Nunca informe só por cor (daltonismo ~8%). Use ensureContrast/bestTextOn.'],
+  ['Tipografia','Escala modular (×1.25/1.333/1.618). Linha 45–75 caracteres. Entrelinha 1.4–1.6 no corpo.'],
+  ['Espaço & Gestalt','Base-8. Mais espaço entre grupos do que dentro deles. Alinhe tudo. Proximidade agrupa.'],
+  ['Profundidade','Uma direção de luz. Sombra = ink colorido, opacidade 12–24%, blur generoso. Sheen sutil no topo.'],
+  ['Imagem certa','Vetor (SVG) p/ arte geométrica; raster (WebP/AVIF) p/ foto. Exporte @2x p/ retina. Defina width/height.'],
+  ['Front-end','Mobile-first, clamp() p/ fluido, grid auto-fit, anime transform/opacity, respeite reduced-motion.'],
+  ['Slides','1 ideia por slide. Título ≥30pt. Alto contraste. Gráfico > tabela. Remova chartjunk.'],
+];
+document.getElementById('tips').innerHTML=TIPS.map(([t,b])=>`<details><summary>${t}</summary><div class="body">${b}</div></details>`).join('');
+
+// ---- Web: search + fetch (proxies CORS keyless) ---------------------------
+const webOut = document.getElementById('webOut');
+const PROXIES = {
+  // texto legível (markdown) de qualquer URL
+  read: u => 'https://r.jina.ai/' + u,
+  // HTML/CSS cru (p/ extrair cores) — dois fallbacks
+  raw: [
+    u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+    u => 'https://r.jina.ai/' + u,
+  ],
+  // busca: DuckDuckGo HTML via leitor → markdown com links
+  search: q => 'https://r.jina.ai/https://duckduckgo.com/html/?q=' + encodeURIComponent(q),
+};
+const norm = u => /^https?:\/\//i.test(u) ? u : 'https://' + u;
+
+async function tryFetch(urls){
+  let lastErr;
+  for(const u of urls){
+    try{ const r = await fetch(u); if(r.ok) return await r.text(); lastErr = new Error(r.status); }
+    catch(e){ lastErr = e; }
+  }
+  throw lastErr || new Error('falha');
+}
+
+async function webFetch(raw){
+  const u = norm(raw.trim()); if(!u) return;
+  webOut.innerHTML = '⏳ buscando ' + u + ' …';
+  try{
+    // 1) HTML cru p/ paleta
+    let html = '';
+    try{ html = await tryFetch(PROXIES.raw.map(f=>f(u))); }catch{}
+    if(html){
+      const fonts = [...new Set([...html.matchAll(/font-family\s*:\s*([^;"'}]+)/gi)].map(m=>m[1].trim()).filter(Boolean))].slice(0,6);
+      extractPalette(html);
+      meta.textContent = 'Web · ' + u + (fonts.length ? '  ·  fontes: ' + fonts.join(' / ') : '');
+      art.innerHTML = '<div class="note" style="padding:40px">Paleta e contraste extraídos de <b>'+u+'</b> →</div>';
+    }
+    // 2) texto legível
+    const txt = await tryFetch([PROXIES.read(u)]);
+    const clip = txt.slice(0, 4000);
+    webOut.innerHTML = '<div style="max-height:240px;overflow:auto;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px;white-space:pre-wrap;font-size:12px">'
+      + clip.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + (txt.length>4000?'\n\n…[truncado]':'') + '</div>';
+  }catch(e){ webOut.innerHTML = '<span style="color:var(--bad)">Erro: '+e.message+' — tente outra URL ou verifique CORS/limite do proxy.</span>'; }
+}
+
+async function webSearch(q){
+  q = q.trim(); if(!q) return;
+  webOut.innerHTML = '⏳ pesquisando “' + q + '” …';
+  try{
+    const txt = await tryFetch([PROXIES.search(q)]);
+    // extrai pares [título](url) e URLs soltas do markdown
+    const links = [];
+    const reMd = /\[([^\]]{3,120})\]\((https?:\/\/[^)]+)\)/g; let m;
+    while((m = reMd.exec(txt)) && links.length < 25){
+      let url = m[2];
+      // DuckDuckGo embrulha em redirect uddg=
+      const dg = url.match(/uddg=([^&]+)/); if(dg) url = decodeURIComponent(dg[1]);
+      const title = m[1].trim();
+      if(/duckduckgo\.com\/(html|y\.js|l\/)/.test(url)) continue;
+      if(title.startsWith('![') || /\.(ico|png|jpe?g|gif|svg|webp)(\?|$)/i.test(url)) continue;
+      if(/external-content\.duckduckgo\.com|duckduckgo\.com\/i\//.test(url)) continue;
+      links.push({ t: title, u: url });
+    }
+    const seen = new Set();
+    const uniq = links.filter(l=>{ if(seen.has(l.u))return false; seen.add(l.u); return true; }).slice(0,12);
+    webOut.innerHTML = uniq.length
+      ? uniq.map(l=>`<div style="padding:5px 0;border-bottom:1px solid var(--line)"><a href="#" data-u="${l.u}" class="webres" style="color:var(--accent);text-decoration:none">${l.t.replace(/[<>]/g,'')}</a><div class="note" style="font-size:10px">${l.u}</div></div>`).join('')
+      : '<span class="note">Sem resultados extraíveis. Tente outra busca.</span>';
+    webOut.querySelectorAll('.webres').forEach(a=>a.onclick=e=>{ e.preventDefault(); document.getElementById('webUrl').value=a.dataset.u; webFetch(a.dataset.u); });
+  }catch(e){ webOut.innerHTML = '<span style="color:var(--bad)">Erro na busca: '+e.message+'</span>'; }
+}
+
+document.getElementById('webFetchBtn').onclick = ()=>webFetch(document.getElementById('webUrl').value);
+document.getElementById('webSearchBtn').onclick = ()=>webSearch(document.getElementById('webQ').value);
+document.getElementById('webUrl').addEventListener('keydown',e=>{ if(e.key==='Enter') webFetch(e.target.value); });
+document.getElementById('webQ').addEventListener('keydown',e=>{ if(e.key==='Enter') webSearch(e.target.value); });
+
+// ---- Simular daltonismo (CVD) --------------------------------------------
+document.querySelectorAll('[data-cvd]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-cvd]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  frame.style.filter = b.dataset.cvd || 'none';
+});
+
+// ---- Exportar paleta ------------------------------------------------------
+function currentPalette(){ return [...document.querySelectorAll('#palette .chip[data-c]')].map(c=>c.dataset.c); }
+async function copy(txt,btn){ try{ await navigator.clipboard.writeText(txt); const o=btn.textContent; btn.textContent='✓ copiado'; setTimeout(()=>btn.textContent=o,1200); }catch{ btn.textContent='copie manual'; } }
+document.getElementById('expCss').onclick=e=>{ const p=currentPalette(); if(!p.length)return; copy(':root{\n'+p.map((c,i)=>`  --c-${i+1}: ${c};`).join('\n')+'\n}', e.target); };
+document.getElementById('expJson').onclick=e=>{ const p=currentPalette(); if(!p.length)return; copy(JSON.stringify(p,null,2), e.target); };
+
+// ---- Escala tipográfica & espaçamento -------------------------------------
+function renderScale(){
+  const base=+document.getElementById('tsBase').value||16, ratio=+document.getElementById('tsRatio').value;
+  const ts = K.typeScale ? K.typeScale(base, ratio, 6) : [];
+  const sp = K.spacing ? [1,2,3,4,5,6,8].map(n=>K.spacing(n)) : [];
+  const tRows = (ts.length?ts:[base]).map((v,i)=>`<tr><td>passo ${i}</td><td><b>${Math.round(v)}px</b></td></tr>`).join('');
+  document.getElementById('scaleOut').innerHTML =
+    `<table><thead><tr><th>tipografia (×${ratio})</th><th></th></tr></thead><tbody>${tRows}</tbody></table>`
+    + (sp.length?`<p class="note" style="margin-top:8px">espaçamento base-8: ${sp.join(' · ')} px</p>`:'');
+}
+document.getElementById('tsBase').oninput=renderScale; document.getElementById('tsRatio').onchange=renderScale;
+
+// ---- Painel de Docs (markdown leve) ---------------------------------------
+function mdToHtml(md){
+  const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const inline=s=>esc(s)
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  const lines=md.split('\n'); let html='', i=0, inList=false, inQuote=false;
+  const closeList=()=>{ if(inList){html+='</ul>';inList=false;} };
+  while(i<lines.length){
+    let ln=lines[i];
+    if(/^\|.*\|/.test(ln) && /^\|[\s:|-]+\|?\s*$/.test(lines[i+1]||'')){ // tabela
+      closeList();
+      const head=ln.split('|').slice(1,-1).map(c=>`<th>${inline(c.trim())}</th>`).join('');
+      i+=2; let body='';
+      while(i<lines.length && /^\|.*\|/.test(lines[i])){ body+='<tr>'+lines[i].split('|').slice(1,-1).map(c=>`<td>${inline(c.trim())}</td>`).join('')+'</tr>'; i++; }
+      html+=`<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`; continue;
+    }
+    if(/^---+\s*$/.test(ln)){ closeList(); html+='<hr>'; i++; continue; }
+    let h=ln.match(/^(#{1,3})\s+(.*)/);
+    if(h){ closeList(); const n=h[1].length; html+=`<h${n}>${inline(h[2])}</h${n}>`; i++; continue; }
+    if(/^>\s?/.test(ln)){ closeList(); html+=`<blockquote>${inline(ln.replace(/^>\s?/,''))}</blockquote>`; i++; continue; }
+    if(/^[-*]\s+/.test(ln)){ if(!inList){html+='<ul>';inList=true;} html+=`<li>${inline(ln.replace(/^[-*]\s+/,''))}</li>`; i++; continue; }
+    closeList();
+    if(ln.trim()) html+=`<p>${inline(ln)}</p>`;
+    i++;
+  }
+  closeList(); return html;
+}
+const docModal=document.getElementById('docs'), docBody=document.getElementById('docBody');
+async function openDoc(path){
+  document.querySelectorAll('#docTabs button').forEach(b=>b.classList.toggle('on', b.dataset.doc===path));
+  docBody.innerHTML='<span class="note">carregando…</span>';
+  try{ const r=await fetch(path); docBody.innerHTML=mdToHtml(await r.text()); docBody.scrollTop=0; }
+  catch(e){ docBody.innerHTML='<span class="note">erro: '+e.message+'</span>'; }
+}
+document.getElementById('docsBtn').onclick=()=>{ docModal.hidden=false; openDoc('/docs/DESIGN-KB.md'); };
+document.getElementById('docsClose').onclick=()=>docModal.hidden=true;
+docModal.onclick=e=>{ if(e.target===docModal) docModal.hidden=true; };
+document.querySelectorAll('#docTabs button').forEach(b=>b.onclick=()=>openDoc(b.dataset.doc));
+
+// ---- Tokens reais do app (colors.css) — visão por modos (= modes da Figma) --
+const tokModal=document.getElementById('tok'), tokBody=document.getElementById('tokBody');
+let TOK=null, tokMode='';
+function parseCssVars(css){
+  const blocks=[]; const re=/(:root[^{]*)\{([^}]*)\}/g; let m;
+  while((m=re.exec(css))){ const sel=m[1].trim(); const vars={}; const vre=/(--[\w-]+)\s*:\s*([^;]+);/g; let v;
+    while((v=vre.exec(m[2]))) vars[v[1].trim()]=v[2].trim(); blocks.push({sel,vars}); }
+  return blocks;
+}
+const modeKeyOf = sel => { const m=sel.match(/data-(\w+)="?(\w+)"?/); return m?`${m[1]}=${m[2]}`:''; };
+function mergedTokens(mode){ const base={}; TOK.forEach(b=>{ if(modeKeyOf(b.sel)==='' && !b.sel.includes(':not(')) Object.assign(base,b.vars); });
+  if(mode) TOK.forEach(b=>{ if(modeKeyOf(b.sel)===mode) Object.assign(base,b.vars); }); return base; }
+function resolveVar(val,map,d=0){ const m=(val||'').match(/^var\((--[\w-]+)\)$/); return (m&&d<6)?resolveVar(map[m[1]]||val,map,d+1):val; }
+const isColor = v => /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v);
+function renderTokens(){
+  if(!TOK){ tokBody.innerHTML='<span class="note">erro ao carregar colors.css</span>'; return; }
+  const map=mergedTokens(tokMode);
+  const entries=Object.entries(map).map(([k,v])=>[k,resolveVar(v,map)]);
+  const colors=entries.filter(([,v])=>isColor(v)), others=entries.filter(([,v])=>!isColor(v));
+  const chip=([k,v])=>`<div class="chip" style="background:${v}" title="${k}: ${v}" data-c="${v}"><span>${k.replace('--','').slice(0,12)}</span></div>`;
+  const ink=resolveVar(map['--ink']||'#000',map), paper=resolveVar(map['--paper']||'#fff',map);
+  const w=K.wcag(ink,paper);
+  tokBody.innerHTML=
+    `<p class="note">Lido de <code>src/assets/css/colors.css</code> · modo <b>${tokMode||'padrão'}</b> · `
+    +`texto×fundo (ink×paper): <b>${w.ratio}:1</b> <span class="tag ${w.level.replace(' ','-')}">${w.level}</span></p>`
+    +`<h3>Cores (${colors.length})</h3><div class="sw" style="margin-bottom:26px">${colors.map(chip).join('')}</div>`
+    +`<h3>Outros tokens (${others.length})</h3><table><tbody>${others.map(([k,v])=>`<tr><td><code>${k}</code></td><td>${v.length>70?v.slice(0,70)+'…':v}</td></tr>`).join('')}</tbody></table>`;
+  tokBody.querySelectorAll('.chip[data-c]').forEach(ch=>ch.onclick=()=>{ document.getElementById('cFg').value=ch.dataset.c; updateColor(); });
+}
+async function openTokens(){ tokModal.hidden=false; if(!TOK){ try{ const r=await fetch('/src/assets/css/colors.css'); TOK=parseCssVars(await r.text()); }catch{ TOK=null; } } renderTokens(); }
+document.getElementById('tokensBtn').onclick=openTokens;
+document.getElementById('tokClose').onclick=()=>tokModal.hidden=true;
+tokModal.onclick=e=>{ if(e.target===tokModal) tokModal.hidden=true; };
+document.querySelectorAll('#tokModes button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('#tokModes button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); tokMode=b.dataset.mode; renderTokens(); });
+document.getElementById('tokCss').onclick=e=>{ if(!TOK)return; const map=mergedTokens(tokMode); copy(':root{\n'+Object.entries(map).map(([k,v])=>`  ${k}: ${v};`).join('\n')+'\n}', e.target); };
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ docModal.hidden=true; tokModal.hidden=true; } });
+
+// init
+updateColor(); buildCols(); renderScale();
+const params=new URLSearchParams(location.search);
+if(params.get('svg')) { document.getElementById('url').value=params.get('svg'); load(params.get('svg')); }
+</script>
+</body>
+</html>
