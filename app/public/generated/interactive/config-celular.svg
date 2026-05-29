@@ -21,7 +21,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">⚙</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Ajustes</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">configurações</text><rect x="92" y="178" width="816" height="58" rx="12" fill="#ffffff"/><rect x="92" y="178" width="816" height="58" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">configurações</text><rect x="92" y="178" width="816" height="58" rx="12" fill="#ffffff"/><rect x="92" y="178" width="816" height="58" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>
        <circle cx="132" cy="207" r="18" fill="#92aecc"/>
        <text x="172" y="215" fill="#1A2540" font-family="Arial" font-size="23" font-weight="700">Wi-Fi</text>
        <text x="884" y="215" text-anchor="end" fill="#9AA2B4" font-family="Arial" font-size="26">›</text><rect x="92" y="248" width="816" height="58" rx="12" fill="#ffffff"/><rect x="92" y="248" width="816" height="58" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>

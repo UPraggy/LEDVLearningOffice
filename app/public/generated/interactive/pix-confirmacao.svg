@@ -22,7 +22,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#5fa281"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">$</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Banco · PIX</text>
-  <text x="180" y="116" fill="#9fc7b3" font-family="Arial" font-size="20" font-weight="700">confirme os dados</text>
+  <text x="180" y="116" fill="#c6ded2" font-family="Arial" font-size="20" font-weight="700">confirme os dados</text>
   <rect x="92" y="190" width="816" height="118" rx="18" fill="#F4F1E8" stroke="#D9CFB8" stroke-width="2"/>
   <text x="120" y="226" fill="#7A8294" font-family="Arial" font-size="19">Você está enviando para</text>
   <text x="120" y="262" fill="#1A2540" font-family="Arial" font-size="28" font-weight="700">J. P. SANTOS COMERCIO ME</text>

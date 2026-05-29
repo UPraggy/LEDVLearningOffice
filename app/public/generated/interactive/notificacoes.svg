@@ -21,7 +21,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Notificações</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">central</text><rect x="92" y="178" width="816" height="84" rx="16" fill="#ffffff" filter="url(#sh-card)"/><rect x="92" y="178" width="816" height="84" rx="16" fill="none" stroke="#D9CFB8" stroke-width="2"/>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">central</text><rect x="92" y="178" width="816" height="84" rx="16" fill="#ffffff" filter="url(#sh-card)"/><rect x="92" y="178" width="816" height="84" rx="16" fill="none" stroke="#D9CFB8" stroke-width="2"/>
        <circle cx="138" cy="220" r="22" fill="#84a3c5"/>
        <text x="184" y="214" fill="#1A2540" font-family="Arial" font-size="23" font-weight="700">WhatsApp</text>
        <text x="184" y="244" fill="#5A6173" font-family="Arial" font-size="20">3 mensagens novas</text><rect x="92" y="278" width="816" height="84" rx="16" fill="#ffffff" filter="url(#sh-card)"/><rect x="92" y="278" width="816" height="84" rx="16" fill="none" stroke="#D9CFB8" stroke-width="2"/>

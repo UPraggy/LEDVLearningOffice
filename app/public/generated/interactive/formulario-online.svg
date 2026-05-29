@@ -21,7 +21,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">▤</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Cadastro</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">formulário online</text><text x="124" y="214" fill="#5A6173" font-family="Arial" font-size="21">Nome completo</text>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">formulário online</text><text x="124" y="214" fill="#5A6173" font-family="Arial" font-size="21">Nome completo</text>
        <rect x="124" y="228" width="752" height="58" rx="10" fill="#ffffff"/><rect x="124" y="228" width="752" height="58" rx="10" fill="none" stroke="#D9CFB8" stroke-width="2"/><text x="124" y="314" fill="#5A6173" font-family="Arial" font-size="21">E-mail</text>
        <rect x="124" y="328" width="752" height="58" rx="10" fill="#ffffff"/><rect x="124" y="328" width="752" height="58" rx="10" fill="none" stroke="#D9CFB8" stroke-width="2"/><text x="124" y="414" fill="#5A6173" font-family="Arial" font-size="21">Telefone</text>
        <rect x="124" y="428" width="752" height="58" rx="10" fill="#ffffff"/><rect x="124" y="428" width="752" height="58" rx="10" fill="none" stroke="#D9CFB8" stroke-width="2"/>

@@ -21,7 +21,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">☰</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Contatos</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">agenda</text><line x1="92" y1="252" x2="908" y2="252" stroke="#D9CFB8" stroke-width="1.5"/>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">agenda</text><line x1="92" y1="252" x2="908" y2="252" stroke="#D9CFB8" stroke-width="1.5"/>
        <circle cx="140" cy="210" r="28" fill="#E25B3F"/><circle cx="140" cy="210" r="28" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="140" y="219.52" text-anchor="middle" fill="#fff" font-family="Arial" font-size="27" font-weight="700">A</text>
        <text x="190" y="220" fill="#1A2540" font-family="Arial" font-size="25" font-weight="700">Ana Souza</text>
        <circle cx="868" cy="210" r="22" fill="#EEF4EE"/>

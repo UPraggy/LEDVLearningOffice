@@ -21,7 +21,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Ônibus</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">horários</text>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">horários</text>
   <rect x="92" y="180" width="816" height="110" rx="16" fill="#d5e0eb" filter="url(#sh-card)"/>
   <rect x="124" y="206" width="64" height="56" rx="10" fill="#4F7CAC"/>
   <rect x="134" y="216" width="44" height="22" rx="4" fill="#fff"/>

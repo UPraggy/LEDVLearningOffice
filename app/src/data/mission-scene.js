@@ -16,6 +16,8 @@
 // Fraunces / Plus Jakarta Sans).
 // ============================================================================
 
+import { ensureContrast } from '../lib/design-kit.js';
+
 const F_DISPLAY = "'Fraunces', Georgia, serif";
 const F_BODY = "'Plus Jakarta Sans', system-ui, sans-serif";
 
@@ -343,7 +345,7 @@ export function buildMissionScene({ trilha, missao, total }) {
   <g filter="url(#m-obj)">${scene}</g>
   <path d="M0 0 h1200 v96 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#${gHead})"/>
   <path d="M0 0 h1200 v44 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#m-sheen)"/>
-  <text x="72" y="52" fill="${shade(t.warm, 12)}" font-family="${F_BODY}" font-size="22" font-weight="700" letter-spacing="5">${esc(String(trilha?.nome || '').toUpperCase())}</text>
+  <text x="72" y="52" fill="${ensureContrast(shade(t.warm, 12), shade(t.ink, -10), 4.5)}" font-family="${F_BODY}" font-size="22" font-weight="700" letter-spacing="5">${esc(String(trilha?.nome || '').toUpperCase())}</text>
   <text x="72" y="98" fill="#fff" font-family="${F_DISPLAY}" font-size="40" font-weight="700">${esc(title[0] || missao?.titulo)}</text>
   <rect x="64" y="600" width="170" height="46" rx="23" fill="url(#${gHead})" filter="url(#m-obj)"/>
   <text x="92" y="631" fill="#fff" font-family="${F_BODY}" font-size="21" font-weight="700">Missão ${n}</text>

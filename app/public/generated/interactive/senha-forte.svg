@@ -21,7 +21,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Criar senha</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">segurança da conta</text>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">segurança da conta</text>
   <text x="124" y="220" fill="#5A6173" font-family="Arial" font-size="22">Sua senha</text>
   <rect x="124" y="240" width="752" height="64" rx="12" fill="#ffffff" filter="url(#sh-card)"/><rect x="124" y="240" width="752" height="64" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>
   <text x="148" y="282" fill="#1A2540" font-family="Arial" font-size="30" font-weight="700" letter-spacing="3">••••••••••</text>

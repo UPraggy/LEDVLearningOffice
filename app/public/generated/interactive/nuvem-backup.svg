@@ -22,7 +22,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#758ca1"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">☁</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Meu Drive</text>
-  <text x="180" y="116" fill="#acbac6" font-family="Arial" font-size="20" font-weight="700">backup automático · 12 GB de 15 GB</text>
+  <text x="180" y="116" fill="#b8c4ce" font-family="Arial" font-size="20" font-weight="700">backup automático · 12 GB de 15 GB</text>
   
   <rect x="92" y="176" width="816" height="64" rx="14" fill="#F4F1E8" stroke="#D9CFB8" stroke-width="2"/>
   <rect x="112" y="192" width="32" height="32" rx="7" fill="#4F7CAC"/>

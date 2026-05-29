@@ -40,6 +40,9 @@ npm run gen           # ambos
 | Scripts geradores de SVG | `scripts/generate-*.mjs` |
 | SVGs prontos | `public/generated/{interactive,missions}/` |
 | Folhas de contato (inspeção visual) | `public/contact-sheet.html`, `public/contact-missions.html` |
+| **Toolkit de design (cor/contraste/escalas/sombra/gradiente)** | `src/lib/design-kit.js` (ESM puro, usável no browser e no Node) |
+| **Base de conhecimento de design + front-end + imagens** | `docs/DESIGN-KB.md` |
+| **Visual Inspector (ferramenta interativa)** | `public/visual-inspector.html` (abrir no dev server; aceita `?svg=URL`) |
 | Docs longas (design, fluxo, backend, roadmap) | `../aboutproject/*.md` |
 
 ## Sistema de SVG (regra de ouro)
@@ -55,6 +58,11 @@ Paleta `PAL` + `shade(hex,p)` em `scene-templates.js`. `<defs>` compartilhado: g
 - **Nova missão**: metadados em `estrutura.js` + conteúdo em `conteudo/<trilha>.js`. Cena vem automática por `scene-for-mission.js`.
 - **Item de Arcade/Desafio**: editar o pool correspondente em `src/data/*-pool.js`.
 
+## Sistema de design (consultar antes de mexer em visual)
+- **`src/lib/design-kit.js`** — funções puras: conversão de cor, contraste WCAG (`wcag`, `contrastRatio`, `bestTextOn`, `ensureContrast`), manipulação (`lighten/darken/rotate/mix`), harmonias (`complement/analogous/triadic/…`), escalas (`spacing`, `typeScale`, `RADII`), elevação (`svgShadow`/`cssShadow`), gradientes (`svgLinearGradient`), motion (`EASING`/`DURATION`). Já integrado nos geradores (subtítulos e eyebrow auto-corrigem contraste via `ensureContrast`).
+- **`docs/DESIGN-KB.md`** — base de conhecimento: cor, contraste, tipografia, layout/grid, Gestalt, forma/ícones, hierarquia, profundidade, movimento, geração de imagens (formatos, SVG→PNG), apresentações, front-end (CWV/a11y), design tokens, checklist.
+- **`public/visual-inspector.html`** — inspeciona qualquer SVG: overlays de grid/colunas/terços, viewports, extração de paleta, matriz de contraste, ferramenta de cor, harmonias, checklist. Importa o `design-kit.js`.
+
 ## Pegadinhas
 - Sem TS; ESM puro (imports relativos com extensão `.js`).
 - IDs de gradiente/filtro nos SVGs derivam de cor/seed para evitar colisão quando vários SVGs convivem na mesma página.
@@ -62,4 +70,4 @@ Paleta `PAL` + `shade(hex,p)` em `scene-templates.js`. `<defs>` compartilhado: g
 - Progresso fica no `localStorage`; limpar = resetar usuário.
 
 ## Estado atual
-60 cenas interativas + 225 imagens de missão com o design final (gradientes/sombra/sheen), inspecionadas. Gerador refinado ao máximo.
+60 cenas interativas + 225 imagens de missão com o design final (gradientes/sombra/sheen), inspecionadas. Gerador refinado e integrado ao `design-kit.js` (acessibilidade automática). Base de design (`DESIGN-KB.md` + `design-kit.js` + `visual-inspector.html`) disponível para consulta/uso.

@@ -22,7 +22,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Galeria</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">128 fotos · álbum Família</text>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">128 fotos · álbum Família</text>
   
   <rect x="92" y="168" width="256" height="108" rx="14" fill="#7FA8C9"/>
   <circle cx="152" cy="206" r="20" fill="#ffffff" opacity="0.85"/>

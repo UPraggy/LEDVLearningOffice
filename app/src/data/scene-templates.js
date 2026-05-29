@@ -17,6 +17,9 @@
 // ---------------------------------------------------------------------------
 // helpers
 // ---------------------------------------------------------------------------
+// Toolkit de design (contraste WCAG, cor, elevação) — ver docs/DESIGN-KB.md
+import { ensureContrast } from '../lib/design-kit.js';
+
 export const esc = (s) =>
   String(s ?? '')
     .replace(/&/g, '&amp;')
@@ -155,7 +158,9 @@ export function frame({ headerFill = '#254B63', title, sub, badge, subFill }) {
   const initial = badge || (title ? String(title)[0].toUpperCase() : '•');
   const gid = `hg-${idfy(headerFill)}`;
   const g2 = shade(headerFill, -24);
-  const subColor = subFill || shade(headerFill, 58);
+  // subtítulo com contraste garantido (WCAG) contra o tom médio do header
+  const mid = shade(headerFill, -8);
+  const subColor = ensureContrast(subFill || shade(headerFill, 58), mid, 4.2);
   return `
   ${sceneBg()}
   ${card(48, 34, 904, 572, { rx: 30, stroke: '#E2D8C2', sw: 2, shadow: 'soft' })}

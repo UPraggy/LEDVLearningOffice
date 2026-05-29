@@ -22,7 +22,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#5fa281"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">$</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Banco · PIX</text>
-  <text x="180" y="116" fill="#9fc7b3" font-family="Arial" font-size="20" font-weight="700">comprovante</text>
+  <text x="180" y="116" fill="#c6ded2" font-family="Arial" font-size="20" font-weight="700">comprovante</text>
   <text x="500" y="220" text-anchor="middle" fill="#1B7A4B" font-family="Arial" font-size="24" font-weight="700">PIX recebido ✓</text>
   <text x="500" y="300" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="46" font-weight="700">R$ 850,00</text>
   <text x="500" y="346" text-anchor="middle" fill="#4A5670" font-family="Arial" font-size="22">de CLEBER A. DA SILVA</text>

@@ -22,7 +22,7 @@
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
   <circle cx="126" cy="88" r="34" fill="#84a3c5"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Reunião da equipe</text>
-  <text x="180" y="116" fill="#b5c8dc" font-family="Arial" font-size="20" font-weight="700">4 participantes · 00:14:32</text>
+  <text x="180" y="116" fill="#ecf1f6" font-family="Arial" font-size="20" font-weight="700">4 participantes · 00:14:32</text>
   
   <rect x="92" y="168" width="396" height="178" rx="18" fill="#2E4A63"/>
   <rect x="92" y="168" width="396" height="178" rx="18" fill="none" stroke="#6BD08A" stroke-width="5"/>
