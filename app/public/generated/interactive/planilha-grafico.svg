@@ -16,22 +16,22 @@
   </filter></defs>
   <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
   <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
-  <linearGradient id="hg-e25b3f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4684e"/><stop offset="1" stop-color="#ac4530"/></linearGradient>
-  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-e25b3f)"/>
+  <linearGradient id="hg-d93e20" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dc4d32"/><stop offset="1" stop-color="#a52f18"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-d93e20)"/>
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
-  <circle cx="126" cy="88" r="34" fill="#eb8c79"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">▦</text>
+  <circle cx="126" cy="88" r="34" fill="#e47863"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">▦</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Vendas</text>
-  <text x="180" y="116" fill="#FFFFFF" font-family="Arial" font-size="20" font-weight="700">gráfico do mês</text>
+  <text x="180" y="116" fill="#fbeae7" font-family="Arial" font-size="20" font-weight="700">gráfico do mês</text>
   <line x1="140" y1="500" x2="884" y2="500" stroke="#D9CFB8" stroke-width="2"/>
-  <line x1="140" y1="220" x2="140" y2="500" stroke="#D9CFB8" stroke-width="2"/><rect x="170" y="387" width="84" height="113" rx="8" fill="#e56b52"/>
+  <line x1="140" y1="220" x2="140" y2="500" stroke="#D9CFB8" stroke-width="2"/><rect x="170" y="387" width="84" height="113" rx="8" fill="#dd5136"/>
        <text x="212" y="375" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="18" font-weight="700">40</text>
-       <text x="212" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Jan</text><rect x="300" y="316" width="84" height="184" rx="8" fill="#e7755e"/>
+       <text x="212" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Jan</text><rect x="300" y="316" width="84" height="184" rx="8" fill="#df5d44"/>
        <text x="342" y="304" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="18" font-weight="700">65</text>
-       <text x="342" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Fev</text><rect x="430" y="359" width="84" height="141" rx="8" fill="#e87f69"/>
+       <text x="342" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Fev</text><rect x="430" y="359" width="84" height="141" rx="8" fill="#e16851"/>
        <text x="472" y="347" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="18" font-weight="700">50</text>
-       <text x="472" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Mar</text><rect x="560" y="260" width="84" height="240" rx="8" fill="#ea8975"/>
+       <text x="472" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Mar</text><rect x="560" y="260" width="84" height="240" rx="8" fill="#e4745e"/>
        <text x="602" y="248" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="18" font-weight="700">85</text>
-       <text x="602" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Abr</text><rect x="690" y="302" width="84" height="198" rx="8" fill="#ec9380"/>
+       <text x="602" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Abr</text><rect x="690" y="302" width="84" height="198" rx="8" fill="#e6806c"/>
        <text x="732" y="290" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="18" font-weight="700">70</text>
        <text x="732" y="534" text-anchor="middle" fill="#5A6173" font-family="Arial" font-size="18">Mai</text>
 </svg>

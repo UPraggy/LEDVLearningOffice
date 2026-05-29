@@ -16,13 +16,13 @@
   </filter></defs>
   <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
   <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
-  <linearGradient id="hg-e25b3f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4684e"/><stop offset="1" stop-color="#ac4530"/></linearGradient>
-  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-e25b3f)"/>
+  <linearGradient id="hg-d93e20" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dc4d32"/><stop offset="1" stop-color="#a52f18"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-d93e20)"/>
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
-  <circle cx="126" cy="88" r="34" fill="#eb8c79"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">R</text>
+  <circle cx="126" cy="88" r="34" fill="#e47863"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">R</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Extrato</text>
-  <text x="180" y="116" fill="#FFFFFF" font-family="Arial" font-size="20" font-weight="700">conta corrente</text>
-  <rect x="92" y="178" width="816" height="64" rx="14" fill="#fae5e0"/>
+  <text x="180" y="116" fill="#fbeae7" font-family="Arial" font-size="20" font-weight="700">conta corrente</text>
+  <rect x="92" y="178" width="816" height="64" rx="14" fill="#f9e0db"/>
   <text x="124" y="206" fill="#5A6173" font-family="Arial" font-size="19">Saldo atual</text>
   <text x="124" y="234" fill="#1A2540" font-family="Arial" font-size="26" font-weight="700">R$ 1.284,30</text><rect x="92" y="260" width="816" height="64" rx="12" fill="#ffffff"/><rect x="92" y="260" width="816" height="64" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>
        <text x="124" y="300" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">Salário</text>

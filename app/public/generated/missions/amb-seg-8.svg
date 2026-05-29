@@ -11,7 +11,7 @@
   <rect width="1200" height="675" fill="url(#mbg-e9f1ea)"/>
   <rect width="1200" height="360" fill="url(#m-glow)"/>
   <circle cx="1080" cy="40" r="190" fill="#4F7A55" opacity=".12"/>
-  <circle cx="120" cy="660" r="220" fill="#E25B3F" opacity=".10"/>
+  <circle cx="120" cy="660" r="220" fill="#D93E20" opacity=".10"/>
   <circle cx="570" cy="145" r="4" fill="#203A2B" opacity=".06"/><circle cx="666" cy="126" r="4" fill="#203A2B" opacity=".06"/><circle cx="800" cy="121" r="6" fill="#203A2B" opacity=".06"/><circle cx="572" cy="210" r="5" fill="#203A2B" opacity=".06"/><circle cx="544" cy="232" r="7" fill="#203A2B" opacity=".06"/>
   <rect x="64" y="150" width="1072" height="430" rx="40" fill="#F6F3EA" filter="url(#m-panel)"/>
   <rect x="64" y="150" width="1072" height="430" rx="40" fill="none" stroke="#ced4d0" stroke-width="2"/>
@@ -25,7 +25,7 @@
       <rect x="823" y="390" width="14" height="34" rx="7" fill="#4F7A55"/></g>
   <path d="M0 0 h1200 v96 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#mhd-203a2b)"/>
   <path d="M0 0 h1200 v44 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#m-sheen)"/>
-  <text x="72" y="52" fill="#e87e68" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="700" letter-spacing="5">DEFESA DIGITAL</text>
+  <text x="72" y="52" fill="#e7826f" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="700" letter-spacing="5">DEFESA DIGITAL</text>
   <text x="72" y="98" fill="#fff" font-family="'Fraunces', Georgia, serif" font-size="40" font-weight="700">Privacidade nas redes</text>
   <rect x="64" y="600" width="170" height="46" rx="23" fill="url(#mhd-203a2b)" filter="url(#m-obj)"/>
   <text x="92" y="631" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="21" font-weight="700">Missão 08</text>

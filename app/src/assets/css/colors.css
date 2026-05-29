@@ -18,8 +18,8 @@
   /* ---- BRAND ---- */
   --navy:         #1B2A4E;   /* Computador */
   --navy-deep:    #0E1A36;
-  --coral:        #E25B3F;   /* Ação primária */
-  --coral-deep:   #C44525;
+  --coral:        #D93E20;   /* Ação primária — alt.B: AA 4.5:1 c/ branco (era #E25B3F = 3.62) */
+  --coral-deep:   #A42F18;   /* hover/escuro — AAA 7:1 c/ branco */
   --honey:        #D49545;   /* XP · conquista */
   --honey-soft:   #E8B978;
   --sage:         #4F7A55;   /* Sucesso */
@@ -36,7 +36,7 @@
   /* ---- MÓDULOS (cores chip) ---- */
   --mod-computador: #1B2A4E;
   --mod-celular:    #4F7CAC;
-  --mod-mercado:    #E25B3F;
+  --mod-mercado:    #D93E20;
   --mod-seguranca:  #4F7A55;
   --mod-ingles:     #6B3F7A;
 
@@ -55,7 +55,7 @@
   /* Variações tonais por módulo (3 tons cada — base + soft + deep) */
   --comp-base: #1B2A4E; --comp-soft: #4F6BA0; --comp-deep: #0E1A36;
   --cel-base:  #4F7CAC; --cel-soft:  #8FB1D5; --cel-deep:  #2E5680;
-  --merc-base: #E25B3F; --merc-soft: #F4A089; --merc-deep: #A23218;
+  --merc-base: #D93E20; --merc-soft: #F4A089; --merc-deep: #A23218;
   --seg-base:  #4F7A55; --seg-soft:  #8AAB8E; --seg-deep:  #2D4A33;
   --ing-base:  #6B3F7A; --ing-soft:  #A07AAE; --ing-deep:  #432356;
 

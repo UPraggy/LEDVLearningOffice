@@ -49,10 +49,10 @@ export const PAL = {
   computador: '#1B2A4E',
   celular: '#4F7CAC',
   ingles: '#6B3F7A',
-  mercado: '#E25B3F',
+  mercado: '#D93E20',
   seguranca: '#4F7A55',
   honey: '#D49545',
-  coral: '#E25B3F',
+  coral: '#D93E20',
   sage: '#4F7A55',
   ink: '#1A2540',
   inkSoft: '#5A6173',
@@ -324,7 +324,7 @@ export const SCENE_BUILDERS = {
   <text x="40" y="262" fill="#4A5670" font-family="Arial" font-size="23">${tspans(lines(t.corpo), 40, 34)}</text>
   <rect x="40" y="320" width="500" height="70" rx="10" fill="#FCEEDB" stroke="#E0A93B" stroke-width="2"/>
   <text x="64" y="364" fill="#9A6A12" font-family="Arial" font-size="23" font-weight="700">${esc(t.valorReceber)}</text>
-  <rect x="60" y="470" width="400" height="80" rx="12" fill="#E25B3F"/>
+  <rect x="60" y="470" width="400" height="80" rx="12" fill="#D93E20"/>
   <text x="260" y="520" text-anchor="middle" fill="#fff" font-family="Arial" font-size="25" font-weight="700">${esc(t.botao)}</text>`;
   },
 
@@ -376,7 +376,7 @@ export const SCENE_BUILDERS = {
   <text x="72" y="256" fill="#7A8294" font-family="Arial" font-size="20">Assunto:</text>
   <text x="190" y="256" fill="#1A2540" font-family="Arial" font-size="24">${esc(t.assunto)}</text>
   <text x="72" y="324" fill="#4A5670" font-family="Arial" font-size="23">${tspans(lines(t.corpo), 72, 36)}</text>
-  <rect x="72" y="476" width="320" height="68" rx="14" fill="#E25B3F"/>
+  <rect x="72" y="476" width="320" height="68" rx="14" fill="#D93E20"/>
   <text x="232" y="519" text-anchor="middle" fill="#fff" font-family="Arial" font-size="23" font-weight="700">${esc(t.botao)}</text>`;
   },
 
@@ -604,7 +604,7 @@ export const SCENE_BUILDERS = {
   <text x="500" y="346" text-anchor="middle" fill="#4A5670" font-family="Arial" font-size="22">de ${esc(t.remetente)}</text>
   <rect x="140" y="380" width="720" height="80" rx="16" fill="#F2EBDD"/>
   <text x="500" y="428" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="22">${esc(t.aviso)}</text>
-  <rect x="140" y="500" width="720" height="84" rx="42" fill="#E25B3F"/>
+  <rect x="140" y="500" width="720" height="84" rx="42" fill="#D93E20"/>
   <text x="500" y="552" text-anchor="middle" fill="#fff" font-family="Arial" font-size="27" font-weight="700">${esc(t.botao)}</text>`;
   },
 
@@ -806,7 +806,7 @@ export const SCENE_BUILDERS = {
   <path d="M120 200 h300 v90 h180 v110 h260" fill="none" stroke="#C9C0AC" stroke-width="10" stroke-linecap="round"/>
   <path d="M120 200 h300 v90 h180" fill="none" stroke="#4F7CAC" stroke-width="12" stroke-linecap="round"/>
   <circle cx="120" cy="200" r="16" fill="#fff" stroke="#4F7CAC" stroke-width="6"/>
-  <path d="M600 372 c0 -34 -26 -52 -26 -78 a26 26 0 1 1 52 0 c0 26 -26 44 -26 78 z" fill="#E25B3F"/>
+  <path d="M600 372 c0 -34 -26 -52 -26 -78 a26 26 0 1 1 52 0 c0 26 -26 44 -26 78 z" fill="#D93E20"/>
   <circle cx="600" cy="296" r="11" fill="#fff"/>
   <rect x="92" y="468" width="816" height="118" rx="18" fill="#F4F1E8" stroke="#D9CFB8" stroke-width="2"/>
   <text x="120" y="512" fill="#1A2540" font-family="Arial" font-size="25" font-weight="700">${esc(t.destino)}</text>
@@ -866,7 +866,7 @@ export const SCENE_BUILDERS = {
   <text x="496" y="${y + 37}" fill="#1A2540" font-family="Arial" font-size="23">${esc(precos[i] || '')}</text>`;
     }
     return `
-  ${frame({ headerFill: '#E25B3F', title: t.title, sub: t.sub, badge: t.badge })}
+  ${frame({ headerFill: '#D93E20', title: t.title, sub: t.sub, badge: t.badge })}
   <rect x="92" y="168" width="816" height="56" rx="10" fill="#F4F1E8" stroke="#C9C0AC" stroke-width="2"/>
   <text x="112" y="204" fill="#7A8294" font-family="Courier New" font-size="22" font-weight="700">fx</text>
   <text x="160" y="204" fill="#1A2540" font-family="Courier New" font-size="22">${esc(t.formula)}</text>
@@ -1017,7 +1017,7 @@ export const SCENE_BUILDERS = {
   },
   'contatos': (d = {}) => {
     const t = { title: 'Contatos', sub: 'agenda', badge: '☰', nomes: 'Ana Souza|Carlos Lima|Dona Maria|Farmácia|João Neto', ...d };
-    const cl = ['#E25B3F', '#4F7CAC', '#6B3F7A', '#4F7A55', '#D49545'];
+    const cl = ['#D93E20', '#4F7CAC', '#6B3F7A', '#4F7A55', '#D49545'];
     const rows = lines(t.nomes).slice(0, 5).map((nm, i) => {
       const cy = 210 + i * 80;
       return `<line x1="92" y1="${cy + 42}" x2="908" y2="${cy + 42}" stroke="${PAL.line}" stroke-width="1.5"/>

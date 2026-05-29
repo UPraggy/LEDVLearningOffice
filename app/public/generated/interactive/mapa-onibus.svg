@@ -31,7 +31,7 @@
   <rect x="92" y="312" width="816" height="240" rx="16" fill="#EAF1E9" filter="url(#sh-soft)"/><rect x="92" y="312" width="816" height="240" rx="16" fill="none" stroke="#D9CFB8" stroke-width="2"/>
   <path d="M150 520 q200 -180 360 -120 q160 60 340 -120" fill="none" stroke="#4F7CAC" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 18"/>
   <circle cx="150" cy="520" r="14" fill="#4F7A55"/>
-  <circle cx="850" cy="280" r="16" fill="#E25B3F"/>
+  <circle cx="850" cy="280" r="16" fill="#D93E20"/>
   <text x="150" y="500" fill="#5A6173" font-family="Arial" font-size="18">Você</text>
   <text x="92" y="586" fill="#5A6173" font-family="Arial" font-size="20">Ponto: Av. Brasil, 1200</text>
 </svg>

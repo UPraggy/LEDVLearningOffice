@@ -16,12 +16,12 @@
   </filter></defs>
   <rect width="1000" height="640" fill="url(#bg-paper)"/><rect width="1000" height="320" fill="url(#bg-glow)"/>
   <rect x="48" y="34" width="904" height="572" rx="30" fill="#ffffff" filter="url(#sh-soft)"/><rect x="48" y="34" width="904" height="572" rx="30" fill="none" stroke="#E2D8C2" stroke-width="2"/>
-  <linearGradient id="hg-e25b3f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4684e"/><stop offset="1" stop-color="#ac4530"/></linearGradient>
-  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-e25b3f)"/>
+  <linearGradient id="hg-d93e20" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dc4d32"/><stop offset="1" stop-color="#a52f18"/></linearGradient>
+  <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v78 h-904 z" fill="url(#hg-d93e20)"/>
   <path d="M48 64 a30 30 0 0 1 30 -30 h844 a30 30 0 0 1 30 30 v34 h-904 z" fill="url(#sheen)"/>
-  <circle cx="126" cy="88" r="34" fill="#eb8c79"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
+  <circle cx="126" cy="88" r="34" fill="#e47863"/><circle cx="126" cy="88" r="34" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/><text x="126" y="99.56" text-anchor="middle" fill="#fff" font-family="Arial" font-size="32" font-weight="700">�</text>
   <text x="180" y="80" fill="#fff" font-family="Arial" font-size="26" font-weight="700">Carrinho</text>
-  <text x="180" y="116" fill="#FFFFFF" font-family="Arial" font-size="20" font-weight="700">loja online</text><rect x="92" y="190" width="816" height="68" rx="12" fill="#ffffff"/><rect x="92" y="190" width="816" height="68" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>
+  <text x="180" y="116" fill="#fbeae7" font-family="Arial" font-size="20" font-weight="700">loja online</text><rect x="92" y="190" width="816" height="68" rx="12" fill="#ffffff"/><rect x="92" y="190" width="816" height="68" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>
        <rect x="120" y="208" width="46" height="46" rx="8" fill="#F0E6D2"/>
        <text x="186" y="238" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">Fone de ouvido</text>
        <text x="884" y="238" text-anchor="end" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">R$ 79,90</text><rect x="92" y="274" width="816" height="68" rx="12" fill="#ffffff"/><rect x="92" y="274" width="816" height="68" rx="12" fill="none" stroke="#D9CFB8" stroke-width="2"/>
@@ -32,6 +32,6 @@
        <text x="186" y="406" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">Cabo USB</text>
        <text x="884" y="406" text-anchor="end" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">R$ 19,90</text>
   <text x="124" y="494" fill="#5A6173" font-family="Arial" font-size="24">Total</text>
-  <text x="884" y="496" text-anchor="end" fill="#E25B3F" font-family="Arial" font-size="32" font-weight="700">R$ 124,30</text>
-  <rect x="92" y="522" width="816" height="64" rx="14" fill="#E25B3F" filter="url(#sh-card)"/><rect x="92" y="522" width="816" height="32" rx="14" fill="url(#sheen)"/><text x="500" y="562.16" text-anchor="middle" fill="#ffffff" font-family="Arial" font-size="24" font-weight="700">Finalizar compra</text>
+  <text x="884" y="496" text-anchor="end" fill="#D93E20" font-family="Arial" font-size="32" font-weight="700">R$ 124,30</text>
+  <rect x="92" y="522" width="816" height="64" rx="14" fill="#D93E20" filter="url(#sh-card)"/><rect x="92" y="522" width="816" height="32" rx="14" fill="url(#sheen)"/><text x="500" y="562.16" text-anchor="middle" fill="#ffffff" font-family="Arial" font-size="24" font-weight="700">Finalizar compra</text>
 </svg>

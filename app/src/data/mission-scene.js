@@ -25,8 +25,8 @@ const F_BODY = "'Plus Jakarta Sans', system-ui, sans-serif";
 export const THEMES = {
   computador: { bg: '#EEF1F8', paper: '#F7F4EC', ink: '#1B2A4E', accent: '#4F6BA0', warm: '#D49545' },
   celular:    { bg: '#E9F2F7', paper: '#F7F4EC', ink: '#1B2A4E', accent: '#4F7CAC', warm: '#D49545' },
-  mercado:    { bg: '#FBEEE6', paper: '#FBF7EE', ink: '#1B2A4E', accent: '#E25B3F', warm: '#D49545' },
-  seguranca:  { bg: '#E9F1EA', paper: '#F6F3EA', ink: '#203A2B', accent: '#4F7A55', warm: '#E25B3F' },
+  mercado:    { bg: '#FBEEE6', paper: '#FBF7EE', ink: '#1B2A4E', accent: '#D93E20', warm: '#D49545' },
+  seguranca:  { bg: '#E9F1EA', paper: '#F6F3EA', ink: '#203A2B', accent: '#4F7A55', warm: '#D93E20' },
   ingles:     { bg: '#F0E9F6', paper: '#F7F2EC', ink: '#39245B', accent: '#6B3F7A', warm: '#D49545' },
 };
 
