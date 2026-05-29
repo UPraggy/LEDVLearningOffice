@@ -41,7 +41,7 @@ npm run gen           # ambos
 | SVGs prontos | `public/generated/{interactive,missions}/` |
 | Folhas de contato (inspeção visual) | `public/contact-sheet.html`, `public/contact-missions.html` |
 | **Toolkit de design (cor/contraste/escalas/sombra/gradiente)** | `src/lib/design-kit.js` (ESM puro, usável no browser e no Node) |
-| **Base de conhecimento de design + front-end + imagens** | `docs/DESIGN-KB.md` |
+| **Base de conhecimento de design + front-end + imagens** | `docs/DESIGN-KB.md` (conceitos) · `docs/DESIGN-RESEARCH.md` (fatos verificados na web: CWV, formatos, números) |
 | **Visual Inspector (ferramenta interativa)** | `public/visual-inspector.html` (abrir no dev server; aceita `?svg=URL`) |
 | Docs longas (design, fluxo, backend, roadmap) | `../aboutproject/*.md` |
 
@@ -61,7 +61,7 @@ Paleta `PAL` + `shade(hex,p)` em `scene-templates.js`. `<defs>` compartilhado: g
 ## Sistema de design (consultar antes de mexer em visual)
 - **`src/lib/design-kit.js`** — funções puras: conversão de cor, contraste WCAG (`wcag`, `contrastRatio`, `bestTextOn`, `ensureContrast`), manipulação (`lighten/darken/rotate/mix`), harmonias (`complement/analogous/triadic/…`), escalas (`spacing`, `typeScale`, `RADII`), elevação (`svgShadow`/`cssShadow`), gradientes (`svgLinearGradient`), motion (`EASING`/`DURATION`). Já integrado nos geradores (subtítulos e eyebrow auto-corrigem contraste via `ensureContrast`).
 - **`docs/DESIGN-KB.md`** — base de conhecimento: cor, contraste, tipografia, layout/grid, Gestalt, forma/ícones, hierarquia, profundidade, movimento, geração de imagens (formatos, SVG→PNG), apresentações, front-end (CWV/a11y), design tokens, checklist.
-- **`public/visual-inspector.html`** — inspeciona qualquer SVG: overlays de grid/colunas/terços, viewports, extração de paleta, matriz de contraste, ferramenta de cor, harmonias, checklist. Importa o `design-kit.js`. **Web embutida:** pesquisa (DuckDuckGo) e lê/extrai paleta de páginas reais via proxies keyless (r.jina.ai + allorigins) — útil quando WebSearch/WebFetch da IA estiverem indisponíveis. Detalhes na seção 16 do `DESIGN-KB.md`.
+- **`public/visual-inspector.html`** — inspeciona qualquer SVG: overlays de grid/colunas/terços, viewports (+ OG 1200), extração de paleta, matriz de contraste, ferramenta de cor, harmonias, checklist. Importa o `design-kit.js`. Ferramentas extras: **📚 Docs** (renderiza DESIGN-KB/DESIGN-RESEARCH inline), **simulador de daltonismo** (protan/deuter/tritan/cinza via feColorMatrix), **escala tipográfica + espaçamento** (base/razão), **export de paleta** (CSS vars / JSON). **Web embutida:** pesquisa (DuckDuckGo) e lê/extrai paleta de páginas reais via proxies keyless (r.jina.ai + allorigins) — útil quando WebSearch/WebFetch da IA estiverem indisponíveis. Detalhes na seção 16 do `DESIGN-KB.md`.
 
 ## Pegadinhas
 - Sem TS; ESM puro (imports relativos com extensão `.js`).
