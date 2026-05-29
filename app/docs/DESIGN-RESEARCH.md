@@ -85,6 +85,23 @@ Métricas "good" medidas no **percentil 75** dos carregamentos (mobile + desktop
 - Acessibilidade: foco visível, navegação por teclado, `alt`, rótulos, contraste (ver §3).
 - Performance: ver §1; otimizar imagens (§2); evitar layout shift.
 
+## 10. Modelo mental da Figma → como aplico no nosso fluxo (SVG + React)
+Aprendido em help.figma.com (verificado). A Figma codifica práticas que traduzo para código:
+
+| Conceito Figma | O que é (verificado) | Equivalente no nosso projeto |
+|---|---|---|
+| **Auto layout** | frame que arranja filhos por **direção** (h/v), com **spacing**, **padding** e **resize** (hug/fill/fixo) | CSS **flexbox/grid** (`gap`, `padding`, `flex`); no SVG, posicionar por passos base-8 |
+| **Constraints** | fixar filhos a bordas/centro/escala p/ **redimensionar responsivo** | `viewBox` + `preserveAspectRatio`; CSS constraints (min/max, `clamp`) |
+| **Variables + modes** | **design tokens** (color/number/string/boolean) com **modos** p/ tema (claro/escuro, marca) e **alias** (semântico→primitivo) | tokens em camadas (primitivo→semântico→componente); paleta `PAL`/`design-kit.js`; modos = trocar mapa de cor por módulo |
+| **Styles** | estilos reutilizáveis de cor/texto/efeito/grid | nossas constantes de cor, `typeScale()`, `ELEVATION`, grid base-8 |
+| **Components / variants / properties** | **main component** define props; **instâncias** são cópias linkadas que **herdam updates**; **variants** = estados; **overrides** por instância | builders paramétricos em `scene-templates.js`/`mission-scene.js` (1 fonte → muitas saídas); props = argumentos da função; variants = parâmetros (módulo/seed) |
+| **Dev Mode** | inspecionar spacing, tokens e exportar/medir | nosso **Visual Inspector** (grid, matriz de contraste, paleta, escala, export CSS/JSON) |
+
+**Princípio que levo da Figma:** *fonte única + tokens + composição por instância*. É exatamente o
+nosso modelo de SVG paramétrico — então ao criar/alterar visual, eu mexo no **builder/token**, nunca
+na saída, e valido no inspector (que faz o papel do Dev Mode). _Fonte: help.figma.com (auto layout,
+variáveis, componentes, constraints) — verificado 2026-05-28._
+
 ---
 
 ### Como esta doc é mantida
