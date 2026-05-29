@@ -90,6 +90,7 @@
   <span class="note">base de design · contraste · grid · paleta · checklist</span>
   <span class="sp"></span>
   <button id="docsBtn" title="Abrir base de conhecimento">📚 Docs</button>
+  <button id="tokensBtn" title="Tokens reais do app (colors.css)">🎨 Tokens</button>
   <select id="preset" title="Carregar SVG do projeto"></select>
   <input id="url" placeholder="/generated/interactive/wpp-chefe.svg" style="width:280px">
   <button id="load">Carregar</button>
@@ -115,6 +116,24 @@
       <button id="docsClose">✕ Fechar</button>
     </div>
     <div class="doc" id="docBody"><span class="note">carregando…</span></div>
+  </div>
+</div>
+
+<!-- modal de tokens reais do app (= "variables + modes" da Figma) -->
+<div id="tok" class="modal" hidden>
+  <div class="sheet">
+    <div class="top">
+      <strong>🎨 Tokens do app</strong>
+      <div class="toolbar" id="tokModes">
+        <button data-mode="" class="on">Padrão</button>
+        <button data-mode="contrast=high">Alto contraste</button>
+        <button data-mode="fontstep=2">Fonte grande</button>
+      </div>
+      <span class="sp"></span>
+      <button id="tokCss" title="Copiar tokens do modo atual">Copiar CSS</button>
+      <button id="tokClose">✕ Fechar</button>
+    </div>
+    <div class="doc" id="tokBody"><span class="note">carregando…</span></div>
   </div>
 </div>
 
@@ -518,7 +537,44 @@ document.getElementById('docsBtn').onclick=()=>{ docModal.hidden=false; openDoc(
 document.getElementById('docsClose').onclick=()=>docModal.hidden=true;
 docModal.onclick=e=>{ if(e.target===docModal) docModal.hidden=true; };
 document.querySelectorAll('#docTabs button').forEach(b=>b.onclick=()=>openDoc(b.dataset.doc));
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') docModal.hidden=true; });
+
+// ---- Tokens reais do app (colors.css) — visão por modos (= modes da Figma) --
+const tokModal=document.getElementById('tok'), tokBody=document.getElementById('tokBody');
+let TOK=null, tokMode='';
+function parseCssVars(css){
+  const blocks=[]; const re=/(:root[^{]*)\{([^}]*)\}/g; let m;
+  while((m=re.exec(css))){ const sel=m[1].trim(); const vars={}; const vre=/(--[\w-]+)\s*:\s*([^;]+);/g; let v;
+    while((v=vre.exec(m[2]))) vars[v[1].trim()]=v[2].trim(); blocks.push({sel,vars}); }
+  return blocks;
+}
+const modeKeyOf = sel => { const m=sel.match(/data-(\w+)="?(\w+)"?/); return m?`${m[1]}=${m[2]}`:''; };
+function mergedTokens(mode){ const base={}; TOK.forEach(b=>{ if(modeKeyOf(b.sel)==='' && !b.sel.includes(':not(')) Object.assign(base,b.vars); });
+  if(mode) TOK.forEach(b=>{ if(modeKeyOf(b.sel)===mode) Object.assign(base,b.vars); }); return base; }
+function resolveVar(val,map,d=0){ const m=(val||'').match(/^var\((--[\w-]+)\)$/); return (m&&d<6)?resolveVar(map[m[1]]||val,map,d+1):val; }
+const isColor = v => /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v);
+function renderTokens(){
+  if(!TOK){ tokBody.innerHTML='<span class="note">erro ao carregar colors.css</span>'; return; }
+  const map=mergedTokens(tokMode);
+  const entries=Object.entries(map).map(([k,v])=>[k,resolveVar(v,map)]);
+  const colors=entries.filter(([,v])=>isColor(v)), others=entries.filter(([,v])=>!isColor(v));
+  const chip=([k,v])=>`<div class="chip" style="background:${v}" title="${k}: ${v}" data-c="${v}"><span>${k.replace('--','').slice(0,12)}</span></div>`;
+  const ink=resolveVar(map['--ink']||'#000',map), paper=resolveVar(map['--paper']||'#fff',map);
+  const w=K.wcag(ink,paper);
+  tokBody.innerHTML=
+    `<p class="note">Lido de <code>src/assets/css/colors.css</code> · modo <b>${tokMode||'padrão'}</b> · `
+    +`texto×fundo (ink×paper): <b>${w.ratio}:1</b> <span class="tag ${w.level.replace(' ','-')}">${w.level}</span></p>`
+    +`<h3>Cores (${colors.length})</h3><div class="sw" style="margin-bottom:26px">${colors.map(chip).join('')}</div>`
+    +`<h3>Outros tokens (${others.length})</h3><table><tbody>${others.map(([k,v])=>`<tr><td><code>${k}</code></td><td>${v.length>70?v.slice(0,70)+'…':v}</td></tr>`).join('')}</tbody></table>`;
+  tokBody.querySelectorAll('.chip[data-c]').forEach(ch=>ch.onclick=()=>{ document.getElementById('cFg').value=ch.dataset.c; updateColor(); });
+}
+async function openTokens(){ tokModal.hidden=false; if(!TOK){ try{ const r=await fetch('/src/assets/css/colors.css'); TOK=parseCssVars(await r.text()); }catch{ TOK=null; } } renderTokens(); }
+document.getElementById('tokensBtn').onclick=openTokens;
+document.getElementById('tokClose').onclick=()=>tokModal.hidden=true;
+tokModal.onclick=e=>{ if(e.target===tokModal) tokModal.hidden=true; };
+document.querySelectorAll('#tokModes button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('#tokModes button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); tokMode=b.dataset.mode; renderTokens(); });
+document.getElementById('tokCss').onclick=e=>{ if(!TOK)return; const map=mergedTokens(tokMode); copy(':root{\n'+Object.entries(map).map(([k,v])=>`  ${k}: ${v};`).join('\n')+'\n}', e.target); };
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ docModal.hidden=true; tokModal.hidden=true; } });
 
 // init
 updateColor(); buildCols(); renderScale();

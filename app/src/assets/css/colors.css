@@ -134,3 +134,22 @@
 :root[data-contrast="high"] body {
   background-image: none;
 }
+
+/* Alto contraste automático: quando o SO pede mais contraste e o usuário
+   não escolheu manualmente, aplica os mesmos overrides (a11y 40+). */
+@media (prefers-contrast: more) {
+  :root:not([data-contrast]) {
+    --paper: #FFF8E7;
+    --paper-warm: #F8EFD8;
+    --surface: #FFFEF9;
+    --surface-2: #FFFFFF;
+    --ink: #000000;
+    --ink-soft: #1A2540;
+    --ink-mute: #4A5670;
+    --line: #B5A582;
+    --line-strong: #7A6A4A;
+    --coral: #C44525;
+    --coral-deep: #8A2A10;
+  }
+  :root:not([data-contrast]) body { background-image: none; }
+}

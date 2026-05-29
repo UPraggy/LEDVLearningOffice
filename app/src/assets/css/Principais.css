@@ -195,6 +195,8 @@ html, body, #root { overflow-x: hidden; }     /* prevenção contra scroll horiz
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
   }
 }

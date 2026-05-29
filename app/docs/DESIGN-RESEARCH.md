@@ -102,6 +102,17 @@ nosso modelo de SVG paramétrico — então ao criar/alterar visual, eu mexo no 
 na saída, e valido no inspector (que faz o papel do Dev Mode). _Fonte: help.figma.com (auto layout,
 variáveis, componentes, constraints) — verificado 2026-05-28._
 
+### 10a. Verificado na prática (Figma MCP, 2026-05-29)
+Materializei os tokens do app num arquivo Figma real (`CgPtWozHjShqmezG7r3SzD`) via MCP e confirmei:
+- **Alias semântico→primitivo funciona** (`createVariableAlias`): `semantic/action/primary` resolve para
+  `#e25b3f`, `semantic/text/strong` para `#1a2540` etc. — lido de volta com `get_variable_defs` (Dev Mode).
+- **Modos múltiplos são pagos**: no plano Starter a coleção de variáveis fica **limitada a 1 modo**
+  (`addMode` falha com "Limited to 1 modes only"). → no app, modos (claro/alto contraste/fonte) vivem no
+  CSS (`colors.css` + `data-*`), e o inspector os simula no painel **🎨 Tokens** sem custo.
+- **Auto layout** (`layoutMode`, `padding`, `itemSpacing`, `primary/counterAxisSizingMode`) e
+  **componentes** (`createComponent`) com fills vinculados a variáveis (`setBoundVariableForPaint`)
+  reproduzem 1:1 nossos builders paramétricos. _Fonte: execução direta via Figma Plugin API (MCP)._
+
 ---
 
 ### Como esta doc é mantida
