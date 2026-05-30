@@ -379,6 +379,11 @@
 .block-head h2 {
   font-family: var(--f-display); font-weight: 600;
   font-size: 22px; letter-spacing: -.01em; margin: 0;
+  padding-left: 12px; position: relative;
+}
+.block-head h2::before {
+  content: ''; position: absolute; left: 0; top: .15em; bottom: .15em;
+  width: 4px; border-radius: 99px; background: var(--gradient-vinho);
 }
 .block-note { margin: var(--s-3) 0 0; font-size: 13px; color: var(--ink-soft); }
 .btn-link {

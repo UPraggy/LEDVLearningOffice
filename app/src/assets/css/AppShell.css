@@ -163,7 +163,7 @@ main.content {
   font-size: clamp(2.2rem, 5vw, 3.6rem);
   margin: 0; max-width: 18ch;
 }
-.bighi em { color: var(--coral); font-style: italic; font-weight: 500; }
+.bighi em { color: var(--vinho); font-style: italic; font-weight: 500; }
 
 .lede {
   font-size: 1.05rem; color: var(--ink-soft);
