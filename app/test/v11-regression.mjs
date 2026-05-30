@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MISSOES } from '../src/data/estrutura.js';
+import { KATAS } from '../src/data/katas/index.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const read = (path) => readFileSync(join(root, path), 'utf8');
@@ -51,5 +52,21 @@ for (const [trilhaId, missoes] of Object.entries(MISSOES)) {
   }
 }
 assert.ok(totalMissoes > 200, 'O teste deve cobrir todas as missoes do catalogo.');
+
+// Katas: 1 por dia do ano (>=365), schema valido e ids unicos.
+assert.ok(KATAS.length >= 365, `Katas devem ser >= 365 (1/dia). Atual: ${KATAS.length}`);
+const kataIds = new Set();
+const cores = new Set(['coral', 'navy', 'plum', 'sage', 'sky']);
+for (const k of KATAS) {
+  assert.ok(!kataIds.has(k.id), `Kata com id duplicado: ${k.id}`);
+  kataIds.add(k.id);
+  assert.ok([1, 2, 3].includes(k.nivel), `Kata ${k.id} com nivel invalido.`);
+  assert.ok(Array.isArray(k.opcoes) && k.opcoes.length === 4, `Kata ${k.id} precisa de 4 opcoes.`);
+  assert.ok(typeof k.resposta === 'number' && k.resposta >= 0 && k.resposta <= 3, `Kata ${k.id} com resposta fora de 0-3.`);
+  assert.ok(cores.has(k.cor), `Kata ${k.id} com cor invalida.`);
+  for (const f of ['modulo', 'titulo', 'cenario', 'explicacao']) {
+    assert.ok(k[f], `Kata ${k.id} sem campo ${f}.`);
+  }
+}
 
 console.log('v11 regression checks passed');
