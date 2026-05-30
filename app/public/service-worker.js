@@ -1,7 +1,7 @@
 // service-worker.js
 // Este service worker faz o app funcionar offline (cache) e ser instalável.
 // Versione a cada deploy mudando o número abaixo:
-const CACHE_VERSION = 'escritorio-v5';
+const CACHE_VERSION = 'escritorio-v6';
 const PIPER_CACHE  = 'escritorio-piper-v1';
 
 // COI: injeta COOP/COEP nas respostas same-origin para reativar crossOriginIsolated

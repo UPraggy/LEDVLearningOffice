@@ -34,7 +34,7 @@ const PROGRESSO_INICIAL = {
     onboardingFeito: false,
     somAtivo: true,
     vozLigada: true,        // botão "Ouvir" aparece nas aulas por padrão
-    vozAutoPlay: true,      // toca aula automaticamente ao entrar
+    vozAutoPlay: false,     // NÃO toca sozinho — só ao clicar "Ouvir"
     notifLigado: false,     // notificações locais
     horaLembrete: '19:00',  // lembrete diário (HH:MM)
   },
@@ -68,7 +68,14 @@ export default class GlobalVar {
   static carregarProgresso() {
     const salvo = GlobalVar.getLocalStorage(CHAVE);
     if (!salvo) return JSON.parse(JSON.stringify(PROGRESSO_INICIAL));
-    return { ...PROGRESSO_INICIAL, ...salvo, user: { ...PROGRESSO_INICIAL.user, ...(salvo.user || {}) }, preferencias: { ...PROGRESSO_INICIAL.preferencias, ...(salvo.preferencias || {}) } };
+    const merged = { ...PROGRESSO_INICIAL, ...salvo, user: { ...PROGRESSO_INICIAL.user, ...(salvo.user || {}) }, preferencias: { ...PROGRESSO_INICIAL.preferencias, ...(salvo.preferencias || {}) } };
+    // Migração 1×: desliga a voz automática em aparelhos que já tinham o antigo default ligado.
+    // Roda só uma vez (flag); depois disso o usuário manda nas Configurações.
+    if (!merged.preferencias.vozAutoMigradoV13) {
+      merged.preferencias.vozAutoPlay = false;
+      merged.preferencias.vozAutoMigradoV13 = true;
+    }
+    return merged;
   }
   static salvarProgresso(p) {
     GlobalVar.setLocalStorage(CHAVE, p);
