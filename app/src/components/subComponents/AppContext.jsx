@@ -140,6 +140,16 @@ function AppProviderInner({ children }) {
       }
       return r.recompensa;
     },
+    /** Arcade diário — registra 1× por dia (idempotente). XP só na 1ª vez. */
+    registrarArcade(acertos, xp = 40) {
+      let creditou = false;
+      setProgresso(p => {
+        const r = GlobalVar.registrarArcade(p, acertos, xp);
+        creditou = r.creditou;
+        return r.progresso;
+      });
+      return creditou;
+    },
     podeAbrirCaixa: GlobalVar.podeAbrirCaixaHoje(progresso),
     marcarMentorLida(id) { setProgresso(p => GlobalVar.marcarMentorLida(p, id)); },
     responderMentor(id, texto) { setProgresso(p => GlobalVar.responderMentor(p, id, texto)); },
