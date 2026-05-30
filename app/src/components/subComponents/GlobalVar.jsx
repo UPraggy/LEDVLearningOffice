@@ -49,6 +49,7 @@ const PROGRESSO_INICIAL = {
   // Onda 9 — SRS (spaced repetition)
   srs: {},                       // { 'card-id': { interval, next, ease, reps } }
   katas: {},                     // { 'YYYY-MM-DD': { kataId, resolvido, tentativas } }
+  modoArcade: {},                // { 'YYYY-MM-DD': { resolvido, acertos } }
 };
 
 export default class GlobalVar {
@@ -262,6 +263,24 @@ export default class GlobalVar {
     const estado = (p.katas || {})[hoje] || { kataId: kata.id, resolvido: false, tentativas: 0 };
     return { kata, estado };
   }
+  /** Arcade diário — registra a sessão 1× por dia (idempotente).
+   *  Soma XP só na 1ª vez; loga atividade e conta no heatmap.
+   *  Retorna `{ progresso, creditou:bool }`. */
+  static registrarArcade(p, acertos, xp = 40) {
+    const hoje = GlobalVar.diaAtualFunc();
+    const jaFeito = !!(p.modoArcade || {})[hoje]?.resolvido;
+    if (jaFeito) return { progresso: p, creditou: false };
+    const modoArcade = { ...(p.modoArcade || {}), [hoje]: { resolvido: true, acertos } };
+    let novo = { ...p, modoArcade, user: { ...p.user, xp: (p.user.xp || 0) + (xp || 0) } };
+    novo = GlobalVar.incrementarAtividadeDia(novo);
+    novo.atividadeRecente = [{
+      ts: Date.now(), tipo: 'arcade',
+      titulo: 'Arcade diário', sub: `${acertos}/3 acertos · +${xp || 0} XP`,
+    }, ...(novo.atividadeRecente || [])].slice(0, 20);
+    GlobalVar.salvarProgresso(novo);
+    return { progresso: novo, creditou: true };
+  }
+
   static marcarKata(p, resolvido) {
     const hoje = GlobalVar.diaAtualFunc();
     const atual = (p.katas || {})[hoje] || { resolvido: false, tentativas: 0 };

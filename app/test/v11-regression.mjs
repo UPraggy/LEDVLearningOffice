@@ -38,7 +38,7 @@ const interacoes = read('src/data/conteudo/_interacoes-exemplo.js');
 const imagens = [...interacoes.matchAll(/tipo:\s*'imagem'[\s\S]*?url:\s*'([^']+)'/g)].map(m => m[1]);
 assert.ok(imagens.length >= 8, 'Missoes precisam de pelo menos 8 imagens de exemplo.');
 for (const url of imagens) {
-  assert.match(url, /^\/generated\/missions\//,
+  assert.match(url, /^\/generated\/(missions|interactive)\//,
     'Imagens de missoes devem ser assets locais gerados no projeto, nao URLs externas.');
 }
 
