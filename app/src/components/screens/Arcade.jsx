@@ -1,5 +1,5 @@
 /* Modo Arcade Diário — 3 microdesafios encadeados, +40 XP no fim. */
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Zap, ArrowLeft, CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
 import { useApp } from '../subComponents/AppContext.jsx';
@@ -24,7 +24,7 @@ function pegarSessao(seed, poolBase = ARCADE_POOL) {
 }
 
 export default function Arcade() {
-  const { progresso, bonusXP, atualizar } = useApp();
+  const { progresso, registrarArcade } = useApp();
   const navigate = useNavigate();
   const hoje = GlobalVar.diaAtualFunc();
   const seed = Math.abs([...hoje].reduce((s, c) => (s * 31 + c.charCodeAt(0)) >>> 0, 0));
@@ -36,6 +36,7 @@ export default function Arcade() {
   const [escolha, setEscolha] = useState(null);
   const [resultado, setResultado] = useState([]);   // [ok|err]
   const [fim, setFim] = useState(arcEstado.resolvido);
+  const finalizarRef = useRef(false);               // trava anti-double-click
 
   if (fim) {
     const acertos = arcEstado.acertos || resultado.filter(r => r === 'ok').length;
@@ -48,7 +49,7 @@ export default function Arcade() {
           <span className="xpwon">+40 XP</span>
           <h2>Você acertou {acertos} de 3.</h2>
           <p style={{ color: 'var(--ink-soft)', maxWidth: '40ch' }}>
-            Ofensiva atualizada para hoje. Volte amanhã para a próxima rodada.
+            Seu XP já foi somado. O arcade vale 1 vez por dia — volte amanhã para a próxima rodada.
           </p>
           <button className="btn btn-primary" onClick={() => navigate('/')}>Voltar pra Home</button>
         </div>
@@ -74,14 +75,15 @@ export default function Arcade() {
     if (idx + 1 < sessao.length) {
       setIdx(i => i + 1);
       setEscolha(null);
-    } else {
-      const acertos = resultado.filter(r => r === 'ok').length;
-      const novo = { ...(progresso.modoArcade || {}), [hoje]: { resolvido: true, acertos } };
-      atualizar({ modoArcade: novo });
-      bonusXP(40);
-      Som.tocar('complete');
-      setFim(true);
+      return;
     }
+    // Finalização: idempotente + trava anti-double-click.
+    if (finalizarRef.current || fim) return;
+    finalizarRef.current = true;
+    const acertos = resultado.filter(r => r === 'ok').length;
+    registrarArcade(acertos, 40);   // soma XP só 1×/dia (atômico no GlobalVar)
+    Som.tocar('complete');
+    setFim(true);
   };
 
   return (
