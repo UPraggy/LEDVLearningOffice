@@ -26,6 +26,19 @@ import { MOB_LOC } from './mob-loc.js';
 import { MOB_FOTOS } from './mob-fotos.js';
 import { AMB_SEG } from './amb-seg.js';
 import { SEC_ATAQUE } from './sec-ataque.js';
+import { SEC_PIX } from './sec-pix.js';
+import { SEC_WHATSAPP } from './sec-whatsapp.js';
+import { SEC_BANCO } from './sec-banco.js';
+import { SEC_COMPRAS } from './sec-compras.js';
+import { SEC_SENHAS_AV } from './sec-senhas-av.js';
+import { SEC_PRIV } from './sec-priv.js';
+import { SEC_DISPOSITIVO } from './sec-dispositivo.js';
+import { SEC_REDES } from './sec-redes.js';
+import { SEC_FAMILIA } from './sec-familia.js';
+import { SEC_INVESTE } from './sec-investe.js';
+import { SEC_EMPREGO } from './sec-emprego.js';
+import { SEC_ROMANCE } from './sec-romance.js';
+import { SEC_RESPOSTA } from './sec-resposta.js';
 import { EN_A1_BASICO } from './en-a1-basico.js';
 import { EN_A1_PESSOAS } from './en-a1-pessoas.js';
 import { EN_A1_NUMEROS } from './en-a1-numeros.js';
@@ -61,6 +74,19 @@ export const CONTEUDOS = {
   ...MOB_FOTOS,
   ...AMB_SEG,
   ...SEC_ATAQUE,
+  ...SEC_PIX,
+  ...SEC_WHATSAPP,
+  ...SEC_BANCO,
+  ...SEC_COMPRAS,
+  ...SEC_SENHAS_AV,
+  ...SEC_PRIV,
+  ...SEC_DISPOSITIVO,
+  ...SEC_REDES,
+  ...SEC_FAMILIA,
+  ...SEC_INVESTE,
+  ...SEC_EMPREGO,
+  ...SEC_ROMANCE,
+  ...SEC_RESPOSTA,
   ...EN_A1_BASICO,
   ...EN_A1_PESSOAS,
   ...EN_A1_NUMEROS,
