@@ -34,6 +34,14 @@ import { MOB_GOV } from './mob-gov.js';
 import { MOB_SAUDE } from './mob-saude.js';
 import { MOB_LOC } from './mob-loc.js';
 import { MOB_FOTOS } from './mob-fotos.js';
+import { MOB_TECLADO } from './mob-teclado.js';
+import { MOB_CONTATOS } from './mob-contatos.js';
+import { MOB_APPS } from './mob-apps.js';
+import { MOB_ACESS } from './mob-acess.js';
+import { MOB_ORGANIZA } from './mob-organiza.js';
+import { MOB_BATERIA } from './mob-bateria.js';
+import { MOB_ENTRET } from './mob-entret.js';
+import { MOB_QR } from './mob-qr.js';
 import { AMB_SEG } from './amb-seg.js';
 import { SEC_ATAQUE } from './sec-ataque.js';
 import { SEC_PIX } from './sec-pix.js';
@@ -92,6 +100,14 @@ export const CONTEUDOS = {
   ...MOB_SAUDE,
   ...MOB_LOC,
   ...MOB_FOTOS,
+  ...MOB_TECLADO,
+  ...MOB_CONTATOS,
+  ...MOB_APPS,
+  ...MOB_ACESS,
+  ...MOB_ORGANIZA,
+  ...MOB_BATERIA,
+  ...MOB_ENTRET,
+  ...MOB_QR,
   ...AMB_SEG,
   ...SEC_ATAQUE,
   ...SEC_PIX,
