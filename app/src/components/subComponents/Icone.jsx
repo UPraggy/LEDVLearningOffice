@@ -6,6 +6,8 @@ import {
   Shield, AlertTriangle,
   Languages, Users, Hash, Sun, Utensils, MapPin, History,
   CalendarClock, MessageSquare, Briefcase, Globe2,
+  MessagesSquare, House, ListChecks, Presentation, Palette,
+  PiggyBank, Store, ShoppingCart, Instagram,
   HelpCircle,
 } from 'lucide-react';
 
@@ -16,6 +18,8 @@ const MAPA = {
   Shield, AlertTriangle,
   Languages, Users, Hash, Sun, Utensils, MapPin, History,
   CalendarClock, MessageSquare, Briefcase, Globe2,
+  MessagesSquare, House, ListChecks, Presentation, Palette,
+  PiggyBank, Store, ShoppingCart, Instagram,
 };
 
 export default function Icone({ nome, size = 24, ...rest }) {

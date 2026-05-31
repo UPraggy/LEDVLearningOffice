@@ -26,6 +26,15 @@ import { PC_IA } from './pc-ia.js';
 import { AMB_COM } from './amb-com.js';
 import { PC_JOB } from './pc-job.js';
 import { MKT_CARREIRA } from './mkt-carreira.js';
+import { MKT_ENTREVISTA } from './mkt-entrevista.js';
+import { MKT_REMOTO } from './mkt-remoto.js';
+import { MKT_PRODUTIVIDADE } from './mkt-produtividade.js';
+import { MKT_APRESENTA } from './mkt-apresenta.js';
+import { MKT_CANVA } from './mkt-canva.js';
+import { MKT_FINANCAS } from './mkt-financas.js';
+import { MKT_MEI } from './mkt-mei.js';
+import { MKT_VENDAS } from './mkt-vendas.js';
+import { MKT_SOCIAL } from './mkt-social.js';
 import { AMB_FINAL } from './amb-final.js';
 import { MOB_DOM } from './mob-dom.js';
 import { MOB_WPP } from './mob-wpp.js';
@@ -92,6 +101,15 @@ export const CONTEUDOS = {
   ...AMB_COM,
   ...PC_JOB,
   ...MKT_CARREIRA,
+  ...MKT_ENTREVISTA,
+  ...MKT_REMOTO,
+  ...MKT_PRODUTIVIDADE,
+  ...MKT_APRESENTA,
+  ...MKT_CANVA,
+  ...MKT_FINANCAS,
+  ...MKT_MEI,
+  ...MKT_VENDAS,
+  ...MKT_SOCIAL,
   ...AMB_FINAL,
   ...MOB_DOM,
   ...MOB_WPP,
