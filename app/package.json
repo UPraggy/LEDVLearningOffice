@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
+    "postbuild": "node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\"",
     "test:v11": "node test/v11-regression.mjs",
     "preview": "vite preview --host",
     "gen:scenes": "node scripts/generate-interactive-scenes.mjs",
