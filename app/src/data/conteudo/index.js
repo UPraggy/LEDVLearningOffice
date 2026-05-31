@@ -11,6 +11,16 @@ import { PC_NAV } from './pc-nav.js';
 import { PC_WORD } from './pc-word.js';
 import { PC_CLOUD } from './pc-cloud.js';
 import { PC_MEET } from './pc-meet.js';
+import { PC_ARQUIVOS } from './pc-arquivos.js';
+import { PC_TECLADO } from './pc-teclado.js';
+import { PC_EMAIL } from './pc-email.js';
+import { PC_PDF } from './pc-pdf.js';
+import { PC_IMPRESSAO } from './pc-impressao.js';
+import { PC_CONFIG } from './pc-config.js';
+import { PC_MANUTENCAO } from './pc-manutencao.js';
+import { PC_PROTEGE } from './pc-protege.js';
+import { PC_MULTIMIDIA } from './pc-multimidia.js';
+import { PC_APPS } from './pc-apps.js';
 import { PC_EXCEL } from './pc-excel.js';
 import { PC_IA } from './pc-ia.js';
 import { AMB_COM } from './amb-com.js';
@@ -59,6 +69,16 @@ export const CONTEUDOS = {
   ...PC_WORD,
   ...PC_CLOUD,
   ...PC_MEET,
+  ...PC_ARQUIVOS,
+  ...PC_TECLADO,
+  ...PC_EMAIL,
+  ...PC_PDF,
+  ...PC_IMPRESSAO,
+  ...PC_CONFIG,
+  ...PC_MANUTENCAO,
+  ...PC_PROTEGE,
+  ...PC_MULTIMIDIA,
+  ...PC_APPS,
   ...PC_EXCEL,
   ...PC_IA,
   ...AMB_COM,
