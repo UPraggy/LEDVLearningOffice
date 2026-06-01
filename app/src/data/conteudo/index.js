@@ -77,8 +77,18 @@ import { EN_A2_PLANOS } from './en-a2-planos.js';
 import { EN_B1_CONVERSA } from './en-b1-conversa.js';
 import { EN_B1_TRABALHO } from './en-b1-trabalho.js';
 import { EN_B1_MUNDO } from './en-b1-mundo.js';
+import { EN_A1_OBJETOS } from './en-a1-objetos.js';
+import { EN_A1_ACOES } from './en-a1-acoes.js';
+import { EN_A2_COMPRAS } from './en-a2-compras.js';
+import { EN_A2_SAUDE } from './en-a2-saude.js';
+import { EN_A2_COMPARAR } from './en-a2-comparar.js';
+import { EN_B1_VIAGEM } from './en-b1-viagem.js';
+import { EN_B1_TELEFONE } from './en-b1-telefone.js';
+import { EN_B2_EXPRESSOES } from './en-b2-expressoes.js';
+import { EN_B2_MIDIA } from './en-b2-midia.js';
+import { EN_B2_FLUENCIA } from './en-b2-fluencia.js';
 import { INTERACOES_EXEMPLO } from './_interacoes-exemplo.js';
-// ✅ MÓDULO INGLÊS COMPLETO (A1 + A2 + B1 = 11 trilhas).
+// ✅ MÓDULO INGLÊS COMPLETO (A1 + A2 + B1 + B2 = 21 trilhas).
 
 export const CONTEUDOS = {
   ...PC_FUND,
@@ -152,6 +162,16 @@ export const CONTEUDOS = {
   ...EN_B1_CONVERSA,
   ...EN_B1_TRABALHO,
   ...EN_B1_MUNDO,
+  ...EN_A1_OBJETOS,
+  ...EN_A1_ACOES,
+  ...EN_A2_COMPRAS,
+  ...EN_A2_SAUDE,
+  ...EN_A2_COMPARAR,
+  ...EN_B1_VIAGEM,
+  ...EN_B1_TELEFONE,
+  ...EN_B2_EXPRESSOES,
+  ...EN_B2_MIDIA,
+  ...EN_B2_FLUENCIA,
 };
 
 /** Retorna o conteúdo rico de uma missão, ou null se ainda não foi produzido.

@@ -8,6 +8,7 @@ import {
   CalendarClock, MessageSquare, Briefcase, Globe2,
   MessagesSquare, House, ListChecks, Presentation, Palette,
   PiggyBank, Store, ShoppingCart, Instagram,
+  Activity, Stethoscope, Scale, Plane, Phone, Newspaper, Mic,
   HelpCircle,
 } from 'lucide-react';
 
@@ -20,6 +21,7 @@ const MAPA = {
   CalendarClock, MessageSquare, Briefcase, Globe2,
   MessagesSquare, House, ListChecks, Presentation, Palette,
   PiggyBank, Store, ShoppingCart, Instagram,
+  Activity, Stethoscope, Scale, Plane, Phone, Newspaper, Mic,
 };
 
 export default function Icone({ nome, size = 24, ...rest }) {

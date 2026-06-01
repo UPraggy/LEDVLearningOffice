@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Adjetivos para descrever">
+  <defs>
+    <linearGradient id="mbg-f0e9f6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4eff8"/><stop offset="1" stop-color="#ddd6e2"/></linearGradient>
+    <linearGradient id="mhd-39245b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#554372"/><stop offset="1" stop-color="#2f1e4b"/></linearGradient>
+    <linearGradient id="macc-6b3f7a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7d568a"/><stop offset="1" stop-color="#5a3566"/></linearGradient>
+    <linearGradient id="m-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="m-glow" cx="0.5" cy="0.1" r="0.9"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="m-panel" x="-12%" y="-12%" width="124%" height="124%"><feDropShadow dx="0" dy="14" stdDeviation="24" flood-color="#221637" flood-opacity=".16"/></filter>
+    <filter id="m-obj" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#221637" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#mbg-f0e9f6)"/>
+  <rect width="1200" height="360" fill="url(#m-glow)"/>
+  <circle cx="1080" cy="40" r="190" fill="#6B3F7A" opacity=".12"/>
+  <circle cx="120" cy="660" r="220" fill="#D49545" opacity=".10"/>
+  <circle cx="188" cy="444" r="7" fill="#39245B" opacity=".06"/><circle cx="741" cy="381" r="8" fill="#39245B" opacity=".06"/><circle cx="932" cy="185" r="6" fill="#39245B" opacity=".06"/><circle cx="589" cy="316" r="5" fill="#39245B" opacity=".06"/><circle cx="1036" cy="169" r="4" fill="#39245B" opacity=".06"/>
+  <rect x="64" y="150" width="1072" height="430" rx="40" fill="#F7F2EC" filter="url(#m-panel)"/>
+  <rect x="64" y="150" width="1072" height="430" rx="40" fill="none" stroke="#d3cfdb" stroke-width="2"/>
+  <rect x="64" y="150" width="1072" height="200" rx="40" fill="url(#m-sheen)"/>
+  <g filter="url(#m-obj)"><circle cx="380" cy="350" r="96" fill="#F0E9F6" stroke="#39245B" stroke-width="9"/><ellipse cx="380" cy="350" rx="44" ry="96" fill="none" stroke="#39245B" stroke-width="6" opacity=".5"/><path d="M284 350 h192 M294 304 h172 M294 396 h172" stroke="#39245B" stroke-width="6" opacity=".5"/><rect x="544" y="238" width="172" height="100" rx="26" fill="#F0E9F6" stroke="#39245B" stroke-width="6"/><path d="M580 336 l-6 34 l40 -30 z" fill="#F0E9F6" stroke="#39245B" stroke-width="6"/><text x="630" y="302" text-anchor="middle" fill="#39245B" font-family="'Fraunces', Georgia, serif" font-size="40" font-weight="700">Hello</text><rect x="744" y="338" width="172" height="100" rx="26" fill="#6B3F7A" stroke="#39245B" stroke-width="6"/><path d="M780 436 l-6 34 l40 -30 z" fill="#6B3F7A" stroke="#39245B" stroke-width="6"/><text x="830" y="402" text-anchor="middle" fill="#fff" font-family="'Fraunces', Georgia, serif" font-size="40" font-weight="700">Hi</text></g>
+  <path d="M0 0 h1200 v96 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#mhd-39245b)"/>
+  <path d="M0 0 h1200 v44 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#m-sheen)"/>
+  <text x="72" y="52" fill="#d9a25b" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="700" letter-spacing="5">COMPARANDO COISAS (A2)</text>
+  <text x="72" y="98" fill="#fff" font-family="'Fraunces', Georgia, serif" font-size="40" font-weight="700">Adjetivos para descrever</text>
+  <rect x="64" y="600" width="170" height="46" rx="23" fill="url(#mhd-39245b)" filter="url(#m-obj)"/>
+  <text x="92" y="631" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="21" font-weight="700">Missão 01</text>
+  <rect x="248" y="600" width="138" height="46" rx="23" fill="url(#macc-6b3f7a)" filter="url(#m-obj)"/>
+  <text x="280" y="631" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="21" font-weight="700">11 min</text>
+  <text x="1136" y="631" text-anchor="end" fill="#39245B" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="700" opacity=".5">01/06</text>
+</svg>
