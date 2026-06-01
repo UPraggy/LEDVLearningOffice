@@ -375,6 +375,193 @@ const POOL = [
       tag: 'carreira', color: 'navy',
     }),
   },
+
+  /* ────────────── BLOCO 9 — Excel avançado & dados ────────────── */
+  {
+    id: 'g-dica-procx',
+    cooldown: 21,
+    cond: (p) => contar(p, 'pc-excel-pro-') >= 1,
+    msg: () => ({
+      title: 'PROCX: a função que vale uma vaga',
+      body: 'Em testes práticos de emprego, "cruzar duas tabelas" é o pedido mais comum — e o PROCX resolve isso melhor que o velho PROCV: busca pra qualquer lado e já trata o "não encontrado". Treine até fazer sem pensar; é o tipo de habilidade que aparece no salário.',
+      tag: 'dica', color: 'navy',
+    }),
+  },
+  {
+    id: 'g-dica-tabela-dinamica',
+    cooldown: 25,
+    cond: (p) => contar(p, 'pc-excel-pro-') >= 6,
+    msg: () => ({
+      title: 'Tabela dinâmica parece mágica (e é treinável)',
+      body: 'Resumir 5 mil linhas em três arrastões de mouse impressiona qualquer chefe. O segredo é base limpa: cabeçalho em toda coluna, sem linha em branco no meio. Transforme em Tabela (Ctrl+T) antes — aí a dinâmica cresce junto com seus dados.',
+      tag: 'dica', color: 'sage',
+    }),
+  },
+  {
+    id: 'g-empurra-excel-pro',
+    cooldown: 18,
+    cond: (p) => contar(p, 'pc-excel-') >= 10 && contar(p, 'pc-excel-pro-') === 0,
+    msg: () => ({
+      title: 'Você já tem base — hora do Excel que decide',
+      body: 'Terminou o Excel essencial? A trilha "Excel Avançado: Fórmulas que Decidem" é o próximo degrau: SE, SOMASE, PROCX, validação e um dashboard de verdade no fim. É o conteúdo que separa "sabe usar" de "sabe analisar".',
+      tag: 'prep', color: 'coral',
+      acao: { tipo: 'modulo', modId: 'mercado' },
+    }),
+  },
+  {
+    id: 'g-dica-se-erro',
+    cooldown: 30,
+    cond: (p) => contar(p, 'pc-excel-pro-') >= 3,
+    msg: () => ({
+      title: 'Planilha do chefe não tem erro vermelho',
+      body: 'Aquele #N/D ou #DIV/0! passa imagem de descuido e ainda quebra somas. Envolva o cálculo com SE.ERRO e mostre um traço ou uma mensagem em português. Mas atenção: entenda a causa antes de esconder — SE.ERRO é maquiagem, não conserto.',
+      tag: 'dica', color: 'navy',
+    }),
+  },
+
+  /* ────────────── BLOCO 10 — Inglês ────────────── */
+  {
+    id: 'g-ingles-comecar',
+    cooldown: 20,
+    cond: (p) => (p.missoesCompletas || []).length >= 8 && contar(p, 'en-') === 0,
+    msg: () => ({
+      title: 'Inglês abre uma porta que não fecha mais',
+      body: 'Não precisa virar fluente pra mudar de patamar: ler instruções, entender um vídeo, responder um e-mail simples já coloca você à frente de muita gente. Comece pelo A1 — são frases curtas, do jeito que dá pra usar amanhã.',
+      tag: 'prep', color: 'coral',
+      acao: { tipo: 'modulo', modId: 'ingles' },
+    }),
+  },
+  {
+    id: 'g-ingles-shadowing',
+    cooldown: 26,
+    cond: (p) => contar(p, 'en-') >= 4,
+    msg: () => ({
+      title: 'Truque de fluência: shadowing',
+      body: 'Ouça uma frase em inglês e repita por cima, imitando o ritmo e o som — como uma sombra (shadow). Estudos de aquisição de língua mostram que isso treina ouvido e boca ao mesmo tempo. 5 minutos por dia valem mais que uma hora só lendo.',
+      tag: 'dica', color: 'sage',
+    }),
+  },
+  {
+    id: 'g-ingles-b1',
+    cooldown: 30,
+    cond: (p) => contar(p, 'en-a2-') >= 4 && contar(p, 'en-b1-') === 0,
+    msg: () => ({
+      title: 'Você está pronto pro B1',
+      body: 'Saiu do "sobreviver" e entrou no "conversar". No B1 você aprende a contar uma história no passado, dar opinião e se virar numa viagem. É o nível que a maioria dos empregos pede como "inglês intermediário". Siga firme.',
+      tag: 'celebra', color: 'honey',
+      acao: { tipo: 'modulo', modId: 'ingles' },
+    }),
+  },
+
+  /* ────────────── BLOCO 11 — Prática: katas, arcade, revisão ────────────── */
+  {
+    id: 'g-kata-rotina',
+    cooldown: 14,
+    cond: (p) => (p.missoesCompletas || []).length >= 6,
+    msg: () => ({
+      title: 'Aqueça o cérebro com um Kata',
+      body: 'Antes da missão do dia, faça 1 ou 2 katas — são desafios rápidos de fixação, de 1 minuto cada. Pianista treina escala todo dia; com habilidade digital é igual. O pouco diário vence o muito esporádico.',
+      tag: 'dica', color: 'navy',
+      acao: { tipo: 'rota', rota: '/kata' },
+    }),
+  },
+  {
+    id: 'g-arcade-relax',
+    cooldown: 16,
+    cond: (p) => (p.user?.streak || 0) >= 4,
+    msg: () => ({
+      title: 'Cansou? Vai pro Arcade.',
+      body: 'Tem dia que a cabeça não quer aula longa — e tudo bem. O Arcade tem joguinhos que ensinam sem parecer estudo: achar o erro, relâmpago, memória. Mantém a ofensiva viva e ainda fixa conteúdo. Diversão também é método.',
+      tag: 'motiva', color: 'honey',
+      acao: { tipo: 'rota', rota: '/arcade' },
+    }),
+  },
+  {
+    id: 'g-revisao-lembrete',
+    cooldown: 7,
+    cond: (p) => (p.missoesCompletas || []).length >= 12,
+    msg: () => ({
+      title: 'Sua revisão de hoje está esperando',
+      body: 'Lembra do que aprendeu semana passada? O cérebro esquece de propósito o que não revisa. Cinco minutos de revisão espaçada hoje valem por uma aula inteira amanhã. Abra quando puder — eu seleciono só o que está na hora de relembrar.',
+      tag: 'prep', color: 'sage',
+      acao: { tipo: 'rota', rota: '/revisao' },
+    }),
+  },
+
+  /* ────────────── BLOCO 12 — Mais dicas técnicas ────────────── */
+  {
+    id: 'g-dica-print-tela',
+    cooldown: 27,
+    cond: (p) => contar(p, 'pc-') >= 2,
+    msg: () => ({
+      title: 'Tirar foto da tela (print)',
+      body: 'No Windows, a tecla "PrtSc" copia a tela inteira; "Windows + Shift + S" deixa você recortar só um pedaço. No celular, geralmente é "ligar + volume pra baixo" juntos. Serve pra guardar comprovante, mostrar um erro pra alguém ou registrar uma conversa.',
+      tag: 'dica', color: 'navy',
+    }),
+  },
+  {
+    id: 'g-dica-copiar-formato',
+    cooldown: 33,
+    cond: (p) => contar(p, 'pc-word-') >= 2 || contar(p, 'pc-excel-') >= 4,
+    msg: () => ({
+      title: 'Pincel de formatação: copie o estilo, não o texto',
+      body: 'No Word e no Excel existe um ícone de pincelzinho. Clique numa célula/texto já formatado, depois no pincel, depois arraste sobre o que quer deixar igual. Copia cor, tamanho, borda — tudo de uma vez. Economiza um trabalhão.',
+      tag: 'dica', color: 'sage',
+    }),
+  },
+  {
+    id: 'g-dica-atalhos-base',
+    cooldown: 24,
+    cond: (p) => contar(p, 'pc-') >= 4,
+    msg: () => ({
+      title: 'Os 4 atalhos que mudam tudo',
+      body: 'Ctrl+C (copiar), Ctrl+V (colar), Ctrl+Z (desfazer) e Ctrl+F (buscar na página). Funcionam em quase todo programa e site. Decorou esses quatro? Você já é mais rápido que a maioria dos colegas de trabalho.',
+      tag: 'dica', color: 'navy',
+    }),
+  },
+  {
+    id: 'g-dica-backup',
+    cooldown: 40,
+    cond: (p) => contar(p, 'pc-cloud-') >= 1 || (p.missoesCompletas || []).length >= 14,
+    msg: () => ({
+      title: 'Quem nunca perdeu um arquivo, vai perder.',
+      body: 'Computador estraga, celular cai n\'água, pen drive some. A salvação tem nome: nuvem. Salve o que importa no Google Drive ou OneDrive — atualiza sozinho e você acessa de qualquer aparelho. Documentos, fotos da família, currículo. Faça isso ainda hoje.',
+      tag: 'segurança', color: 'coral',
+    }),
+  },
+
+  /* ────────────── BLOCO 13 — Mais motivação & marcos ────────────── */
+  {
+    id: 'g-mot-meio-curso',
+    unica: true,
+    cond: (p) => (p.missoesCompletas || []).length >= 50,
+    msg: () => ({
+      title: '50 missões. Pare e respire fundo.',
+      body: 'Cinquenta. Cada uma foi uma escolha de sentar e aprender quando seria mais fácil não fazer nada. Isso não é sobre tecnologia — é sobre o tipo de pessoa que você está provando ser. Eu acompanho muitos alunos; poucos chegam aqui. Orgulho de você.',
+      tag: 'celebra', color: 'honey',
+    }),
+  },
+  {
+    id: 'g-mot-trofeu-10',
+    unica: true,
+    cond: (p) => (p.trofeus || []).length >= 10,
+    msg: () => ({
+      title: '10 troféus — sua estante está enchendo',
+      body: 'Dez conquistas guardadas. Num dia em que bater aquela dúvida de "será que eu consigo?", abra os troféus. Eles não mentem: você já conseguiu, dez vezes. O resto é repetir o que já sabe fazer.',
+      tag: 'celebra', color: 'honey',
+      acao: { tipo: 'rota', rota: '/trofeus' },
+    }),
+  },
+  {
+    id: 'g-mot-domingo',
+    cooldown: 21,
+    cond: (p) => (p.user?.streak || 0) >= 7,
+    msg: () => ({
+      title: 'O segredo não é intensidade — é não zerar',
+      body: 'Você não precisa de dias heroicos. Precisa de não deixar o contador voltar a zero. Uma missão curta num dia ruim segura a corrente inteira. Constância vence talento que não aparece — e a sua já está virando hábito.',
+      tag: 'motiva', color: 'sage',
+    }),
+  },
 ];
 
 /** Resposta automática do mentor quando o aluno responde uma mensagem. */

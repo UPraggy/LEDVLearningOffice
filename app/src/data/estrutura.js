@@ -1032,6 +1032,8 @@ export const TROFEUS = [
   { id: 'cinquenta-missoes',nome: 'Meio Caminho',    desc: 'Concluiu 50 missões',          tipo: 'marco', tier: 'gold',    mod: 'honey',     icon: 'flag',     regra: { missoes: 50 } },
   { id: 'cem-missoes',      nome: 'Centurião',       desc: 'Concluiu 100 missões',         tipo: 'marco', tier: 'gold',    mod: 'merc',      icon: 'crown',    regra: { missoes: 100 } },
   { id: 'dois-cem-missoes', nome: 'Maratonista',     desc: 'Concluiu 200 missões',         tipo: 'marco', tier: 'diamond', mod: 'magenta',   icon: 'trending', regra: { missoes: 200 } },
+  { id: 'tres-cem-missoes', nome: 'Incansável',      desc: 'Concluiu 300 missões',         tipo: 'marco', tier: 'diamond', mod: 'magenta',   icon: 'flag',     regra: { missoes: 300 } },
+  { id: 'quinhentas-missoes',nome: 'Lendário',       desc: 'Concluiu 500 missões',         tipo: 'marco', tier: 'mythic',  mod: 'vinho',     icon: 'crown',    regra: { missoes: 500 } },
 
   // ===== OFENSIVA (cor: streak/honey) =====
   { id: 'ofensiva-3',   nome: 'Faísca',          desc: '3 dias seguidos',   tipo: 'ofensiva', tier: 'bronze',  mod: 'ouro-rosa', icon: 'spark',   regra: { streak: 3 } },
@@ -1076,6 +1078,8 @@ export const TROFEUS = [
   { id: 'en-a2',          nome: 'A2 Explorer',     desc: 'Todas as trilhas A2 de inglês',    tipo: 'ingles', tier: 'gold',   mod: 'ing',   icon: 'globe',   regra: { trilhas: ['en-a2-comida','en-a2-lugares','en-a2-passado','en-a2-planos'] } },
   { id: 'en-b1',          nome: 'B1 Speaker',      desc: 'Todas as trilhas B1 de inglês',    tipo: 'ingles', tier: 'gold',   mod: 'roxo',  icon: 'mic',     regra: { trilhas: ['en-b1-conversa','en-b1-trabalho','en-b1-mundo'] } },
   { id: 'en-dom-trabalho',nome: 'Business English',desc: 'Concluiu Inglês para o Trabalho',  tipo: 'ingles', tier: 'gold',   mod: 'roxo',  icon: 'briefcase', regra: { trilha: 'en-b1-trabalho' } },
+  { id: 'en-b2',          nome: 'B2 Fluent',       desc: 'Todas as trilhas B2 de inglês',    tipo: 'ingles', tier: 'diamond',mod: 'roxo',  icon: 'globe',   regra: { trilhas: ['en-b2-expressoes','en-b2-midia','en-b2-fluencia'] } },
+  { id: 'en-dom-fluencia',nome: 'Native Feel',     desc: 'Concluiu Fluência & Naturalidade', tipo: 'ingles', tier: 'gold',   mod: 'roxo',  icon: 'mic',     regra: { trilha: 'en-b2-fluencia' } },
 
   // ===== ESPECIAIS (módulo completo) =====
   { id: 'mod-computador', nome: 'Dono do PC',         desc: 'Completou o módulo Computador',  tipo: 'especial', tier: 'diamond', mod: 'comp',  icon: 'medal',    regra: { modulo: 'computador' } },
