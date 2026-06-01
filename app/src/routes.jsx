@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { BrowserRouter, Routes as Router, Route, Navigate, useLocation } from 'react-router-dom';
 import { AppProvider, useApp } from './components/subComponents/AppContext.jsx';
 import AppShell from './components/AppShell.jsx';
@@ -22,10 +22,23 @@ import Arcade from './components/screens/Arcade.jsx';
 
 function ScrollToTop() {
   const loc = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    // alguns containers internos também precisam
-    document.querySelector('main.content')?.scrollTo?.({ top: 0, behavior: 'instant' });
+  // useLayoutEffect roda antes do paint; o rAF garante um 2º passe caso a tela
+  // recém-montada reposicione o scroll (ordem de effects entre irmãos).
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    const aoTopo = () => {
+      // form de 2 argumentos: máxima compatibilidade, sem 'behavior'
+      window.scrollTo(0, 0);
+      if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      document.querySelector('main.content')?.scrollTo?.(0, 0);
+    };
+    aoTopo();
+    const r = requestAnimationFrame(aoTopo);
+    return () => cancelAnimationFrame(r);
   }, [loc.pathname]);
   return null;
 }

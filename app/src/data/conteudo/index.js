@@ -22,6 +22,7 @@ import { PC_PROTEGE } from './pc-protege.js';
 import { PC_MULTIMIDIA } from './pc-multimidia.js';
 import { PC_APPS } from './pc-apps.js';
 import { PC_EXCEL } from './pc-excel.js';
+import { PC_EXCEL_PRO } from './pc-excel-pro.js';
 import { PC_IA } from './pc-ia.js';
 import { AMB_COM } from './amb-com.js';
 import { PC_JOB } from './pc-job.js';
@@ -107,6 +108,7 @@ export const CONTEUDOS = {
   ...PC_MULTIMIDIA,
   ...PC_APPS,
   ...PC_EXCEL,
+  ...PC_EXCEL_PRO,
   ...PC_IA,
   ...AMB_COM,
   ...PC_JOB,

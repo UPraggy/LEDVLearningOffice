@@ -2,7 +2,7 @@
 import {
   Settings, Globe, FileText, Cloud, Video,
   Smartphone, MessageCircle, Banknote, KeyRound, Heart, Map, Camera,
-  Sheet, Sparkles, Send, Linkedin, TrendingUp, Layers,
+  Sheet, Sigma, Sparkles, Send, Linkedin, TrendingUp, Layers,
   Shield, AlertTriangle,
   Languages, Users, Hash, Sun, Utensils, MapPin, History,
   CalendarClock, MessageSquare, Briefcase, Globe2,
@@ -15,7 +15,7 @@ import {
 const MAPA = {
   Settings, Globe, FileText, Cloud, Video,
   Smartphone, MessageCircle, Banknote, KeyRound, Heart, Map, Camera,
-  Sheet, Sparkles, Send, Linkedin, TrendingUp, Layers,
+  Sheet, Sigma, Sparkles, Send, Linkedin, TrendingUp, Layers,
   Shield, AlertTriangle,
   Languages, Users, Hash, Sun, Utensils, MapPin, History,
   CalendarClock, MessageSquare, Briefcase, Globe2,

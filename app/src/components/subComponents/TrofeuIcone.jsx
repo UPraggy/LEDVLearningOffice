@@ -114,6 +114,12 @@ const I = {
       <path d="M3 10h18M3 15h18M9 4v16M15 4v16" />
     </svg>
   ),
+  sigma: (s = 32) => (
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round">
+      <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".12" />
+      <path d="M16 7H8l4 5-4 5h8" />
+    </svg>
+  ),
   briefcase: (s = 32) => (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round">
       <rect x="3" y="7" width="18" height="13" rx="2" fill="currentColor" opacity=".2" />
