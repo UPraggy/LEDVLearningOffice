@@ -89,6 +89,7 @@
   <h1>🔍 Visual Inspector</h1>
   <span class="note">base de design · contraste · grid · paleta · checklist</span>
   <span class="sp"></span>
+  <button id="galBtn" title="Galeria: rende TODAS as cenas e marca problemas (vazia/404/texto cortado)">🖼 Galeria</button>
   <button id="docsBtn" title="Abrir base de conhecimento">📚 Docs</button>
   <button id="tokensBtn" title="Tokens reais do app (colors.css)">🎨 Tokens</button>
   <select id="preset" title="Carregar SVG do projeto"></select>
@@ -134,6 +135,28 @@
       <button id="tokClose">✕ Fechar</button>
     </div>
     <div class="doc" id="tokBody"><span class="note">carregando…</span></div>
+  </div>
+</div>
+
+<!-- modal de GALERIA: rende TODAS as cenas em lote + auditoria real (getBBox) -->
+<div id="gal" class="modal" hidden>
+  <div class="sheet" style="max-width:1280px;width:96vw">
+    <div class="top" style="flex-wrap:wrap;gap:8px">
+      <strong>🖼 Galeria de cenas</strong>
+      <select id="galScope" style="padding:5px">
+        <option value="int">Interativas (todas)</option>
+        <option value="all" selected>Missões — todas as trilhas</option>
+      </select>
+      <select id="galTrilha" style="padding:5px;max-width:260px"></select>
+      <label class="row" style="margin:0;gap:4px"><input type="checkbox" id="galOnlyProb"> só problemas</label>
+      <button id="galRun">Rodar auditoria</button>
+      <span class="sp"></span>
+      <span class="note" id="galStat">—</span>
+      <button id="galClose">✕ Fechar</button>
+    </div>
+    <div class="doc" id="galBody" style="padding:12px">
+      <div id="galGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px"></div>
+    </div>
   </div>
 </div>
 
@@ -574,7 +597,83 @@ tokModal.onclick=e=>{ if(e.target===tokModal) tokModal.hidden=true; };
 document.querySelectorAll('#tokModes button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('#tokModes button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); tokMode=b.dataset.mode; renderTokens(); });
 document.getElementById('tokCss').onclick=e=>{ if(!TOK)return; const map=mergedTokens(tokMode); copy(':root{\n'+Object.entries(map).map(([k,v])=>`  ${k}: ${v};`).join('\n')+'\n}', e.target); };
 
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ docModal.hidden=true; tokModal.hidden=true; } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ docModal.hidden=true; tokModal.hidden=true; galModal.hidden=true; } });
+
+// ---- GALERIA (auditoria visual em lote, getBBox real) --------------------
+const galModal=document.getElementById('gal'), galGrid=document.getElementById('galGrid'),
+      galStat=document.getElementById('galStat'), galScope=document.getElementById('galScope'),
+      galTrilha=document.getElementById('galTrilha'), galOnly=document.getElementById('galOnlyProb');
+let MAN=null;
+async function galManifest(){ if(MAN) return MAN; try{ MAN=await (await fetch('/inspector-manifest.json')).json(); }catch{ MAN={interactive:[],trilhas:{}}; } return MAN; }
+function fillTrilhas(){
+  const t=MAN.trilhas||{}; const mods={};
+  for(const [id,o] of Object.entries(t)){ (mods[o.modulo||'—']=mods[o.modulo||'—']||[]).push([id,o]); }
+  let html='<option value="*">— todas as trilhas —</option>';
+  for(const mod of Object.keys(mods).sort()){
+    html+=`<optgroup label="${mod}">`+mods[mod].sort((a,b)=>a[0].localeCompare(b[0]))
+      .map(([id,o])=>`<option value="${id}">${id} · ${o.nome} (${o.missoes.length})</option>`).join('')+'</optgroup>';
+  }
+  galTrilha.innerHTML=html;
+}
+function galList(){
+  if(galScope.value==='int') return (MAN.interactive||[]).map(s=>({id:s,url:`/generated/interactive/${s}.svg`}));
+  const t=MAN.trilhas||{}; const sel=galTrilha.value;
+  const ids=sel==='*'||!sel ? Object.keys(t) : [sel];
+  const out=[];
+  for(const tid of ids) for(const mid of (t[tid]?.missoes||[])) out.push({id:mid,url:`/generated/missions/${mid}.svg`});
+  return out;
+}
+// audita um <svg> já renderizado no DOM → lista de problemas
+function auditCard(svg,W,H){
+  const tol=6, probs=[];
+  if(!svg) return ['vazia/sem <svg>'];
+  if(!svg.querySelector('*')) probs.push('sem elementos');
+  for(const tx of svg.querySelectorAll('text')){
+    let b; try{ b=tx.getBBox(); }catch{ continue; }
+    if(!b.width&&!b.height) continue;
+    if(b.x<-tol||b.y<-tol||b.x+b.width>W+tol||b.y+b.height>H+tol){
+      probs.push(`texto cortado: "${(tx.textContent||'').trim().slice(0,22)}"`);
+    }
+  }
+  return probs;
+}
+async function galRun(){
+  await galManifest();
+  if(galScope.value!=='int'&&!galTrilha.options.length) fillTrilhas();
+  const list=galList(); galGrid.innerHTML='';
+  let done=0,bad=0,empty=0,cut=0;
+  galStat.textContent=`renderizando ${list.length}…`;
+  for(let i=0;i<list.length;i++){
+    const it=list[i];
+    const card=document.createElement('div');
+    card.style.cssText='border:1px solid var(--line);border-radius:10px;padding:8px;background:#0d1320';
+    const holder=document.createElement('div'); holder.style.cssText='background:#E9EEF2;border-radius:6px;overflow:hidden;min-height:80px';
+    card.appendChild(holder); galGrid.appendChild(card);
+    let txt='',ok=true;
+    try{ const r=await fetch(it.url); if(!r.ok){ok=false;txt='';} else txt=await r.text(); }catch{ ok=false; }
+    let svg=null, probs=[];
+    if(!ok||!/<svg[\s>]/.test(txt)){ probs=['404 / não renderiza']; empty++; }
+    else{
+      holder.innerHTML=txt; svg=holder.querySelector('svg');
+      if(svg){ svg.style.width='100%'; svg.style.height='auto'; svg.removeAttribute('width'); svg.removeAttribute('height'); }
+      const vb=(svg?.getAttribute('viewBox')||'0 0 0 0').split(/\s+/).map(Number);
+      probs=auditCard(svg,vb[2]||1,vb[3]||1);
+      if(probs.some(p=>p.startsWith('texto'))) cut++;
+      if(probs.some(p=>p.startsWith('sem')||p.startsWith('vazia'))) empty++;
+    }
+    if(probs.length){ bad++; card.style.borderColor='#e0564f'; card.style.boxShadow='0 0 0 1px #e0564f'; }
+    const badge=probs.length?`<div style="color:#ff8a82;font-size:11px;margin-top:4px">⚠ ${probs.join(' · ')}</div>`:'';
+    card.insertAdjacentHTML('beforeend',`<div style="font-size:11px;color:#9fb0c8;margin-top:6px;word-break:break-all">${it.id}</div>${badge}`);
+    if(galOnly.checked && !probs.length) card.style.display='none';
+    if(++done%24===0){ galStat.textContent=`${done}/${list.length} · ${bad} c/ problema`; await new Promise(r=>requestAnimationFrame(r)); }
+  }
+  galStat.textContent=`${list.length} cenas · ${bad} com problema (${empty} vazias/404 · ${cut} texto cortado)`;
+}
+document.getElementById('galBtn').onclick=async()=>{ galModal.hidden=false; await galManifest(); if(!galTrilha.options.length) fillTrilhas(); };
+document.getElementById('galClose').onclick=()=>{ galModal.hidden=true; };
+document.getElementById('galRun').onclick=galRun;
+galScope.onchange=()=>{ galTrilha.style.display=galScope.value==='int'?'none':''; };
+galModal.addEventListener('click',e=>{ if(e.target===galModal) galModal.hidden=true; });
 
 // init
 updateColor(); buildCols(); renderScale();
