@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Fazer uma ligação">
+  <defs>
+    <linearGradient id="mbg-e9f2f7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eff5f9"/><stop offset="1" stop-color="#d6dfe3"/></linearGradient>
+    <linearGradient id="mhd-1b2a4e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4867"/><stop offset="1" stop-color="#162240"/></linearGradient>
+    <linearGradient id="macc-4f7cac" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#648cb6"/><stop offset="1" stop-color="#426890"/></linearGradient>
+    <linearGradient id="m-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="m-glow" cx="0.5" cy="0.1" r="0.9"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="m-panel" x="-12%" y="-12%" width="124%" height="124%"><feDropShadow dx="0" dy="14" stdDeviation="24" flood-color="#10192f" flood-opacity=".16"/></filter>
+    <filter id="m-obj" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#10192f" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#mbg-e9f2f7)"/>
+  <rect width="1200" height="360" fill="url(#m-glow)"/>
+  <circle cx="1080" cy="40" r="190" fill="#4F7CAC" opacity=".12"/>
+  <circle cx="120" cy="660" r="220" fill="#D49545" opacity=".10"/>
+  <circle cx="532" cy="426" r="6" fill="#1B2A4E" opacity=".06"/><circle cx="906" cy="286" r="5" fill="#1B2A4E" opacity=".06"/><circle cx="830" cy="341" r="7" fill="#1B2A4E" opacity=".06"/><circle cx="1066" cy="265" r="5" fill="#1B2A4E" opacity=".06"/><circle cx="728" cy="426" r="7" fill="#1B2A4E" opacity=".06"/>
+  <rect x="64" y="150" width="1072" height="430" rx="40" fill="#F7F4EC" filter="url(#m-panel)"/>
+  <rect x="64" y="150" width="1072" height="430" rx="40" fill="none" stroke="#cdd0d8" stroke-width="2"/>
+  <rect x="64" y="150" width="1072" height="200" rx="40" fill="url(#m-sheen)"/>
+  <g filter="url(#m-obj)">
+      <rect x="508" y="200" width="184" height="320" rx="30" fill="#fff" stroke="#1B2A4E" stroke-width="9"/>
+      <rect x="534" y="238" width="132" height="244" rx="8" fill="#E9F2F7"/>
+      <circle cx="600" cy="500" r="11" fill="#1B2A4E" opacity=".3"/>
+      <rect x="720" y="270" width="170" height="60" rx="18" fill="#E9F2F7" stroke="#1B2A4E" stroke-width="5"/>
+      <path d="M732 328 l0 26 l26 -26 z" fill="#E9F2F7" stroke="#1B2A4E" stroke-width="5"/>
+      <rect x="810" y="360" width="170" height="60" rx="18" fill="#4F7CAC" />
+      <path d="M968 418 l0 26 l-26 -26 z" fill="#4F7CAC"/>
+      <path d="M740 294 h120 M740 314 h84" stroke="#1B2A4E" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+      <path d="M830 384 h120 M830 404 h70" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".85"/></g>
+  <path d="M0 0 h1200 v96 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#mhd-1b2a4e)"/>
+  <path d="M0 0 h1200 v44 a24 24 0 0 1 -24 24 h-1152 a24 24 0 0 1 -24 -24 z" fill="url(#m-sheen)"/>
+  <text x="72" y="52" fill="#d9a25b" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="700" letter-spacing="5">LIGAÇÕES, CONTATOS E VIDEOCHAMADA</text>
+  <text x="72" y="98" fill="#fff" font-family="'Fraunces', Georgia, serif" font-size="40" font-weight="700">Fazer uma ligação</text>
+  <rect x="64" y="600" width="170" height="46" rx="23" fill="url(#mhd-1b2a4e)" filter="url(#m-obj)"/>
+  <text x="92" y="631" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="21" font-weight="700">Missão 02</text>
+  <rect x="248" y="600" width="138" height="46" rx="23" fill="url(#macc-4f7cac)" filter="url(#m-obj)"/>
+  <text x="280" y="631" fill="#fff" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="21" font-weight="700">8 min</text>
+  <text x="1136" y="631" text-anchor="end" fill="#1B2A4E" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="700" opacity=".5">02/09</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Explorador de arquivos do Windows"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  <rect width="1000" height="640" fill="#EDF1F7"/>
+  <rect x="0" y="0" width="1000" height="56" fill="#F7F9FC" stroke="#C4CCDA"/>
+  <text x="28" y="36" fill="#1A2540" font-family="Arial" font-size="22" font-weight="700">Explorador de Arquivos</text>
+  <rect x="0" y="56" width="1000" height="44" fill="#fff" stroke="#C4CCDA"/>
+  <text x="28" y="84" fill="#4A5670" font-family="Arial" font-size="19">Este Computador › Documentos</text>
+  <rect x="0" y="100" width="270" height="540" fill="#F2EBDD"/>
+  <text x="28" y="150" fill="#4A5670" font-family="Arial" font-size="19" font-weight="700">Acesso rápido</text>
+  <text x="40" y="200" fill="#1A2540" font-family="Arial" font-size="20">⭐ Favoritos</text>
+  <text x="40" y="250" fill="#1A2540" font-family="Arial" font-size="20">💻 Este Computador</text>
+  <rect x="28" y="490" width="214" height="50" rx="8" fill="#E8E0CC"/>
+  <text x="48" y="522" fill="#1A2540" font-family="Arial" font-size="20">🗑 Lixeira</text>
+  <rect x="296" y="200" width="600" height="58" rx="8" fill="#E8F0F7" stroke="#C4CCDA"/><rect x="316" y="216" width="34" height="26" rx="4" fill="#E0A93B"/><text x="368" y="238" fill="#1A2540" font-family="Arial" font-size="22">Documentos</text><rect x="296" y="270" width="600" height="58" rx="8" fill="#F4F1E8" stroke="#C4CCDA"/><rect x="316" y="286" width="34" height="26" rx="4" fill="#E0A93B"/><text x="368" y="308" fill="#1A2540" font-family="Arial" font-size="22">Imagens</text><rect x="296" y="340" width="600" height="58" rx="8" fill="#F4F1E8" stroke="#C4CCDA"/><rect x="316" y="356" width="34" height="26" rx="4" fill="#E0A93B"/><text x="368" y="378" fill="#1A2540" font-family="Arial" font-size="22">Downloads</text><rect x="296" y="410" width="600" height="58" rx="8" fill="#F4F1E8" stroke="#C4CCDA"/><rect x="316" y="426" width="34" height="26" rx="4" fill="#E0A93B"/><text x="368" y="448" fill="#1A2540" font-family="Arial" font-size="22">Trabalho</text>
+  <text x="296" y="190" fill="#7A8294" font-family="Arial" font-size="18">Pastas</text>
+</svg>

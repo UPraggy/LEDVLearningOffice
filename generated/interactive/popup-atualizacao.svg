@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-label="Pop-up falso de atualização do navegador"><defs>
+  <linearGradient id="bg-paper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#DFE6EC"/>
+  </linearGradient>
+  <radialGradient id="bg-glow" cx="0.5" cy="0.08" r="0.9">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sh-soft" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#16203A" flood-opacity="0.18"/>
+  </filter>
+  <filter id="sh-card" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#16203A" flood-opacity="0.13"/>
+  </filter></defs>
+  <rect width="1000" height="640" fill="#2B3440"/>
+  <rect x="0" y="0" width="1000" height="40" fill="#1E2933"/>
+  <text x="20" y="27" fill="#9AA2B4" font-family="Arial" font-size="16">www.video-gratis.stream</text>
+  <rect x="210" y="130" width="580" height="380" rx="18" fill="#fff"/>
+  <rect x="210" y="130" width="580" height="70" rx="18" fill="#2E6FA3"/>
+  <rect x="210" y="170" width="580" height="30" fill="#2E6FA3"/>
+  <text x="244" y="175" fill="#fff" font-family="Arial" font-size="24" font-weight="700">Atualização necessária</text>
+  <text x="744" y="175" fill="#fff" font-family="Arial" font-size="26" font-weight="700" text-anchor="middle">✕</text>
+  <text x="500" y="270" text-anchor="middle" fill="#1A2540" font-family="Arial" font-size="26" font-weight="700">Seu navegador está desatualizado</text>
+  <text x="500" y="318" text-anchor="middle" fill="#4A5670" font-family="Arial" font-size="21">Instale a atualização para continuar</text>
+  <text x="500" y="348" text-anchor="middle" fill="#4A5670" font-family="Arial" font-size="21">assistindo. É rápido e gratuito.</text>
+  <rect x="300" y="396" width="400" height="76" rx="12" fill="#2E6FA3"/>
+  <text x="500" y="444" text-anchor="middle" fill="#fff" font-family="Arial" font-size="24" font-weight="700">Atualizar agora</text>
+</svg>
