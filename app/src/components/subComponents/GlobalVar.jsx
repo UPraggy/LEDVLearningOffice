@@ -11,12 +11,15 @@ import {
 import { gerarInbox as gerarInboxMentor } from '../../data/mentor-pool.js';
 
 const CHAVE = 'escritorio-progresso';
+const CHAVE_BAK = 'escritorio-progresso-bak';   // cópia de segurança — restaura se a principal corromper
+const CHAVE_FOTO = 'escritorio-avatar-foto';    // dataURL da foto do usuário (fora do JSON p/ não estourar quota)
 
 const PROGRESSO_INICIAL = {
   user: {
     nome: '',
     idade: '',
     moduloInicial: '',
+    avatar: '',          // '' = iniciais | 'p1'..'pN' = preset | 'foto' = upload (dataURL na chave própria)
     xp: 0,
     nivelNum: 1,
     streak: 0,
@@ -61,13 +64,29 @@ export default class GlobalVar {
     catch { return null; }
   }
   static setLocalStorage(chave, valor) {
-    return localStorage.setItem(chave, JSON.stringify(valor));
+    // Nunca deixa um erro de escrita (quota cheia etc.) derrubar o app.
+    try { localStorage.setItem(chave, JSON.stringify(valor)); return true; }
+    catch { return false; }
   }
 
-  /* ===== PROGRESSO ===== */
+  /* ===== PROGRESSO =====
+     Persistência defensiva: a chave principal NUNCA é a única fonte. Cada save
+     grava também um backup. Se a principal sumir/corromper (quota, JSON truncado,
+     limpeza parcial do navegador), o load restaura do backup em vez de zerar. */
+  static progressoValido(o) {
+    return !!o && typeof o === 'object' && Array.isArray(o.missoesCompletas);
+  }
   static carregarProgresso() {
-    const salvo = GlobalVar.getLocalStorage(CHAVE);
-    if (!salvo) return JSON.parse(JSON.stringify(PROGRESSO_INICIAL));
+    let salvo = GlobalVar.getLocalStorage(CHAVE);
+    // Caiu pra branco? tenta o backup antes de desistir do progresso do usuário.
+    if (!GlobalVar.progressoValido(salvo)) {
+      const bak = GlobalVar.getLocalStorage(CHAVE_BAK);
+      if (GlobalVar.progressoValido(bak)) {
+        salvo = bak;
+        GlobalVar.setLocalStorage(CHAVE, bak);   // re-hidrata a principal
+      }
+    }
+    if (!GlobalVar.progressoValido(salvo)) return JSON.parse(JSON.stringify(PROGRESSO_INICIAL));
     const merged = { ...PROGRESSO_INICIAL, ...salvo, user: { ...PROGRESSO_INICIAL.user, ...(salvo.user || {}) }, preferencias: { ...PROGRESSO_INICIAL.preferencias, ...(salvo.preferencias || {}) } };
     // Migração 1×: desliga a voz automática em aparelhos que já tinham o antigo default ligado.
     // Roda só uma vez (flag); depois disso o usuário manda nas Configurações.
@@ -78,10 +97,29 @@ export default class GlobalVar {
     return merged;
   }
   static salvarProgresso(p) {
-    GlobalVar.setLocalStorage(CHAVE, p);
+    const ok = GlobalVar.setLocalStorage(CHAVE, p);
+    // Só atualiza o backup quando a principal gravou e o dado é íntegro —
+    // assim um save quebrado nunca contamina a cópia de segurança.
+    if (ok && GlobalVar.progressoValido(p)) GlobalVar.setLocalStorage(CHAVE_BAK, p);
   }
   static resetarProgresso() {
     localStorage.removeItem(CHAVE);
+    localStorage.removeItem(CHAVE_BAK);
+    GlobalVar.limparAvatarFoto();
+  }
+
+  /* ===== AVATAR (foto fica em chave própria, fora do JSON de progresso) ===== */
+  static getAvatarFoto() {
+    try { return localStorage.getItem(CHAVE_FOTO) || ''; } catch { return ''; }
+  }
+  static setAvatarFoto(dataURL) {
+    return GlobalVar.setLocalStorageRaw(CHAVE_FOTO, dataURL);
+  }
+  static limparAvatarFoto() {
+    try { localStorage.removeItem(CHAVE_FOTO); } catch { /* ignore */ }
+  }
+  static setLocalStorageRaw(chave, texto) {
+    try { localStorage.setItem(chave, texto); return true; } catch { return false; }
   }
 
   /** Marca login do dia + atualiza streak. Idempotente.

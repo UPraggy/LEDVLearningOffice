@@ -22,6 +22,13 @@ function diaSemana() {
   return ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'][new Date().getDay()];
 }
 
+function saudacao() {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 12) return 'Bom dia';
+  if (h >= 12 && h < 18) return 'Boa tarde';
+  return 'Boa noite';
+}
+
 export default function HomePage() {
   const { progresso, abrirCaixaDoDia, podeAbrirCaixa, toast, atualizar } = useApp();
   const navigate = useNavigate();
@@ -136,7 +143,7 @@ export default function HomePage() {
       <div className="hello">
         <div>
           <div className="kicker">{diaSemana()} · {new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' })}</div>
-          <h1 className="bighi">Bom dia, <em>{nomeCurto}</em>.</h1>
+          <h1 className="bighi">{saudacao()}, <em>{nomeCurto}</em>.</h1>
         </div>
         <div className="hello-stamps">
           <span className="streak-pill"><Flame size={16} fill="currentColor" /> {user.streak || 0} dias</span>

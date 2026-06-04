@@ -8,6 +8,8 @@ import { useApp } from './subComponents/AppContext.jsx';
 import { useEffect, useState } from 'react';
 import GlobalVar from './subComponents/GlobalVar.jsx';
 import Marca from './subComponents/Marca.jsx';
+import Avatar from './subComponents/Avatar.jsx';
+import InstalarApp from './subComponents/InstalarApp.jsx';
 import '../assets/css/AppShell.css';
 
 const APRENDER = [
@@ -94,7 +96,7 @@ export default function AppShell({ children }) {
         {MAIS.map(i => <SidebarItem key={i.to} {...i} />)}
 
         <div className="sb-user" title="Seu perfil">
-          <div className="avatar">{inits}</div>
+          <Avatar user={user} size={36} />
           <div className="info">
             <strong>{nomeCurto}</strong>
             <span>{nivelNome} · {(user.xp || 0).toLocaleString('pt-BR')} XP</span>
@@ -119,6 +121,8 @@ export default function AppShell({ children }) {
         aria-label="Mudar tamanho da fonte">
         <small>A</small><strong>A</strong>
       </button>
+
+      <InstalarApp />
     </div>
   );
 }

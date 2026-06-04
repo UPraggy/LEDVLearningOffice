@@ -1,15 +1,66 @@
 import { useRef, useState } from 'react';
-import { Download, Upload, RefreshCw, Type, Trophy, Flame, Volume2, VolumeX } from 'lucide-react';
+import { Download, Upload, RefreshCw, Type, Trophy, Flame, Volume2, VolumeX, Camera, ImageUp } from 'lucide-react';
 import { useApp } from '../subComponents/AppContext.jsx';
 import GlobalVar from '../subComponents/GlobalVar.jsx';
+import Avatar from '../subComponents/Avatar.jsx';
+import { AVATARES } from '../../data/avatares.js';
 import { MODULOS, TRILHAS, MISSOES, TROFEUS } from '../../data/estrutura.js';
+
+/** Lê a imagem, reccorta no centro e reduz p/ 256px (JPEG) — mantém o
+ *  dataURL pequeno (~20-40 KB) pra não estourar a quota do navegador. */
+function processarFoto(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onerror = () => reject(new Error('leitura'));
+    r.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error('imagem'));
+      img.onload = () => {
+        const L = 256;
+        const lado = Math.min(img.width, img.height);
+        const sx = (img.width - lado) / 2;
+        const sy = (img.height - lado) / 2;
+        const cv = document.createElement('canvas');
+        cv.width = L; cv.height = L;
+        const ctx = cv.getContext('2d');
+        ctx.drawImage(img, sx, sy, lado, lado, 0, 0, L, L);
+        resolve(cv.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = r.result;
+    };
+    r.readAsDataURL(file);
+  });
+}
 
 export default function Perfil({ ativaResp }) {
   const { progresso, alternarFonte, alternarSom, resetar, atualizar } = useApp();
   const somAtivo = progresso.preferencias?.somAtivo !== false;
   const { user } = progresso;
   const fileRef = useRef(null);
+  const fotoRef = useRef(null);
   const [msg, setMsg] = useState('');
+  const [msgAvatar, setMsgAvatar] = useState('');
+
+  const escolherPreset = (id) => {
+    atualizar({ user: { avatar: id } });
+    GlobalVar.limparAvatarFoto();
+    setMsgAvatar('Avatar atualizado.');
+  };
+
+  const enviarFoto = async (e) => {
+    const f = e.target.files?.[0];
+    e.target.value = '';
+    if (!f) return;
+    if (!f.type.startsWith('image/')) { setMsgAvatar('Escolha um arquivo de imagem (JPG ou PNG).'); return; }
+    try {
+      const dataURL = await processarFoto(f);
+      if (!GlobalVar.setAvatarFoto(dataURL)) { setMsgAvatar('Não coube na memória do navegador. Tente uma foto menor.'); return; }
+      atualizar({ user: { avatar: 'foto' } });
+      setMsgAvatar('Foto salva neste aparelho.');
+    } catch {
+      setMsgAvatar('Não consegui ler essa imagem. Tente outra.');
+    }
+  };
 
   const info = GlobalVar.infoNivel(user.xp || 0);
   const total = Object.values(MISSOES).reduce((s, ms) => s + ms.length, 0);
@@ -46,13 +97,7 @@ export default function Perfil({ ativaResp }) {
   return (
     <main className="screen">
           <header style={{ marginBottom: 'var(--s-7)', display: 'flex', alignItems: 'center', gap: 'var(--s-5)', flexWrap: 'wrap' }}>
-            <div style={{
-              width: 96, height: 96, borderRadius: '50%',
-              background: 'linear-gradient(135deg, var(--honey), var(--coral))',
-              color: '#fff', display: 'grid', placeItems: 'center',
-              fontFamily: 'var(--f-display)', fontWeight: 700, fontSize: 40,
-              boxShadow: 'var(--sh-2)',
-            }}>{(user.nome || 'E').slice(0, 1).toUpperCase()}</div>
+            <Avatar user={user} size={96} style={{ boxShadow: 'var(--sh-2)' }} />
             <div style={{ flex: 1, minWidth: 240 }}>
               <span className="t-kicker">Bem-vindo de volta</span>
               <h1 style={{ fontSize: 'clamp(32px,5vw,52px)', margin: 'var(--s-2) 0 var(--s-2)' }}>{user.nome || 'Aluno(a)'}</h1>
@@ -91,6 +136,44 @@ export default function Perfil({ ativaResp }) {
               </div>
               <span style={{ fontSize: 13, color: 'var(--ink-soft)' }}>Desbloqueados</span>
             </div>
+          </section>
+
+          <section className="panel" style={{ marginBottom: 'var(--s-5)' }}>
+            <h3 style={{ fontFamily: 'var(--f-display)', fontWeight: 600, fontSize: 22, marginBottom: 'var(--s-2)' }}>Seu avatar</h3>
+            <p style={{ color: 'var(--ink-soft)', marginBottom: 'var(--s-4)' }}>
+              Escolha uma figurinha ou use sua própria foto. Fica guardado só neste aparelho.
+            </p>
+            <div style={{ display: 'flex', gap: 'var(--s-3)', flexWrap: 'wrap', marginBottom: 'var(--s-4)' }}>
+              {AVATARES.map(a => {
+                const sel = user.avatar === a.id;
+                return (
+                  <button key={a.id} type="button" onClick={() => escolherPreset(a.id)}
+                    aria-pressed={sel} aria-label={a.rotulo} title={a.rotulo}
+                    style={{
+                      width: 60, height: 60, borderRadius: '50%', background: a.grad,
+                      fontSize: 30, lineHeight: 1, display: 'grid', placeItems: 'center',
+                      cursor: 'pointer', padding: 0,
+                      border: sel ? '3px solid var(--ink)' : '3px solid transparent',
+                      boxShadow: sel ? 'var(--sh-2)' : 'var(--sh-1)',
+                      outlineOffset: 2,
+                    }}>
+                    <span aria-hidden="true">{a.emoji}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div style={{ display: 'flex', gap: 'var(--s-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+              <input ref={fotoRef} type="file" accept="image/*" onChange={enviarFoto} style={{ display: 'none' }} />
+              <button className="btn btn-primary" onClick={() => fotoRef.current?.click()}>
+                <ImageUp size={16} /> Enviar minha foto
+              </button>
+              {user.avatar && (
+                <button className="btn btn-ghost" onClick={() => escolherPreset('')}>
+                  <RefreshCw size={16} /> Voltar pras iniciais
+                </button>
+              )}
+            </div>
+            {msgAvatar && <p style={{ marginTop: 'var(--s-3)', color: 'var(--sage)', fontSize: 14 }}>{msgAvatar}</p>}
           </section>
 
           <section className="panel" style={{ marginBottom: 'var(--s-5)' }}>
