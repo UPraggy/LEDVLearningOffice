@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, Users } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, Users, Award } from 'lucide-react';
 import { MODULOS, TRILHAS, MISSOES } from '../../data/estrutura.js';
 import { useApp } from '../subComponents/AppContext.jsx';
 
 export default function Modulos({ ativaResp }) {
   const { progresso } = useApp();
+  const navigate = useNavigate();
   const feitas = new Set(progresso.missoesCompletas);
 
   const stats = (modId) => {
@@ -67,6 +68,21 @@ export default function Modulos({ ativaResp }) {
                       <span>{s.feitos}/{s.total} missões</span>
                       <span style={{ color: m.cor, fontWeight: 700 }}>Entrar <ArrowRight size={11} style={{ verticalAlign: 'middle' }} /></span>
                     </div>
+                    {s.pct === 100 && (
+                      <span role="link" tabIndex={0}
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(`/certificado/${m.id}`); }}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); navigate(`/certificado/${m.id}`); } }}
+                        style={{
+                          display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-start',
+                          marginTop: 2, padding: '4px 10px', borderRadius: 'var(--r-pill, 999px)',
+                          background: 'var(--honey-soft, #f2d8a8)', color: 'var(--navy)',
+                          fontFamily: 'var(--f-mono)', fontSize: 11, fontWeight: 700,
+                          letterSpacing: '.04em', cursor: 'pointer',
+                        }}
+                      >
+                        <Award size={12} /> Certificado
+                      </span>
+                    )}
                   </div>
                 </Link>
               );

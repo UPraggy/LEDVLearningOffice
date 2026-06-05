@@ -25,6 +25,7 @@ const PROGRESSO_INICIAL = {
     streak: 0,
     escudos: 0,
     ultimaVisita: null,
+    ultimaConclusao: null,   // dia (local 'YYYY-MM-DD') da última missão concluída
   },
   missoesCompletas: [],
   trofeus: [],
@@ -125,7 +126,7 @@ export default class GlobalVar {
   /** Marca login do dia + atualiza streak. Idempotente.
    *  Também avalia troféus de ofensiva — retorna `{ progresso, trofeusNovos:[] }`. */
   static tickDia(p) {
-    const hoje = new Date().toISOString().split('T')[0];
+    const hoje = GlobalVar.diaAtualFunc();
     const user = atualizarOfensiva(p.user, hoje);
     let parcial = { ...p, user };
     // Ganho de escudo a cada 10 dias (max 2) — só se aumentou o streak
@@ -356,7 +357,7 @@ export default class GlobalVar {
     let parcial = {
       ...p,
       missoesCompletas,
-      user: { ...p.user, xp: xpNovo, nivelNum },
+      user: { ...p.user, xp: xpNovo, nivelNum, ultimaConclusao: GlobalVar.diaAtualFunc() },
     };
     // Conta no heatmap + recorde
     parcial = GlobalVar.incrementarAtividadeDia(parcial);
@@ -410,7 +411,10 @@ export default class GlobalVar {
     return `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}/${d.getUTCFullYear()}`;
   }
   static diaAtualFunc() {
-    return new Date().toISOString().split('T')[0];
+    // Dia LOCAL (não UTC) — evita virar o dia 3h cedo no Brasil (UTC−3),
+    // o que fazia a ofensiva incrementar/zerar na hora errada à noite.
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
 
   /* ===== HELPERS DE DOMÍNIO ===== */
@@ -420,6 +424,41 @@ export default class GlobalVar {
   }
   static missoesDaTrilha(tid) { return MISSOES[tid] || []; }
   static nomeNivel(n) { return NIVEIS[(n || 1) - 1] || NIVEIS[0]; }
+
+  /** Carga horária total de um módulo: soma o `tempo` (min) de TODAS as
+   *  missões de TODAS as trilhas do módulo. Retorna `{ minutos, horas, horasFmt }`. */
+  static cargaHorariaModulo(modId) {
+    const minutos = GlobalVar.trilhasDoModulo(modId).reduce((acc, t) => {
+      const ms = GlobalVar.missoesDaTrilha(t.id);
+      return acc + ms.reduce((s, m) => s + (m.tempo || 0), 0);
+    }, 0);
+    const horas = minutos / 60;
+    // 90 min → "1h30"; 120 min → "2h"; 50 min → "50min"
+    let horasFmt;
+    if (minutos < 60) horasFmt = `${minutos}min`;
+    else {
+      const h = Math.floor(minutos / 60);
+      const m = minutos % 60;
+      horasFmt = m ? `${h}h${String(m).padStart(2, '0')}` : `${h}h`;
+    }
+    return { minutos, horas, horasFmt };
+  }
+
+  /** True se TODAS as missões de TODAS as trilhas do módulo foram concluídas. */
+  static moduloCompleto(p, modId) {
+    const feitas = new Set(p?.missoesCompletas || []);
+    const trilhas = GlobalVar.trilhasDoModulo(modId);
+    if (!trilhas.length) return false;
+    let totalMissoes = 0;
+    for (const t of trilhas) {
+      const ms = GlobalVar.missoesDaTrilha(t.id);
+      totalMissoes += ms.length;
+      for (const m of ms) {
+        if (!feitas.has(`${t.id}-${m.id}`)) return false;
+      }
+    }
+    return totalMissoes > 0;
+  }
 
   /** Próximo nível: { proximo, faltam, total } */
   static infoNivel(xp) {

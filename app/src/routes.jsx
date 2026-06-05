@@ -7,6 +7,7 @@ import Onboarding from './components/screens/Onboarding.jsx';
 import HomePage from './components/screens/HomePage.jsx';
 import Modulos from './components/screens/Modulos.jsx';
 import Trilhas from './components/screens/Trilhas.jsx';
+import Certificado from './components/screens/Certificado.jsx';
 import TrilhaDetail from './components/screens/TrilhaDetail.jsx';
 import Missao from './components/screens/Missao.jsx';
 import Trofeus from './components/screens/Trofeus.jsx';
@@ -66,6 +67,7 @@ function ConteudoRotas({ ativaResp }) {
         <Route path="/" element={<GuardaOnboarding><HomePage ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/modulos" element={<GuardaOnboarding><Modulos ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/modulo/:modId" element={<GuardaOnboarding><Trilhas ativaResp={ativaResp} /></GuardaOnboarding>} />
+        <Route path="/certificado/:modId" element={<GuardaOnboarding><Certificado /></GuardaOnboarding>} />
         <Route path="/trilha/:trilhaId" element={<GuardaOnboarding><TrilhaDetail ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/missao/:trilhaId/:missaoId" element={<GuardaOnboarding><Missao ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/agenda" element={<GuardaOnboarding><Agenda ativaResp={ativaResp} /></GuardaOnboarding>} />

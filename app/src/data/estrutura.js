@@ -1003,7 +1003,12 @@ export const OFENSIVA = {
 
 /** Calcula o novo estado de ofensiva. Datas no formato 'YYYY-MM-DD'. */
 export function atualizarOfensiva(user, hojeISO) {
-  const hoje = hojeISO || new Date().toISOString().split('T')[0];
+  // Dia LOCAL (não UTC) — consistente com a comparação `new Date(ultima + 'T00:00:00')`.
+  const hojeLocal = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  };
+  const hoje = hojeISO || hojeLocal();
   const ultima = user.ultimaVisita;
   if (!ultima) return { ...user, streak: Math.max(1, user.streak || 0), ultimaVisita: hoje };
   if (ultima === hoje) return user;

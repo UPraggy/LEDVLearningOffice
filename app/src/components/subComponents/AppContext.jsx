@@ -30,10 +30,20 @@ function AppProviderInner({ children }) {
     const streak = progresso?.user?.streak || 0;
     const hoje = GlobalVar.diaAtualFunc?.() || new Date().toISOString().slice(0, 10);
     const ultimaConclusao = progresso?.user?.ultimaConclusao;
-    if (streak >= 2 && ultimaConclusao !== hoje &&
-        progresso?.preferencias?.notifLigado &&
-        Notifica.permissao() === 'granted') {
-      Notifica.lembreteRiscoStreak({ horaHHMM: '21:00', streak });
+    const notifOk = progresso?.preferencias?.notifLigado && Notifica.permissao() === 'granted';
+    if (notifOk) {
+      // Re-arma o lembrete diário a cada boot (agendar é idempotente por id) —
+      // sem isto ele só dispara 1× e some, pois se auto-remove ao tocar.
+      Notifica.lembreteDiario({
+        horaHHMM: progresso?.preferencias?.horaLembrete || '19:00',
+        titulo: 'Não perca sua ofensiva 🔥',
+        body: 'Sua sequência te espera — 1 missão curtinha já conta.',
+        url: '/',
+      });
+      // Lembrete de risco às 21h, só se tem ofensiva ativa e ainda não fez missão hoje.
+      if (streak >= 2 && ultimaConclusao !== hoje) {
+        Notifica.lembreteRiscoStreak({ horaHHMM: '21:00', streak });
+      }
     }
     const novos = getBoot().trofeusNovos || [];
     if (!novos.length) return;

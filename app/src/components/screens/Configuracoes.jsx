@@ -25,8 +25,8 @@ export default function Configuracoes() {
     if (r === 'granted') {
       Notifica.lembreteDiario({
         horaHHMM: horaLemb,
-        titulo: 'Sua missão de hoje no Escritório',
-        body: 'Mantém a ofensiva — 5 minutos já contam.',
+        titulo: 'Não perca sua ofensiva 🔥',
+        body: 'Sua sequência te espera — 1 missão curtinha já conta.',
         url: '/',
       });
       Notifica.mostrar('Notificações ligadas', 'Vou te lembrar todo dia às ' + horaLemb + '.');
@@ -43,7 +43,7 @@ export default function Configuracoes() {
     setPreferencia('horaLembrete', nova);
     if (permNotif === 'granted') {
       Notifica.cancelar('lembrete-diario');
-      Notifica.lembreteDiario({ horaHHMM: nova, titulo: 'Sua missão de hoje', body: 'Mantém a ofensiva.', url: '/' });
+      Notifica.lembreteDiario({ horaHHMM: nova, titulo: 'Não perca sua ofensiva 🔥', body: 'Sua sequência te espera — 1 missão curtinha já conta.', url: '/' });
     }
   }
 

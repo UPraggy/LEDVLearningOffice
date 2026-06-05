@@ -1,8 +1,9 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, ChevronRight, Lock, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ChevronRight, Lock, CheckCircle2, Award } from 'lucide-react';
 import Icone from '../subComponents/Icone.jsx';
 import { MODULOS, TRILHAS, MISSOES } from '../../data/estrutura.js';
 import { useApp } from '../subComponents/AppContext.jsx';
+import GlobalVar from '../subComponents/GlobalVar.jsx';
 import { trilhaTemConteudo } from '../../data/conteudo/index.js';
 
 export default function Trilhas({ ativaResp }) {
@@ -13,6 +14,7 @@ export default function Trilhas({ ativaResp }) {
 
   const trilhas = TRILHAS.filter(t => t.modulo === modId).sort((a, b) => a.ordem - b.ordem);
   const feitas = new Set(progresso.missoesCompletas);
+  const completo = GlobalVar.moduloCompleto(progresso, modId);
 
   return (
     <main className="screen">
@@ -34,6 +36,41 @@ export default function Trilhas({ ativaResp }) {
               <p style={{ color: 'var(--ink-soft)', maxWidth: '60ch' }}>{modulo.desc}</p>
             </div>
           </header>
+
+          {completo && (
+            <Link to={`/certificado/${modId}`}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 'var(--s-4)',
+                marginBottom: 'var(--s-6)', padding: 'var(--s-5)',
+                borderRadius: 'var(--r-lg)', textDecoration: 'none', color: 'inherit',
+                background: 'var(--honey-soft, #f2d8a8)',
+                border: '1px solid var(--honey, #d49545)',
+                boxShadow: 'var(--sh-1)',
+                transition: 'transform var(--t-micro), box-shadow var(--t-micro)',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = 'var(--sh-2)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'var(--sh-1)'; }}
+            >
+              <div style={{
+                width: 52, height: 52, borderRadius: 'var(--r-md)', flexShrink: 0,
+                background: 'var(--navy)', color: 'var(--honey-soft, #f2d8a8)',
+                display: 'grid', placeItems: 'center',
+              }}>
+                <Award size={26} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <strong style={{ fontFamily: 'var(--f-display)', fontSize: 18, color: 'var(--navy)' }}>
+                  🏆 Certificado disponível
+                </strong>
+                <div style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
+                  Você concluiu este módulo! Baixe seu comprovante com nome, data e carga horária.
+                </div>
+              </div>
+              <span className="t-mono" style={{ color: 'var(--navy)', fontWeight: 700, fontSize: 12, whiteSpace: 'nowrap' }}>
+                Baixar <ChevronRight size={12} style={{ verticalAlign: 'middle' }} />
+              </span>
+            </Link>
+          )}
 
           <section className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px,1fr))' }}>
             {trilhas.map((t) => {
