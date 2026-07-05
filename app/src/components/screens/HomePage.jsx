@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Gift, Star, Shield, Lightbulb, Zap, Trophy, Flame, ChevronRight,
-  Grid3x3, Calendar, MessageSquare, PenLine, Layers, CheckCircle2, BookOpenCheck, Brain,
+  Grid3x3, Calendar, MessageSquare, PenLine, Layers, CheckCircle2, BookOpenCheck, Brain, MapPin,
 } from 'lucide-react';
 import { useApp } from '../subComponents/AppContext.jsx';
 import GlobalVar from '../subComponents/GlobalVar.jsx';
@@ -276,6 +276,7 @@ export default function HomePage() {
       <div className="quick-row">
         <Link to="/modulos" className="quick"><Grid3x3 size={22} /><span>Módulos</span></Link>
         <Link to="/agenda" className="quick"><Calendar size={22} /><span>Agenda</span></Link>
+        <Link to="/lugares" className="quick"><MapPin size={22} /><span>Lugares próximos</span></Link>
         <Link to="/mentor" className="quick">
           <MessageSquare size={22} /><span>Caixa do Mentor</span>
           {mentorNew > 0 && <span className="badge">{mentorNew}</span>}

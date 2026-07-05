@@ -20,6 +20,7 @@ import Configuracoes from './components/screens/Configuracoes.jsx';
 import Revisao from './components/screens/Revisao.jsx';
 import Kata from './components/screens/Kata.jsx';
 import Arcade from './components/screens/Arcade.jsx';
+import LugaresProximos from './components/screens/LugaresProximos.jsx';
 
 function ScrollToTop() {
   const loc = useLocation();
@@ -78,6 +79,7 @@ function ConteudoRotas({ ativaResp }) {
         <Route path="/revisao" element={<GuardaOnboarding><Revisao ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/kata" element={<GuardaOnboarding><Kata ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/arcade" element={<GuardaOnboarding><Arcade ativaResp={ativaResp} /></GuardaOnboarding>} />
+        <Route path="/lugares" element={<GuardaOnboarding><LugaresProximos ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/trofeus" element={<GuardaOnboarding><Trofeus ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="/perfil" element={<GuardaOnboarding><Perfil ativaResp={ativaResp} /></GuardaOnboarding>} />
         <Route path="*" element={<Navigate to="/" replace />} />

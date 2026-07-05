@@ -3,7 +3,7 @@
    Substitui o TopMenu antigo. Cada screen agora só renderiza seu <main>.
    ========================================================================= */
 import { NavLink, useLocation } from 'react-router-dom';
-import { Home, Grid3x3, Calendar, MessageSquare, User, Trophy, PenLine, Layers, Settings, Volume2, VolumeX, Brain, BookOpenCheck, Zap } from 'lucide-react';
+import { Home, Grid3x3, Calendar, MessageSquare, User, Trophy, PenLine, Layers, Settings, Brain, BookOpenCheck, Zap, MapPin } from 'lucide-react';
 import { useApp } from './subComponents/AppContext.jsx';
 import { useEffect, useState } from 'react';
 import GlobalVar from './subComponents/GlobalVar.jsx';
@@ -22,6 +22,7 @@ const APRENDER = [
 const MAIS = [
   { to: '/trofeus',       label: 'Troféus',       Icon: Trophy },
   { to: '/arcade',        label: 'Arcade Diário', Icon: Zap },
+  { to: '/lugares',       label: 'Lugares próximos', Icon: MapPin },
   { to: '/revisao',       label: 'Revisão',       Icon: Brain },
   { to: '/kata',          label: 'Kata diário',   Icon: BookOpenCheck },
   { to: '/diario',        label: 'Diário',        Icon: PenLine },
